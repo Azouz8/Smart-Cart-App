@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.smart_cart_app-mergeDebugResources-24:/values/values.xml",
+            "outputFile": "com.example.smart_cart_app-mergeDebugResources-26:/values/values.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Azouz\\.gradle\\caches\\transforms-3\\c3e60d8edb6a86f432de0791fcaa87bd\\transformed\\lifecycle-runtime-2.7.0\\res\\values\\values.xml",
