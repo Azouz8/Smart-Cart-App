@@ -32,26 +32,32 @@ class RegisterView extends StatelessWidget {
                       const Spacer(
                         flex: 2,
                       ),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Column(
                             children: [
                               Text(
                                 "Create Account",
-                                style: TextStyle(
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.w600,
-                                  fontFamily: "Carmen",
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium!
+                                    .copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: const Color(0xff1A2530),
+                                      fontFamily: "Carmen",
+                                    ),
                               ),
                               Text(
                                 "Let’s Create Account Together",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.grey,
-                                  fontFamily: "Carmen",
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.grey,
+                                      fontFamily: "Carmen",
+                                    ),
                               ),
                             ],
                           )
@@ -147,21 +153,29 @@ class RegisterView extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
+                          Text(
                             'Already have an account?',
-                            style: TextStyle(
-                              fontFamily: "Carmen",
-                              color: Colors.grey,
-                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall!
+                                .copyWith(
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.grey,
+                                  fontFamily: "Carmen",
+                                ),
                           ),
                           InkWell(
                             onTap: () {
                               Navigator.pop(context);
                             },
-                            child: const Text(' Sign In',
-                                style: TextStyle(
-                                    fontFamily: "Carmen",
-                                    fontWeight: FontWeight.bold)),
+                            child: Text(' Sign In',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "Carmen",
+                                    )),
                           )
                         ],
                       )

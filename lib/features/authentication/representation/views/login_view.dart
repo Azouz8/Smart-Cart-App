@@ -31,27 +31,31 @@ class LoginView extends StatelessWidget {
                       const Spacer(
                         flex: 2,
                       ),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Column(
                             children: [
                               Text(
                                 "Hello Again!",
-                                style: TextStyle(
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.w600,
-                                  fontFamily: "Carmen",
-                                ),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium!
+                                    .copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: const Color(0xff1A2530),
+                                      fontFamily: "Carmen",
+                                    ),
                               ),
-                              Text(
-                                "Welcome Back You've Been Missed!",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.grey,
-                                  fontFamily: "Carmen",
-                                ),
-                              ),
+                              Text("Welcome Back You've Been Missed!",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.grey,
+                                        fontFamily: "Carmen",
+                                      )),
                             ],
                           )
                         ],
@@ -152,21 +156,29 @@ class LoginView extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
+                          Text(
                             'Don\'t have an account?',
-                            style: TextStyle(
-                              fontFamily: "Carmen",
-                              color: Colors.grey,
-                            ),
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall!
+                                .copyWith(
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.grey,
+                                  fontFamily: "Carmen",
+                                ),
                           ),
                           InkWell(
                             onTap: () {
                               GoRouter.of(context).push('/registerView');
                             },
-                            child: const Text(' Sign Up For Free!',
-                                style: TextStyle(
-                                    fontFamily: "Carmen",
-                                    fontWeight: FontWeight.bold)),
+                            child: Text(' Sign Up For Free!',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "Carmen",
+                                    )),
                           )
                         ],
                       )
