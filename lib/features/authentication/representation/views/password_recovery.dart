@@ -1,0 +1,103 @@
+import 'package:flutter/material.dart';
+import 'package:smart_cart_app/features/authentication/representation/views/widgets/customTextFormField.dart';
+
+class PasswordRecoveryView extends StatelessWidget {
+  PasswordRecoveryView({super.key});
+  final emailController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(),
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Form(
+            key: formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      children: [
+                        Text(
+                          "Password Recovery",
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.w600,
+                            fontFamily: "Carmen",
+                          ),
+                        ),
+                        SizedBox(
+                          height: 4,
+                        ),
+                        Text(
+                          "Please Enter Your Email Address To\nRecieve a Verification Code",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey,
+                            fontFamily: "Carmen",
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 50,
+                ),
+                CustomTextFormField(
+                  controller: emailController,
+                  label: "Email Address",
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return "Email Must Not Be Empty!";
+                    }
+                    return null;
+                  },
+                  prefixIcon: const Icon(Icons.email),
+                  type: TextInputType.emailAddress,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        print(emailController.text);
+                      }
+                    },
+                    style: ButtonStyle(
+                      shape: WidgetStatePropertyAll(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                      ),
+                      backgroundColor:
+                          WidgetStateProperty.all(const Color(0xff5b9ee1)),
+                    ),
+                    child: const Text(
+                      "Continue",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontFamily: "Carmen",
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
