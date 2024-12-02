@@ -36,7 +36,7 @@ class CustomTextFormField extends StatelessWidget {
       enabled: enabled,
       style: const TextStyle(
         color: Colors.black,
-        fontSize: 18,
+        fontSize: 12,
         fontFamily: "Carmen",
       ),
       decoration: InputDecoration(
@@ -48,7 +48,7 @@ class CustomTextFormField extends StatelessWidget {
         hintText: label,
         hintStyle: const TextStyle(
           color: Colors.grey,
-          fontSize: 16,
+          fontSize: 12,
           fontFamily: "Carmen",
         ),
         contentPadding: const EdgeInsets.all(12),

@@ -1,0 +1,1 @@
+ D:\\Programming\\Flutter\\smart_cart_app\\.dart_tool\\flutter_build\\bcbeebfd9b180d646b08c1a51edf99e1\\native_assets.yaml: 

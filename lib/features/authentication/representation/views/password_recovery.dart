@@ -18,30 +18,34 @@ class PasswordRecoveryView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Column(
                       children: [
                         Text(
                           "Password Recovery",
-                          style: TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.w600,
-                            fontFamily: "Carmen",
-                          ),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium!
+                              .copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: const Color(0xff1A2530),
+                                fontFamily: "Carmen",
+                              ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 4,
                         ),
                         Text(
                           "Please Enter Your Email Address To\nRecieve a Verification Code",
                           textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.grey,
-                            fontFamily: "Carmen",
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodyLarge!.copyWith(
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.grey,
+                                    fontFamily: "Carmen",
+                                  ),
                         ),
                       ],
                     )
@@ -63,7 +67,7 @@ class PasswordRecoveryView extends StatelessWidget {
                   type: TextInputType.emailAddress,
                 ),
                 const SizedBox(
-                  height: 16,
+                  height: 20,
                 ),
                 SizedBox(
                   width: double.infinity,
@@ -83,14 +87,12 @@ class PasswordRecoveryView extends StatelessWidget {
                       backgroundColor:
                           WidgetStateProperty.all(const Color(0xff5b9ee1)),
                     ),
-                    child: const Text(
-                      "Continue",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontFamily: "Carmen",
-                      ),
-                    ),
+                    child: Text("Continue",
+                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                              fontWeight: FontWeight.w400,
+                              color: Colors.white,
+                              fontFamily: "Carmen",
+                            )),
                   ),
                 )
               ],

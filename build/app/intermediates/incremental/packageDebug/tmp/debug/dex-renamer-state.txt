@@ -1,4 +1,4 @@
-#Mon Dec 02 20:53:03 EET 2024
+#Mon Dec 02 21:54:29 EET 2024
 base.0=D\:\\Programming\\Flutter\\smart_cart_app\\build\\app\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
 base.1=D\:\\Programming\\Flutter\\smart_cart_app\\build\\app\\intermediates\\dex\\debug\\mergeLibDexDebug\\0\\classes.dex
 base.2=D\:\\Programming\\Flutter\\smart_cart_app\\build\\app\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex

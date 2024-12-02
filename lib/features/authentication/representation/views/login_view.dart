@@ -47,15 +47,17 @@ class LoginView extends StatelessWidget {
                                       fontFamily: "Carmen",
                                     ),
                               ),
-                              Text("Welcome Back You've Been Missed!",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyLarge!
-                                      .copyWith(
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.grey,
-                                        fontFamily: "Carmen",
-                                      )),
+                              Text(
+                                "Welcome Back You've Been Missed!",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyLarge!
+                                    .copyWith(
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.grey,
+                                      fontFamily: "Carmen",
+                                    ),
+                              ),
                             ],
                           )
                         ],
@@ -108,12 +110,16 @@ class LoginView extends StatelessWidget {
                               GoRouter.of(context)
                                   .push("/passwordRecoveryView");
                             },
-                            child: const Text(
+                            child: Text(
                               "Forgot Password?",
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontFamily: "Carmen",
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.grey,
+                                    fontFamily: "Carmen",
+                                  ),
                             ),
                           ),
                         ],
@@ -140,14 +146,15 @@ class LoginView extends StatelessWidget {
                             backgroundColor: WidgetStateProperty.all(
                                 const Color(0xff5b9ee1)),
                           ),
-                          child: const Text(
-                            "Login",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontFamily: "Carmen",
-                            ),
-                          ),
+                          child: Text("Login",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleSmall!
+                                  .copyWith(
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.white,
+                                    fontFamily: "Carmen",
+                                  )),
                         ),
                       ),
                       const Spacer(
