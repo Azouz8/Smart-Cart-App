@@ -8,10 +8,14 @@ ThemeData getLightTheme() => ThemeData(
       scaffoldBackgroundColor: AppColorsLight.scaffoldBackgroundColor,
       textTheme: TextTheme(
         bodyLarge: TextStylesLight.getBodyLarge(),
+        bodySmall: TextStylesLight.getBodySmall(),
+        bodyMedium: TextStylesLight.getBodyMedium(),
+        labelLarge: TextStylesLight.getLabelLarge(),
         titleMedium: TextStylesLight.getTitleMedium(),
         titleSmall: TextStylesLight.getTitleSmall(),
         headlineSmall: TextStylesLight.getHeadlineSmall(),
         headlineMedium: TextStylesLight.getHeadlineMedium(),
+        headlineLarge: TextStylesLight.getHeadlineLarge(),
         displaySmall: TextStylesLight.getDisplaySmall(),
       ),
       inputDecorationTheme: InputDecorationTheme(

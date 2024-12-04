@@ -5,7 +5,7 @@ import 'package:smart_cart_app/features/authentication/representation/views/regi
 import 'package:smart_cart_app/features/home/presentation/views/home_view.dart';
 
 abstract class AppRouter {
-  // static const homeView = "/homeView";
+  static const homeView = "/homeView";
   static const loginView = "/loginView";
   static const registerView = "/registerView";
   static const passwordRecoveryViewView = "/passwordRecoveryView";
@@ -13,11 +13,15 @@ abstract class AppRouter {
   static final router = GoRouter(routes: [
     GoRoute(
       path: "/",
-      builder: (context, state) => HomeView(),
+      builder: (context, state) => LoginView(),
     ),
     GoRoute(
       path: loginView,
       builder: (context, state) => LoginView(),
+    ),
+    GoRoute(
+      path: homeView,
+      builder: (context, state) => const HomeView(),
     ),
     GoRoute(
       path: registerView,

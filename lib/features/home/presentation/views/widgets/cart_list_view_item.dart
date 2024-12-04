@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CartListViewItem extends StatelessWidget {
   const CartListViewItem({
@@ -8,8 +9,9 @@ class CartListViewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.sizeOf(context).height * 0.16,
+      height: MediaQuery.sizeOf(context).height * 0.19,
       child: Card(
+        // clipBehavior: Clip.antiAlias,
         borderOnForeground: false,
         elevation: 0.2,
         color: Colors.white,
@@ -17,86 +19,94 @@ class CartListViewItem extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: Row(
             children: [
-              Image.asset(
-                "assets/images/Image_placeholder.png",
-                fit: BoxFit.fill,
+              SvgPicture.asset(
+                "assets/images/ImagePlaceholder.svg",
+                width: MediaQuery.sizeOf(context).width * 0.22,
+                fit: BoxFit.cover,
               ),
               const SizedBox(
                 width: 18,
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Lorem",
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelLarge!
-                        .copyWith(
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Lorem Ipsum is simply dummy text of the printing and typesetting",
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontFamily: "Carmen", fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      "\$250.00",
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
                           fontFamily: "Carmen",
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          "Quantity",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall!
+                              .copyWith(
+                                  fontFamily: "Carmen",
+                                  fontWeight: FontWeight.w400),
                         ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    "\$250.00",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge!
-                        .copyWith(
-                            fontFamily: "Carmen", color: Colors.grey),
-                  ),
-                  const Spacer(),
-                  Text(
-                    "Total",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge!
-                        .copyWith(
-                            fontFamily: "Carmen",
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-              const Spacer(),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    "Quantity",
-                    style: Theme.of(context)
-                        .textTheme
-                        .labelLarge!
-                        .copyWith(
-                          fontFamily: "Carmen",
+                        const SizedBox(
+                          height: 5,
                         ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    "3",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge!
-                        .copyWith(
-                            fontFamily: "Carmen", color: Colors.grey),
-                  ),
-                  const Spacer(),
-                  Text(
-                    "\$750",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge!
-                        .copyWith(
-                            fontFamily: "Carmen",
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold),
-                  ),
-                ],
+                        const Spacer(),
+                        Text(
+                          "3",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall!
+                              .copyWith(
+                                  fontFamily: "Carmen",
+                                  color: Colors.grey,
+                                  fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+                    Row(
+                      children: [
+                        Text(
+                          "Total",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall!
+                              .copyWith(
+                                  fontFamily: "Carmen",
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.bold),
+                        ),
+                        const Spacer(),
+                        Text(
+                          "\$750",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyLarge!
+                              .copyWith(
+                                  fontFamily: "Carmen",
+                                  color: Colors.green,
+                                  fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
