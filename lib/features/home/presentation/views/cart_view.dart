@@ -28,6 +28,13 @@ class CartView extends StatelessWidget {
                 const SizedBox(
                   height: 12,
                 ),
+                const Divider(
+                  thickness: 0.5,
+                  color: Colors.grey,
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
                 ListView.builder(
                     itemBuilder: (context, index) => const CartListViewItem(),
                     shrinkWrap: true,
