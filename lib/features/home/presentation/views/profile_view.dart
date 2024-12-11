@@ -134,7 +134,7 @@ class ProfileInfoWidget extends StatelessWidget {
           value,
           style: Theme.of(context)
               .textTheme
-              .bodyLarge!
+              .bodyMedium!
               .copyWith(fontFamily: "Carmen", color: Colors.grey),
         ),
         const SizedBox(
@@ -143,7 +143,7 @@ class ProfileInfoWidget extends StatelessWidget {
         const Icon(
           Icons.arrow_forward_ios,
           color: Colors.grey,
-          size: 22,
+          size: 20,
         ),
       ],
     );

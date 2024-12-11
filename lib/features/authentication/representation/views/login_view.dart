@@ -19,183 +19,198 @@ class LoginView extends StatelessWidget {
         listener: (BuildContext context, state) {},
         builder: (BuildContext context, Object? state) {
           var cubit = AuthCubit.get(context);
-          return SafeArea(
-            child: Scaffold(
-              body: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Form(
-                  key: formKey,
-                  child: SingleChildScrollView(
-                    keyboardDismissBehavior:
-                        ScrollViewKeyboardDismissBehavior.manual,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: MediaQuery.sizeOf(context).height * 0.1,
-                        ),
-                        SvgPicture.asset(
-                          "assets/images/loginIcon.svg",
-                          height: 100,
-                        ),
-                        const SizedBox(
-                          height: 24,
-                        ),
-                        Text(
-                          "Hello Again!",
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineMedium!
-                              .copyWith(
-                                fontWeight: FontWeight.w600,
-                                color: const Color(0xff1A2530),
-                                fontFamily: "Carmen",
-                              ),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          "Welcome Back You've Been Missed!",
-                          style:
-                              Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.grey,
-                                    fontFamily: "Carmen",
-                                  ),
-                        ),
-                        const SizedBox(
-                          height: 35,
-                        ),
-                        CustomTextFormField(
-                          controller: emailController,
-                          label: "Email Address",
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "Email Must Not Be Empty!";
-                            }
-                            return null;
-                          },
-                          prefixIcon: const Icon(Icons.email),
-                          type: TextInputType.emailAddress,
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        CustomTextFormField(
-                          controller: passwordController,
-                          label: "Password",
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "Please enter your password!";
-                            }
-                            return null;
-                          },
-                          prefixIcon: const Icon(Icons.password),
-                          type: TextInputType.text,
-                          obsecureText: cubit.isPassword,
-                          suffixIcon: IconButton(
-                            icon: cubit.suffixIcon,
-                            onPressed: () {
-                              cubit.changePasswordVisibility();
-                            },
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                GoRouter.of(context)
-                                    .push("/passwordRecoveryView");
-                              },
-                              child: Text(
-                                "Forgot Password?",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleSmall!
-                                    .copyWith(
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.grey,
-                                      fontFamily: "Carmen",
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          height: 45,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              // if (formKey.currentState!.validate()) {
-                              //   // Login Code
-                              // }
-                              GoRouter.of(context).push('/homeView');
-                            },
-                            style: ButtonStyle(
-                              shape: WidgetStatePropertyAll(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                              ),
-                              backgroundColor: WidgetStateProperty.all(
-                                  const Color(0xff5b9ee1)),
-                            ),
-                            child: Text(
-                              "Login",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall!
-                                  .copyWith(
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.white,
-                                    fontFamily: "Carmen",
-                                  ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: MediaQuery.sizeOf(context).height * 0.13,
-                        ),
-                        Row(
+          return Scaffold(
+            body: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxHeight: MediaQuery.sizeOf(context).height,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Form(
+                        key: formKey,
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
+                            SizedBox(
+                              height: MediaQuery.sizeOf(context).height * 0.15,
+                            ),
+                            SvgPicture.asset(
+                              "assets/images/loginIcon.svg",
+                              height: 100,
+                            ),
+                            const SizedBox(
+                              height: 24,
+                            ),
                             Text(
-                              'Don\'t have an account?',
+                              "Hello Again!",
                               style: Theme.of(context)
                                   .textTheme
-                                  .titleSmall!
+                                  .headlineMedium!
+                                  .copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: const Color(0xff1A2530),
+                                    fontFamily: "Carmen",
+                                  ),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              "Welcome Back You've Been Missed!",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge!
                                   .copyWith(
                                     fontWeight: FontWeight.w400,
                                     color: Colors.grey,
                                     fontFamily: "Carmen",
                                   ),
                             ),
-                            InkWell(
-                              onTap: () {
-                                GoRouter.of(context).push('/registerView');
+                            const SizedBox(
+                              height: 35,
+                            ),
+                            CustomTextFormField(
+                              controller: emailController,
+                              label: "Email Address",
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Email Must Not Be Empty!";
+                                }
+                                return null;
                               },
-                              child: Text(' Sign Up For Free!',
+                              prefixIcon: const Icon(Icons.email),
+                              type: TextInputType.emailAddress,
+                            ),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            CustomTextFormField(
+                              controller: passwordController,
+                              label: "Password",
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return "Please enter your password!";
+                                }
+                                return null;
+                              },
+                              prefixIcon: const Icon(Icons.password),
+                              type: TextInputType.text,
+                              obsecureText: cubit.isPassword,
+                              suffixIcon: IconButton(
+                                icon: cubit.suffixIcon,
+                                onPressed: () {
+                                  cubit.changePasswordVisibility();
+                                },
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    GoRouter.of(context)
+                                        .push("/passwordRecoveryView");
+                                  },
+                                  child: Text(
+                                    "Forgot Password?",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleSmall!
+                                        .copyWith(
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.grey,
+                                          fontFamily: "Carmen",
+                                        ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            SizedBox(
+                              width: double.infinity,
+                              height: 45,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  // if (formKey.currentState!.validate()) {
+                                  //   // Login Code
+                                  // }
+                                  GoRouter.of(context).push('/homeView');
+                                },
+                                style: ButtonStyle(
+                                  shape: WidgetStatePropertyAll(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                  ),
+                                  backgroundColor: WidgetStateProperty.all(
+                                      const Color(0xff5b9ee1)),
+                                ),
+                                child: Text(
+                                  "Login",
                                   style: Theme.of(context)
                                       .textTheme
                                       .titleSmall!
                                       .copyWith(
-                                        fontWeight: FontWeight.bold,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.white,
                                         fontFamily: "Carmen",
-                                      )),
-                            )
+                                      ),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
-                      ],
-                    ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Don\'t have an account?',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall!
+                                .copyWith(
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.grey,
+                                  fontFamily: "Carmen",
+                                ),
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              GoRouter.of(context).push('/registerView');
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                top: 8,
+                                bottom: 8,
+                                right: 8,
+                              ),
+                              child: Text(
+                                ' Sign Up For Free!',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall!
+                                    .copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "Carmen",
+                                    ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),
