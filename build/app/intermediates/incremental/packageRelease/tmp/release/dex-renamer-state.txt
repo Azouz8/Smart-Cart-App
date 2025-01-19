@@ -1,4 +1,0 @@
-#Wed Dec 11 19:53:03 EET 2024
-base.0=D\:\\Programming\\Flutter\\smart_cart_app\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
-path.0=classes.dex
-renamed.0=classes.dex

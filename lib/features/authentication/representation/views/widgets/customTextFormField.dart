@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
 
 class CustomTextFormField extends StatelessWidget {
   CustomTextFormField(
@@ -35,7 +36,7 @@ class CustomTextFormField extends StatelessWidget {
       keyboardType: type,
       enabled: enabled,
       style: const TextStyle(
-        color: Colors.black,
+        color: AppColorsLight.secondaryColor,
         fontSize: 12,
         fontFamily: "Carmen",
       ),
@@ -58,7 +59,7 @@ class CustomTextFormField extends StatelessWidget {
 
   OutlineInputBorder customOutlineInputBorder() {
     return const OutlineInputBorder(
-      borderSide: BorderSide(color: Colors.black),
+      borderSide: BorderSide(color: AppColorsLight.secondaryColor),
       borderRadius: BorderRadius.all(
         Radius.circular(16),
       ),
