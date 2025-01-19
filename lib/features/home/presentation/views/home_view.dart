@@ -18,6 +18,7 @@ class HomeView extends StatelessWidget {
             selectedItemColor: Colors.white,
             selectedIconTheme: IconThemeData(color: Colors.white, size: 30.sp),
             elevation: 0,
+            unselectedItemColor: Colors.white54,
             currentIndex: cubit.currentIndex,
             type: BottomNavigationBarType.fixed,
             items: cubit.bottomItems,

@@ -17,6 +17,8 @@ ThemeData getLightTheme() => ThemeData(
         headlineMedium: TextStylesLight.getHeadlineMedium(),
         headlineLarge: TextStylesLight.getHeadlineLarge(),
         displaySmall: TextStylesLight.getDisplaySmall(),
+        displayMedium: TextStylesLight.getDisplayMedium(),
+        displayLarge: TextStylesLight.getDisplayLarge(),
       ),
       inputDecorationTheme: InputDecorationTheme(
         hintStyle: TextStyle(color: AppColorsLight.appBarCompsColor),
