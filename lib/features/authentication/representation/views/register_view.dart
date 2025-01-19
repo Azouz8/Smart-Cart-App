@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
 import 'package:smart_cart_app/features/authentication/representation/manager/auth_cubit/auth_cubit.dart';
 import 'package:smart_cart_app/features/authentication/representation/manager/auth_cubit/auth_states.dart';
 import 'package:smart_cart_app/features/authentication/representation/views/widgets/customTextFormField.dart';
@@ -186,10 +187,13 @@ class RegisterView extends StatelessWidget {
                                   fontFamily: "Carmen",
                                 ),
                           ),
-                          GestureDetector(
+                          InkWell(
                             onTap: () {
                               Navigator.pop(context);
                             },
+                            overlayColor: const WidgetStatePropertyAll(
+                                AppColorsLight.scaffoldBackgroundColor),
+                            borderRadius: BorderRadius.circular(15),
                             child: Padding(
                               padding: const EdgeInsets.only(
                                 top: 8,
