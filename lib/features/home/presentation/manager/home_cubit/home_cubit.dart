@@ -8,7 +8,7 @@ import 'package:smart_cart_app/features/home/presentation/views/profile_view.dar
 class HomeCubit extends Cubit<HomeStates> {
   HomeCubit() : super(HomeInitial());
   static HomeCubit get(context) => BlocProvider.of(context);
-
+  String qrCode = "";
   int currentIndex = 0;
   List<BottomNavigationBarItem> bottomItems = [
     const BottomNavigationBarItem(
@@ -33,5 +33,10 @@ class HomeCubit extends Cubit<HomeStates> {
   void changeBottomNav(int index) {
     currentIndex = index;
     emit(HomeChangeBottomNavState());
+  }
+
+  void saveQRCode(String value) {
+    qrCode += value;
+    emit(HomeScanQRSuccessState());
   }
 }
