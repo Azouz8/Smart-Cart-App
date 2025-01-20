@@ -38,7 +38,6 @@ class CustomTextFormField extends StatelessWidget {
       style: const TextStyle(
         color: AppColorsLight.secondaryColor,
         fontSize: 12,
-        fontFamily: "Carmen",
       ),
       decoration: InputDecoration(
         prefixIcon: prefixIcon,
@@ -50,7 +49,6 @@ class CustomTextFormField extends StatelessWidget {
         hintStyle: const TextStyle(
           color: Colors.grey,
           fontSize: 12,
-          fontFamily: "Carmen",
         ),
         contentPadding: const EdgeInsets.all(12),
       ),

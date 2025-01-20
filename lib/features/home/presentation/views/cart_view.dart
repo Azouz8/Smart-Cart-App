@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:smart_cart_app/core/routing/app_router.dart';
 import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_states.dart';
 import 'package:smart_cart_app/features/home/presentation/views/widgets/cart_list_view_item.dart';
+import 'package:smart_cart_app/features/home/presentation/views/widgets/checkout_button.dart';
 
 class CartView extends StatelessWidget {
   const CartView({super.key});
@@ -19,7 +19,7 @@ class CartView extends StatelessWidget {
         return SafeArea(
           child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
-              if (true) {
+              if (false) {
                 return Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
@@ -156,7 +156,8 @@ class CartView extends StatelessWidget {
                                   const CartListViewItem(),
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
-                              itemCount: 10)
+                              itemCount: 10),
+                          const CheckoutButton(),
                         ],
                       ),
                     ),

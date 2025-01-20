@@ -41,7 +41,6 @@ class PasswordRecoveryView extends StatelessWidget {
                                 .copyWith(
                                   fontWeight: FontWeight.w600,
                                   color: const Color(0xff1A2530),
-                                  fontFamily: "Carmen",
                                 ),
                           ),
                           const SizedBox(
@@ -54,7 +53,6 @@ class PasswordRecoveryView extends StatelessWidget {
                                 Theme.of(context).textTheme.bodyLarge!.copyWith(
                                       fontWeight: FontWeight.w400,
                                       color: Colors.grey,
-                                      fontFamily: "Carmen",
                                     ),
                           ),
                         ],
@@ -102,7 +100,6 @@ class PasswordRecoveryView extends StatelessWidget {
                               Theme.of(context).textTheme.titleSmall!.copyWith(
                                     fontWeight: FontWeight.w400,
                                     color: Colors.white,
-                                    fontFamily: "Carmen",
                                   )),
                     ),
                   )

@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:smart_cart_app/features/authentication/representation/views/login_view.dart';
 import 'package:smart_cart_app/features/authentication/representation/views/password_recovery.dart';
 import 'package:smart_cart_app/features/authentication/representation/views/register_view.dart';
+import 'package:smart_cart_app/features/checkout/presentation/views/checkout_cart_view.dart';
 import 'package:smart_cart_app/features/home/presentation/views/home_view.dart';
 import 'package:smart_cart_app/features/home/presentation/views/scan_qr_view.dart';
 
@@ -11,6 +12,7 @@ abstract class AppRouter {
   static const registerView = "/registerView";
   static const passwordRecoveryView = "/passwordRecoveryView";
   static const scanQRCodeView = "/scanQRCodeView";
+  static const checkoutCartView = "/checkoutCartView";
 
   static final router = GoRouter(routes: [
     GoRoute(
@@ -30,9 +32,16 @@ abstract class AppRouter {
       builder: (context, state) => RegisterView(),
     ),
     GoRoute(
-        path: passwordRecoveryView,
-        builder: (context, state) => PasswordRecoveryView()),
+      path: passwordRecoveryView,
+      builder: (context, state) => PasswordRecoveryView(),
+    ),
     GoRoute(
-        path: scanQRCodeView, builder: (context, state) => const ScanQrView()),
+      path: scanQRCodeView,
+      builder: (context, state) => const ScanQrView(),
+    ),
+    GoRoute(
+      path: checkoutCartView,
+      builder: (context, state) => const CheckoutCartView(),
+    ),
   ]);
 }

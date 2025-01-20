@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:smart_cart_app/core/routing/app_router.dart';
 import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
 import 'package:smart_cart_app/features/authentication/representation/manager/auth_cubit/auth_cubit.dart';
 import 'package:smart_cart_app/features/authentication/representation/manager/auth_cubit/auth_states.dart';
@@ -56,7 +57,6 @@ class LoginView extends StatelessWidget {
                                   .copyWith(
                                     fontWeight: FontWeight.w600,
                                     color: const Color(0xff1A2530),
-                                    fontFamily: "Carmen",
                                   ),
                             ),
                             const SizedBox(
@@ -70,7 +70,6 @@ class LoginView extends StatelessWidget {
                                   .copyWith(
                                     fontWeight: FontWeight.w400,
                                     color: Colors.grey,
-                                    fontFamily: "Carmen",
                                   ),
                             ),
                             const SizedBox(
@@ -119,7 +118,7 @@ class LoginView extends StatelessWidget {
                                 InkWell(
                                   onTap: () {
                                     GoRouter.of(context)
-                                        .push("/passwordRecoveryView");
+                                        .push(AppRouter.passwordRecoveryView);
                                   },
                                   overlayColor: const WidgetStatePropertyAll(
                                     AppColorsLight.scaffoldBackgroundColor,
@@ -132,7 +131,6 @@ class LoginView extends StatelessWidget {
                                         .copyWith(
                                           fontWeight: FontWeight.w400,
                                           color: Colors.grey,
-                                          fontFamily: "Carmen",
                                         ),
                                   ),
                                 ),
@@ -149,7 +147,7 @@ class LoginView extends StatelessWidget {
                                   // if (formKey.currentState!.validate()) {
                                   //   // Login Code
                                   // }
-                                  GoRouter.of(context).push('/homeView');
+                                  GoRouter.of(context).push(AppRouter.homeView);
                                 },
                                 style: ButtonStyle(
                                   shape: WidgetStatePropertyAll(
@@ -168,7 +166,6 @@ class LoginView extends StatelessWidget {
                                       .copyWith(
                                         fontWeight: FontWeight.w400,
                                         color: Colors.white,
-                                        fontFamily: "Carmen",
                                       ),
                                 ),
                               ),
@@ -187,12 +184,11 @@ class LoginView extends StatelessWidget {
                                 .copyWith(
                                   fontWeight: FontWeight.w400,
                                   color: Colors.grey,
-                                  fontFamily: "Carmen",
                                 ),
                           ),
                           InkWell(
                             onTap: () {
-                              GoRouter.of(context).push('/registerView');
+                              GoRouter.of(context).push(AppRouter.registerView);
                             },
                             overlayColor: const WidgetStatePropertyAll(
                                 AppColorsLight.scaffoldBackgroundColor),
@@ -210,7 +206,6 @@ class LoginView extends StatelessWidget {
                                     .titleSmall!
                                     .copyWith(
                                       fontWeight: FontWeight.bold,
-                                      fontFamily: "Carmen",
                                     ),
                               ),
                             ),

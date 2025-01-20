@@ -65,7 +65,6 @@ class RegisterView extends StatelessWidget {
                                           .copyWith(
                                             fontWeight: FontWeight.w600,
                                             color: const Color(0xff1A2530),
-                                            fontFamily: "Carmen",
                                           ),
                                     ),
                                     Text(
@@ -76,7 +75,6 @@ class RegisterView extends StatelessWidget {
                                           .copyWith(
                                             fontWeight: FontWeight.w400,
                                             color: Colors.grey,
-                                            fontFamily: "Carmen",
                                           ),
                                     ),
                                   ],
@@ -163,7 +161,6 @@ class RegisterView extends StatelessWidget {
                                         .copyWith(
                                           fontWeight: FontWeight.w400,
                                           color: Colors.white,
-                                          fontFamily: "Carmen",
                                         )),
                               ),
                             ),
@@ -184,7 +181,6 @@ class RegisterView extends StatelessWidget {
                                 .copyWith(
                                   fontWeight: FontWeight.w400,
                                   color: Colors.grey,
-                                  fontFamily: "Carmen",
                                 ),
                           ),
                           InkWell(
@@ -207,7 +203,6 @@ class RegisterView extends StatelessWidget {
                                     .titleSmall!
                                     .copyWith(
                                       fontWeight: FontWeight.bold,
-                                      fontFamily: "Carmen",
                                     ),
                               ),
                             ),
