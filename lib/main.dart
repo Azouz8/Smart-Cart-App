@@ -8,7 +8,7 @@ import 'core/routing/app_router.dart';
 
 void main() => runApp(
       DevicePreview(
-        enabled: false,
+        enabled: true,
         builder: (context) => const SmartCart(),
       ),
     );
