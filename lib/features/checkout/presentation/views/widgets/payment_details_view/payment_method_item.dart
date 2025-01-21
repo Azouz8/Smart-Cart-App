@@ -15,7 +15,7 @@ class PaymentMethodItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       height: 60.h,
-      width: MediaQuery.sizeOf(context).width * 0.3,
+      width: MediaQuery.sizeOf(context).width * 0.425,
       duration: const Duration(milliseconds: 300),
       decoration: ShapeDecoration(
           shape: RoundedRectangleBorder(
@@ -38,6 +38,7 @@ class PaymentMethodItem extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
         child: SvgPicture.asset(
+          fit: BoxFit.scaleDown,
           image,
         ),
       ),

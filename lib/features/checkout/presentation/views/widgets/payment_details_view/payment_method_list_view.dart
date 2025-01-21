@@ -19,7 +19,7 @@ class _PaymentMethodListViewState extends State<PaymentMethodListView> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 62.h,
-      width: MediaQuery.of(context).size.width,
+      width: MediaQuery.sizeOf(context).width * 0.8,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: paymentMethods.length,
