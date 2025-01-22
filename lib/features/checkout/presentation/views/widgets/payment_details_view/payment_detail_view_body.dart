@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:smart_cart_app/core/routing/app_router.dart';
 import 'custom_credit_card.dart';
 import 'payment_method_list_view.dart';
 
 class PaymentDetailViewBody extends StatefulWidget {
-  PaymentDetailViewBody({super.key});
+  const PaymentDetailViewBody({super.key});
 
   @override
   State<PaymentDetailViewBody> createState() => _PaymentDetailViewBodyState();
@@ -33,12 +35,13 @@ class _PaymentDetailViewBodyState extends State<PaymentDetailViewBody> {
                 margin: const EdgeInsets.symmetric(horizontal: 12),
                 child: ElevatedButton(
                   onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      formKey.currentState!.save();
-                    } else {
-                      autovalidateMode = AutovalidateMode.always;
-                      setState(() {});
-                    }
+                    // if (formKey.currentState!.validate()) {
+                    //   formKey.currentState!.save();
+                    // } else {
+                    //   autovalidateMode = AutovalidateMode.always;
+                    //   setState(() {});
+                    // }
+                    GoRouter.of(context).push(AppRouter.thankYouView);
                   },
                   style: ButtonStyle(
                     shape: WidgetStatePropertyAll(
