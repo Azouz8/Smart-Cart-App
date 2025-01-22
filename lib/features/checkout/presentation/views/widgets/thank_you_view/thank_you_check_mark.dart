@@ -13,7 +13,7 @@ class ThankYouCheckMark extends StatelessWidget {
       top: -35,
       child: CircleAvatar(
         radius: 35,
-        backgroundColor: Color(0xffd9d9d9),
+        backgroundColor: Color(0xffededed),
         child: CircleAvatar(
           radius: 25,
           backgroundColor: Colors.green,
