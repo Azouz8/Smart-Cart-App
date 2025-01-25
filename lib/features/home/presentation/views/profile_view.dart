@@ -1,35 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
+import 'package:smart_cart_app/features/home/presentation/views/widgets/custom_home_app_bar.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return const SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Profile",
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineMedium!
-                  .copyWith(fontFamily: "Carmen"),
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            Divider(
-              thickness: 0.5,
-              color: Colors.grey.withOpacity(0.5),
-            ),
-            const SizedBox(
-              height: 24,
-            ),
-            const Row(
+            CustomHomeAppBar(title: "Profile"),
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CircleAvatar(
@@ -41,28 +26,28 @@ class ProfileView extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(
+            SizedBox(
               height: 30,
             ),
-            const ProfileInfoWidget(
+            ProfileInfoWidget(
               preIcon: Icons.person,
               label: "Name",
               value: "Ali Azouz",
             ),
-            const MyDivider(),
-            const ProfileInfoWidget(
+            MyDivider(),
+            ProfileInfoWidget(
               preIcon: Icons.email,
               label: "Email",
               value: "AliAzouz@gmail.com",
             ),
-            const MyDivider(),
-            const ProfileInfoWidget(
+            MyDivider(),
+            ProfileInfoWidget(
               preIcon: Icons.phone,
               label: "Phone Number",
               value: "01020033818",
             ),
-            const MyDivider(),
-            const ProfileInfoWidget(
+            MyDivider(),
+            ProfileInfoWidget(
               preIcon: Icons.password,
               label: "Change Password",
               value: "*********",

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
 import 'package:smart_cart_app/core/themes/light_theme/text_styles_light.dart';
 
@@ -26,10 +27,15 @@ ThemeData getLightTheme() => ThemeData(
           borderSide: BorderSide(color: AppColorsLight.appBarCompsColor),
         ),
       ),
-      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: Colors.white70,
-        selectedIconTheme: IconThemeData(color: Color(0xffff5d65)),
-        selectedItemColor: Color(0xffff5d65),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: const Color(0xff5b9ee1),
+        showUnselectedLabels: false,
+        enableFeedback: false,
+        selectedItemColor: Colors.white,
+        selectedIconTheme: IconThemeData(color: Colors.white, size: 24.sp),
+        elevation: 0,
+        unselectedItemColor: Colors.white54,
+        type: BottomNavigationBarType.fixed,
       ),
       appBarTheme: const AppBarTheme(
         color: AppColorsLight.scaffoldBackgroundColor,

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_states.dart';
 import 'package:smart_cart_app/features/home/presentation/views/cart_view.dart';
 import 'package:smart_cart_app/features/home/presentation/views/map_view.dart';
+import 'package:smart_cart_app/features/home/presentation/views/offers_view.dart';
 import 'package:smart_cart_app/features/home/presentation/views/profile_view.dart';
 
 class HomeCubit extends Cubit<HomeStates> {
@@ -16,6 +17,10 @@ class HomeCubit extends Cubit<HomeStates> {
       label: "Cart",
     ),
     const BottomNavigationBarItem(
+      icon: Icon(Icons.redeem_rounded),
+      label: "Offers",
+    ),
+    const BottomNavigationBarItem(
       icon: Icon(Icons.map),
       label: "Map",
     ),
@@ -26,6 +31,7 @@ class HomeCubit extends Cubit<HomeStates> {
   ];
   List<Widget> screens = [
     const CartView(),
+    const OffersView(),
     const MapView(),
     const ProfileView()
   ];
