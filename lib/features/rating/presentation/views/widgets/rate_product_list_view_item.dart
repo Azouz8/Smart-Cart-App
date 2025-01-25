@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import 'rating_bar_widget.dart';
 
 class RateProductListViewItem extends StatelessWidget {
   const RateProductListViewItem({
@@ -41,29 +42,7 @@ class RateProductListViewItem extends StatelessWidget {
                           fontFamily: "Carmen", fontWeight: FontWeight.bold),
                     ),
                     const Spacer(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        RatingBar.builder(
-                          itemSize: 30,
-                          initialRating: 3,
-                          minRating: 1,
-                          direction: Axis.horizontal,
-                          glow: false,
-                          allowHalfRating: true,
-                          itemCount: 5,
-                          itemPadding:
-                              const EdgeInsets.symmetric(horizontal: 4.0),
-                          itemBuilder: (context, _) => const Icon(
-                            Icons.star,
-                            color: Colors.amber,
-                          ),
-                          onRatingUpdate: (rating) {
-                            print(rating);
-                          },
-                        ),
-                      ],
-                    )
+                    const RatingBarWidget()
                   ],
                 ),
               ),

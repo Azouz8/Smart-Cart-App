@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:smart_cart_app/core/routing/app_router.dart';
 import 'package:smart_cart_app/features/rating/presentation/views/widgets/rate_product_list_view_item.dart';
 import '../../../../home/presentation/views/widgets/custom_home_app_bar.dart';
 
