@@ -7,6 +7,7 @@ import 'package:smart_cart_app/features/checkout/presentation/views/payment_deta
 import 'package:smart_cart_app/features/checkout/presentation/views/thank_you_view.dart';
 import 'package:smart_cart_app/features/home/presentation/views/home_view.dart';
 import 'package:smart_cart_app/features/home/presentation/views/scan_qr_view.dart';
+import 'package:smart_cart_app/features/rating/presentation/views/rate_products_view.dart';
 
 abstract class AppRouter {
   static const homeView = "/homeView";
@@ -17,6 +18,7 @@ abstract class AppRouter {
   static const checkoutCartView = "/checkoutCartView";
   static const paymentDetailsView = "/paymentDetailsView";
   static const thankYouView = "/thankYouView";
+  static const rateProductsView = "/rateProductsView";
 
   static final router = GoRouter(routes: [
     GoRoute(
@@ -54,6 +56,10 @@ abstract class AppRouter {
     GoRoute(
       path: thankYouView,
       builder: (context, state) => const ThankYouView(),
+    ),
+    GoRoute(
+      path: rateProductsView,
+      builder: (context, state) => const RateProductsView(),
     ),
   ]);
 }

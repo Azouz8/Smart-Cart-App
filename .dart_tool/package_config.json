@@ -164,6 +164,12 @@
       "languageVersion": "3.2"
     },
     {
+      "name": "flutter_rating_bar",
+      "rootUri": "file:///C:/Users/Azouz/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_rating_bar-4.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
       "name": "flutter_screenutil",
       "rootUri": "file:///C:/Users/Azouz/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_screenutil-5.9.3",
       "packageUri": "lib/",
@@ -566,7 +572,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2025-01-21T18:16:51.270989Z",
+  "generated": "2025-01-25T21:46:59.615507Z",
   "generator": "pub",
   "generatorVersion": "3.6.0",
   "flutterRoot": "file:///C:/Flutter/flutter",
