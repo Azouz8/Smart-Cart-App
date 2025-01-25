@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  CustomTextFormField(
+  const CustomTextFormField(
       {super.key,
       required this.controller,
       required this.label,
@@ -13,15 +13,15 @@ class CustomTextFormField extends StatelessWidget {
       this.type,
       this.enabled,
       this.suffixIcon});
-  Icon prefixIcon;
-  IconButton? suffixIcon;
-  String? Function(String?)? validator;
-  String? Function(String?)? onSubmit;
-  String label;
-  TextEditingController controller = TextEditingController();
-  bool? obsecureText;
-  TextInputType? type;
-  bool? enabled;
+  final Icon prefixIcon;
+  final IconButton? suffixIcon;
+  final String? Function(String?)? validator;
+  final String? Function(String?)? onSubmit;
+  final String label;
+  final TextEditingController controller;
+  final bool? obsecureText;
+  final TextInputType? type;
+  final bool? enabled;
 
   @override
   Widget build(BuildContext context) {

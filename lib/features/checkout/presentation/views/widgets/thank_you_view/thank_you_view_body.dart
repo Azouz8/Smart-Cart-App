@@ -11,11 +11,11 @@ class ThankYouViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 0, left: 24, right: 24, top: 72),
+    return const Padding(
+      padding: EdgeInsets.only(bottom: 0, left: 24, right: 24, top: 72),
       child: Column(
         children: [
-          const Stack(
+          Stack(
             clipBehavior: Clip.none,
             children: [
               ThankYouContainer(),
@@ -25,32 +25,57 @@ class ThankYouViewBody extends StatelessWidget {
               ThankYouCheckMark(),
             ],
           ),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {
-                GoRouter.of(context).push(AppRouter.homeView);
-              },
-              style: ButtonStyle(
-                shape: WidgetStatePropertyAll(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
+          Row(
+            spacing: 8,
+            children: [
+              Expanded(
+                child: CustomButton(
+                  title: "Go to Home Page",
+                  route: AppRouter.homeView,
                 ),
-                backgroundColor:
-                    WidgetStateProperty.all(const Color(0xff5b9ee1)),
               ),
-              child: Text(
-                "Go to Home page",
-                style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                      fontWeight: FontWeight.w400,
-                      color: Colors.white,
-                      fontFamily: "Carmen",
-                    ),
+              Expanded(
+                child: CustomButton(
+                  title: "Rate Products",
+                  route: AppRouter.homeView,
+                ),
               ),
-            ),
+            ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+class CustomButton extends StatelessWidget {
+  const CustomButton({
+    super.key,
+    required this.title,
+    required this.route,
+  });
+  final String title, route;
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {
+        GoRouter.of(context).push(route);
+      },
+      style: ButtonStyle(
+        shape: WidgetStatePropertyAll(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+        ),
+        backgroundColor: WidgetStateProperty.all(const Color(0xff5b9ee1)),
+      ),
+      child: Text(
+        title,
+        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+              fontWeight: FontWeight.w400,
+              color: Colors.white,
+              fontFamily: "Carmen",
+            ),
       ),
     );
   }
