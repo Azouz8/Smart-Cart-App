@@ -15,13 +15,15 @@ class PaymentMethodItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       height: 60.h,
-      width: MediaQuery.sizeOf(context).width * 0.425,
+      width: MediaQuery.sizeOf(context).width * 0.3,
       duration: const Duration(milliseconds: 300),
       decoration: ShapeDecoration(
           shape: RoundedRectangleBorder(
             side: BorderSide(
               width: isActive ? 1.5 : 1,
-              color: isActive ? Colors.green : AppColorsLight.secondaryColor,
+              color: isActive
+                  ? AppColorsLight.primaryColor
+                  : AppColorsLight.secondaryColor,
             ),
             borderRadius: BorderRadius.circular(15),
           ),
@@ -29,7 +31,7 @@ class PaymentMethodItem extends StatelessWidget {
           shadows: [
             isActive
                 ? const BoxShadow(
-                    color: Colors.green,
+                    color: AppColorsLight.primaryColor,
                     blurRadius: 4,
                     offset: Offset(0, 0),
                     spreadRadius: 0)

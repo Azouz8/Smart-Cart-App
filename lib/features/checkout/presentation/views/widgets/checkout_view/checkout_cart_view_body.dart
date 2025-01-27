@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:smart_cart_app/core/routing/app_router.dart';
+import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
+import 'package:smart_cart_app/features/checkout/presentation/views/widgets/payment_details_view/payment_method_list_view.dart';
+import 'package:smart_cart_app/features/checkout/presentation/views/widgets/thank_you_view/thank_you_view_body.dart';
 
 import 'ordre_info_item.dart';
 import 'total_price_widget.dart';
@@ -29,7 +31,14 @@ class CheckoutCartViewBody extends StatelessWidget {
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () {
-                GoRouter.of(context).push(AppRouter.paymentDetailsView);
+                // GoRouter.of(context).push(AppRouter.paymentDetailsView);
+                showModalBottomSheet(
+                  backgroundColor: AppColorsLight.scaffoldBackgroundColor,
+                  context: context,
+                  builder: (context) {
+                    return const PaymentMethodsBottomSheet();
+                  },
+                );
               },
               style: ButtonStyle(
                 shape: WidgetStatePropertyAll(
@@ -52,6 +61,29 @@ class CheckoutCartViewBody extends StatelessWidget {
           ),
           const SizedBox(
             height: 5,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class PaymentMethodsBottomSheet extends StatelessWidget {
+  const PaymentMethodsBottomSheet({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      child: Column(
+        spacing: 16,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          PaymentMethodListView(),
+          SizedBox(
+            width: double.infinity,
+            child:
+                CustomButton(title: "Continue", route: AppRouter.thankYouView),
           ),
         ],
       ),
