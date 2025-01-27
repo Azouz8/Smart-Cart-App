@@ -30,7 +30,7 @@ class HomeCubit extends Cubit<HomeStates> {
     ),
   ];
   List<Widget> screens = [
-    const CartView(),
+    CartView(),
     const OffersView(),
     const MapView(),
     const ProfileView()

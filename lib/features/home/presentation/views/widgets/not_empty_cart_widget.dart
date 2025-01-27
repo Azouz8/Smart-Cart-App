@@ -1,0 +1,62 @@
+import 'package:flutter/material.dart';
+import 'package:smart_cart_app/features/home/presentation/views/cart_view.dart';
+import 'cart_list_view_item.dart';
+import 'checkout_button.dart';
+import 'custom_home_app_bar.dart';
+
+class NotEmptyCartWidget extends StatelessWidget {
+  const NotEmptyCartWidget({
+    super.key,
+    required this.list,
+  });
+
+  final List<CartItemModel> list;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: 10,
+          horizontal: 20,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const CustomHomeAppBar(
+              title: "Your Cart",
+            ),
+            ListView.builder(
+              itemBuilder: (context, index) => ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Dismissible(
+                  key: const Key(""),
+                  direction: DismissDirection.endToStart,
+                  onDismissed: (direction) {
+                    list.removeAt(index);
+                  },
+                  background: Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.red,
+                      // borderRadius: BorderRadius.circular(15),
+                    ),
+                    alignment: Alignment.centerRight,
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: const Icon(Icons.delete, color: Colors.white),
+                  ),
+                  child: CartListViewItem(
+                    cartItemModel: list[index],
+                  ),
+                ),
+              ),
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: list.length,
+            ),
+            const CheckoutButton(),
+          ],
+        ),
+      ),
+    );
+  }
+}
