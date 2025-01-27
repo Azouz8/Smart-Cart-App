@@ -25,22 +25,25 @@ class ThankYouViewBody extends StatelessWidget {
               ThankYouCheckMark(),
             ],
           ),
-          Row(
-            spacing: 8,
-            children: [
-              Expanded(
-                child: CustomButton(
-                  title: "Go to Home Page",
-                  route: AppRouter.homeView,
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 15),
+            child: Row(
+              spacing: 8,
+              children: [
+                Expanded(
+                  child: CustomButton(
+                    title: "Go to Home Page",
+                    route: AppRouter.homeView,
+                  ),
                 ),
-              ),
-              Expanded(
-                child: CustomButton(
-                  title: "Rate Products",
-                  route: AppRouter.rateProductsView,
+                Expanded(
+                  child: CustomButton(
+                    title: "Rate Products",
+                    route: AppRouter.rateProductsView,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),
@@ -71,6 +74,7 @@ class CustomButton extends StatelessWidget {
       ),
       child: Text(
         title,
+        textAlign: TextAlign.center,
         style: Theme.of(context).textTheme.titleSmall!.copyWith(
               fontWeight: FontWeight.w400,
               color: Colors.white,

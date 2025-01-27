@@ -31,17 +31,17 @@ class RateProductListViewItem extends StatelessWidget {
               ),
               Expanded(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  spacing: 8,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Lorem Ipsum is simply dummy text of the printing and typesetting",
+                      "Lorem Ipsum is simply dummy text",
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           fontFamily: "Carmen", fontWeight: FontWeight.bold),
                     ),
-                    const Spacer(),
                     const RatingBarWidget()
                   ],
                 ),

@@ -12,8 +12,8 @@ class ThankYouContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 570.h,
-      padding: const EdgeInsets.only(right: 28, left: 28, top: 44, bottom: 16),
+      height: 550.h,
+      padding: const EdgeInsets.only(right: 28, left: 28, top: 44, bottom: 8),
       decoration: ShapeDecoration(
         color: const Color(0xffededed),
         shape: RoundedRectangleBorder(
@@ -29,6 +29,7 @@ class ThankYouContainer extends StatelessWidget {
           ),
           Text(
             "Your Transaction was Successfull",
+            textAlign: TextAlign.center,
             style: Theme.of(context)
                 .textTheme
                 .titleMedium!
@@ -74,7 +75,7 @@ class ThankYouContainer extends StatelessWidget {
           ),
           const ThankYouPaymentMethodInfo(),
           SizedBox(
-            height: 50.h,
+            height: 30.h,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
