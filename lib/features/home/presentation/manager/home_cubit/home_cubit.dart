@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_cart_app/features/home/data/repos/home_repo.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_states.dart';
 import 'package:smart_cart_app/features/home/presentation/views/cart_view.dart';
 import 'package:smart_cart_app/features/home/presentation/views/map_view.dart';
@@ -7,10 +8,12 @@ import 'package:smart_cart_app/features/home/presentation/views/offers_view.dart
 import 'package:smart_cart_app/features/home/presentation/views/profile_view.dart';
 
 class HomeCubit extends Cubit<HomeStates> {
-  HomeCubit() : super(HomeInitial());
+  HomeCubit(this.homeRepo) : super(HomeInitial());
   static HomeCubit get(context) => BlocProvider.of(context);
+  HomeRepo homeRepo;
   String qrCode = "";
   int currentIndex = 0;
+
   List<BottomNavigationBarItem> bottomItems = [
     const BottomNavigationBarItem(
       icon: Icon(Icons.shopping_cart),
@@ -41,8 +44,14 @@ class HomeCubit extends Cubit<HomeStates> {
     emit(HomeChangeBottomNavState());
   }
 
-  void saveQRCode(String value) {
-    qrCode += value;
-    emit(HomeScanQRSuccessState());
+  Future<void> connectUserToCart(String cartID) async {
+    emit(HomeAddUserToCartLoading());
+    var result =
+        await homeRepo.addUserToCart(cartID: cartID, userID: "AzouzUser");
+    result.fold((failure) {
+      emit(HomeAddUserToCartFailure());
+    }, (responseCode) {
+      emit(HomeAddUserToCartSuccess());
+    });
   }
 }

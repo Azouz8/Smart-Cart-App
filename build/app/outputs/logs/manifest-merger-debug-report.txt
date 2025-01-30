@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 application
-INJECTED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml:2:5-33:19
+INJECTED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml:3:5-34:19
 INJECTED from D:\Programming\Flutter\smart_cart_app\android\app\src\debug\AndroidManifest.xml
 MERGED from [androidx.camera:camera-core:1.3.4] C:\Users\Azouz\.gradle\caches\8.10.2\transforms\dd87bc0d0e0706e91f6cb72dbc566e27\transformed\jetified-camera-core-1.3.4\AndroidManifest.xml:23:5-34:19
 MERGED from [androidx.camera:camera-core:1.3.4] C:\Users\Azouz\.gradle\caches\8.10.2\transforms\dd87bc0d0e0706e91f6cb72dbc566e27\transformed\jetified-camera-core-1.3.4\AndroidManifest.xml:23:5-34:19
@@ -43,8 +43,8 @@ MERGED from [com.google.android.odml:image:1.0.0-beta1] C:\Users\Azouz\.gradle\c
 	android:name
 		INJECTED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml
 manifest
-ADDED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml:1:1-45:12
-MERGED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml:1:1-45:12
+ADDED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml:1:1-46:12
+MERGED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml:1:1-46:12
 INJECTED from D:\Programming\Flutter\smart_cart_app\android\app\src\debug\AndroidManifest.xml:1:1-7:12
 INJECTED from D:\Programming\Flutter\smart_cart_app\android\app\src\debug\AndroidManifest.xml:1:1-7:12
 INJECTED from D:\Programming\Flutter\smart_cart_app\android\app\src\debug\AndroidManifest.xml:1:1-7:12
@@ -108,24 +108,26 @@ MERGED from [com.google.android.odml:image:1.0.0-beta1] C:\Users\Azouz\.gradle\c
 		INJECTED from D:\Programming\Flutter\smart_cart_app\android\app\src\debug\AndroidManifest.xml
 	xmlns:android
 		ADDED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml:1:11-69
-queries
-ADDED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml:39:5-44:15
-intent#action:name:android.intent.action.PROCESS_TEXT+data:mimeType:text/plain
-ADDED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml:40:9-43:18
-action#android.intent.action.PROCESS_TEXT
-ADDED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml:41:13-72
-	android:name
-		ADDED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml:41:21-70
-data
-ADDED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml:42:13-50
-	android:mimeType
-		ADDED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml:42:19-48
 uses-permission#android.permission.INTERNET
-ADDED from D:\Programming\Flutter\smart_cart_app\android\app\src\debug\AndroidManifest.xml:6:5-66
+ADDED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml:2:1-62
+MERGED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml:2:1-62
+MERGED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml:2:1-62
 MERGED from [com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Azouz\.gradle\caches\8.10.2\transforms\120f97744a172e93b5b4883e48e4b552\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:26:5-67
 MERGED from [com.google.android.datatransport:transport-backend-cct:2.3.3] C:\Users\Azouz\.gradle\caches\8.10.2\transforms\120f97744a172e93b5b4883e48e4b552\transformed\jetified-transport-backend-cct-2.3.3\AndroidManifest.xml:26:5-67
 	android:name
-		ADDED from D:\Programming\Flutter\smart_cart_app\android\app\src\debug\AndroidManifest.xml:6:22-64
+		ADDED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml:2:18-60
+queries
+ADDED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml:40:5-45:15
+intent#action:name:android.intent.action.PROCESS_TEXT+data:mimeType:text/plain
+ADDED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml:41:9-44:18
+action#android.intent.action.PROCESS_TEXT
+ADDED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml:42:13-72
+	android:name
+		ADDED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml:42:21-70
+data
+ADDED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml:43:13-50
+	android:mimeType
+		ADDED from D:\Programming\Flutter\smart_cart_app\android\app\src\main\AndroidManifest.xml:43:19-48
 uses-sdk
 INJECTED from D:\Programming\Flutter\smart_cart_app\android\app\src\debug\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\Programming\Flutter\smart_cart_app\android\app\src\debug\AndroidManifest.xml

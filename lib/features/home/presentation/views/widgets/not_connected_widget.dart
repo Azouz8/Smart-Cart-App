@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smart_cart_app/core/routing/app_router.dart';
 import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
-import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 
 class NotConnectedWidget extends StatelessWidget {
   const NotConnectedWidget({
@@ -52,11 +51,9 @@ class NotConnectedWidget extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .displaySmall!
-                  .copyWith(
-                      fontFamily: "Carmen", color: Colors.white),
+                  .copyWith(fontFamily: "Carmen", color: Colors.white),
             ),
           ),
-          Text("Your QR is : ${HomeCubit.get(context).qrCode}"),
         ],
       ),
     );

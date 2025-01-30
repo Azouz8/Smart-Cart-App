@@ -16,14 +16,12 @@ class ScanQrView extends StatelessWidget {
           controller: MobileScannerController(
               detectionSpeed: DetectionSpeed.noDuplicates),
           onDetect: (capture) {
-            print("====================================");
             final List<Barcode> barcodes = capture.barcodes;
             String val = "";
             for (final barcode in barcodes) {
-              print(barcode.rawValue);
               val += barcode.displayValue!;
             }
-            HomeCubit.get(context).saveQRCode(val);
+            HomeCubit.get(context).connectUserToCart(val);
             Navigator.pop(context);
           },
         ),

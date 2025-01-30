@@ -201,7 +201,7 @@
     },
     {
       "name": "get_it",
-      "rootUri": "file:///C:/Users/Azouz/AppData/Local/Pub/Cache/hosted/pub.dev/get_it-8.0.2",
+      "rootUri": "file:///C:/Users/Azouz/AppData/Local/Pub/Cache/hosted/pub.dev/get_it-8.0.3",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -572,7 +572,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2025-01-25T21:46:59.615507Z",
+  "generated": "2025-01-30T22:30:10.219625Z",
   "generator": "pub",
   "generatorVersion": "3.6.0",
   "flutterRoot": "file:///C:/Flutter/flutter",
