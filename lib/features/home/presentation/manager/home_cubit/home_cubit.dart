@@ -1,11 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_cart_app/features/home/data/models/cart_product_model/cart_product_model.dart';
 import 'package:smart_cart_app/features/home/data/repos/home_repo.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_states.dart';
-import 'package:smart_cart_app/features/home/presentation/views/cart_view.dart';
-import 'package:smart_cart_app/features/home/presentation/views/map_view.dart';
-import 'package:smart_cart_app/features/home/presentation/views/offers_view.dart';
-import 'package:smart_cart_app/features/home/presentation/views/profile_view.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class HomeCubit extends Cubit<HomeStates> {
@@ -13,8 +9,8 @@ class HomeCubit extends Cubit<HomeStates> {
   static HomeCubit get(context) => BlocProvider.of(context);
   HomeRepo homeRepo;
   String cartId = "";
-  int currentIndex = 0;
   late IO.Socket socket;
+  List<CartProductModel> cartProducts = [];
 
   initSocket() {
     socket = IO.io("http://192.168.110.1:3000", <String, dynamic>{
@@ -31,41 +27,14 @@ class HomeCubit extends Cubit<HomeStates> {
     socket.onError((err) => print("Socket could not connect :" + err));
   }
 
-  removeProduct() {
-    socket.emit("cartUpdated");
-  }
-
-  List<BottomNavigationBarItem> bottomItems = [
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.shopping_cart),
-      label: "Cart",
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.redeem_rounded),
-      label: "Offers",
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.map),
-      label: "Map",
-    ),
-    const BottomNavigationBarItem(
-      icon: Icon(Icons.person),
-      label: "Profile",
-    ),
-  ];
-  List<Widget> screens = [
-    const CartView(),
-    const OffersView(),
-    const MapView(),
-    const ProfileView()
-  ];
-
-  void changeBottomNav(int index) {
-    if (!isClosed) {
-      // Check if Cubit is still active before emitting
-      currentIndex = index;
-      emit(HomeChangeBottomNavState());
+  @override
+  Future<void> close() {
+    if (socket.connected) {
+      socket.disconnect();
+      socket.dispose();
+      print("Socket disconnected and disposed.");
     }
+    return super.close();
   }
 
   Future<void> connectUserToCart(String cartID) async {
@@ -87,7 +56,10 @@ class HomeCubit extends Cubit<HomeStates> {
       (result) {
         result.fold(
           (failure) => emit(HomeGetScannedProductsFailure()),
-          (products) => emit(HomeGetScannedProductsSuccess(products)),
+          (products) {
+            cartProducts = products;
+            emit(HomeGetScannedProductsSuccess(products));
+          },
         );
       },
       onError: (error) {
@@ -96,23 +68,25 @@ class HomeCubit extends Cubit<HomeStates> {
     );
   }
 
-  // Future<void> getScannedProducts() async {
-  //   emit(HomeGetScannedProductsLoading());
-  //   var result = await homeRepo.getScannedProducts();
-  //   result.fold((failure) {
-  //     emit(HomeGetScannedProductsFailure());
-  //   }, (products) {
-  //     emit(HomeGetScannedProductsSuccess(products));
-  //   });
-  // }
-
   Future<void> getCartProducts(String cartID) async {
     emit(HomeGetCartProductsLoading());
     var result = await homeRepo.getCartProducts(cartID: cartID);
     result.fold((failure) {
       emit(HomeGetCartProductsFailure());
     }, (products) {
+      cartProducts = products;
       emit(HomeGetCartProductsSuccess(products));
+    });
+  }
+
+  Future<void> deleteProductFromCart({required String cartID, required String productID}) async {
+    emit(HomeDeleteProductLoading());
+    var result = await homeRepo.deleteProductFromCart(
+        cartID: cartID, productID: productID);
+    result.fold((failure) {
+      emit(HomeDeleteProductFailure());
+    }, (responseCode) {
+      emit(HomeDeleteProductSuccess());
     });
   }
 }

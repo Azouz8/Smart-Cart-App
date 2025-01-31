@@ -21,4 +21,23 @@ class ApiService {
         options: Options(method: "GET"));
     return response.data;
   }
+
+  Future<int?> deleteProduct(
+      {required String productID, required String cartID}) async {
+    try {
+      print(
+          "=========================================================================");
+      print(productID);
+      print(cartID);
+      var response = await _dio.request<dynamic>(
+        '${ApiConsts.apiBaseUrl}${ApiConsts.cart}$cartID/${ApiConsts.deleteProductFromCart}',
+        options: Options(method: "DELETE"),
+        queryParameters: <String, dynamic>{"productID": productID},
+      );
+      return response.statusCode;
+    } catch (e) {
+      print("ERORRRRRRRRRRRRRR: $e");
+      return null;
+    }
+  }
 }

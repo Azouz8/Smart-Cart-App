@@ -4,8 +4,6 @@ abstract class HomeStates {}
 
 class HomeInitial extends HomeStates {}
 
-class HomeChangeBottomNavState extends HomeStates {}
-
 class HomeAddUserToCartLoading extends HomeStates {}
 
 class HomeAddUserToCartFailure extends HomeStates {}
@@ -31,3 +29,9 @@ class HomeGetCartProductsSuccess extends HomeStates {
   List<CartProductModel> products;
   HomeGetCartProductsSuccess(this.products);
 }
+
+class HomeDeleteProductLoading extends HomeStates {}
+
+class HomeDeleteProductFailure extends HomeStates {}
+
+class HomeDeleteProductSuccess extends HomeStates {}

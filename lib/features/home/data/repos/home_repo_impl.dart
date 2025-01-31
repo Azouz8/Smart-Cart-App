@@ -54,6 +54,7 @@ class HomeRepoImpl extends HomeRepo {
   Stream<Either<Failures, List<CartProductModel>>> getScannedProducts() {
     return _streamController.stream;
   }
+  
   // @override
   // Future<Either<Failures, List<CartProductModel>>> getScannedProducts() async {
   //   final completer = Completer<Either<Failures, List<CartProductModel>>>();
@@ -92,6 +93,17 @@ class HomeRepoImpl extends HomeRepo {
         products.add(CartProductModel.fromJson(i));
       }
       return Right(products);
+    } on Exception {
+      return Left(ServerFailure());
+    }
+  }
+  
+  @override
+  Future<Either<Failures, int>> deleteProductFromCart({required String productID, required String cartID}) async{
+    try {
+      var responseCode =await apiService.deleteProduct(productID: productID,cartID: cartID);
+      
+      return Right(responseCode!);
     } on Exception {
       return Left(ServerFailure());
     }

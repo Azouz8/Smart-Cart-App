@@ -7,25 +7,8 @@ import 'widgets/empty_cart_widget.dart';
 import 'widgets/not_connected_widget.dart';
 import 'widgets/not_empty_cart_widget.dart';
 
-class CartView extends StatefulWidget {
+class CartView extends StatelessWidget {
   const CartView({super.key});
-
-  @override
-  State<CartView> createState() => _CartViewState();
-}
-
-class _CartViewState extends State<CartView> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  // @override
-  // void dispose() {
-  //   HomeCubit.get(context).socket.disconnect();
-  //   HomeCubit.get(context).socket.dispose();
-  //   super.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -38,16 +21,8 @@ class _CartViewState extends State<CartView> {
             builder: (BuildContext context, BoxConstraints constraints) {
               if (state is HomeInitial) {
                 return const NotConnectedWidget(showSnackbar: false);
-              } else if (state is HomeAddUserToCartLoading ||
-                  state is HomeGetScannedProductsLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(
-                      color: AppColorsLight.primaryColor),
-                );
               } else if (state is HomeAddUserToCartFailure) {
-                return const NotConnectedWidget(
-                  showSnackbar: true,
-                );
+                return const NotConnectedWidget(showSnackbar: true);
               } else if (state is HomeAddUserToCartSuccess) {
                 cubit.getCartProducts(cubit.cartId);
                 cubit.initSocket();
@@ -56,14 +31,10 @@ class _CartViewState extends State<CartView> {
                 if (state.products.isEmpty) {
                   return const EmptyCartWidget();
                 } else {
-                  return NotEmptyCartWidget(
-                    products: state.products,
-                  );
+                  return NotEmptyCartWidget(products: cubit.cartProducts);
                 }
               } else if (state is HomeGetScannedProductsSuccess) {
-                return NotEmptyCartWidget(
-                  products: state.products,
-                );
+                return NotEmptyCartWidget(products: state.products);
               } else {
                 return const Center(
                   child: CircularProgressIndicator(
