@@ -6,6 +6,7 @@ import 'package:smart_cart_app/features/home/presentation/views/cart_view.dart';
 import 'package:smart_cart_app/features/home/presentation/views/map_view.dart';
 import 'package:smart_cart_app/features/home/presentation/views/offers_view.dart';
 import 'package:smart_cart_app/features/home/presentation/views/profile_view.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class HomeCubit extends Cubit<HomeStates> {
   HomeCubit(this.homeRepo) : super(HomeInitial());
@@ -13,6 +14,26 @@ class HomeCubit extends Cubit<HomeStates> {
   HomeRepo homeRepo;
   String cartId = "";
   int currentIndex = 0;
+  late IO.Socket socket;
+
+  initSocket() {
+    socket = IO.io("http://192.168.110.1:3000", <String, dynamic>{
+      'autoConnect': false,
+      'transports': ['websocket'],
+    });
+    socket.connect();
+    socket.onConnect((_) {
+      print("Connection established");
+      getScannedProducts();
+    });
+    socket.onDisconnect((_) => print("connection Disconnection"));
+    socket.onConnectError((err) => print("Socket could not connect :" + err));
+    socket.onError((err) => print("Socket could not connect :" + err));
+  }
+
+  removeProduct() {
+    socket.emit("cartUpdated");
+  }
 
   List<BottomNavigationBarItem> bottomItems = [
     const BottomNavigationBarItem(
@@ -33,15 +54,18 @@ class HomeCubit extends Cubit<HomeStates> {
     ),
   ];
   List<Widget> screens = [
-    CartView(),
+    const CartView(),
     const OffersView(),
     const MapView(),
     const ProfileView()
   ];
 
   void changeBottomNav(int index) {
-    currentIndex = index;
-    emit(HomeChangeBottomNavState());
+    if (!isClosed) {
+      // Check if Cubit is still active before emitting
+      currentIndex = index;
+      emit(HomeChangeBottomNavState());
+    }
   }
 
   Future<void> connectUserToCart(String cartID) async {
@@ -55,6 +79,32 @@ class HomeCubit extends Cubit<HomeStates> {
       cartId = cartID;
     });
   }
+
+  Future<void> getScannedProducts() async {
+    emit(HomeGetScannedProductsLoading());
+
+    homeRepo.getScannedProducts().listen(
+      (result) {
+        result.fold(
+          (failure) => emit(HomeGetScannedProductsFailure()),
+          (products) => emit(HomeGetScannedProductsSuccess(products)),
+        );
+      },
+      onError: (error) {
+        emit(HomeGetScannedProductsFailure());
+      },
+    );
+  }
+
+  // Future<void> getScannedProducts() async {
+  //   emit(HomeGetScannedProductsLoading());
+  //   var result = await homeRepo.getScannedProducts();
+  //   result.fold((failure) {
+  //     emit(HomeGetScannedProductsFailure());
+  //   }, (products) {
+  //     emit(HomeGetScannedProductsSuccess(products));
+  //   });
+  // }
 
   Future<void> getCartProducts(String cartID) async {
     emit(HomeGetCartProductsLoading());

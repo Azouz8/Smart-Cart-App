@@ -7,63 +7,26 @@ import 'widgets/empty_cart_widget.dart';
 import 'widgets/not_connected_widget.dart';
 import 'widgets/not_empty_cart_widget.dart';
 
-class CartView extends StatelessWidget {
-  CartView({super.key});
-  final List<CartItemModel> list = [
-    CartItemModel(
-      title:
-          "1Lorem Ipsum is simply dummy text of the printing and typesetting",
-      price: "250",
-      quantity: "3",
-    ),
-    CartItemModel(
-      title:
-          "2Lorem Ipsum is simply dummy text of the printing and typesetting",
-      price: "250",
-      quantity: "3",
-    ),
-    CartItemModel(
-      title:
-          "3Lorem Ipsum is simply dummy text of the printing and typesetting",
-      price: "250",
-      quantity: "3",
-    ),
-    CartItemModel(
-      title: "Lorem Ipsum is simply dummy text of the printing and typesetting",
-      price: "250",
-      quantity: "3",
-    ),
-    CartItemModel(
-      title: "Lorem Ipsum is simply dummy text of the printing and typesetting",
-      price: "250",
-      quantity: "3",
-    ),
-    CartItemModel(
-      title: "Lorem Ipsum is simply dummy text of the printing and typesetting",
-      price: "250",
-      quantity: "3",
-    ),
-    CartItemModel(
-      title: "Lorem Ipsum is simply dummy text of the printing and typesetting",
-      price: "250",
-      quantity: "3",
-    ),
-    CartItemModel(
-      title: "Lorem Ipsum is simply dummy text of the printing and typesetting",
-      price: "250",
-      quantity: "3",
-    ),
-    CartItemModel(
-      title: "Lorem Ipsum is simply dummy text of the printing and typesetting",
-      price: "250",
-      quantity: "3",
-    ),
-    CartItemModel(
-      title: "Lorem Ipsum is simply dummy text of the printing and typesetting",
-      price: "250",
-      quantity: "3",
-    ),
-  ];
+class CartView extends StatefulWidget {
+  const CartView({super.key});
+
+  @override
+  State<CartView> createState() => _CartViewState();
+}
+
+class _CartViewState extends State<CartView> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  // @override
+  // void dispose() {
+  //   HomeCubit.get(context).socket.disconnect();
+  //   HomeCubit.get(context).socket.dispose();
+  //   super.dispose();
+  // }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomeCubit, HomeStates>(
@@ -74,17 +37,37 @@ class CartView extends StatelessWidget {
           child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               if (state is HomeInitial) {
-                return const NotConnectedWidget();
-              } else if (state is HomeAddUserToCartLoading) {
+                return const NotConnectedWidget(showSnackbar: false);
+              } else if (state is HomeAddUserToCartLoading ||
+                  state is HomeGetScannedProductsLoading) {
                 return const Center(
                   child: CircularProgressIndicator(
                       color: AppColorsLight.primaryColor),
                 );
+              } else if (state is HomeAddUserToCartFailure) {
+                return const NotConnectedWidget(
+                  showSnackbar: true,
+                );
               } else if (state is HomeAddUserToCartSuccess) {
-                return const EmptyCartWidget();
-              } else {
+                cubit.getCartProducts(cubit.cartId);
+                cubit.initSocket();
+                return Container();
+              } else if (state is HomeGetCartProductsSuccess) {
+                if (state.products.isEmpty) {
+                  return const EmptyCartWidget();
+                } else {
+                  return NotEmptyCartWidget(
+                    products: state.products,
+                  );
+                }
+              } else if (state is HomeGetScannedProductsSuccess) {
                 return NotEmptyCartWidget(
-                  list: list,
+                  products: state.products,
+                );
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(
+                      color: AppColorsLight.primaryColor),
                 );
               }
             },
@@ -93,11 +76,4 @@ class CartView extends StatelessWidget {
       },
     );
   }
-}
-
-class CartItemModel {
-  final String title, price, quantity;
-
-  CartItemModel(
-      {required this.title, required this.price, required this.quantity});
 }

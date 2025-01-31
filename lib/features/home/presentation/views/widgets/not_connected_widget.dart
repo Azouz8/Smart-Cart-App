@@ -7,10 +7,29 @@ import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
 class NotConnectedWidget extends StatelessWidget {
   const NotConnectedWidget({
     super.key,
+    required this.showSnackbar,
   });
-
+  final bool showSnackbar;
   @override
   Widget build(BuildContext context) {
+    if (showSnackbar) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            margin: const EdgeInsets.all(8),
+            content: Text(
+              "Sorry, This cart is in use",
+              style: Theme.of(context)
+                  .textTheme
+                  .labelMedium!
+                  .copyWith(color: Colors.white),
+            ),
+            behavior: SnackBarBehavior.floating,
+            backgroundColor: Colors.redAccent,
+          ),
+        );
+      });
+    }
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(

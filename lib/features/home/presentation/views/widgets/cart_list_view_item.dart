@@ -1,15 +1,19 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:smart_cart_app/features/home/presentation/views/cart_view.dart';
+import 'package:smart_cart_app/features/home/data/models/cart_product_model/cart_product_model.dart';
 
 class CartListViewItem extends StatelessWidget {
   const CartListViewItem({
     super.key,
-    required this.cartItemModel,
+    required this.cartProductModel,
   });
-  final CartItemModel cartItemModel;
+  final CartProductModel cartProductModel;
   @override
   Widget build(BuildContext context) {
+    final String total =
+        (cartProductModel.productID!.price! * cartProductModel.quantity!)
+            .toStringAsFixed(2);
     return SizedBox(
       height: MediaQuery.sizeOf(context).height * 0.2,
       child: Container(
@@ -18,10 +22,17 @@ class CartListViewItem extends StatelessWidget {
         color: Colors.white,
         child: Row(
           children: [
-            SvgPicture.asset(
-              "assets/images/ImagePlaceholder.svg",
-              width: MediaQuery.sizeOf(context).width * 0.22,
-              fit: BoxFit.cover,
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: CachedNetworkImage(
+                imageUrl: cartProductModel.productID!.image ?? "",
+                errorWidget: (context, url, error) => SvgPicture.asset(
+                  "assets/images/ImagePlaceholder.svg",
+                  width: MediaQuery.sizeOf(context).width * 0.22,
+                  fit: BoxFit.cover,
+                ),
+                fit: BoxFit.fill,
+              ),
             ),
             const SizedBox(
               width: 18,
@@ -32,7 +43,7 @@ class CartListViewItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    cartItemModel.title,
+                    cartProductModel.productID!.title!,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: Theme.of(context)
@@ -44,7 +55,7 @@ class CartListViewItem extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    "\$250.00",
+                    "\$ ${cartProductModel.productID!.price}",
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                         fontFamily: "Carmen",
                         color: Colors.grey,
@@ -65,7 +76,7 @@ class CartListViewItem extends StatelessWidget {
                       ),
                       const Spacer(),
                       Text(
-                        "3",
+                        "${cartProductModel.quantity}",
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(
                             fontFamily: "Carmen",
                             color: Colors.grey,
@@ -85,7 +96,7 @@ class CartListViewItem extends StatelessWidget {
                       ),
                       const Spacer(),
                       Text(
-                        "\$750",
+                        "\$ $total",
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             fontFamily: "Carmen",
                             color: Colors.green,

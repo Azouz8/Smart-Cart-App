@@ -17,7 +17,7 @@ class ApiService {
 
   Future<Map<String, dynamic>> getCartProducts({required String cartID}) async {
     var response = await _dio.request<dynamic>(
-        '${ApiConsts.apiBaseUrl}${ApiConsts.cart}$cartID',
+        '${ApiConsts.apiBaseUrl}${ApiConsts.cart}$cartID/${ApiConsts.products}',
         options: Options(method: "GET"));
     return response.data;
   }

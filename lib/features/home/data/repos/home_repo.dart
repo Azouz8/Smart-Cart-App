@@ -6,5 +6,6 @@ abstract class HomeRepo {
   Future<Either<Failures, int>> addUserToCart(
       {required String cartID, required String userID});
 
+  Stream<Either<Failures, List<CartProductModel>>> getScannedProducts();
   Future<Either<Failures, List<CartProductModel>>> getCartProducts({required String cartID});
 }

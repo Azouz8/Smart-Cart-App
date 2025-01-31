@@ -14,6 +14,15 @@ class HomeAddUserToCartSuccess extends HomeStates {}
 
 class HomeUserNotConnectedToCartState extends HomeStates {}
 
+class HomeGetScannedProductsLoading extends HomeStates {}
+
+class HomeGetScannedProductsFailure extends HomeStates {}
+
+class HomeGetScannedProductsSuccess extends HomeStates {
+  List<CartProductModel> products;
+  HomeGetScannedProductsSuccess(this.products);
+}
+
 class HomeGetCartProductsLoading extends HomeStates {}
 
 class HomeGetCartProductsFailure extends HomeStates {}

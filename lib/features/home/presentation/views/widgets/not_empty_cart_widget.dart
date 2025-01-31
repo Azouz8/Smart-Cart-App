@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:smart_cart_app/features/home/presentation/views/cart_view.dart';
+import 'package:smart_cart_app/features/home/data/models/cart_product_model/cart_product_model.dart';
 import 'cart_list_view_item.dart';
 import 'checkout_button.dart';
 import 'custom_home_app_bar.dart';
@@ -7,14 +7,15 @@ import 'custom_home_app_bar.dart';
 class NotEmptyCartWidget extends StatelessWidget {
   const NotEmptyCartWidget({
     super.key,
-    required this.list,
+    required this.products,
   });
 
-  final List<CartItemModel> list;
+  final List<CartProductModel> products;
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
       child: Padding(
         padding: const EdgeInsets.symmetric(
           vertical: 10,
@@ -33,7 +34,7 @@ class NotEmptyCartWidget extends StatelessWidget {
                   key: const Key(""),
                   direction: DismissDirection.endToStart,
                   onDismissed: (direction) {
-                    list.removeAt(index);
+                    products.removeAt(index);
                   },
                   background: Container(
                     decoration: const BoxDecoration(
@@ -45,13 +46,13 @@ class NotEmptyCartWidget extends StatelessWidget {
                     child: const Icon(Icons.delete, color: Colors.white),
                   ),
                   child: CartListViewItem(
-                    cartItemModel: list[index],
+                    cartProductModel: products[index],
                   ),
                 ),
               ),
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: list.length,
+              itemCount: products.length,
             ),
             const CheckoutButton(),
           ],

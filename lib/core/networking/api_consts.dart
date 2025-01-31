@@ -11,6 +11,7 @@ class ApiConsts {
 
   //Cart
   static const String cart = "cart/";
+  static const String products = "products";
   static const String addUserToCart = "addUser";
   static const String removeUserFromCart = "removeUser";
   static const String deleteProductFromCart = "deleteproduct";

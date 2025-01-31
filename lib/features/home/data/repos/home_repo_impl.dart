@@ -1,13 +1,18 @@
+import 'dart:async';
 import 'package:either_dart/either.dart';
 import 'package:smart_cart_app/core/networking/api_error_handler.dart';
 import 'package:smart_cart_app/core/networking/api_service.dart';
 import 'package:smart_cart_app/features/home/data/models/cart_product_model/cart_product_model.dart';
 import 'package:smart_cart_app/features/home/data/repos/home_repo.dart';
+import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 class HomeRepoImpl extends HomeRepo {
   final ApiService apiService;
+  final IO.Socket socket;
+ HomeRepoImpl(this.apiService, this.socket) {
+    _setupSocketListeners();
+  }
 
-  HomeRepoImpl(this.apiService);
   @override
   Future<Either<Failures, int>> addUserToCart({
     required String cartID,
@@ -21,6 +26,61 @@ class HomeRepoImpl extends HomeRepo {
       return Left(ServerFailure());
     }
   }
+ final StreamController<Either<Failures, List<CartProductModel>>> _streamController =
+      StreamController.broadcast();
+
+  void _setupSocketListeners() {
+    socket.on("cartUpdated", (data) {
+      print("Cart updateddddddddddddddddddddddddddddddddddddddddddd: $data");
+
+      try {
+        List<CartProductModel> updatedProducts = data
+            .map<CartProductModel>((item) => CartProductModel.fromJson(item))
+            .toList();
+
+        _streamController.add(Right(updatedProducts));
+      } catch (e) {
+        print("Error parsing product: $e");
+        _streamController.add(Left(ServerFailure()));
+      }
+    });
+
+    socket.onError((error) {
+      print("Socket error: $error");
+      _streamController.add(Left(ServerFailure()));
+    });
+  }
+  @override
+  Stream<Either<Failures, List<CartProductModel>>> getScannedProducts() {
+    return _streamController.stream;
+  }
+  // @override
+  // Future<Either<Failures, List<CartProductModel>>> getScannedProducts() async {
+  //   final completer = Completer<Either<Failures, List<CartProductModel>>>();
+  //   try {
+  //     socket.on("cartUpdated", (data) {
+  //       print("Cart updateddddddddddddddddddddddddddddddd: $data");
+
+  //       List<CartProductModel> updatedProducts = [];
+  //       for (var item in data) {
+  //         updatedProducts.add(CartProductModel.fromJson(item));
+  //       }
+  //       print(
+  //           "updater cartttttttttttt ------------------------------------------------------====");
+  //       print(updatedProducts);
+  //       completer.complete(Right(updatedProducts));
+  //     });
+
+  //     socket.onError((error) {
+  //       completer.completeError(error);
+  //     });
+  //     return await completer.future;
+  //   } catch (e) {
+  //     print(
+  //         "updater ERRORRRRRRR ------------------------------------------------------====");
+  //     return Left(ServerFailure());
+  //   }
+  // }
 
   @override
   Future<Either<Failures, List<CartProductModel>>> getCartProducts(
@@ -28,7 +88,7 @@ class HomeRepoImpl extends HomeRepo {
     try {
       var data = await apiService.getCartProducts(cartID: cartID);
       List<CartProductModel> products = [];
-      for (var i in data["cartProducts"]) {
+      for (var i in data["results"]) {
         products.add(CartProductModel.fromJson(i));
       }
       return Right(products);
