@@ -16,7 +16,7 @@ class PaymentDetailsView extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body:  const PaymentDetailViewBody(),
+      body: const PaymentDetailViewBody(),
     );
   }
 }

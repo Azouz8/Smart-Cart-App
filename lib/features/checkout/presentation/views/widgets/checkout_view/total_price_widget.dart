@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class TotalPriceWidget extends StatelessWidget {
   const TotalPriceWidget({
-    super.key, required this.price,
+    super.key,
+    required this.price,
   });
   final String price;
   @override

@@ -53,11 +53,10 @@ class PasswordRecoveryViewBody extends StatelessWidget {
                       Text(
                         "Please Enter Your Email Address To\nRecieve a Verification Code",
                         textAlign: TextAlign.center,
-                        style:
-                            Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.grey,
-                                ),
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                              fontWeight: FontWeight.w400,
+                              color: Colors.grey,
+                            ),
                       ),
                     ],
                   )
@@ -100,11 +99,10 @@ class PasswordRecoveryViewBody extends StatelessWidget {
                         WidgetStateProperty.all(const Color(0xff5b9ee1)),
                   ),
                   child: Text("Continue",
-                      style:
-                          Theme.of(context).textTheme.titleSmall!.copyWith(
-                                fontWeight: FontWeight.w400,
-                                color: Colors.white,
-                              )),
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
+                          )),
                 ),
               )
             ],

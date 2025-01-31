@@ -14,4 +14,11 @@ class ApiService {
         options: Options(method: "PATCH"));
     return response.statusCode;
   }
+
+  Future<Map<String, dynamic>> getCartProducts({required String cartID}) async {
+    var response = await _dio.request<dynamic>(
+        '${ApiConsts.apiBaseUrl}${ApiConsts.cart}$cartID',
+        options: Options(method: "GET"));
+    return response.data;
+  }
 }

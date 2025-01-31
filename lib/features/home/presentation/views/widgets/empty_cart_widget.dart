@@ -10,8 +10,7 @@ class EmptyCartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: Column(
         spacing: 8,
         mainAxisAlignment: MainAxisAlignment.center,
@@ -47,12 +46,8 @@ class EmptyCartWidget extends StatelessWidget {
           ),
           Text(
             "Your cart is empty, Hurry up and get some good products",
-            style: Theme.of(context)
-                .textTheme
-                .displayMedium!
-                .copyWith(
-                    fontFamily: "Carmen",
-                    color: AppColorsLight.secondaryColor),
+            style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                fontFamily: "Carmen", color: AppColorsLight.secondaryColor),
             textAlign: TextAlign.center,
           ),
           const Spacer(

@@ -9,23 +9,25 @@ class ScanQrView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<HomeCubit, HomeStates>(
+    return BlocConsumer<HomeCubit, HomeStates>(
       listener: (BuildContext context, state) {},
-      child: Scaffold(
-        body: MobileScanner(
-          controller: MobileScannerController(
-              detectionSpeed: DetectionSpeed.noDuplicates),
-          onDetect: (capture) {
-            final List<Barcode> barcodes = capture.barcodes;
-            String val = "";
-            for (final barcode in barcodes) {
-              val += barcode.displayValue!;
-            }
-            HomeCubit.get(context).connectUserToCart(val);
-            Navigator.pop(context);
-          },
-        ),
-      ),
+      builder: (BuildContext context, state) {
+        return Scaffold(
+          body: MobileScanner(
+            controller: MobileScannerController(
+                detectionSpeed: DetectionSpeed.noDuplicates),
+            onDetect: (capture) {
+              final List<Barcode> barcodes = capture.barcodes;
+              String cartID = "";
+              for (final barcode in barcodes) {
+                cartID += barcode.displayValue!;
+              }
+              HomeCubit.get(context).connectUserToCart(cartID);
+              Navigator.pop(context);
+            },
+          ),
+        );
+      },
     );
   }
 }

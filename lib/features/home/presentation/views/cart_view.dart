@@ -69,6 +69,7 @@ class CartView extends StatelessWidget {
     return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {},
       builder: (BuildContext context, state) {
+        var cubit = HomeCubit.get(context);
         return SafeArea(
           child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
@@ -77,13 +78,14 @@ class CartView extends StatelessWidget {
               } else if (state is HomeAddUserToCartLoading) {
                 return const Center(
                   child: CircularProgressIndicator(
-                    color: AppColorsLight.primaryColor,
-                  ),
+                      color: AppColorsLight.primaryColor),
                 );
-              } else if (state is HomeAddUserToCartSuccess && list.isEmpty) {
+              } else if (state is HomeAddUserToCartSuccess) {
                 return const EmptyCartWidget();
               } else {
-                return NotEmptyCartWidget(list: list);
+                return NotEmptyCartWidget(
+                  list: list,
+                );
               }
             },
           ),

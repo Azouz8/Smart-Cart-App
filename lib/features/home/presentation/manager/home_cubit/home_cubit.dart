@@ -11,7 +11,7 @@ class HomeCubit extends Cubit<HomeStates> {
   HomeCubit(this.homeRepo) : super(HomeInitial());
   static HomeCubit get(context) => BlocProvider.of(context);
   HomeRepo homeRepo;
-  String qrCode = "";
+  String cartId = "";
   int currentIndex = 0;
 
   List<BottomNavigationBarItem> bottomItems = [
@@ -52,6 +52,17 @@ class HomeCubit extends Cubit<HomeStates> {
       emit(HomeAddUserToCartFailure());
     }, (responseCode) {
       emit(HomeAddUserToCartSuccess());
+      cartId = cartID;
+    });
+  }
+
+  Future<void> getCartProducts(String cartID) async {
+    emit(HomeGetCartProductsLoading());
+    var result = await homeRepo.getCartProducts(cartID: cartID);
+    result.fold((failure) {
+      emit(HomeGetCartProductsFailure());
+    }, (products) {
+      emit(HomeGetCartProductsSuccess(products));
     });
   }
 }
