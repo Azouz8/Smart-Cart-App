@@ -9,9 +9,12 @@ class ApiService {
   Future<int?> addUserToCart(
       {required String cartID, required String userID}) async {
     var response = await _dio.request<dynamic>(
-        '${ApiConsts.apiBaseUrl}${ApiConsts.cart}$cartID/${ApiConsts.addUserToCart}',
-        queryParameters: <String, dynamic>{"userID": userID},
-        options: Options(method: "PATCH"));
+      '${ApiConsts.apiBaseUrl}${ApiConsts.cart}$cartID/${ApiConsts.addUserToCart}',
+      data: {"userID": userID},
+      options: Options(
+        method: "PATCH",
+      ),
+    );
     return response.statusCode;
   }
 
@@ -32,7 +35,7 @@ class ApiService {
       var response = await _dio.request<dynamic>(
         '${ApiConsts.apiBaseUrl}${ApiConsts.cart}$cartID/${ApiConsts.deleteProductFromCart}',
         options: Options(method: "DELETE"),
-        queryParameters: <String, dynamic>{"productID": productID},
+        data: {"productID": productID},
       );
       return response.statusCode;
     } catch (e) {

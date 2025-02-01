@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:smart_cart_app/core/services/cache_helper.dart';
+import 'package:smart_cart_app/core/services/cache_helper_consts.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_states.dart';
 
@@ -22,6 +24,7 @@ class ScanQrView extends StatelessWidget {
               for (final barcode in barcodes) {
                 cartID += barcode.displayValue!;
               }
+              CacheHelper.putString(key: CacheHelperKeys.cartID, value: cartID);
               HomeCubit.get(context).connectUserToCart(cartID);
               Navigator.pop(context);
             },

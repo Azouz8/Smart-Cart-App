@@ -308,6 +308,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "panara_dialogs",
+      "rootUri": "file:///C:/Users/Azouz/AppData/Local/Pub/Cache/hosted/pub.dev/panara_dialogs-0.1.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
       "name": "path",
       "rootUri": "file:///C:/Users/Azouz/AppData/Local/Pub/Cache/hosted/pub.dev/path-1.9.0",
       "packageUri": "lib/",
@@ -590,7 +596,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2025-01-31T19:53:49.052281Z",
+  "generated": "2025-02-01T17:57:01.410689Z",
   "generator": "pub",
   "generatorVersion": "3.6.0",
   "flutterRoot": "file:///C:/Flutter/flutter",

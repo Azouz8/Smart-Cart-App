@@ -2,6 +2,7 @@ import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smart_cart_app/core/services/cache_helper.dart';
 import 'package:smart_cart_app/core/services/service_locator.dart';
 import 'package:smart_cart_app/core/themes/light_theme/light_theme.dart';
 import 'package:smart_cart_app/features/home/data/repos/home_repo_impl.dart';
@@ -9,10 +10,12 @@ import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/hom
 import 'package:smart_cart_app/features/home/presentation/manager/layout_cubit/layout_cubit.dart';
 import 'core/routing/app_router.dart';
 import 'core/services/bloc_observer.dart';
-void main() {
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupServiceLocator();
   Bloc.observer = MyBlocObserver();
+  await CacheHelper.init();
   runApp(
     DevicePreview(
       enabled: false,

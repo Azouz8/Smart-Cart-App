@@ -18,12 +18,31 @@ class EmptyCartWidget extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Your Cart",
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineMedium!
-                    .copyWith(fontFamily: "Carmen"),
+              Row(
+                children: [
+                  Text(
+                    "Your Cart",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineMedium!
+                        .copyWith(fontFamily: "Carmen"),
+                  ),
+                  const Spacer(),
+                  InkWell(
+                    borderRadius: BorderRadius.circular(15),
+                    onTap: () {
+                      
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.only(left: 8, right: 8),
+                      child: Icon(
+                        Icons.login_rounded,
+                        color: Colors.red,
+                        size: 28,
+                      ),
+                    ),
+                  )
+                ],
               ),
               const SizedBox(
                 height: 12,

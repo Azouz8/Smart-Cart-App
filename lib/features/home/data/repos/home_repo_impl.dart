@@ -31,8 +31,6 @@ class HomeRepoImpl extends HomeRepo {
 
   void _setupSocketListeners() {
     socket.on("cartUpdated", (data) {
-      print("Cart updateddddddddddddddddddddddddddddddddddddddddddd: $data");
-
       try {
         List<CartProductModel> updatedProducts = data
             .map<CartProductModel>((item) => CartProductModel.fromJson(item))
@@ -54,34 +52,6 @@ class HomeRepoImpl extends HomeRepo {
   Stream<Either<Failures, List<CartProductModel>>> getScannedProducts() {
     return _streamController.stream;
   }
-  
-  // @override
-  // Future<Either<Failures, List<CartProductModel>>> getScannedProducts() async {
-  //   final completer = Completer<Either<Failures, List<CartProductModel>>>();
-  //   try {
-  //     socket.on("cartUpdated", (data) {
-  //       print("Cart updateddddddddddddddddddddddddddddddd: $data");
-
-  //       List<CartProductModel> updatedProducts = [];
-  //       for (var item in data) {
-  //         updatedProducts.add(CartProductModel.fromJson(item));
-  //       }
-  //       print(
-  //           "updater cartttttttttttt ------------------------------------------------------====");
-  //       print(updatedProducts);
-  //       completer.complete(Right(updatedProducts));
-  //     });
-
-  //     socket.onError((error) {
-  //       completer.completeError(error);
-  //     });
-  //     return await completer.future;
-  //   } catch (e) {
-  //     print(
-  //         "updater ERRORRRRRRR ------------------------------------------------------====");
-  //     return Left(ServerFailure());
-  //   }
-  // }
 
   @override
   Future<Either<Failures, List<CartProductModel>>> getCartProducts(
