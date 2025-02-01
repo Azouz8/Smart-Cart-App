@@ -13,7 +13,7 @@ class CartView extends StatelessWidget {
   const CartView({super.key});
   @override
   Widget build(BuildContext context) {
-    CacheHelper.remove(key: CacheHelperKeys.cartID);
+    // CacheHelper.remove(key: CacheHelperKeys.cartID);
     if (CacheHelper.getString(key: CacheHelperKeys.cartID) != null) {
       HomeCubit.get(context)
           .getCartProducts(CacheHelper.getString(key: CacheHelperKeys.cartID)!);
@@ -25,7 +25,8 @@ class CartView extends StatelessWidget {
         return SafeArea(
           child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
-              if (state is HomeInitial) {
+              if (state is HomeInitial ||
+                  state is HomeRemoveUserFromCartSuccess) {
                 return const NotConnectedWidget(showSnackbar: false);
               } else if (state is HomeAddUserToCartFailure) {
                 return const NotConnectedWidget(showSnackbar: true);

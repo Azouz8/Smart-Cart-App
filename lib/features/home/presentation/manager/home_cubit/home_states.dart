@@ -10,6 +10,12 @@ class HomeAddUserToCartFailure extends HomeStates {}
 
 class HomeAddUserToCartSuccess extends HomeStates {}
 
+class HomeRemoveUserFromCartLoading extends HomeStates {}
+
+class HomeRemoveUserFromCartFailure extends HomeStates {}
+
+class HomeRemoveUserFromCartSuccess extends HomeStates {}
+
 class HomeUserNotConnectedToCartState extends HomeStates {}
 
 class HomeGetScannedProductsLoading extends HomeStates {}

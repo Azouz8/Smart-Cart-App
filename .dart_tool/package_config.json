@@ -386,6 +386,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "quickalert",
+      "rootUri": "file:///C:/Users/Azouz/AppData/Local/Pub/Cache/hosted/pub.dev/quickalert-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "rxdart",
       "rootUri": "file:///C:/Users/Azouz/AppData/Local/Pub/Cache/hosted/pub.dev/rxdart-0.28.0",
       "packageUri": "lib/",
@@ -596,7 +602,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2025-02-01T17:57:01.410689Z",
+  "generated": "2025-02-01T18:05:43.673508Z",
   "generator": "pub",
   "generatorVersion": "3.6.0",
   "flutterRoot": "file:///C:/Flutter/flutter",

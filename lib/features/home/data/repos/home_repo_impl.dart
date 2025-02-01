@@ -26,6 +26,19 @@ class HomeRepoImpl extends HomeRepo {
       return Left(ServerFailure());
     }
   }
+  @override
+  Future<Either<Failures, int>> removeUserFromCart({
+    required String cartID,
+    required String userID,
+  }) async {
+    try {
+      var resposeCode =
+          await apiService.removeUserFromCart(cartID: cartID, userID: userID);
+      return Right(resposeCode!);
+    } on Exception {
+      return Left(ServerFailure());
+    }
+  }
  final StreamController<Either<Failures, List<CartProductModel>>> _streamController =
       StreamController.broadcast();
 

@@ -49,6 +49,22 @@ class HomeCubit extends Cubit<HomeStates> {
     });
   }
 
+  Future<void> removeUserFromCart(String cartID) async {
+    print("================================================");
+    print(cartID);
+    print(cartID);
+    print(cartID);
+    emit(HomeRemoveUserFromCartLoading());
+    var result =
+        await homeRepo.removeUserFromCart(cartID: cartID, userID: "AzouzUser");
+    result.fold((failure) {
+      emit(HomeRemoveUserFromCartFailure());
+    }, (responseCode) {
+      emit(HomeRemoveUserFromCartSuccess());
+      cartID = "";
+    });
+  }
+
   Future<void> getScannedProducts() async {
     emit(HomeGetScannedProductsLoading());
 
@@ -79,7 +95,8 @@ class HomeCubit extends Cubit<HomeStates> {
     });
   }
 
-  Future<void> deleteProductFromCart({required String cartID, required String productID}) async {
+  Future<void> deleteProductFromCart(
+      {required String cartID, required String productID}) async {
     emit(HomeDeleteProductLoading());
     var result = await homeRepo.deleteProductFromCart(
         cartID: cartID, productID: productID);

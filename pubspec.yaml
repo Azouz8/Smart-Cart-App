@@ -51,6 +51,7 @@ dependencies:
   socket_io_client: ^3.0.2
   fluttertoast: ^8.2.10
   panara_dialogs: ^0.1.5
+  quickalert: ^1.1.0
 
 dev_dependencies:
   flutter_test:

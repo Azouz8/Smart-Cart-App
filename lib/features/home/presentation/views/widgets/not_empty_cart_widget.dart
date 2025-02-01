@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:smart_cart_app/features/home/data/models/cart_product_model/cart_product_model.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
+import 'package:smart_cart_app/features/home/presentation/views/widgets/connected_cart_custom_appbar.dart';
 import 'cart_list_view_item.dart';
 import 'checkout_button.dart';
-import 'custom_home_app_bar.dart';
 
 class NotEmptyCartWidget extends StatelessWidget {
   const NotEmptyCartWidget({
@@ -25,9 +25,7 @@ class NotEmptyCartWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const CustomHomeAppBar(
-              title: "Your Cart",
-            ),
+            ConnectedCartCustomAppBar(),
             ListView.builder(
               itemBuilder: (context, index) => ClipRRect(
                 borderRadius: BorderRadius.circular(15),

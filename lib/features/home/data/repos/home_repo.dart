@@ -5,6 +5,8 @@ import 'package:smart_cart_app/features/home/data/models/cart_product_model/cart
 abstract class HomeRepo {
   Future<Either<Failures, int>> addUserToCart(
       {required String cartID, required String userID});
+  Future<Either<Failures, int>> removeUserFromCart(
+      {required String cartID, required String userID});
 
   Stream<Either<Failures, List<CartProductModel>>> getScannedProducts();
   Future<Either<Failures, List<CartProductModel>>> getCartProducts(

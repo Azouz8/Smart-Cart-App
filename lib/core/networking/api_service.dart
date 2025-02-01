@@ -18,6 +18,20 @@ class ApiService {
     return response.statusCode;
   }
 
+  Future<int?> removeUserFromCart(
+      {required String cartID, required String userID}) async {
+    print(userID);
+    print(cartID);
+    var response = await _dio.request<dynamic>(
+      '${ApiConsts.apiBaseUrl}${ApiConsts.cart}$cartID/${ApiConsts.removeUserFromCart}',
+      data: {"userID": userID},
+      options: Options(
+        method: "PATCH",
+      ),
+    );
+    return response.statusCode;
+  }
+
   Future<Map<String, dynamic>> getCartProducts({required String cartID}) async {
     var response = await _dio.request<dynamic>(
         '${ApiConsts.apiBaseUrl}${ApiConsts.cart}$cartID/${ApiConsts.products}',

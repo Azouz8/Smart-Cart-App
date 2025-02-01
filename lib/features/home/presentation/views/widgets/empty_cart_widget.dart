@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
+import 'connected_cart_custom_appbar.dart';
 
 class EmptyCartWidget extends StatelessWidget {
   const EmptyCartWidget({
@@ -15,39 +16,14 @@ class EmptyCartWidget extends StatelessWidget {
         spacing: 8,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Column(
+          const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: [
-                  Text(
-                    "Your Cart",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineMedium!
-                        .copyWith(fontFamily: "Carmen"),
-                  ),
-                  const Spacer(),
-                  InkWell(
-                    borderRadius: BorderRadius.circular(15),
-                    onTap: () {
-                      
-                    },
-                    child: const Padding(
-                      padding: EdgeInsets.only(left: 8, right: 8),
-                      child: Icon(
-                        Icons.login_rounded,
-                        color: Colors.red,
-                        size: 28,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(
+              ConnectedCartCustomAppBar(),
+              SizedBox(
                 height: 12,
               ),
-              const Divider(
+              Divider(
                 thickness: 0.5,
                 color: Colors.grey,
               ),
