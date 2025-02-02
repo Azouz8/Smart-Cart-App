@@ -19,7 +19,8 @@ class HomeCubit extends Cubit<HomeStates> {
     });
     socket.connect();
     socket.onConnect((_) {
-      print("Connection established");
+      print("Connection establishedddddddddddd");
+      // emit(HomeSocketConnectedState());
       getScannedProducts();
     });
     socket.onDisconnect((_) => print("connection Disconnection"));
@@ -44,16 +45,12 @@ class HomeCubit extends Cubit<HomeStates> {
     result.fold((failure) {
       emit(HomeAddUserToCartFailure());
     }, (responseCode) {
-      emit(HomeAddUserToCartSuccess());
       cartId = cartID;
+      emit(HomeAddUserToCartSuccess());
     });
   }
 
   Future<void> removeUserFromCart(String cartID) async {
-    print("================================================");
-    print(cartID);
-    print(cartID);
-    print(cartID);
     emit(HomeRemoveUserFromCartLoading());
     var result =
         await homeRepo.removeUserFromCart(cartID: cartID, userID: "AzouzUser");
@@ -61,13 +58,15 @@ class HomeCubit extends Cubit<HomeStates> {
       emit(HomeRemoveUserFromCartFailure());
     }, (responseCode) {
       emit(HomeRemoveUserFromCartSuccess());
-      cartID = "";
+      cartId = "";
+      cartProducts.clear();
+      // homeRepo.disconnectSocket();
     });
   }
 
   Future<void> getScannedProducts() async {
-    emit(HomeGetScannedProductsLoading());
-
+    print(
+        "Listening for scanned products..===================================================.");
     homeRepo.getScannedProducts().listen(
       (result) {
         result.fold(
@@ -91,15 +90,17 @@ class HomeCubit extends Cubit<HomeStates> {
       emit(HomeGetCartProductsFailure());
     }, (products) {
       cartProducts = products;
+      cartId = cartID;
       emit(HomeGetCartProductsSuccess(products));
     });
   }
 
   Future<void> deleteProductFromCart(
       {required String cartID, required String productID}) async {
-    emit(HomeDeleteProductLoading());
     var result = await homeRepo.deleteProductFromCart(
-        cartID: cartID, productID: productID);
+      cartID: cartID,
+      productID: productID,
+    );
     result.fold((failure) {
       emit(HomeDeleteProductFailure());
     }, (responseCode) {

@@ -15,48 +15,65 @@ class NotEmptyCartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 10,
-          horizontal: 20,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ConnectedCartCustomAppBar(),
-            ListView.builder(
-              itemBuilder: (context, index) => ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: Dismissible(
-                  key: const Key(""),
-                  direction: DismissDirection.endToStart,
-                  onDismissed: (direction) {
-                    HomeCubit.get(context).deleteProductFromCart(
-                      cartID: HomeCubit.get(context).cartId,
-                      productID: products[index].productID!.id!,
-                    );
-                  },
-                  background: Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.red,
-                    ),
-                    alignment: Alignment.centerRight,
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: const Icon(Icons.delete, color: Colors.white),
+    HomeCubit.get(context).initSocket();
+    return SafeArea(
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 10,
+            horizontal: 20,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ConnectedCartCustomAppBar(),
+                  SizedBox(
+                    height: 12,
                   ),
-                  child: CartListViewItem(
-                    cartProductModel: products[index],
+                  Divider(
+                    thickness: 0.5,
+                    color: Colors.grey,
+                  ),
+                ],
+              ),
+              ListView.builder(
+                itemBuilder: (context, index) => ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: Dismissible(
+                    key: Key(products[index].productID!.id!),
+                    direction: DismissDirection.endToStart,
+                    onDismissed: (direction) {
+                      final removedProduct = products.removeAt(index);
+
+                      HomeCubit.get(context).deleteProductFromCart(
+                        cartID: HomeCubit.get(context).cartId,
+                        productID: removedProduct.productID!.id!,
+                      );
+                    },
+                    background: Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.red,
+                      ),
+                      alignment: Alignment.centerRight,
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: const Icon(Icons.delete, color: Colors.white),
+                    ),
+                    child: CartListViewItem(
+                      cartProductModel: products[index],
+                    ),
                   ),
                 ),
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: products.length,
               ),
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: products.length,
-            ),
-            const CheckoutButton(),
-          ],
+              const CheckoutButton(),
+            ],
+          ),
         ),
       ),
     );

@@ -4,6 +4,8 @@ abstract class HomeStates {}
 
 class HomeInitial extends HomeStates {}
 
+class HomeSocketConnectedState extends HomeStates {}
+
 class HomeAddUserToCartLoading extends HomeStates {}
 
 class HomeAddUserToCartFailure extends HomeStates {}

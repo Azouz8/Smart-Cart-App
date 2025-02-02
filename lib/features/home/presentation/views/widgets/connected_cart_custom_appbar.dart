@@ -37,7 +37,7 @@ class ConnectedCartCustomAppBar extends StatelessWidget {
                 CacheHelper.remove(key: CacheHelperKeys.cartID);
                 HomeCubit.get(context)
                     .removeUserFromCart(HomeCubit.get(context).cartId);
-                GoRouter.of(context).push(AppRouter.homeView);
+                GoRouter.of(context).go(AppRouter.loginView);
               },
             );
           },

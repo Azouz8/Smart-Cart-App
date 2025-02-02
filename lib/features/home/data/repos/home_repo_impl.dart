@@ -9,7 +9,7 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 class HomeRepoImpl extends HomeRepo {
   final ApiService apiService;
   final IO.Socket socket;
- HomeRepoImpl(this.apiService, this.socket) {
+  HomeRepoImpl(this.apiService, this.socket) {
     _setupSocketListeners();
   }
 
@@ -26,6 +26,7 @@ class HomeRepoImpl extends HomeRepo {
       return Left(ServerFailure());
     }
   }
+
   @override
   Future<Either<Failures, int>> removeUserFromCart({
     required String cartID,
@@ -39,12 +40,15 @@ class HomeRepoImpl extends HomeRepo {
       return Left(ServerFailure());
     }
   }
- final StreamController<Either<Failures, List<CartProductModel>>> _streamController =
-      StreamController.broadcast();
+
+  final StreamController<Either<Failures, List<CartProductModel>>>
+      _streamController = StreamController.broadcast();
 
   void _setupSocketListeners() {
+    print("LISTENINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
     socket.on("cartUpdated", (data) {
       try {
+        print("🔄 Received cart update from socket");
         List<CartProductModel> updatedProducts = data
             .map<CartProductModel>((item) => CartProductModel.fromJson(item))
             .toList();
@@ -66,6 +70,18 @@ class HomeRepoImpl extends HomeRepo {
     return _streamController.stream;
   }
 
+  // @override
+  // void disconnectSocket() {
+  //   if (socket.connected) {
+  //     socket.disconnect();
+  //     socket.clearListeners();
+  //   }
+  //   _streamController.close().then(
+  //         (value) => print(
+  //             "Socket and stream are closed ================================="),
+  //       );
+  // }
+
   @override
   Future<Either<Failures, List<CartProductModel>>> getCartProducts(
       {required String cartID}) async {
@@ -80,12 +96,14 @@ class HomeRepoImpl extends HomeRepo {
       return Left(ServerFailure());
     }
   }
-  
+
   @override
-  Future<Either<Failures, int>> deleteProductFromCart({required String productID, required String cartID}) async{
+  Future<Either<Failures, int>> deleteProductFromCart(
+      {required String productID, required String cartID}) async {
     try {
-      var responseCode =await apiService.deleteProduct(productID: productID,cartID: cartID);
-      
+      var responseCode =
+          await apiService.deleteProduct(productID: productID, cartID: cartID);
+
       return Right(responseCode!);
     } on Exception {
       return Left(ServerFailure());

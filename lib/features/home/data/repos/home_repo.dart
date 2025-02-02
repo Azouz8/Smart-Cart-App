@@ -9,6 +9,7 @@ abstract class HomeRepo {
       {required String cartID, required String userID});
 
   Stream<Either<Failures, List<CartProductModel>>> getScannedProducts();
+  // void disconnectSocket();
   Future<Either<Failures, List<CartProductModel>>> getCartProducts(
       {required String cartID});
 

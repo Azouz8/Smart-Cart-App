@@ -11,45 +11,42 @@ import 'widgets/not_empty_cart_widget.dart';
 
 class CartView extends StatelessWidget {
   const CartView({super.key});
+
   @override
   Widget build(BuildContext context) {
-    // CacheHelper.remove(key: CacheHelperKeys.cartID);
-    if (CacheHelper.getString(key: CacheHelperKeys.cartID) != null) {
-      HomeCubit.get(context)
-          .getCartProducts(CacheHelper.getString(key: CacheHelperKeys.cartID)!);
+    final cubit = HomeCubit.get(context);
+    final cartId = CacheHelper.getString(key: CacheHelperKeys.cartID);
+
+    if (cartId != null) {
+      cubit.getCartProducts(cartId);
     }
+
     return BlocConsumer<HomeCubit, HomeStates>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is HomeAddUserToCartSuccess) {
+          cubit.getCartProducts(cubit.cartId);
+        }
+      },
       builder: (BuildContext context, state) {
-        var cubit = HomeCubit.get(context);
-        return SafeArea(
-          child: LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-              if (state is HomeInitial ||
-                  state is HomeRemoveUserFromCartSuccess) {
-                return const NotConnectedWidget(showSnackbar: false);
-              } else if (state is HomeAddUserToCartFailure) {
-                return const NotConnectedWidget(showSnackbar: true);
-              } else if (state is HomeAddUserToCartSuccess) {
-                cubit.getCartProducts(cubit.cartId);
-                cubit.initSocket();
-                return Container();
-              } else if (state is HomeGetCartProductsSuccess) {
-                if (state.products.isEmpty) {
-                  return const EmptyCartWidget();
-                } else {
-                  return NotEmptyCartWidget(products: cubit.cartProducts);
-                }
-              } else if (state is HomeGetScannedProductsSuccess) {
-                return NotEmptyCartWidget(products: state.products);
-              } else {
-                return const Center(
-                  child: CircularProgressIndicator(
-                      color: AppColorsLight.primaryColor),
-                );
-              }
-            },
-          ),
+        if (state is HomeInitial || state is HomeRemoveUserFromCartSuccess) {
+          return const NotConnectedWidget(showSnackbar: false);
+        }
+
+        if (state is HomeAddUserToCartFailure) {
+          return const NotConnectedWidget(showSnackbar: true);
+        }
+        if (state is HomeGetCartProductsSuccess ||
+            state is HomeDeleteProductSuccess ||
+            state is HomeGetScannedProductsSuccess) {
+          final products = cubit.cartProducts;
+          if (products.isEmpty) {
+            return const EmptyCartWidget();
+          } else {
+            return NotEmptyCartWidget(products: products);
+          }
+        }
+        return const Center(
+          child: CircularProgressIndicator(color: AppColorsLight.primaryColor),
         );
       },
     );
