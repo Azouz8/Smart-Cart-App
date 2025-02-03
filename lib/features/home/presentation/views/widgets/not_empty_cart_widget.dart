@@ -41,6 +41,7 @@ class NotEmptyCartWidget extends StatelessWidget {
                 ],
               ),
               ListView.builder(
+                reverse: true,
                 itemBuilder: (context, index) => ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: Dismissible(
