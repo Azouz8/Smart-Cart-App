@@ -9,6 +9,9 @@ class HomeCubit extends Cubit<HomeStates> {
   static HomeCubit get(context) => BlocProvider.of(context);
   HomeRepo homeRepo;
   String cartId = "";
+  String orderSubtotal = "";
+  String totalPrice = "";
+  String totalDiscount = "";
   late IO.Socket socket;
   List<CartProductModel> cartProducts = [];
 
@@ -62,6 +65,25 @@ class HomeCubit extends Cubit<HomeStates> {
       cartProducts.clear();
       // homeRepo.disconnectSocket();
     });
+  }
+
+  void getTotalPrice() {
+    double total = 0;
+    for (var product in cartProducts) {
+      total += product.productID!.price! * product.quantity!;
+    }
+    orderSubtotal = total.toStringAsFixed(2);
+    double discount = getTotalDiscount();
+    totalPrice = (total - discount).toStringAsFixed(2);
+  }
+
+  double getTotalDiscount() {
+    double discount = 0;
+    for (var product in cartProducts) {
+      discount += product.productID!.discount!; // Assuming `price` is a double
+    }
+    totalDiscount = discount.toStringAsFixed(2);
+    return discount;
   }
 
   Future<void> getScannedProducts() async {
