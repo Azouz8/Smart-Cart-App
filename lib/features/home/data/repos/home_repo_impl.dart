@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:either_dart/either.dart';
-import 'package:smart_cart_app/core/networking/api_error_handler.dart';
-import 'package:smart_cart_app/core/networking/api_service.dart';
+import 'package:smart_cart_app/core/networking/api/api_service.dart';
+import 'package:smart_cart_app/core/networking/errors/exceptions.dart';
 import 'package:smart_cart_app/features/home/data/models/cart_product_model/cart_product_model.dart';
 import 'package:smart_cart_app/features/home/data/repos/home_repo.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
@@ -14,21 +14,21 @@ class HomeRepoImpl extends HomeRepo {
   }
 
   @override
-  Future<Either<Failures, int>> addUserToCart({
+  Future<Either<String, Map<String, dynamic>>> addUserToCart({
     required String cartID,
     required String userID,
   }) async {
     try {
-      var resposeCode =
+      var response =
           await apiService.addUserToCart(cartID: cartID, userID: userID);
-      return Right(resposeCode!);
-    } on Exception {
-      return Left(ServerFailure());
+      return Right(response);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errMessage);
     }
   }
 
   @override
-  Future<Either<Failures, int>> removeUserFromCart({
+  Future<Either<String, Map<String, dynamic>>> removeUserFromCart({
     required String cartID,
     required String userID,
   }) async {
@@ -36,37 +36,37 @@ class HomeRepoImpl extends HomeRepo {
       var resposeCode =
           await apiService.removeUserFromCart(cartID: cartID, userID: userID);
       return Right(resposeCode!);
-    } on Exception {
-      return Left(ServerFailure());
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errMessage);
     }
   }
 
-  final StreamController<Either<Failures, List<CartProductModel>>>
+  final StreamController<Either<String, List<CartProductModel>>>
       _streamController = StreamController.broadcast();
 
   void _setupSocketListeners() {
-    print("LISTENINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
     socket.on("cartUpdated", (data) {
       try {
         print("🔄 Received cart update from socket");
+        print(data);
         List<CartProductModel> updatedProducts = data
             .map<CartProductModel>((item) => CartProductModel.fromJson(item))
             .toList();
 
         _streamController.add(Right(updatedProducts));
-      } catch (e) {
-        print("Error parsing product: $e");
-        _streamController.add(Left(ServerFailure()));
+      } on ServerException catch (e) {
+        return Left(e.errorModel.errMessage);
       }
     });
 
     socket.onError((error) {
       print("Socket error: $error");
-      _streamController.add(Left(ServerFailure()));
+      _streamController.add(Left(error));
     });
   }
+
   @override
-  Stream<Either<Failures, List<CartProductModel>>> getScannedProducts() {
+  Stream<Either<String, List<CartProductModel>>> getScannedProducts() {
     return _streamController.stream;
   }
 
@@ -83,7 +83,7 @@ class HomeRepoImpl extends HomeRepo {
   // }
 
   @override
-  Future<Either<Failures, List<CartProductModel>>> getCartProducts(
+  Future<Either<String, List<CartProductModel>>> getCartProducts(
       {required String cartID}) async {
     try {
       var data = await apiService.getCartProducts(cartID: cartID);
@@ -92,21 +92,20 @@ class HomeRepoImpl extends HomeRepo {
         products.add(CartProductModel.fromJson(i));
       }
       return Right(products);
-    } on Exception {
-      return Left(ServerFailure());
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errMessage);
     }
   }
 
   @override
-  Future<Either<Failures, int>> deleteProductFromCart(
+  Future<Either<String, int>> deleteProductFromCart(
       {required String productID, required String cartID}) async {
     try {
-      var responseCode =
+      var response =
           await apiService.deleteProduct(productID: productID, cartID: cartID);
-
-      return Right(responseCode!);
-    } on Exception {
-      return Left(ServerFailure());
+      return Right(response);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errMessage);
     }
   }
 }

@@ -2,16 +2,19 @@ import 'product_id.dart';
 
 class CartProductModel {
   CartProductModel({
-      ProductId? productID, 
-      int? quantity, 
-      String? id,}){
+    ProductId? productID,
+    int? quantity,
+    String? id,
+  }) {
     _productID = productID;
     _quantity = quantity;
     _id = id;
-}
+  }
 
   CartProductModel.fromJson(dynamic json) {
-    _productID = json['productID'] != null ? ProductId.fromJson(json['productID']) : null;
+    _productID = json['productID'] != null
+        ? ProductId.fromJson(json['productID'])
+        : null;
     _quantity = json['quantity'];
     _id = json['_id'];
   }
@@ -32,5 +35,4 @@ class CartProductModel {
     map['_id'] = _id;
     return map;
   }
-
 }

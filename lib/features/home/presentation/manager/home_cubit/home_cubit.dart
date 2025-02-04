@@ -87,8 +87,7 @@ class HomeCubit extends Cubit<HomeStates> {
   }
 
   Future<void> getScannedProducts() async {
-    print(
-        "Listening for scanned products..===================================================.");
+    print("Listening for scanned products..================================.");
     homeRepo.getScannedProducts().listen(
       (result) {
         result.fold(
