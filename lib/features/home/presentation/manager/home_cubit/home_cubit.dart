@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_cart_app/core/networking/api/api_consts.dart';
 import 'package:smart_cart_app/features/home/data/models/cart_product_model/cart_product_model.dart';
 import 'package:smart_cart_app/features/home/data/repos/home_repo.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_states.dart';
@@ -16,13 +17,13 @@ class HomeCubit extends Cubit<HomeStates> {
   List<CartProductModel> cartProducts = [];
 
   initSocket() {
-    socket = IO.io("http://192.168.110.1:3000", <String, dynamic>{
+    socket = IO.io(ApiConsts.sockecIOUrl, <String, dynamic>{
       'autoConnect': false,
       'transports': ['websocket'],
     });
     socket.connect();
     socket.onConnect((_) {
-      print("Connection establishedddddddddddd");
+      print("Connection established");
       // emit(HomeSocketConnectedState());
       getScannedProducts();
     });

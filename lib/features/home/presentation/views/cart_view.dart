@@ -38,11 +38,10 @@ class CartView extends StatelessWidget {
         if (state is HomeGetCartProductsSuccess ||
             state is HomeDeleteProductSuccess ||
             state is HomeGetScannedProductsSuccess) {
-          final products = cubit.cartProducts;
-          if (products.isEmpty) {
+          if (cubit.cartProducts.isEmpty) {
             return const EmptyCartWidget();
           } else {
-            return NotEmptyCartWidget(products: products);
+            return NotEmptyCartWidget(products: cubit.cartProducts);
           }
         }
         return const Center(

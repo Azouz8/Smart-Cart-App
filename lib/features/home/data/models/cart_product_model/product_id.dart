@@ -49,12 +49,12 @@ class ProductId {
     _itemId = json['item_id'];
     _title = json['title'];
     _category = json['category'];
-    _price = json['price'];
+    _price = json['price'] is int? (json['price'] as int).toDouble() : json['price'];
     _sales = json['sales'];
     _inventory = json['inventory'];
-    _rating = json['rating'];
+    _rating = json['rating'] is int? (json['rating'] as int).toDouble() : json['rating'];
     _barcode = json['barcode'];
-    _weight = json['weight'];
+    _weight = json['weight'] is int? (json['weight'] as int).toDouble() : json['weight'];
     _description = json['description'];
     _image = json['image'];
     if (json['tags'] != null) {

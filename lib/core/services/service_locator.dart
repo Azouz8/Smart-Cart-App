@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:smart_cart_app/core/networking/api/api_consts.dart';
 import 'package:smart_cart_app/core/networking/api/api_service.dart';
 import 'package:smart_cart_app/core/networking/api/dio_consumer.dart';
 import 'package:smart_cart_app/features/home/data/repos/home_repo_impl.dart';
@@ -12,7 +13,7 @@ void setupServiceLocator() {
 
   getIt.registerSingleton<IO.Socket>(
     IO.io(
-      "http://192.168.110.1:3000", // Replace with your server URL
+      ApiConsts.sockecIOUrl, // Replace with your server URL
       <String, dynamic>{
         'autoConnect': false,
         'transports': ['websocket'],

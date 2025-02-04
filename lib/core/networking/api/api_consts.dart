@@ -1,7 +1,9 @@
 class ApiConsts {
   //Base URL
   static const String apiBaseUrl = "http://192.168.110.1:3000/api/";
-  // static const String apiBaseUrl = "http://ssc-grad.up.railway.app/api/";
+  static const String sockecIOUrl = "http://192.168.110.1:3000";
+  // static const String apiBaseUrl = "https://ssc-grad.up.railway.app/api/";
+  // static const String sockecIOUrl = "https://ssc-grad.up.railway.app";
 
   //Authentication
   static const String auth = "auth";

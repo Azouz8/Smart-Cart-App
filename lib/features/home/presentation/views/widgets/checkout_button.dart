@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smart_cart_app/core/routing/app_router.dart';
+import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 
 class CheckoutButton extends StatelessWidget {
   const CheckoutButton({super.key});
@@ -11,7 +12,9 @@ class CheckoutButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {
-          GoRouter.of(context).push(AppRouter.checkoutCartView);
+          if (HomeCubit.get(context).cartProducts.isNotEmpty) {
+            GoRouter.of(context).push(AppRouter.checkoutCartView);
+          }
         },
         style: ButtonStyle(
           shape: WidgetStatePropertyAll(

@@ -49,7 +49,6 @@ class NotEmptyCartWidget extends StatelessWidget {
                     direction: DismissDirection.endToStart,
                     onDismissed: (direction) {
                       final removedProduct = products.removeAt(index);
-
                       HomeCubit.get(context).deleteProductFromCart(
                         cartID: HomeCubit.get(context).cartId,
                         productID: removedProduct.productID!.id!,
