@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:either_dart/either.dart';
+import 'package:smart_cart_app/core/networking/api/api_consts.dart';
 import 'package:smart_cart_app/core/networking/api/api_service.dart';
 import 'package:smart_cart_app/core/networking/errors/exceptions.dart';
 import 'package:smart_cart_app/features/home/data/models/cart_product_model/cart_product_model.dart';
@@ -45,7 +46,7 @@ class HomeRepoImpl extends HomeRepo {
       _streamController = StreamController.broadcast();
 
   void _setupSocketListeners() {
-    socket.on("cartUpdated", (data) {
+    socket.on(ApiKeys.cartUpdated, (data) {
       try {
         print("🔄 Received cart update from socket");
         print(data);
@@ -88,7 +89,7 @@ class HomeRepoImpl extends HomeRepo {
     try {
       var data = await apiService.getCartProducts(cartID: cartID);
       List<CartProductModel> products = [];
-      for (var i in data["results"]) {
+      for (var i in data[ApiKeys.results]) {
         products.add(CartProductModel.fromJson(i));
       }
       return Right(products);

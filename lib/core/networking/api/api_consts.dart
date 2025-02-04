@@ -1,6 +1,7 @@
 class ApiConsts {
   //Base URL
   static const String apiBaseUrl = "http://192.168.110.1:3000/api/";
+  // static const String apiBaseUrl = "http://ssc-grad.up.railway.app/api/";
 
   //Authentication
   static const String auth = "auth";
@@ -19,4 +20,8 @@ class ApiConsts {
 
 class ApiKeys {
   static const String message = "message";
+  static const String cartUpdated = "cartUpdated";
+  static const String results = "results";
+  static const String userID = "userID";
+  static const String productID = "productID";
 }

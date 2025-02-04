@@ -9,7 +9,7 @@ class ApiService {
   addUserToCart({required String cartID, required String userID}) async {
     var response = await api.patch(
       '${ApiConsts.apiBaseUrl}${ApiConsts.cart}$cartID/${ApiConsts.addUserToCart}',
-      data: {"userID": userID},
+      data: {ApiKeys.userID: userID},
     );
     return response;
   }
@@ -17,7 +17,7 @@ class ApiService {
   removeUserFromCart({required String cartID, required String userID}) async {
     var response = await api.patch(
       '${ApiConsts.apiBaseUrl}${ApiConsts.cart}$cartID/${ApiConsts.removeUserFromCart}',
-      data: {"userID": userID},
+      data: {ApiKeys.userID: userID},
     );
     return response;
   }
@@ -32,7 +32,7 @@ class ApiService {
   deleteProduct({required String productID, required String cartID}) async {
     var response = await api.delete(
       '${ApiConsts.apiBaseUrl}${ApiConsts.cart}$cartID/${ApiConsts.deleteProductFromCart}',
-      data: {"productID": productID},
+      data: {ApiKeys.productID: productID},
     );
     return response;
   }
