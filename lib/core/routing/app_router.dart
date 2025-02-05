@@ -1,7 +1,8 @@
 import 'package:go_router/go_router.dart';
-import 'package:smart_cart_app/features/authentication/representation/views/login_view.dart';
-import 'package:smart_cart_app/features/authentication/representation/views/password_recovery.dart';
-import 'package:smart_cart_app/features/authentication/representation/views/register_view.dart';
+import 'package:smart_cart_app/features/authentication/presentation/views/login_view.dart';
+import 'package:smart_cart_app/features/authentication/presentation/views/password_recovery.dart';
+import 'package:smart_cart_app/features/authentication/presentation/views/register_view.dart';
+import 'package:smart_cart_app/features/category_selection/presentation/views/categories_view.dart';
 import 'package:smart_cart_app/features/checkout/presentation/views/checkout_cart_view.dart';
 import 'package:smart_cart_app/features/checkout/presentation/views/payment_details_view.dart';
 import 'package:smart_cart_app/features/checkout/presentation/views/thank_you_view.dart';
@@ -19,6 +20,7 @@ abstract class AppRouter {
   static const paymentDetailsView = "/paymentDetailsView";
   static const thankYouView = "/thankYouView";
   static const rateProductsView = "/rateProductsView";
+  static const categoriesView = "/categoriesView";
 
   static final router = GoRouter(routes: [
     GoRoute(
@@ -60,6 +62,10 @@ abstract class AppRouter {
     GoRoute(
       path: rateProductsView,
       builder: (context, state) => const RateProductsView(),
+    ),
+    GoRoute(
+      path: categoriesView,
+      builder: (context, state) => const CategoriesView(),
     ),
   ]);
 }
