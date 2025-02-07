@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_multi_select_items/flutter_multi_select_items.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:smart_cart_app/core/routing/app_router.dart';
 import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
 import 'package:smart_cart_app/features/authentication/presentation/manager/auth_cubit/auth_states.dart';
 import 'package:smart_cart_app/features/authentication/presentation/views/widgets/custom_text_form_field.dart';
@@ -247,9 +249,12 @@ class RegisterViewBody extends StatelessWidget {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
-                            if (formKey.currentState!.validate()) {
-                              // Registeration Code
-                            }
+                            GoRouter.of(context)
+                                .push(AppRouter.verificationView);
+                            // if (formKey.currentState!.validate()) {
+                            //   // Registeration Code
+
+                            // }
                           },
                           style: ButtonStyle(
                             shape: WidgetStatePropertyAll(

@@ -6,12 +6,13 @@ class ApiService {
 
   ApiService(this.api);
 
-  signUp(
-      {required String name,
-      required String email,
-      required String password,
-      required String gender,
-      required String birthdate}) async {
+  signUp({
+    required String name,
+    required String email,
+    required String password,
+    required String gender,
+    required String birthdate,
+  }) async {
     var response = await api.post(
       '${ApiConsts.apiBaseUrl}${ApiConsts.auth}${ApiConsts.signUp}',
       data: {
