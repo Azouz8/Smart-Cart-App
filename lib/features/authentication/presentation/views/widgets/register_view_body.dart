@@ -320,39 +320,44 @@ class RegisterViewBody extends StatelessWidget {
               ),
               SliverFillRemaining(
                 hasScrollBody: false,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Already have an account?',
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            fontWeight: FontWeight.w400,
-                            color: Colors.grey,
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Already have an account?',
+                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                              fontWeight: FontWeight.w400,
+                              color: Colors.grey,
+                            ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        overlayColor: const WidgetStatePropertyAll(
+                            AppColorsLight.scaffoldBackgroundColor),
+                        borderRadius: BorderRadius.circular(15),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            top: 8,
+                            bottom: 8,
+                            right: 8,
                           ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      overlayColor: const WidgetStatePropertyAll(
-                          AppColorsLight.scaffoldBackgroundColor),
-                      borderRadius: BorderRadius.circular(15),
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          top: 8,
-                          bottom: 8,
-                          right: 8,
-                        ),
-                        child: Text(
-                          ' Sign In',
-                          style:
-                              Theme.of(context).textTheme.titleSmall!.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                          child: Text(
+                            ' Sign In',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall!
+                                .copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],
