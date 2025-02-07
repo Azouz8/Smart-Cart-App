@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_cart_app/features/authentication/data/repos/auth_repo.dart';
 import 'auth_states.dart';
 
 class AuthCubit extends Cubit<AuthStates> {
-  AuthCubit() : super(AuthInitial());
+  AuthCubit(this.authRepo) : super(AuthInitial());
   static AuthCubit get(context) => BlocProvider.of(context);
+  AuthRepo authRepo;
   Icon passwordIcon = const Icon(Icons.visibility_outlined);
   bool isPassword = true;
   Icon confirmedPasswordIcon = const Icon(Icons.visibility_outlined);
@@ -32,5 +34,26 @@ class AuthCubit extends Cubit<AuthStates> {
     gender = isMale ? "Male" : "Female";
     print(isMaleSelected);
     emit(ChangeGender());
+  }
+
+  Future<void> signUp({
+    required String name,
+    required String email,
+    required String password,
+    required String gender,
+    required String birthdate,
+  }) async {
+    emit(AuthSignUpLoading());
+    var result = await authRepo.signUpUser(
+        name: name,
+        email: email,
+        password: password,
+        gender: gender,
+        birthdate: birthdate);
+    result.fold((failure) {
+      emit(AuthSignUpFailure(failure));
+    }, (success) {
+      emit(AuthSignUpSuccess());
+    });
   }
 }

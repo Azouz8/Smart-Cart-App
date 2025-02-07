@@ -26,6 +26,44 @@ class ApiService {
     return response;
   }
 
+  verifyEmail({
+    required String code,
+  }) async {
+    var response = await api.post(
+      '${ApiConsts.apiBaseUrl}${ApiConsts.auth}${ApiConsts.verifyEmail}',
+      data: {
+        ApiKeys.code: code,
+      },
+    );
+    return response;
+  }
+
+  logIn({
+    required String email,
+    required String password,
+  }) async {
+    var response = await api.post(
+      '${ApiConsts.apiBaseUrl}${ApiConsts.auth}${ApiConsts.login}',
+      data: {
+        ApiKeys.email: email,
+        ApiKeys.password: password,
+      },
+    );
+    return response;
+  }
+
+  logOut() async {
+    var response = await api
+        .post('${ApiConsts.apiBaseUrl}${ApiConsts.auth}${ApiConsts.logout}');
+    return response;
+  }
+
+  refreshToken() async {
+    var response = await api.post(
+        '${ApiConsts.apiBaseUrl}${ApiConsts.auth}${ApiConsts.refreshToken}');
+    return response;
+  }
+
   addUserToCart({required String cartID, required String userID}) async {
     var response = await api.patch(
       '${ApiConsts.apiBaseUrl}${ApiConsts.cart}$cartID/${ApiConsts.addUserToCart}',

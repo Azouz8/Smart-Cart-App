@@ -26,7 +26,26 @@ class RegisterViewBody extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthCubit, AuthStates>(
+    return BlocConsumer<AuthCubit, AuthStates>(
+      listener: (context, state) {
+        if (state is AuthSignUpSuccess) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              margin: const EdgeInsets.all(8),
+              content: Text(
+                "Account Created Successfully, please check your Email",
+                style: Theme.of(context)
+                    .textTheme
+                    .labelMedium!
+                    .copyWith(color: Colors.white),
+              ),
+              behavior: SnackBarBehavior.floating,
+              backgroundColor: AppColorsLight.primaryColor,
+            ),
+          );
+          GoRouter.of(context).push(AppRouter.loginView);
+        }
+      },
       builder: (BuildContext context, state) {
         var cubit = AuthCubit.get(context);
         return Padding(
@@ -113,6 +132,12 @@ class RegisterViewBody extends StatelessWidget {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return "This Field is Required!";
+                          } else if (value.length < 8) {
+                            return "Password must be at least 8 characters!";
+                          } else if (upperCaseCheck(value)) {
+                            return "Password must has at least 1 Uppercase letter!";
+                          } else if (specialCharCheck(value)) {
+                            return "Password must has at least 1 Special character!";
                           }
                           return null;
                         },
@@ -249,12 +274,15 @@ class RegisterViewBody extends StatelessWidget {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
-                            GoRouter.of(context)
-                                .push(AppRouter.verificationView);
-                            // if (formKey.currentState!.validate()) {
-                            //   // Registeration Code
-
-                            // }
+                            if (formKey.currentState!.validate()) {
+                              cubit.signUp(
+                                name: nameController.text,
+                                email: emailController.text,
+                                password: passwordController.text,
+                                gender: cubit.gender,
+                                birthdate: birthDateController.text,
+                              );
+                            }
                           },
                           style: ButtonStyle(
                             shape: WidgetStatePropertyAll(
@@ -265,16 +293,25 @@ class RegisterViewBody extends StatelessWidget {
                             backgroundColor: WidgetStateProperty.all(
                                 const Color(0xff5b9ee1)),
                           ),
-                          child: Text(
-                            "Register",
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleSmall!
-                                .copyWith(
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.white,
+                          child: state is AuthSignUpLoading
+                              ? const SizedBox(
+                                  height: 15,
+                                  width: 15,
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                    strokeWidth: 2,
+                                  ),
+                                )
+                              : Text(
+                                  "Register",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall!
+                                      .copyWith(
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.white,
+                                      ),
                                 ),
-                          ),
                         ),
                       ),
                     ],
@@ -323,6 +360,45 @@ class RegisterViewBody extends StatelessWidget {
         );
       },
     );
+  }
+
+  bool specialCharCheck(String value) {
+    return !value.contains('@') &&
+        !value.contains("#") &&
+        !value.contains('\$') &&
+        !value.contains("%") &&
+        !value.contains('^') &&
+        !value.contains("&") &&
+        !value.contains("*");
+  }
+
+  bool upperCaseCheck(String value) {
+    return !value.contains('A') &&
+        !value.contains("B") &&
+        !value.contains('C') &&
+        !value.contains("D") &&
+        !value.contains('E') &&
+        !value.contains("F") &&
+        !value.contains('G') &&
+        !value.contains("H") &&
+        !value.contains('I') &&
+        !value.contains("J") &&
+        !value.contains('K') &&
+        !value.contains("L") &&
+        !value.contains('M') &&
+        !value.contains("N") &&
+        !value.contains('O') &&
+        !value.contains("P") &&
+        !value.contains('Q') &&
+        !value.contains("R") &&
+        !value.contains('S') &&
+        !value.contains("T") &&
+        !value.contains("U") &&
+        !value.contains("V") &&
+        !value.contains("W") &&
+        !value.contains("X") &&
+        !value.contains("Y") &&
+        !value.contains("Z");
   }
 
   ShapeDecoration selectionDecoration(Color color) {

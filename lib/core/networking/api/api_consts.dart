@@ -9,6 +9,9 @@ class ApiConsts {
   static const String auth = "auth/";
   static const String signUp = "signup";
   static const String verifyEmail = "verifyEmail";
+  static const String login = "login";
+  static const String logout = "logout";
+  static const String refreshToken = "refresh-token";
   static const String passwordRecovery = "password-recovery";
   static const String resetPassword = "reset-password/";
 
@@ -25,10 +28,11 @@ class ApiKeys {
   static const String email = "email";
   static const String password = "password";
   static const String gender = "gender";
-  static const String birthdate = "birthdate";
+  static const String birthdate = "birthDate";
   static const String message = "message";
   static const String cartUpdated = "cartUpdated";
   static const String results = "results";
   static const String userID = "userID";
   static const String productID = "productID";
+  static const String code = "code";
 }
