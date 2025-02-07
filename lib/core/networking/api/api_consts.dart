@@ -6,7 +6,7 @@ class ApiConsts {
   // static const String sockecIOUrl = "https://ssc-grad.up.railway.app";
 
   //Authentication
-  static const String auth = "auth";
+  static const String auth = "auth/";
   static const String signUp = "signup";
   static const String verifyEmail = "verifyEmail";
   static const String passwordRecovery = "password-recovery";
@@ -21,6 +21,11 @@ class ApiConsts {
 }
 
 class ApiKeys {
+  static const String name = "name";
+  static const String email = "email";
+  static const String password = "password";
+  static const String gender = "gender";
+  static const String birthdate = "birthdate";
   static const String message = "message";
   static const String cartUpdated = "cartUpdated";
   static const String results = "results";

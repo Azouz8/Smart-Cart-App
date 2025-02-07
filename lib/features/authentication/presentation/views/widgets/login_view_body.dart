@@ -99,7 +99,7 @@ class LoginViewBody extends StatelessWidget {
                       type: TextInputType.text,
                       obsecureText: cubit.isPassword,
                       suffixIcon: IconButton(
-                        icon: cubit.suffixIcon,
+                        icon: cubit.passwordIcon,
                         onPressed: () {
                           cubit.changePasswordVisibility();
                         },

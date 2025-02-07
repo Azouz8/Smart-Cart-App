@@ -6,6 +6,25 @@ class ApiService {
 
   ApiService(this.api);
 
+  signUp(
+      {required String name,
+      required String email,
+      required String password,
+      required String gender,
+      required String birthdate}) async {
+    var response = await api.post(
+      '${ApiConsts.apiBaseUrl}${ApiConsts.auth}${ApiConsts.signUp}',
+      data: {
+        ApiKeys.name: name,
+        ApiKeys.email: email,
+        ApiKeys.password: password,
+        ApiKeys.gender: gender,
+        ApiKeys.birthdate: birthdate,
+      },
+    );
+    return response;
+  }
+
   addUserToCart({required String cartID, required String userID}) async {
     var response = await api.patch(
       '${ApiConsts.apiBaseUrl}${ApiConsts.cart}$cartID/${ApiConsts.addUserToCart}',
