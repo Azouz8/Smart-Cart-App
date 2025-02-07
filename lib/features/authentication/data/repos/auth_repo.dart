@@ -1,5 +1,7 @@
 import 'package:either_dart/either.dart';
 
+import '../models/login_model.dart';
+
 abstract class AuthRepo {
   Future<Either<String, Map<String, dynamic>>> signUpUser({
     required String name,
@@ -10,5 +12,9 @@ abstract class AuthRepo {
   });
   Future<Either<String, Map<String, dynamic>>> verifyEmail({
     required String code
+  });
+  Future<Either<String, LoginModel>> signInUser({
+    required String email,
+    required String password,
   });
 }
