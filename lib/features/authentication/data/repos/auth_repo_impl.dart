@@ -46,7 +46,8 @@ class AuthRepoImpl extends AuthRepo {
         email: email,
         password: password,
       );
-      return Right(response);
+      LoginModel loginModel = LoginModel.fromJson(response);
+      return Right(loginModel);
     } on ServerException catch (e) {
       return Left(e.errorModel.errMessage);
     }
