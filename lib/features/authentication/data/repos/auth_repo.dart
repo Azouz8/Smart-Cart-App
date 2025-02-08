@@ -10,10 +10,9 @@ abstract class AuthRepo {
     required String gender,
     required String birthdate,
   });
-  Future<Either<String, Map<String, dynamic>>> verifyEmail({
-    required String code
-  });
-  Future<Either<String, LoginModel>> signInUser({
+  Future<Either<String, Map<String, dynamic>>> verifyEmail(
+      {required String code});
+  Future<Either<String, LoginModel>> loginUser({
     required String email,
     required String password,
   });

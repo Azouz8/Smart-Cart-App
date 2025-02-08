@@ -39,7 +39,7 @@ class AuthRepoImpl extends AuthRepo {
   }
 
   @override
-  Future<Either<String, LoginModel>> signInUser(
+  Future<Either<String, LoginModel>> loginUser(
       {required String email, required String password}) async {
     try {
       var response = await apiService.logIn(

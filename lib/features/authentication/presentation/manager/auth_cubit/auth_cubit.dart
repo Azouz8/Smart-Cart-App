@@ -36,7 +36,7 @@ class AuthCubit extends Cubit<AuthStates> {
     emit(ChangeGender());
   }
 
-  Future<void> signUp({
+  Future<void> signupUser({
     required String name,
     required String email,
     required String password,
@@ -54,6 +54,22 @@ class AuthCubit extends Cubit<AuthStates> {
       emit(AuthSignUpFailure(failure));
     }, (success) {
       emit(AuthSignUpSuccess());
+    });
+  }
+
+  Future<void> loginUser({
+    required String email,
+    required String password,
+  }) async {
+    emit(AuthLoginLoading());
+    var result = await authRepo.loginUser(
+      email: email,
+      password: password,
+    );
+    result.fold((failure) {
+      emit(AuthLoginFailure(failure));
+    }, (loginModel) {
+      emit(AuthLoginSuccess(loginModel));
     });
   }
 }

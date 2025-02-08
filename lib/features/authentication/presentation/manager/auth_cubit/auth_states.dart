@@ -1,3 +1,5 @@
+import 'package:smart_cart_app/features/authentication/data/models/login_model.dart';
+
 abstract class AuthStates {}
 
 class AuthInitial extends AuthStates {}
@@ -14,3 +16,15 @@ class AuthSignUpFailure extends AuthStates {
 }
 
 class AuthSignUpSuccess extends AuthStates {}
+
+class AuthLoginLoading extends AuthStates {}
+
+class AuthLoginFailure extends AuthStates {
+  String errMessage;
+  AuthLoginFailure(this.errMessage);
+}
+
+class AuthLoginSuccess extends AuthStates {
+  LoginModel loginModel;
+  AuthLoginSuccess(this.loginModel);
+}

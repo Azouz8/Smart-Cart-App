@@ -275,7 +275,7 @@ class RegisterViewBody extends StatelessWidget {
                         child: ElevatedButton(
                           onPressed: () {
                             if (formKey.currentState!.validate()) {
-                              cubit.signUp(
+                              cubit.signupUser(
                                 name: nameController.text,
                                 email: emailController.text,
                                 password: passwordController.text,
