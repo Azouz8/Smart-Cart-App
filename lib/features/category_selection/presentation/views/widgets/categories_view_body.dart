@@ -23,7 +23,7 @@ class CategoriesViewBody extends StatelessWidget {
     return BlocConsumer<CategoryCubit, CategoryStates>(
       listener: (context, state) {
         if (state is CategoryGetFailure) {
-          showCustomSnackBar(context: context, message: state.errMessage);
+          showCustomSnackBar(context: context, message: state.errMessage, vPadding: 64);
         }
       },
       builder: (context, state) => state is CategoryGetLoading
@@ -69,7 +69,6 @@ class CategoriesViewBody extends StatelessWidget {
                                 return selectedItem;
                               },
                             ));
-                            print(selectedCategories);
                           },
                         ),
                       ),

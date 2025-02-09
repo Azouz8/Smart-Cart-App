@@ -22,7 +22,7 @@ class CacheHelper {
   }
 
   static String? getString({required String key}) {
-    return sharedPreferences!.getString(key);
+    return sharedPreferences?.getString(key);
   }
 
   static void remove({required String key}) {
@@ -32,4 +32,6 @@ class CacheHelper {
 
 class CacheHelperKeys {
   static const String cartID = "cartID";
+  static const String userID = "userID";
+  static const String token = "token";
 }

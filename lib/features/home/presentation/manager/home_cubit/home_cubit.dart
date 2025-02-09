@@ -42,10 +42,9 @@ class HomeCubit extends Cubit<HomeStates> {
     return super.close();
   }
 
-  Future<void> connectUserToCart(String cartID) async {
+  Future<void> connectUserToCart(String cartID, String userID) async {
     emit(HomeAddUserToCartLoading());
-    var result =
-        await homeRepo.addUserToCart(cartID: cartID, userID: "AzouzUser");
+    var result = await homeRepo.addUserToCart(cartID: cartID, userID: userID);
     result.fold((failure) {
       emit(HomeAddUserToCartFailure(failure));
     }, (responseCode) {

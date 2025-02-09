@@ -58,7 +58,7 @@ class ApiService {
     return response;
   }
 
-  refreshToken() async {
+  refreshToken({required String token}) async {
     var response = await api.post(
         '${ApiConsts.apiBaseUrl}${ApiConsts.auth}${ApiConsts.refreshToken}');
     return response;

@@ -32,7 +32,8 @@ class RegisterViewBody extends StatelessWidget {
         if (state is AuthSignUpSuccess) {
           showCustomSnackBar(
               context: context,
-              message: "Account Created Successfully, please check your Email");
+              message: "Account Created Successfully, please check your Email",
+              vPadding: 64);
           GoRouter.of(context).push(AppRouter.loginView);
         }
       },

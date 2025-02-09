@@ -4,8 +4,8 @@ import 'package:smart_cart_app/core/services/cache_helper.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 
 class ScanQrView extends StatelessWidget {
-  const ScanQrView({super.key});
-
+  ScanQrView({super.key});
+  final String? userID = CacheHelper.getString(key: CacheHelperKeys.userID);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +19,7 @@ class ScanQrView extends StatelessWidget {
             cartID += barcode.displayValue!;
           }
           CacheHelper.putString(key: CacheHelperKeys.cartID, value: cartID);
-          HomeCubit.get(context).connectUserToCart(cartID);
+          HomeCubit.get(context).connectUserToCart(cartID, userID!);
           Navigator.pop(context);
         },
       ),

@@ -62,7 +62,7 @@ abstract class AppRouter {
       pageBuilder: (context, state) => CustomTransitionPage(
         child: const HomeView(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          const begin = Offset(0.0, -1.0);
+          const begin = Offset(1.0, 0);
           const end = Offset.zero;
           const curve = Curves.ease;
           var tween =
@@ -81,10 +81,41 @@ abstract class AppRouter {
     GoRoute(
       path: passwordRecoveryView,
       builder: (context, state) => PasswordRecoveryView(),
+      pageBuilder: (context, state) => CustomTransitionPage(
+        child: PasswordRecoveryView(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(1.0, 0.0);
+          const end = Offset.zero;
+          const curve = Curves.ease;
+          var tween =
+              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          return SlideTransition(
+            position: animation.drive(tween),
+            child: child,
+          );
+        },
+      ),
     ),
     GoRoute(
       path: scanQRCodeView,
-      builder: (context, state) => const ScanQrView(),
+      pageBuilder: (context, state) => CustomTransitionPage(
+        child: BlocProvider(
+          create: (context) => CategoryCubit(getIt.get<CategoryRepoImpl>()),
+          child: ScanQrView(),
+        ),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          final scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+            CurvedAnimation(parent: animation, curve: Curves.easeInOut),
+          );
+          final fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+            CurvedAnimation(parent: animation, curve: Curves.easeInOut),
+          );
+          return ScaleTransition(
+            scale: scaleAnimation,
+            child: FadeTransition(opacity: fadeAnimation, child: child),
+          );
+        },
+      ),
     ),
     GoRoute(
       path: checkoutCartView,
@@ -104,9 +135,24 @@ abstract class AppRouter {
     ),
     GoRoute(
       path: categoriesView,
-      builder: (context, state) => BlocProvider(
+      pageBuilder: (context, state) => CustomTransitionPage(
+        child: BlocProvider(
           create: (context) => CategoryCubit(getIt.get<CategoryRepoImpl>()),
-          child: const CategoriesView()),
+          child: const CategoriesView(),
+        ),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          final scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+            CurvedAnimation(parent: animation, curve: Curves.easeInOut),
+          );
+          final fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+            CurvedAnimation(parent: animation, curve: Curves.easeInOut),
+          );
+          return ScaleTransition(
+            scale: scaleAnimation,
+            child: FadeTransition(opacity: fadeAnimation, child: child),
+          );
+        },
+      ),
     ),
   ]);
 }

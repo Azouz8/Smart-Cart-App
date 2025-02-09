@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smart_cart_app/core/services/helper_functions.dart';
-import 'package:smart_cart_app/core/services/secure_storage.dart';
 import 'package:smart_cart_app/features/authentication/presentation/manager/auth_cubit/auth_states.dart';
 import '../../../../../core/routing/app_router.dart';
 import '../../../../../core/themes/light_theme/app_colors_light.dart';
@@ -29,12 +28,15 @@ class LoginViewBody extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthStates>(
       listener: (context, state) {
         if (state is AuthLoginSuccess) {
-          showCustomSnackBar(context: context, message: "Welcome Back!");
-          SecureStorage().writeData(
-              key: SecureStorageKeys.token, value: state.loginModel.token!);
-          GoRouter.of(context).push(AppRouter.categoriesView);
+          showCustomSnackBar(
+              context: context, message: "Welcome Back!", vPadding: 16);
+          // SecureStorage().writeData(
+          //     key: SecureStorageKeys.token, value: state.loginModel.token!);
+
+          GoRouter.of(context).push(AppRouter.homeView ,extra: state.loginModel.id);
         } else if (state is AuthLoginFailure) {
-          showCustomSnackBar(context: context, message: state.errMessage);
+          showCustomSnackBar(
+              context: context, message: state.errMessage, vPadding: 64);
         }
       },
       builder: (context, state) {
@@ -151,6 +153,7 @@ class LoginViewBody extends StatelessWidget {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
+                            FocusManager.instance.primaryFocus?.unfocus();
                             if (formKey.currentState!.validate()) {
                               cubit.loginUser(
                                   email: emailController.text,

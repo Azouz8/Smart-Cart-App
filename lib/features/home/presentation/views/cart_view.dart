@@ -27,24 +27,25 @@ class CartView extends StatelessWidget {
           cubit.getCartProducts(cubit.cartId);
         }
         if (state is HomeAddUserToCartFailure) {
-          showCustomSnackBar(context: context, message: state.errMessage);
+          showCustomSnackBar(
+              context: context, message: state.errMessage, vPadding: 16);
         } else if (state is HomeDeleteProductFailure) {
-          showCustomSnackBar(context: context, message: state.errMessage);
+          showCustomSnackBar(
+              context: context, message: state.errMessage, vPadding: 16);
         } else if (state is HomeGetCartProductsFailure) {
-          showCustomSnackBar(context: context, message: state.errMessage);
+          showCustomSnackBar(
+              context: context, message: state.errMessage, vPadding: 16);
         } else if (state is HomeGetScannedProductsFailure) {
-          showCustomSnackBar(context: context, message: state.errMessage);
+          showCustomSnackBar(
+              context: context, message: state.errMessage, vPadding: 16);
         } else if (state is HomeRemoveUserFromCartFailure) {
-          showCustomSnackBar(context: context, message: state.errMessage);
+          showCustomSnackBar(
+              context: context, message: state.errMessage, vPadding: 16);
         }
       },
       builder: (BuildContext context, state) {
         if (state is HomeInitial || state is HomeRemoveUserFromCartSuccess) {
           return const NotConnectedWidget(showSnackbar: false);
-        }
-
-        if (state is HomeAddUserToCartFailure) {
-          return const NotConnectedWidget(showSnackbar: true);
         }
         if (state is HomeGetCartProductsSuccess ||
             state is HomeDeleteProductSuccess ||
