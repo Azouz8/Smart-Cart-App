@@ -4,6 +4,7 @@ import 'package:smart_cart_app/core/networking/api/api_consts.dart';
 import 'package:smart_cart_app/core/networking/api/api_service.dart';
 import 'package:smart_cart_app/core/networking/api/dio_consumer.dart';
 import 'package:smart_cart_app/features/authentication/data/repos/auth_repo_impl.dart';
+import 'package:smart_cart_app/features/category_selection/data/repos/category_repo_impl.dart';
 import 'package:smart_cart_app/features/home/data/repos/home_repo_impl.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
@@ -30,6 +31,11 @@ void setupServiceLocator() {
   );
   getIt.registerSingleton<AuthRepoImpl>(
     AuthRepoImpl(
+      getIt<ApiService>(),
+    ),
+  );
+  getIt.registerSingleton<CategoryRepoImpl>(
+    CategoryRepoImpl(
       getIt<ApiService>(),
     ),
   );

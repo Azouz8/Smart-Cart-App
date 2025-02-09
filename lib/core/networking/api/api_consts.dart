@@ -21,6 +21,10 @@ class ApiConsts {
   static const String addUserToCart = "addUser";
   static const String removeUserFromCart = "removeUser";
   static const String deleteProductFromCart = "deleteproduct";
+
+  //User
+  static const String user = "user/";
+  static const String categories = "categories";
 }
 
 class ApiKeys {
@@ -32,6 +36,7 @@ class ApiKeys {
   static const String message = "message";
   static const String cartUpdated = "cartUpdated";
   static const String results = "results";
+  static const String data = "data";
   static const String userID = "userID";
   static const String productID = "productID";
   static const String code = "code";

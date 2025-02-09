@@ -64,6 +64,12 @@ class ApiService {
     return response;
   }
 
+  getCategories() async {
+    var response = await api.get(
+        '${ApiConsts.apiBaseUrl}${ApiConsts.user}${ApiConsts.categories}');
+    return response;
+  }
+
   addUserToCart({required String cartID, required String userID}) async {
     var response = await api.patch(
       '${ApiConsts.apiBaseUrl}${ApiConsts.cart}$cartID/${ApiConsts.addUserToCart}',

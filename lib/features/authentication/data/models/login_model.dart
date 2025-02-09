@@ -1,18 +1,19 @@
 class LoginModel {
   LoginModel({
-      String? token, 
-      String? id, 
-      String? name, 
-      String? email, 
-      bool? isAdmin, 
-      String? lastLogin,}){
+    String? token,
+    String? id,
+    String? name,
+    String? email,
+    bool? isAdmin,
+    String? lastLogin,
+  }) {
     _token = token;
     _id = id;
     _name = name;
     _email = email;
     _isAdmin = isAdmin;
     _lastLogin = lastLogin;
-}
+  }
 
   LoginModel.fromJson(dynamic json) {
     _token = json['token'];
@@ -46,5 +47,4 @@ class LoginModel {
     map['lastLogin'] = _lastLogin;
     return map;
   }
-
 }

@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:smart_cart_app/core/routing/app_router.dart';
 import 'package:smart_cart_app/core/services/cache_helper.dart';
-import 'package:smart_cart_app/core/services/cache_helper_consts.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 
 class ConnectedCartCustomAppBar extends StatelessWidget {

@@ -6,6 +6,7 @@ class ServerException implements Exception {
 
   ServerException({required this.errorModel});
 }
+
 //Handling all possible Dio Exceptions
 void handleDioException(DioException e) {
   switch (e.type) {
@@ -31,7 +32,8 @@ void handleDioException(DioException e) {
       );
     case DioExceptionType.connectionError:
       throw ServerException(
-        errorModel: ErrorModel.fromJson(e.response!.data),
+        errorModel:
+            ErrorModel(errMessage: "Please Check Your Internet Connection!"),
       );
     case DioExceptionType.unknown:
       throw ServerException(

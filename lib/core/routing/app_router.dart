@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:smart_cart_app/core/services/service_locator.dart';
 import 'package:smart_cart_app/features/authentication/presentation/views/login_view.dart';
 import 'package:smart_cart_app/features/authentication/presentation/views/password_recovery.dart';
 import 'package:smart_cart_app/features/authentication/presentation/views/register_view.dart';
 import 'package:smart_cart_app/features/authentication/presentation/views/verification_view.dart';
+import 'package:smart_cart_app/features/category_selection/data/repos/category_repo_impl.dart';
+import 'package:smart_cart_app/features/category_selection/presentation/manager/category_cubit.dart';
 import 'package:smart_cart_app/features/category_selection/presentation/views/categories_view.dart';
 import 'package:smart_cart_app/features/checkout/presentation/views/checkout_cart_view.dart';
 import 'package:smart_cart_app/features/checkout/presentation/views/payment_details_view.dart';
@@ -100,7 +104,9 @@ abstract class AppRouter {
     ),
     GoRoute(
       path: categoriesView,
-      builder: (context, state) => const CategoriesView(),
+      builder: (context, state) => BlocProvider(
+          create: (context) => CategoryCubit(getIt.get<CategoryRepoImpl>()),
+          child: const CategoriesView()),
     ),
   ]);
 }

@@ -1,26 +1,27 @@
 class ProductId {
   ProductId({
-      String? id, 
-      String? itemId, 
-      String? title, 
-      String? category, 
-      double? price, 
-      int? sales, 
-      int? inventory, 
-      double? rating, 
-      String? barcode, 
-      double? weight, 
-      String? description, 
-      String? image, 
-      List<dynamic>? tags, 
-      bool? isAvailable, 
-      int? discount, 
-      String? aisle, 
-      List<dynamic>? broughtBy, 
-      String? section, 
-      String? createdAt, 
-      String? updatedAt, 
-      int? v,}){
+    String? id,
+    String? itemId,
+    String? title,
+    String? category,
+    double? price,
+    int? sales,
+    int? inventory,
+    double? rating,
+    String? barcode,
+    double? weight,
+    String? description,
+    String? image,
+    List<dynamic>? tags,
+    bool? isAvailable,
+    int? discount,
+    String? aisle,
+    List<dynamic>? broughtBy,
+    String? section,
+    String? createdAt,
+    String? updatedAt,
+    int? v,
+  }) {
     _id = id;
     _itemId = itemId;
     _title = title;
@@ -42,19 +43,25 @@ class ProductId {
     _createdAt = createdAt;
     _updatedAt = updatedAt;
     _v = v;
-}
+  }
 
   ProductId.fromJson(dynamic json) {
     _id = json['_id'];
     _itemId = json['item_id'];
     _title = json['title'];
     _category = json['category'];
-    _price = json['price'] is int? (json['price'] as int).toDouble() : json['price'];
+    _price = json['price'] is int
+        ? (json['price'] as int).toDouble()
+        : json['price'];
     _sales = json['sales'];
     _inventory = json['inventory'];
-    _rating = json['rating'] is int? (json['rating'] as int).toDouble() : json['rating'];
+    _rating = json['rating'] is int
+        ? (json['rating'] as int).toDouble()
+        : json['rating'];
     _barcode = json['barcode'];
-    _weight = json['weight'] is int? (json['weight'] as int).toDouble() : json['weight'];
+    _weight = json['weight'] is int
+        ? (json['weight'] as int).toDouble()
+        : json['weight'];
     _description = json['description'];
     _image = json['image'];
     if (json['tags'] != null) {
@@ -150,5 +157,4 @@ class ProductId {
     map['__v'] = _v;
     return map;
   }
-
 }

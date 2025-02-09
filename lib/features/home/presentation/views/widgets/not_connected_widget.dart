@@ -15,7 +15,8 @@ class NotConnectedWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (showSnackbar) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        showCustomSnackBar(context: context, message: "Sorry, This cart is in use");
+        showCustomSnackBar(
+            context: context, message: "Sorry, This cart is in use");
       });
     }
     return Padding(
