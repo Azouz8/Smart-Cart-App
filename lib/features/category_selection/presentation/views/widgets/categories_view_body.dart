@@ -12,57 +12,19 @@ class CategoriesViewBody extends StatelessWidget {
   final controller = MultiSelectController();
   final List selectedCategories = [];
   final List<MultiSelectCard> list = [
-    MultiSelectCard(value: 'Dart', label: 'Dart'),
-    MultiSelectCard(value: 'Python', label: 'Python'),
-    MultiSelectCard(value: 'JavaScript', label: 'JavaScript'),
-    MultiSelectCard(value: 'Java', label: 'Java'),
-    MultiSelectCard(value: 'C#', label: 'C#'),
-    MultiSelectCard(value: 'C++', label: 'C++'),
-    MultiSelectCard(value: 'Go Lang', label: 'Go Lang'),
-    MultiSelectCard(value: 'Swift', label: 'Swift'),
-    MultiSelectCard(value: 'PHP', label: 'PHP'),
-    MultiSelectCard(value: 'Kotlin', label: 'Kotlin'),
-    MultiSelectCard(value: 'Dart', label: 'Dart'),
-    MultiSelectCard(value: 'Python', label: 'Python'),
-    MultiSelectCard(value: 'JavaScript', label: 'JavaScript'),
-    MultiSelectCard(value: 'Java', label: 'Java'),
-    MultiSelectCard(value: 'C#', label: 'C#'),
-    MultiSelectCard(value: 'C++', label: 'C++'),
-    MultiSelectCard(value: 'Go Lang', label: 'Go Lang'),
-    MultiSelectCard(value: 'Swift', label: 'Swift'),
-    MultiSelectCard(value: 'PHP', label: 'PHP'),
-    MultiSelectCard(value: 'Kotlin', label: 'Kotlin'),
-    MultiSelectCard(value: 'Dart', label: 'Dart'),
-    MultiSelectCard(value: 'Python', label: 'Python'),
-    MultiSelectCard(value: 'JavaScript', label: 'JavaScript'),
-    MultiSelectCard(value: 'Java', label: 'Java'),
-    MultiSelectCard(value: 'C#', label: 'C#'),
-    MultiSelectCard(value: 'C++', label: 'C++'),
-    MultiSelectCard(value: 'Go Lang', label: 'Go Lang'),
-    MultiSelectCard(value: 'Swift', label: 'Swift'),
-    MultiSelectCard(value: 'PHP', label: 'PHP'),
-    MultiSelectCard(value: 'Kotlin', label: 'Kotlin'),
-    MultiSelectCard(value: 'Dart', label: 'Dart'),
-    MultiSelectCard(value: 'Python', label: 'Python'),
-    MultiSelectCard(value: 'JavaScript', label: 'JavaScript'),
-    MultiSelectCard(value: 'Java', label: 'Java'),
-    MultiSelectCard(value: 'C#', label: 'C#'),
-    MultiSelectCard(value: 'C++', label: 'C++'),
-    MultiSelectCard(value: 'Go Lang', label: 'Go Lang'),
-    MultiSelectCard(value: 'Swift', label: 'Swift'),
-    MultiSelectCard(value: 'PHP', label: 'PHP'),
-    MultiSelectCard(value: 'Kotlin', label: 'Kotlin'),
-    MultiSelectCard(value: 'Dart', label: 'Dart'),
-    MultiSelectCard(value: 'Python', label: 'Python'),
-    MultiSelectCard(value: 'JavaScript', label: 'JavaScript'),
-    MultiSelectCard(value: 'Java', label: 'Java'),
-    MultiSelectCard(value: 'C#', label: 'C#'),
-    MultiSelectCard(value: 'C++', label: 'C++'),
-    MultiSelectCard(value: 'Go Lang', label: 'Go Lang'),
-    MultiSelectCard(value: 'Swift', label: 'Swift'),
-    MultiSelectCard(value: 'PHP', label: 'PHP'),
-    MultiSelectCard(value: 'Kotlin', label: 'Kotlin'),
-    MultiSelectCard(value: 'Dart', label: 'Dart'),
+    MultiSelectCard(value: 'Health', label: 'Health'),
+    MultiSelectCard(value: 'HairCare', label: 'HairCare'),
+    MultiSelectCard(value: 'Cosmetics', label: 'Cosmetics'),
+    MultiSelectCard(value: 'Food', label: 'Food'),
+    MultiSelectCard(value: 'Appliances', label: 'Appliances'),
+    MultiSelectCard(value: 'Snacks', label: 'Snacks'),
+    MultiSelectCard(value: 'Health', label: 'Health'),
+    MultiSelectCard(value: 'HairCare', label: 'HairCare'),
+    MultiSelectCard(value: 'Cosmetics', label: 'Cosmetics'),
+    MultiSelectCard(value: 'Food', label: 'Food'),
+    MultiSelectCard(value: 'Appliances', label: 'Appliances'),
+    MultiSelectCard(value: 'Snacks', label: 'Snacks'),
+    MultiSelectCard(value: 'Snacks', label: 'Snacks'),
   ];
 
   @override
@@ -83,14 +45,14 @@ class CategoriesViewBody extends StatelessWidget {
                   controller: controller,
                   items: list,
                   itemsPadding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
                   itemsDecoration: MultiSelectDecorations(
                     selectedDecoration:
                         selectionDecoration(AppColorsLight.primaryColor),
                     decoration: selectionDecoration(Colors.grey.withAlpha(25)),
                   ),
                   textStyles: MultiSelectTextStyles(
-                    selectedTextStyle: TextStyle(fontSize: 18.sp),
+                    selectedTextStyle: TextStyle(fontSize: 20.sp),
                     textStyle: TextStyle(fontSize: 18.sp),
                   ),
                   splashColor: AppColorsLight.primaryColor,
@@ -98,8 +60,8 @@ class CategoriesViewBody extends StatelessWidget {
                   onChange: (selectedItems, selectedItem) {
                     selectedCategories.clear();
                     selectedCategories.addAll(selectedItems.map(
-                      (e) {
-                        return e;
+                      (selectedItem) {
+                        return selectedItem;
                       },
                     ));
                     print(selectedCategories);

@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smart_cart_app/core/routing/app_router.dart';
+import 'package:smart_cart_app/core/services/helper_functions.dart';
 import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
 import 'package:smart_cart_app/features/authentication/presentation/manager/auth_cubit/auth_states.dart';
 import 'package:smart_cart_app/features/authentication/presentation/views/widgets/custom_text_form_field.dart';
@@ -29,20 +30,9 @@ class RegisterViewBody extends StatelessWidget {
     return BlocConsumer<AuthCubit, AuthStates>(
       listener: (context, state) {
         if (state is AuthSignUpSuccess) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              margin: const EdgeInsets.all(8),
-              content: Text(
-                "Account Created Successfully, please check your Email",
-                style: Theme.of(context)
-                    .textTheme
-                    .labelMedium!
-                    .copyWith(color: Colors.white),
-              ),
-              behavior: SnackBarBehavior.floating,
-              backgroundColor: AppColorsLight.primaryColor,
-            ),
-          );
+          showCustomSnackBar(
+              context: context,
+              message: "Account Created Successfully, please check your Email");
           GoRouter.of(context).push(AppRouter.loginView);
         }
       },
@@ -130,14 +120,12 @@ class RegisterViewBody extends StatelessWidget {
                         controller: passwordController,
                         label: "Password",
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "This Field is Required!";
-                          } else if (value.length < 8) {
-                            return "Password must be at least 8 characters!";
-                          } else if (upperCaseCheck(value)) {
-                            return "Password must has at least 1 Uppercase letter!";
-                          } else if (specialCharCheck(value)) {
-                            return "Password must has at least 1 Special character!";
+                          if (value == null ||
+                              value.isEmpty ||
+                              value.length < 8 ||
+                              upperCaseCheck(value) ||
+                              specialCharCheck(value)) {
+                            return "Password must be at least 8 characters,\n1 Uppercase letter,\n1 Special character.";
                           }
                           return null;
                         },
@@ -258,7 +246,10 @@ class RegisterViewBody extends StatelessWidget {
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.grey.withAlpha(25),
-                          prefixIcon: const Icon(Icons.date_range_rounded),
+                          prefixIcon: const Icon(
+                            Icons.date_range_rounded,
+                            color: AppColorsLight.secondaryColor,
+                          ),
                           enabledBorder: customOutlineInputBorder(),
                           border: customOutlineInputBorder(),
                           focusedBorder: customOutlineInputBorder(),
@@ -431,7 +422,7 @@ class RegisterViewBody extends StatelessWidget {
     DateTime? picked = await showDatePicker(
       context: context,
       firstDate: DateTime(1950),
-      lastDate: DateTime.now(),
+      lastDate: DateTime(2012),
     );
     if (picked != null) {
       birthDateController.text = picked.toString().split(" ")[0];

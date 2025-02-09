@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smart_cart_app/core/routing/app_router.dart';
+import 'package:smart_cart_app/core/services/helper_functions.dart';
 import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
 
 class NotConnectedWidget extends StatelessWidget {
@@ -14,20 +15,7 @@ class NotConnectedWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (showSnackbar) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            margin: const EdgeInsets.all(8),
-            content: Text(
-              "Sorry, This cart is in use",
-              style: Theme.of(context)
-                  .textTheme
-                  .labelMedium!
-                  .copyWith(color: Colors.white),
-            ),
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.redAccent,
-          ),
-        );
+        showCustomSnackBar(context: context, message: "Sorry, This cart is in use");
       });
     }
     return Padding(

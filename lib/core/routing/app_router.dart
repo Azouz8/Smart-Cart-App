@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smart_cart_app/features/authentication/presentation/views/login_view.dart';
 import 'package:smart_cart_app/features/authentication/presentation/views/password_recovery.dart';
@@ -34,12 +35,40 @@ abstract class AppRouter {
       builder: (context, state) => LoginView(),
     ),
     GoRoute(
-      path: homeView,
-      builder: (context, state) => const HomeView(),
-    ),
-    GoRoute(
       path: registerView,
       builder: (context, state) => const RegisterView(),
+      pageBuilder: (context, state) => CustomTransitionPage(
+        child: const RegisterView(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(1.0, 0.0);
+          const end = Offset.zero;
+          const curve = Curves.ease;
+          var tween =
+              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          return SlideTransition(
+            position: animation.drive(tween),
+            child: child,
+          );
+        },
+      ),
+    ),
+    GoRoute(
+      path: homeView,
+      builder: (context, state) => const HomeView(),
+      pageBuilder: (context, state) => CustomTransitionPage(
+        child: const HomeView(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(0.0, -1.0);
+          const end = Offset.zero;
+          const curve = Curves.ease;
+          var tween =
+              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          return SlideTransition(
+            position: animation.drive(tween),
+            child: child,
+          );
+        },
+      ),
     ),
     GoRoute(
       path: verificationView,

@@ -37,7 +37,7 @@ class VerificationViewBody extends StatelessWidget {
             TextButton(
               onPressed: () {},
               child: const Text(
-                "Resend OTP Code",
+                "Resend Code",
                 style: TextStyle(color: Color(0xFF757575)),
               ),
             ),

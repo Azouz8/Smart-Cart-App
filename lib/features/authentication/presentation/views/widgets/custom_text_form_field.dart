@@ -40,6 +40,8 @@ class CustomTextFormField extends StatelessWidget {
         fontSize: 12,
       ),
       decoration: InputDecoration(
+        prefixIconColor: AppColorsLight.secondaryColor,
+        suffixIconColor: AppColorsLight.secondaryColor,
         prefixIcon: prefixIcon,
         suffixIcon: suffixIcon,
         enabledBorder: customOutlineInputBorder(),
