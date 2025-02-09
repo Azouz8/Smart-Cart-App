@@ -47,7 +47,7 @@ class HomeCubit extends Cubit<HomeStates> {
     var result =
         await homeRepo.addUserToCart(cartID: cartID, userID: "AzouzUser");
     result.fold((failure) {
-      emit(HomeAddUserToCartFailure());
+      emit(HomeAddUserToCartFailure(failure));
     }, (responseCode) {
       cartId = cartID;
       emit(HomeAddUserToCartSuccess());
@@ -59,7 +59,7 @@ class HomeCubit extends Cubit<HomeStates> {
     var result =
         await homeRepo.removeUserFromCart(cartID: cartID, userID: "AzouzUser");
     result.fold((failure) {
-      emit(HomeRemoveUserFromCartFailure());
+      emit(HomeRemoveUserFromCartFailure(failure));
     }, (responseCode) {
       emit(HomeRemoveUserFromCartSuccess());
       cartId = "";
@@ -92,7 +92,7 @@ class HomeCubit extends Cubit<HomeStates> {
     homeRepo.getScannedProducts().listen(
       (result) {
         result.fold(
-          (failure) => emit(HomeGetScannedProductsFailure()),
+          (failure) => emit(HomeGetScannedProductsFailure(failure)),
           (products) {
             cartProducts = products;
             emit(HomeGetScannedProductsSuccess(products));
@@ -100,7 +100,7 @@ class HomeCubit extends Cubit<HomeStates> {
         );
       },
       onError: (error) {
-        emit(HomeGetScannedProductsFailure());
+        emit(HomeGetScannedProductsFailure(error.toString()));
       },
     );
   }
@@ -109,7 +109,7 @@ class HomeCubit extends Cubit<HomeStates> {
     emit(HomeGetCartProductsLoading());
     var result = await homeRepo.getCartProducts(cartID: cartID);
     result.fold((failure) {
-      emit(HomeGetCartProductsFailure());
+      emit(HomeGetCartProductsFailure(failure));
     }, (products) {
       cartProducts = products;
       cartId = cartID;
@@ -124,7 +124,7 @@ class HomeCubit extends Cubit<HomeStates> {
       productID: productID,
     );
     result.fold((failure) {
-      emit(HomeDeleteProductFailure());
+      emit(HomeDeleteProductFailure(failure));
     }, (responseCode) {
       emit(HomeDeleteProductSuccess());
     });

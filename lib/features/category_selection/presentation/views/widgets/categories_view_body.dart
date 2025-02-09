@@ -8,7 +8,6 @@ import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
 import 'package:smart_cart_app/features/category_selection/presentation/manager/category_cubit.dart';
 import 'package:smart_cart_app/features/category_selection/presentation/manager/category_states.dart';
 import 'package:smart_cart_app/features/home/presentation/views/widgets/custom_home_app_bar.dart';
-
 import 'custom_submit_button.dart';
 
 class CategoriesViewBody extends StatelessWidget {

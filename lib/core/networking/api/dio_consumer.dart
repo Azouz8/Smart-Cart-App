@@ -1,12 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:smart_cart_app/core/networking/api/api_consumer.dart';
 import 'package:smart_cart_app/core/networking/errors/exceptions.dart';
+import 'package:smart_cart_app/core/services/secure_storage.dart';
 
 class DioConsumer extends ApiConsumer {
   final Dio dio;
-
+  var token = SecureStorage().readData(key: SecureStorageKeys.token);
   DioConsumer({required this.dio}) {
     dio.interceptors.add(LogInterceptor(responseBody: true));
+    dio.options.headers["authorization"] = "token $token";
   }
   @override
   Future get(String path,

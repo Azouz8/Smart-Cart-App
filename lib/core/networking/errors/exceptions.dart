@@ -12,23 +12,28 @@ void handleDioException(DioException e) {
   switch (e.type) {
     case DioExceptionType.connectionTimeout:
       throw ServerException(
-        errorModel: ErrorModel.fromJson(e.response!.data),
+        errorModel:
+            ErrorModel(errMessage: "Please Check Your Internet Connection!"),
       );
     case DioExceptionType.sendTimeout:
       throw ServerException(
-        errorModel: ErrorModel.fromJson(e.response!.data),
+        errorModel:
+            ErrorModel(errMessage: "Please Check Your Internet Connection!"),
       );
     case DioExceptionType.receiveTimeout:
       throw ServerException(
-        errorModel: ErrorModel.fromJson(e.response!.data),
+        errorModel:
+            ErrorModel(errMessage: "Please Check Your Internet Connection!"),
       );
     case DioExceptionType.badCertificate:
       throw ServerException(
-        errorModel: ErrorModel.fromJson(e.response!.data),
+        errorModel:
+            ErrorModel(errMessage: "Please Check Your Internet Connection!"),
       );
     case DioExceptionType.cancel:
       throw ServerException(
-        errorModel: ErrorModel.fromJson(e.response!.data),
+        errorModel:
+            ErrorModel(errMessage: "Please Check Your Internet Connection!"),
       );
     case DioExceptionType.connectionError:
       throw ServerException(
@@ -37,7 +42,8 @@ void handleDioException(DioException e) {
       );
     case DioExceptionType.unknown:
       throw ServerException(
-        errorModel: ErrorModel.fromJson(e.response!.data),
+        errorModel:
+            ErrorModel(errMessage: "Please Check Your Internet Connection!"),
       );
     case DioExceptionType.badResponse:
       switch (e.response?.statusCode) {

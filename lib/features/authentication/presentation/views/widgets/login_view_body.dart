@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:smart_cart_app/core/services/helper_functions.dart';
 import 'package:smart_cart_app/core/services/secure_storage.dart';
 import 'package:smart_cart_app/features/authentication/presentation/manager/auth_cubit/auth_states.dart';
-
 import '../../../../../core/routing/app_router.dart';
 import '../../../../../core/themes/light_theme/app_colors_light.dart';
 import '../../manager/auth_cubit/auth_cubit.dart';
@@ -152,13 +151,11 @@ class LoginViewBody extends StatelessWidget {
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {
-                            GoRouter.of(context).push(AppRouter.categoriesView);
-
-                            // if (formKey.currentState!.validate()) {
-                            //   cubit.loginUser(
-                            //       email: emailController.text,
-                            //       password: passwordController.text);
-                            // }
+                            if (formKey.currentState!.validate()) {
+                              cubit.loginUser(
+                                  email: emailController.text,
+                                  password: passwordController.text);
+                            }
                           },
                           style: ButtonStyle(
                             shape: WidgetStatePropertyAll(

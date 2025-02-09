@@ -2,7 +2,6 @@ import 'package:either_dart/either.dart';
 import 'package:smart_cart_app/core/networking/api/api_consts.dart';
 import 'package:smart_cart_app/core/networking/api/api_service.dart';
 import 'package:smart_cart_app/core/networking/errors/exceptions.dart';
-import 'package:smart_cart_app/features/category_selection/data/models/categories_model.dart';
 import 'package:smart_cart_app/features/category_selection/data/models/category.dart';
 import 'package:smart_cart_app/features/category_selection/data/repos/category_repo.dart';
 
