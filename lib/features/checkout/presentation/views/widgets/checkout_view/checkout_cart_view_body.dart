@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:smart_cart_app/core/routing/app_router.dart';
 import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_states.dart';
@@ -43,14 +45,14 @@ class CheckoutCartViewBody extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // GoRouter.of(context).push(AppRouter.paymentDetailsView);
-                    showModalBottomSheet(
-                      backgroundColor: AppColorsLight.scaffoldBackgroundColor,
-                      context: context,
-                      builder: (context) {
-                        return const PaymentMethodsBottomSheet();
-                      },
-                    );
+                    GoRouter.of(context).push(AppRouter.thankYouView);
+                    // showModalBottomSheet(
+                    //   backgroundColor: AppColorsLight.scaffoldBackgroundColor,
+                    //   context: context,
+                    //   builder: (context) {
+                    //     return const PaymentMethodsBottomSheet();
+                    //   },
+                    // );
                   },
                   style: ButtonStyle(
                     shape: WidgetStatePropertyAll(

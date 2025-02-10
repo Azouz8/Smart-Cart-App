@@ -47,6 +47,11 @@ class CartView extends StatelessWidget {
         if (state is HomeInitial || state is HomeRemoveUserFromCartSuccess) {
           return const NotConnectedWidget(showSnackbar: false);
         }
+        if (state is HomeAddUserToCartFailure) {
+          return const NotConnectedWidget(
+            showSnackbar: false,
+          );
+        }
         if (state is HomeGetCartProductsSuccess ||
             state is HomeDeleteProductSuccess ||
             state is HomeGetScannedProductsSuccess) {

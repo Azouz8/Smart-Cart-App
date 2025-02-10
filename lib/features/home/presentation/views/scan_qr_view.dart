@@ -18,7 +18,6 @@ class ScanQrView extends StatelessWidget {
           for (final barcode in barcodes) {
             cartID += barcode.displayValue!;
           }
-          CacheHelper.putString(key: CacheHelperKeys.cartID, value: cartID);
           HomeCubit.get(context).connectUserToCart(cartID, userID!);
           Navigator.pop(context);
         },

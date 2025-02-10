@@ -2,17 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField(
-      {super.key,
-      required this.controller,
-      required this.label,
-      required this.validator,
-      required this.prefixIcon,
-      this.obsecureText,
-      this.onSubmit,
-      this.type,
-      this.enabled,
-      this.suffixIcon});
+  const CustomTextFormField({
+    super.key,
+    required this.controller,
+    required this.label,
+    required this.validator,
+    required this.prefixIcon,
+    this.obsecureText,
+    this.onChanged,
+    this.onSubmit,
+    this.type,
+    this.enabled,
+    this.suffixIcon,
+    required this.fieldKey, // New parameter
+  });
+
   final Icon prefixIcon;
   final IconButton? suffixIcon;
   final String? Function(String?)? validator;
@@ -22,16 +26,22 @@ class CustomTextFormField extends StatelessWidget {
   final bool? obsecureText;
   final TextInputType? type;
   final bool? enabled;
+  final void Function(String)? onChanged;
+  final GlobalKey<FormFieldState> fieldKey; // New field key
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      // onTapOutside: (event) {
-      //   FocusManager.instance.primaryFocus?.unfocus();
-      // },
+      key: fieldKey, // Assign key to this field
       controller: controller,
       validator: validator,
       onFieldSubmitted: onSubmit,
+      onChanged: (value) {
+        fieldKey.currentState?.validate(); // Validate only this field
+        if (onChanged != null) {
+          onChanged!(value);
+        }
+      },
       obscureText: obsecureText ?? false,
       keyboardType: type,
       enabled: enabled,

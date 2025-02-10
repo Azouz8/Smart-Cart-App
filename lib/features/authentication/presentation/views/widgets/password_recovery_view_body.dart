@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'custom_text_form_field.dart';
 
 class PasswordRecoveryViewBody extends StatelessWidget {
-  const PasswordRecoveryViewBody({
+  PasswordRecoveryViewBody({
     super.key,
     required this.formKey,
     required this.emailController,
@@ -12,6 +11,7 @@ class PasswordRecoveryViewBody extends StatelessWidget {
 
   final GlobalKey<FormState> formKey;
   final TextEditingController emailController;
+  final GlobalKey<FormFieldState> emailFieldKey = GlobalKey<FormFieldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +66,7 @@ class PasswordRecoveryViewBody extends StatelessWidget {
                 height: 50,
               ),
               CustomTextFormField(
+                fieldKey: emailFieldKey,
                 controller: emailController,
                 label: "Email Address",
                 validator: (value) {
@@ -73,6 +74,9 @@ class PasswordRecoveryViewBody extends StatelessWidget {
                     return "Email Must Not Be Empty!";
                   }
                   return null;
+                },
+                onChanged: (value) {
+                  emailFieldKey.currentState!.validate();
                 },
                 prefixIcon: const Icon(Icons.email),
                 type: TextInputType.emailAddress,

@@ -21,6 +21,12 @@ class RegisterViewBody extends StatelessWidget {
   final confirmPasswordController = TextEditingController();
   final birthDateController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+  final GlobalKey<FormFieldState> nameFieldKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> emailFieldKey = GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> passwordFieldKey =
+      GlobalKey<FormFieldState>();
+  final GlobalKey<FormFieldState> confirmPasswordFieldKey =
+      GlobalKey<FormFieldState>();
   final List<MultiSelectCard> list = [
     MultiSelectCard(value: 'Male', label: 'Male'),
     MultiSelectCard(value: 'Female', label: 'Female')
@@ -92,6 +98,7 @@ class RegisterViewBody extends StatelessWidget {
                         ],
                       ),
                       CustomTextFormField(
+                        fieldKey: nameFieldKey,
                         controller: nameController,
                         label: "Name",
                         validator: (value) {
@@ -100,10 +107,14 @@ class RegisterViewBody extends StatelessWidget {
                           }
                           return null;
                         },
+                        onChanged: (value) {
+                          nameFieldKey.currentState!.validate();
+                        },
                         prefixIcon: const Icon(Icons.person),
                         type: TextInputType.text,
                       ),
                       CustomTextFormField(
+                        fieldKey: emailFieldKey,
                         controller: emailController,
                         label: "Email Address",
                         validator: (value) {
@@ -114,10 +125,14 @@ class RegisterViewBody extends StatelessWidget {
                           }
                           return null;
                         },
+                        onChanged: (value) {
+                          emailFieldKey.currentState!.validate();
+                        },
                         prefixIcon: const Icon(Icons.email),
                         type: TextInputType.emailAddress,
                       ),
                       CustomTextFormField(
+                        fieldKey: passwordFieldKey,
                         controller: passwordController,
                         label: "Password",
                         validator: (value) {
@@ -130,6 +145,9 @@ class RegisterViewBody extends StatelessWidget {
                           }
                           return null;
                         },
+                        onChanged: (value) {
+                          passwordFieldKey.currentState!.validate();
+                        },
                         prefixIcon: const Icon(Icons.password),
                         type: TextInputType.text,
                         obsecureText: cubit.isPassword,
@@ -141,6 +159,7 @@ class RegisterViewBody extends StatelessWidget {
                         ),
                       ),
                       CustomTextFormField(
+                        fieldKey: confirmPasswordFieldKey,
                         controller: confirmPasswordController,
                         label: "Confirrm Password",
                         validator: (value) {
@@ -150,6 +169,9 @@ class RegisterViewBody extends StatelessWidget {
                             return "Passwords Does not match";
                           }
                           return null;
+                        },
+                        onChanged: (value) {
+                          confirmPasswordFieldKey.currentState!.validate();
                         },
                         prefixIcon: const Icon(Icons.password),
                         type: TextInputType.text,

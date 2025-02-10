@@ -18,15 +18,15 @@ class CartListViewItem extends StatelessWidget {
     return SizedBox(
       height: MediaQuery.sizeOf(context).height * 0.2,
       child: Container(
-        margin: const EdgeInsets.only(bottom: 8),
+        margin: const EdgeInsets.only(bottom: 0),
         padding: const EdgeInsets.all(16),
         color: Colors.white,
         child: Row(
           children: [
-            AspectRatio(
-              aspectRatio: 0.95,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: AspectRatio(
+                aspectRatio: 0.95,
                 child: CachedNetworkImage(
                   imageUrl: cartProductModel.productID!.image ?? "",
                   errorWidget: (context, url, error) => SvgPicture.asset(

@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:smart_cart_app/core/routing/app_router.dart';
+import 'package:smart_cart_app/core/services/cache_helper.dart';
+import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
+import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_states.dart';
 import 'package:smart_cart_app/features/rating/presentation/views/widgets/rate_product_list_view_item.dart';
 import '../../../../home/presentation/views/widgets/custom_home_app_bar.dart';
 
@@ -7,50 +13,60 @@ class RateProductsViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const CustomHomeAppBar(
-                title: "Rate Products",
-              ),
-              ListView.builder(
-                itemBuilder: (context, index) =>
-                    const RateProductListViewItem(),
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 10,
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    // if (formKey.currentState!.validate()) {
-                    //   // Login Code
-                    // }
-                  },
-                  style: ButtonStyle(
-                    shape: WidgetStatePropertyAll(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                    ),
-                    backgroundColor:
-                        WidgetStateProperty.all(const Color(0xff5b9ee1)),
-                  ),
-                  child: Text(
-                    "Submit Ratings",
-                    style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white,
-                        ),
-                  ),
+    return BlocListener<HomeCubit, HomeStates>(
+      listener: (context, state) {
+        if (state is HomeRemoveUserFromCartSuccess) {
+          GoRouter.of(context).go(AppRouter.homeView);
+        }
+      },
+      child: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const CustomHomeAppBar(
+                  title: "Rate Products",
                 ),
-              )
-            ],
+                ListView.builder(
+                  itemBuilder: (context, index) =>
+                      const RateProductListViewItem(),
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: 10,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      var cartID =
+                          CacheHelper.getString(key: CacheHelperKeys.cartID);
+                      var userID =
+                          CacheHelper.getString(key: CacheHelperKeys.userID);
+                      HomeCubit.get(context)
+                          .removeUserFromCart(cartID!, userID!);
+                    },
+                    style: ButtonStyle(
+                      shape: WidgetStatePropertyAll(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                      ),
+                      backgroundColor:
+                          WidgetStateProperty.all(const Color(0xff5b9ee1)),
+                    ),
+                    child: Text(
+                      "Submit Ratings",
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
+                          ),
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

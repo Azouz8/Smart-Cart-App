@@ -25,6 +25,7 @@ class NotEmptyCartWidget extends StatelessWidget {
             horizontal: 20,
           ),
           child: Column(
+            spacing: 8,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Column(
@@ -40,8 +41,9 @@ class NotEmptyCartWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              ListView.builder(
+              ListView.separated(
                 reverse: true,
+                separatorBuilder: (context, index) => const SizedBox(height: 8),
                 itemBuilder: (context, index) => ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: Dismissible(

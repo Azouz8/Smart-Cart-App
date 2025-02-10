@@ -62,7 +62,7 @@ class HomeRepoImpl extends HomeRepo {
 
     socket.onError((error) {
       print("Socket error: $error");
-      _streamController.add(Left(error));
+      _streamController.add(Left(error.toString()));
     });
   }
 

@@ -10,7 +10,7 @@ import '../../manager/auth_cubit/auth_cubit.dart';
 import 'custom_text_form_field.dart';
 
 class LoginViewBody extends StatelessWidget {
-  const LoginViewBody({
+  LoginViewBody({
     super.key,
     required this.formKey,
     required this.emailController,
@@ -22,6 +22,10 @@ class LoginViewBody extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final AuthCubit cubit;
+  final GlobalKey<FormFieldState> emailFieldKey =
+      GlobalKey<FormFieldState>(); // Key for email field
+  final GlobalKey<FormFieldState> passwordFieldKey =
+      GlobalKey<FormFieldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +37,8 @@ class LoginViewBody extends StatelessWidget {
           // SecureStorage().writeData(
           //     key: SecureStorageKeys.token, value: state.loginModel.token!);
 
-          GoRouter.of(context).push(AppRouter.homeView ,extra: state.loginModel.id);
+          GoRouter.of(context)
+              .push(AppRouter.homeView, extra: state.loginModel.id);
         } else if (state is AuthLoginFailure) {
           showCustomSnackBar(
               context: context, message: state.errMessage, vPadding: 64);
@@ -86,13 +91,17 @@ class LoginViewBody extends StatelessWidget {
                         height: 35,
                       ),
                       CustomTextFormField(
+                        fieldKey: emailFieldKey,
                         controller: emailController,
                         label: "Email Address",
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return "Email Must Not Be Empty!";
+                            return "This field is required!";
                           }
                           return null;
+                        },
+                        onChanged: (value) {
+                          emailFieldKey.currentState!.validate();
                         },
                         prefixIcon: const Icon(Icons.email),
                         type: TextInputType.emailAddress,
@@ -101,13 +110,18 @@ class LoginViewBody extends StatelessWidget {
                         height: 16,
                       ),
                       CustomTextFormField(
+                        fieldKey: passwordFieldKey,
                         controller: passwordController,
                         label: "Password",
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return "Please enter your password!";
+                            return "This field is required!";
                           }
+
                           return null;
+                        },
+                        onChanged: (value) {
+                          passwordFieldKey.currentState!.validate();
                         },
                         prefixIcon: const Icon(Icons.password),
                         type: TextInputType.text,

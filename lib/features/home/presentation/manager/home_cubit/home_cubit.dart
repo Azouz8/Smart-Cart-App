@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_cart_app/core/networking/api/api_consts.dart';
+import 'package:smart_cart_app/core/services/cache_helper.dart';
 import 'package:smart_cart_app/features/home/data/models/cart_product_model/cart_product_model.dart';
 import 'package:smart_cart_app/features/home/data/repos/home_repo.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_states.dart';
@@ -28,8 +29,8 @@ class HomeCubit extends Cubit<HomeStates> {
       getScannedProducts();
     });
     socket.onDisconnect((_) => print("connection Disconnection"));
-    socket.onConnectError((err) => print("Socket could not connect :" + err));
-    socket.onError((err) => print("Socket could not connect :" + err));
+    socket.onConnectError((err) => print("Socket could not connect :$err"));
+    socket.onError((err) => print("Socket could not connect :$err"));
   }
 
   @override
@@ -49,17 +50,21 @@ class HomeCubit extends Cubit<HomeStates> {
       emit(HomeAddUserToCartFailure(failure));
     }, (responseCode) {
       cartId = cartID;
+      CacheHelper.putString(key: CacheHelperKeys.cartID, value: cartID);
       emit(HomeAddUserToCartSuccess());
     });
   }
 
-  Future<void> removeUserFromCart(String cartID) async {
+  Future<void> removeUserFromCart(String cartID, String userID) async {
     emit(HomeRemoveUserFromCartLoading());
     var result =
-        await homeRepo.removeUserFromCart(cartID: cartID, userID: "AzouzUser");
+        await homeRepo.removeUserFromCart(cartID: cartID, userID: userID);
     result.fold((failure) {
       emit(HomeRemoveUserFromCartFailure(failure));
     }, (responseCode) {
+      CacheHelper.remove(key: CacheHelperKeys.cartID);
+      CacheHelper.remove(key: CacheHelperKeys.token);
+      CacheHelper.remove(key: CacheHelperKeys.userID);
       emit(HomeRemoveUserFromCartSuccess());
       cartId = "";
       cartProducts.clear();

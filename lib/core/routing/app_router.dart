@@ -58,7 +58,6 @@ abstract class AppRouter {
     ),
     GoRoute(
       path: homeView,
-      builder: (context, state) => const HomeView(),
       pageBuilder: (context, state) => CustomTransitionPage(
         child: const HomeView(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
