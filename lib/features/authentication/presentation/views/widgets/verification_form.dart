@@ -112,7 +112,6 @@ class OtpForm extends StatelessWidget {
                   onChanged: (pin) {
                     if (pin.isNotEmpty) {
                       FocusScope.of(context).nextFocus();
-                      print(pin1.text + pin2.text + pin3.text + pin4.text);
                       code = pin1.text + pin2.text + pin3.text + pin4.text;
                     }
                   },

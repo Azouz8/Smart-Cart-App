@@ -25,6 +25,11 @@ class ApiConsts {
   //User
   static const String user = "user/";
   static const String categories = "categories";
+
+  //Stripe
+  static const String stripeUrl = "https://api.stripe.com/v1/payment_intents";
+  static const String stripeToken =
+      "sk_test_51QmhlE2LYZqbIr0bJGl3cR4FMfGwvNDFeH4nJvZ5t4m9WVWys9C44mOducYYOGhvd6IZ1GlqGdqKpHWzIjJfgLZi00bBGLAsRP";
 }
 
 class ApiKeys {

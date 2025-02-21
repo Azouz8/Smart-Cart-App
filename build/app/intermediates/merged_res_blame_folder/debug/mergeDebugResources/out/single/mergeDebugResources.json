@@ -1,26 +1,26 @@
 [
     {
-        "merged": "com.example.smart_cart_app-debug-34:/drawable-v21_launch_background.xml.flat",
-        "source": "com.example.smart_cart_app-main-29:/drawable-v21/launch_background.xml"
+        "merged": "com.example.smart_cart_app-debug-98:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.example.smart_cart_app-main-93:/mipmap-xxxhdpi/ic_launcher.png"
     },
     {
-        "merged": "com.example.smart_cart_app-debug-34:/mipmap-mdpi_ic_launcher.png.flat",
-        "source": "com.example.smart_cart_app-main-29:/mipmap-mdpi/ic_launcher.png"
+        "merged": "com.example.smart_cart_app-debug-98:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.example.smart_cart_app-main-93:/mipmap-hdpi/ic_launcher.png"
     },
     {
-        "merged": "com.example.smart_cart_app-debug-34:/mipmap-xhdpi_ic_launcher.png.flat",
-        "source": "com.example.smart_cart_app-main-29:/mipmap-xhdpi/ic_launcher.png"
+        "merged": "com.example.smart_cart_app-debug-98:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.example.smart_cart_app-main-93:/mipmap-mdpi/ic_launcher.png"
     },
     {
-        "merged": "com.example.smart_cart_app-debug-34:/mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "com.example.smart_cart_app-main-29:/mipmap-xxxhdpi/ic_launcher.png"
+        "merged": "com.example.smart_cart_app-debug-98:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.example.smart_cart_app-main-93:/mipmap-xhdpi/ic_launcher.png"
     },
     {
-        "merged": "com.example.smart_cart_app-debug-34:/mipmap-hdpi_ic_launcher.png.flat",
-        "source": "com.example.smart_cart_app-main-29:/mipmap-hdpi/ic_launcher.png"
+        "merged": "com.example.smart_cart_app-debug-98:/drawable-v21_launch_background.xml.flat",
+        "source": "com.example.smart_cart_app-main-93:/drawable-v21/launch_background.xml"
     },
     {
-        "merged": "com.example.smart_cart_app-debug-34:/mipmap-xxhdpi_ic_launcher.png.flat",
-        "source": "com.example.smart_cart_app-main-29:/mipmap-xxhdpi/ic_launcher.png"
+        "merged": "com.example.smart_cart_app-debug-98:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.example.smart_cart_app-main-93:/mipmap-xxhdpi/ic_launcher.png"
     }
 ]

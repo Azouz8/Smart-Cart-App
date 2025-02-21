@@ -2,9 +2,10 @@ import 'category.dart';
 
 class Data {
   Data({
-      List<Categories>? categories,}){
+    List<Categories>? categories,
+  }) {
     _categories = categories;
-}
+  }
 
   Data.fromJson(dynamic json) {
     if (json['categories'] != null) {
@@ -25,5 +26,4 @@ class Data {
     }
     return map;
   }
-
 }

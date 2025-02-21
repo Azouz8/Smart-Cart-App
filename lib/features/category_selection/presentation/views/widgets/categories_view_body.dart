@@ -15,7 +15,6 @@ class CategoriesViewBody extends StatelessWidget {
   final controller = MultiSelectController();
   final List selectedCategories = [];
 
-
   @override
   Widget build(BuildContext context) {
     var cubit = CategoryCubit.get(context);
@@ -23,7 +22,8 @@ class CategoriesViewBody extends StatelessWidget {
     return BlocConsumer<CategoryCubit, CategoryStates>(
       listener: (context, state) {
         if (state is CategoryGetFailure) {
-          showCustomSnackBar(context: context, message: state.errMessage, vPadding: 64);
+          showCustomSnackBar(
+              context: context, message: state.errMessage, vPadding: 64);
         }
       },
       builder: (context, state) => state is CategoryGetLoading

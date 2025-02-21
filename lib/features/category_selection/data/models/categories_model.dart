@@ -2,13 +2,14 @@ import 'Data.dart';
 
 class CategoriesModel {
   CategoriesModel({
-      String? status, 
-      int? results, 
-      Data? data,}){
+    String? status,
+    int? results,
+    Data? data,
+  }) {
     _status = status;
     _results = results;
     _data = data;
-}
+  }
 
   CategoriesModel.fromJson(dynamic json) {
     _status = json['status'];
@@ -32,5 +33,4 @@ class CategoriesModel {
     }
     return map;
   }
-
 }

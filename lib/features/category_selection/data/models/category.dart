@@ -1,10 +1,11 @@
 class Categories {
   Categories({
-      String? id, 
-      String? title,}){
+    String? id,
+    String? title,
+  }) {
     _id = id;
     _title = title;
-}
+  }
 
   Categories.fromJson(dynamic json) {
     _id = json['_id'];
@@ -22,5 +23,4 @@ class Categories {
     map['title'] = _title;
     return map;
   }
-
 }

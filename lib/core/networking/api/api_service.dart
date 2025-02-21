@@ -1,5 +1,6 @@
 import 'package:smart_cart_app/core/networking/api/api_consumer.dart';
 import 'package:smart_cart_app/core/networking/api/api_consts.dart';
+import 'package:smart_cart_app/features/checkout/data/models/payment_intent_input_model/payment_intent_input_model.dart';
 
 class ApiService {
   final ApiConsumer api;
@@ -65,8 +66,8 @@ class ApiService {
   }
 
   getCategories() async {
-    var response = await api.get(
-        '${ApiConsts.apiBaseUrl}${ApiConsts.user}${ApiConsts.categories}');
+    var response = await api
+        .get('${ApiConsts.apiBaseUrl}${ApiConsts.user}${ApiConsts.categories}');
     return response;
   }
 
@@ -97,6 +98,17 @@ class ApiService {
     var response = await api.delete(
       '${ApiConsts.apiBaseUrl}${ApiConsts.cart}$cartID/${ApiConsts.deleteProductFromCart}',
       data: {ApiKeys.productID: productID},
+    );
+    return response;
+  }
+
+  createPaymentIntent({
+    required PaymentIntentInputModel paymentIntentInputModel,
+  }) async {
+    var response = await api.post(
+      ApiConsts.stripeUrl,
+      data: paymentIntentInputModel.toJson(),
+      token: ApiConsts.stripeToken,
     );
     return response;
   }

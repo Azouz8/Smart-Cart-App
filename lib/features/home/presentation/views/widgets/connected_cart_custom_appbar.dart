@@ -35,8 +35,7 @@ class ConnectedCartCustomAppBar extends StatelessWidget {
               onConfirmBtnTap: () {
                 var userID = CacheHelper.getString(key: CacheHelperKeys.userID);
                 var cartID = CacheHelper.getString(key: CacheHelperKeys.cartID);
-                HomeCubit.get(context)
-                    .removeUserFromCart(cartID!, userID!);
+                HomeCubit.get(context).removeUserFromCart(cartID!, userID!);
                 GoRouter.of(context).go(AppRouter.loginView);
               },
             );

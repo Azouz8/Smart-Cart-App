@@ -72,8 +72,7 @@ class AuthCubit extends Cubit<AuthStates> {
     }, (loginModel) {
       CacheHelper.putString(
           key: CacheHelperKeys.token, value: loginModel.token!);
-      CacheHelper.putString(
-          key: CacheHelperKeys.userID, value: loginModel.id!);
+      CacheHelper.putString(key: CacheHelperKeys.userID, value: loginModel.id!);
       emit(AuthLoginSuccess(loginModel));
     });
   }
