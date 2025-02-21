@@ -8,7 +8,6 @@
 
 import 'package:flutter_credit_card/src/plugin/flutter_credit_card_web.dart';
 import 'package:flutter_secure_storage_web/flutter_secure_storage_web.dart';
-import 'package:fluttertoast/fluttertoast_web.dart';
 import 'package:mobile_scanner/src/web/mobile_scanner_web.dart';
 import 'package:shared_preferences_web/shared_preferences_web.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
@@ -17,7 +16,6 @@ void registerPlugins([final Registrar? pluginRegistrar]) {
   final Registrar registrar = pluginRegistrar ?? webPluginRegistrar;
   FlutterCreditCardWeb.registerWith(registrar);
   FlutterSecureStorageWeb.registerWith(registrar);
-  FluttertoastWebPlugin.registerWith(registrar);
   MobileScannerWeb.registerWith(registrar);
   SharedPreferencesPlugin.registerWith(registrar);
   registrar.registerMessageHandler();

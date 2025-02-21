@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.smart_cart_app-mergeReleaseResources-31:/values-bn/values-bn.xml",
+            "outputFile": "com.example.smart_cart_app-mergeReleaseResources-32:/values-bn/values-bn.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Azouz\\.gradle\\caches\\8.10.2\\transforms\\ad2b3df54d3079cea81e79983573f45c\\transformed\\core-1.13.1\\res\\values-bn\\values-bn.xml",

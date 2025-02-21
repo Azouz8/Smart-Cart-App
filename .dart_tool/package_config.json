@@ -242,12 +242,6 @@
       "languageVersion": "3.2"
     },
     {
-      "name": "fluttertoast",
-      "rootUri": "file:///C:/Users/Azouz/AppData/Local/Pub/Cache/hosted/pub.dev/fluttertoast-8.2.10",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "freezed_annotation",
       "rootUri": "file:///C:/Users/Azouz/AppData/Local/Pub/Cache/hosted/pub.dev/freezed_annotation-2.4.4",
       "packageUri": "lib/",
@@ -360,12 +354,6 @@
       "rootUri": "file:///C:/Users/Azouz/AppData/Local/Pub/Cache/hosted/pub.dev/octo_image-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
-    },
-    {
-      "name": "panara_dialogs",
-      "rootUri": "file:///C:/Users/Azouz/AppData/Local/Pub/Cache/hosted/pub.dev/panara_dialogs-0.1.5",
-      "packageUri": "lib/",
-      "languageVersion": "2.15"
     },
     {
       "name": "path",
@@ -662,7 +650,7 @@
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2025-02-09T14:12:14.663316Z",
+  "generated": "2025-02-14T18:26:02.987308Z",
   "generator": "pub",
   "generatorVersion": "3.6.0",
   "flutterRoot": "file:///C:/Flutter/flutter",

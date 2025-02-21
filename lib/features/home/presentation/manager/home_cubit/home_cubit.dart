@@ -63,12 +63,9 @@ class HomeCubit extends Cubit<HomeStates> {
       emit(HomeRemoveUserFromCartFailure(failure));
     }, (responseCode) {
       CacheHelper.remove(key: CacheHelperKeys.cartID);
-      CacheHelper.remove(key: CacheHelperKeys.token);
-      CacheHelper.remove(key: CacheHelperKeys.userID);
       emit(HomeRemoveUserFromCartSuccess());
       cartId = "";
       cartProducts.clear();
-      // homeRepo.disconnectSocket();
     });
   }
 

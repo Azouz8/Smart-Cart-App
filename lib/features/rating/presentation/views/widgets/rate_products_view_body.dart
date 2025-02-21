@@ -13,13 +13,13 @@ class RateProductsViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<HomeCubit, HomeStates>(
+    return BlocConsumer<HomeCubit, HomeStates>(
       listener: (context, state) {
         if (state is HomeRemoveUserFromCartSuccess) {
           GoRouter.of(context).go(AppRouter.homeView);
         }
       },
-      child: SafeArea(
+      builder: (context, state) => SafeArea(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -56,13 +56,25 @@ class RateProductsViewBody extends StatelessWidget {
                       backgroundColor:
                           WidgetStateProperty.all(const Color(0xff5b9ee1)),
                     ),
-                    child: Text(
-                      "Submit Ratings",
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white,
+                    child: state is HomeRemoveUserFromCartLoading
+                        ? const SizedBox(
+                            height: 15,
+                            width: 15,
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                              strokeWidth: 2,
+                            ),
+                          )
+                        : Text(
+                            "Submit Ratings",
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall!
+                                .copyWith(
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.white,
+                                ),
                           ),
-                    ),
                   ),
                 )
               ],

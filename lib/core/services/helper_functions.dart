@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import '../themes/light_theme/app_colors_light.dart';
 
-void showCustomSnackBar(
-    {required BuildContext context, required String message , required double vPadding}) {
+void showCustomSnackBar({
+  required BuildContext context,
+  required String message,
+  required double vPadding,
+}) {
   final AnimationController controller = AnimationController(
     duration: const Duration(milliseconds: 500),
     vsync: ScaffoldMessenger.of(context), // Use ScaffoldMessenger as the vsync
@@ -28,7 +31,7 @@ void showCustomSnackBar(
 
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(
-      margin:  EdgeInsets.symmetric(horizontal: 24, vertical: vPadding),
+      margin: EdgeInsets.symmetric(horizontal: 24, vertical: vPadding),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       content: AnimatedBuilder(
         animation: controller,
@@ -39,6 +42,7 @@ void showCustomSnackBar(
               opacity: fadeAnimation,
               child: Text(
                 message,
+                textAlign: TextAlign.center,
                 style: Theme.of(context)
                     .textTheme
                     .labelMedium!

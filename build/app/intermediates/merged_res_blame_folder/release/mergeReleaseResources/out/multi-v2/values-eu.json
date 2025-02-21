@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.smart_cart_app-mergeReleaseResources-31:/values-eu/values-eu.xml",
+            "outputFile": "com.example.smart_cart_app-mergeReleaseResources-32:/values-eu/values-eu.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Azouz\\.gradle\\caches\\8.10.2\\transforms\\4940cd06ad498def1595ae26713dc43e\\transformed\\jetified-play-services-basement-18.1.0\\res\\values-eu\\values.xml",

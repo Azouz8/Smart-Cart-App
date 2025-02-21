@@ -35,8 +35,7 @@ com.example.smart_cart_app-packageDebugResources-33 D:\Programming\Flutter\smart
 com.example.smart_cart_app-debug-34 D:\Programming\Flutter\smart_cart_app\build\app\intermediates\merged_res\debug\mergeDebugResources
 com.example.smart_cart_app-debug-35 D:\Programming\Flutter\smart_cart_app\build\flutter_credit_card\intermediates\packaged_res\debug\packageDebugResources
 com.example.smart_cart_app-debug-36 D:\Programming\Flutter\smart_cart_app\build\flutter_secure_storage\intermediates\packaged_res\debug\packageDebugResources
-com.example.smart_cart_app-debug-37 D:\Programming\Flutter\smart_cart_app\build\fluttertoast\intermediates\packaged_res\debug\packageDebugResources
-com.example.smart_cart_app-debug-38 D:\Programming\Flutter\smart_cart_app\build\mobile_scanner\intermediates\packaged_res\debug\packageDebugResources
-com.example.smart_cart_app-debug-39 D:\Programming\Flutter\smart_cart_app\build\path_provider_android\intermediates\packaged_res\debug\packageDebugResources
-com.example.smart_cart_app-debug-40 D:\Programming\Flutter\smart_cart_app\build\shared_preferences_android\intermediates\packaged_res\debug\packageDebugResources
-com.example.smart_cart_app-debug-41 D:\Programming\Flutter\smart_cart_app\build\sqflite_android\intermediates\packaged_res\debug\packageDebugResources
+com.example.smart_cart_app-debug-37 D:\Programming\Flutter\smart_cart_app\build\mobile_scanner\intermediates\packaged_res\debug\packageDebugResources
+com.example.smart_cart_app-debug-38 D:\Programming\Flutter\smart_cart_app\build\path_provider_android\intermediates\packaged_res\debug\packageDebugResources
+com.example.smart_cart_app-debug-39 D:\Programming\Flutter\smart_cart_app\build\shared_preferences_android\intermediates\packaged_res\debug\packageDebugResources
+com.example.smart_cart_app-debug-40 D:\Programming\Flutter\smart_cart_app\build\sqflite_android\intermediates\packaged_res\debug\packageDebugResources
