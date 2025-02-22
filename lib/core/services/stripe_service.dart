@@ -10,12 +10,12 @@ class StripeService {
       PaymentIntentInputModel paymentIntentInputModel) async {
     var response = await apiService.createPaymentIntent(
         paymentIntentInputModel: paymentIntentInputModel);
-    var paymentIntentModel = PaymentIntentModel.fromJson(response.data);
+    var paymentIntentModel = PaymentIntentModel.fromJson(response);
     return paymentIntentModel;
   }
 
   Future initPaymentSheet({required String paymentIntentClientSecret}) async {
-    Stripe.instance.initPaymentSheet(
+    await Stripe.instance.initPaymentSheet(
         paymentSheetParameters: SetupPaymentSheetParameters(
       paymentIntentClientSecret: paymentIntentClientSecret,
       merchantDisplayName: "SSC",
@@ -23,7 +23,7 @@ class StripeService {
   }
 
   Future displayPaymentSheet() async {
-    Stripe.instance.presentPaymentSheet();
+    await Stripe.instance.presentPaymentSheet();
   }
 
   Future makePayment({required paymentIntentInputModel}) async {

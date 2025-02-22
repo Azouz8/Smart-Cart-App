@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:smart_cart_app/core/routing/app_router.dart';
+import 'package:smart_cart_app/features/checkout/presentation/views/widgets/checkout_view/custom_consumer_button.dart';
 import '../payment_details_view/payment_method_list_view.dart';
-import '../thank_you_view/thank_you_view_body.dart';
 
 class PaymentMethodsBottomSheet extends StatelessWidget {
   const PaymentMethodsBottomSheet({super.key});
@@ -17,8 +16,7 @@ class PaymentMethodsBottomSheet extends StatelessWidget {
           PaymentMethodListView(),
           SizedBox(
             width: double.infinity,
-            child:
-                CustomButton(title: "Continue", route: AppRouter.thankYouView),
+            child: CustomConsumerButton(title: "Continue"),
           ),
         ],
       ),

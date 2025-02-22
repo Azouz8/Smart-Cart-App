@@ -75,7 +75,7 @@ class ThankYouContainer extends StatelessWidget {
           ),
           const ThankYouPaymentMethodInfo(),
           SizedBox(
-            height: 30.h,
+            height: 80.h,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -45,7 +45,10 @@ class DioConsumer extends ApiConsumer {
 
   @override
   Future post(String path,
-      {Object? data, Map<String, dynamic>? queryParameters ,String? token}) async {
+      {Object? data,
+      Map<String, dynamic>? queryParameters,
+      String? token,
+      String? contentType}) async {
     try {
       // final token = CacheHelper.getString(key: CacheHelperKeys.token);
       // Remember to add the token for each method use this
@@ -53,6 +56,7 @@ class DioConsumer extends ApiConsumer {
       final response = await dio.post(
         path,
         data: data,
+        options: Options(contentType: contentType),
         queryParameters: queryParameters,
       );
       return response.data;

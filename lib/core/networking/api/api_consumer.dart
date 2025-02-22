@@ -9,6 +9,7 @@ abstract class ApiConsumer {
     Object? data,
     Map<String, dynamic>? queryParameters,
    String? token,
+   String? contentType
   });
   Future<dynamic> patch(
     String path, {

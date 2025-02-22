@@ -8,7 +8,7 @@ class ThankYouDashedLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: MediaQuery.sizeOf(context).height * 0.13 + 20,
+      bottom: MediaQuery.sizeOf(context).height * 0.13 + 50,
       left: 0,
       right: 0,
       child: Padding(

@@ -11,7 +11,7 @@ class ThankYouHalfCircle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: MediaQuery.sizeOf(context).height * 0.13,
+      bottom: MediaQuery.sizeOf(context).height * 0.13 + 30,
       left: left,
       right: right,
       child: const CircleAvatar(

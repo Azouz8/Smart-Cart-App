@@ -1,25 +1,33 @@
-import 'card.dart';
-import 'link.dart';
+import 'Card.dart';
+import 'Link.dart';
 
 class PaymentMethodOptions {
-  Card? card;
-  Link? link;
+  PaymentMethodOptions({
+      Card? card, 
+      Link? link,}){
+    _card = card;
+    _link = link;
+}
 
-  PaymentMethodOptions({this.card, this.link});
+  PaymentMethodOptions.fromJson(dynamic json) {
+    _card = json['card'] != null ? Card.fromJson(json['card']) : null;
+    _link = json['link'] != null ? Link.fromJson(json['link']) : null;
+  }
+  Card? _card;
+  Link? _link;
 
-  factory PaymentMethodOptions.fromJson(Map<String, dynamic> json) {
-    return PaymentMethodOptions(
-      card: json['card'] == null
-          ? null
-          : Card.fromJson(json['card'] as Map<String, dynamic>),
-      link: json['link'] == null
-          ? null
-          : Link.fromJson(json['link'] as Map<String, dynamic>),
-    );
+  Card? get card => _card;
+  Link? get link => _link;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    if (_card != null) {
+      map['card'] = _card?.toJson();
+    }
+    if (_link != null) {
+      map['link'] = _link?.toJson();
+    }
+    return map;
   }
 
-  Map<String, dynamic> toJson() => {
-        'card': card?.toJson(),
-        'link': link?.toJson(),
-      };
 }

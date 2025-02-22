@@ -13,38 +13,37 @@ class PaymentMethodItem extends StatelessWidget {
   final String image;
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: AnimatedContainer(
-        height: 60.h,
-        duration: const Duration(milliseconds: 300),
-        decoration: ShapeDecoration(
-            shape: RoundedRectangleBorder(
-              side: BorderSide(
-                width: isActive ? 1.5 : 1,
-                color: isActive
-                    ? AppColorsLight.primaryColor
-                    : AppColorsLight.secondaryColor,
-              ),
-              borderRadius: BorderRadius.circular(15),
+    return AnimatedContainer(
+      height: 60.h,
+      width: 100.w,
+      duration: const Duration(milliseconds: 300),
+      decoration: ShapeDecoration(
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              width: isActive ? 1.5 : 1,
+              color: isActive
+                  ? AppColorsLight.primaryColor
+                  : AppColorsLight.secondaryColor,
             ),
-            color: Colors.white,
-            shadows: [
-              isActive
-                  ? const BoxShadow(
-                      color: AppColorsLight.primaryColor,
-                      blurRadius: 4,
-                      offset: Offset(0, 0),
-                      spreadRadius: 0)
-                  : const BoxShadow()
-            ]),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
-          child: SizedBox(
-            width: 55.w,
-            child: SvgPicture.asset(
-              fit: BoxFit.scaleDown,
-              image,
-            ),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          color: Colors.white,
+          shadows: [
+            isActive
+                ? const BoxShadow(
+                    color: AppColorsLight.primaryColor,
+                    blurRadius: 4,
+                    offset: Offset(0, 0),
+                    spreadRadius: 0)
+                : const BoxShadow()
+          ]),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
+        child: SizedBox(
+          width: 50.w,
+          child: SvgPicture.asset(
+            fit: BoxFit.scaleDown,
+            image,
           ),
         ),
       ),

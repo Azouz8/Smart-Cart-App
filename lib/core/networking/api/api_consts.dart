@@ -29,7 +29,9 @@ class ApiConsts {
   //Stripe
   static const String stripeUrl = "https://api.stripe.com/v1/payment_intents";
   static const String stripeToken =
-      "sk_test_51QmhlE2LYZqbIr0bJGl3cR4FMfGwvNDFeH4nJvZ5t4m9WVWys9C44mOducYYOGhvd6IZ1GlqGdqKpHWzIjJfgLZi00bBGLAsRP";
+      "sk_test_51QmhlkRszYJcmajwDvdAN3VO4UPzXrhIoMunU5bIyvSD0HY1RPcyAc3lCzWP0PXx4bZ5woga9ZE0ob0gvu2WILzj00gpJUxnpT";
+  static const String stripePK =
+      "pk_test_51QmhlkRszYJcmajwHJqMe49Al95KLcwPqXC2GGYXJh1211ugPU6nxFEbCKySnCNZmyk0Ny5e1KgoHM44jWrYw8lt00lQL34qWS";
 }
 
 class ApiKeys {

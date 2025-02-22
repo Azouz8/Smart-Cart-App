@@ -1,185 +1,258 @@
 import 'amount_details.dart';
 import 'automatic_payment_methods.dart';
-import 'metadata.dart';
 import 'payment_method_options.dart';
 
 class PaymentIntentModel {
-  String? id;
-  String? object;
-  int? amount;
-  int? amountCapturable;
-  AmountDetails? amountDetails;
-  int? amountReceived;
-  dynamic application;
-  dynamic applicationFeeAmount;
-  AutomaticPaymentMethods? automaticPaymentMethods;
-  dynamic canceledAt;
-  dynamic cancellationReason;
-  String? captureMethod;
-  String? clientSecret;
-  String? confirmationMethod;
-  int? created;
-  String? currency;
-  dynamic customer;
-  dynamic description;
-  dynamic invoice;
-  dynamic lastPaymentError;
-  dynamic latestCharge;
-  bool? livemode;
-  Metadata? metadata;
-  dynamic nextAction;
-  dynamic onBehalfOf;
-  dynamic paymentMethod;
-  PaymentMethodOptions? paymentMethodOptions;
-  List<String>? paymentMethodTypes;
-  dynamic processing;
-  dynamic receiptEmail;
-  dynamic review;
-  dynamic setupFutureUsage;
-  dynamic shipping;
-  dynamic source;
-  dynamic statementDescriptor;
-  dynamic statementDescriptorSuffix;
-  String? status;
-  dynamic transferData;
-  dynamic transferGroup;
-
   PaymentIntentModel({
-    this.id,
-    this.object,
-    this.amount,
-    this.amountCapturable,
-    this.amountDetails,
-    this.amountReceived,
-    this.application,
-    this.applicationFeeAmount,
-    this.automaticPaymentMethods,
-    this.canceledAt,
-    this.cancellationReason,
-    this.captureMethod,
-    this.clientSecret,
-    this.confirmationMethod,
-    this.created,
-    this.currency,
-    this.customer,
-    this.description,
-    this.invoice,
-    this.lastPaymentError,
-    this.latestCharge,
-    this.livemode,
-    this.metadata,
-    this.nextAction,
-    this.onBehalfOf,
-    this.paymentMethod,
-    this.paymentMethodOptions,
-    this.paymentMethodTypes,
-    this.processing,
-    this.receiptEmail,
-    this.review,
-    this.setupFutureUsage,
-    this.shipping,
-    this.source,
-    this.statementDescriptor,
-    this.statementDescriptorSuffix,
-    this.status,
-    this.transferData,
-    this.transferGroup,
-  });
+      String? id, 
+      String? object, 
+      int? amount, 
+      int? amountCapturable, 
+      AmountDetails? amountDetails, 
+      int? amountReceived, 
+      dynamic application, 
+      dynamic applicationFeeAmount, 
+      AutomaticPaymentMethods? automaticPaymentMethods, 
+      dynamic canceledAt, 
+      dynamic cancellationReason, 
+      String? captureMethod, 
+      String? clientSecret, 
+      String? confirmationMethod, 
+      int? created, 
+      String? currency, 
+      dynamic customer, 
+      dynamic description, 
+      dynamic invoice, 
+      dynamic lastPaymentError, 
+      dynamic latestCharge, 
+      bool? livemode, 
+      dynamic metadata, 
+      dynamic nextAction, 
+      dynamic onBehalfOf, 
+      dynamic paymentMethod, 
+      PaymentMethodOptions? paymentMethodOptions, 
+      List<String>? paymentMethodTypes, 
+      dynamic processing, 
+      dynamic receiptEmail, 
+      dynamic review, 
+      dynamic setupFutureUsage, 
+      dynamic shipping, 
+      dynamic source, 
+      dynamic statementDescriptor, 
+      dynamic statementDescriptorSuffix, 
+      String? status, 
+      dynamic transferData, 
+      dynamic transferGroup,}){
+    _id = id;
+    _object = object;
+    _amount = amount;
+    _amountCapturable = amountCapturable;
+    _amountDetails = amountDetails;
+    _amountReceived = amountReceived;
+    _application = application;
+    _applicationFeeAmount = applicationFeeAmount;
+    _automaticPaymentMethods = automaticPaymentMethods;
+    _canceledAt = canceledAt;
+    _cancellationReason = cancellationReason;
+    _captureMethod = captureMethod;
+    _clientSecret = clientSecret;
+    _confirmationMethod = confirmationMethod;
+    _created = created;
+    _currency = currency;
+    _customer = customer;
+    _description = description;
+    _invoice = invoice;
+    _lastPaymentError = lastPaymentError;
+    _latestCharge = latestCharge;
+    _livemode = livemode;
+    _metadata = metadata;
+    _nextAction = nextAction;
+    _onBehalfOf = onBehalfOf;
+    _paymentMethod = paymentMethod;
+    _paymentMethodOptions = paymentMethodOptions;
+    _paymentMethodTypes = paymentMethodTypes;
+    _processing = processing;
+    _receiptEmail = receiptEmail;
+    _review = review;
+    _setupFutureUsage = setupFutureUsage;
+    _shipping = shipping;
+    _source = source;
+    _statementDescriptor = statementDescriptor;
+    _statementDescriptorSuffix = statementDescriptorSuffix;
+    _status = status;
+    _transferData = transferData;
+    _transferGroup = transferGroup;
+}
 
-  factory PaymentIntentModel.fromJson(Map<String, dynamic> json) {
-    return PaymentIntentModel(
-      id: json['id'] as String?,
-      object: json['object'] as String?,
-      amount: json['amount'] as int?,
-      amountCapturable: json['amount_capturable'] as int?,
-      amountDetails: json['amount_details'] == null
-          ? null
-          : AmountDetails.fromJson(
-              json['amount_details'] as Map<String, dynamic>),
-      amountReceived: json['amount_received'] as int?,
-      application: json['application'] as dynamic,
-      applicationFeeAmount: json['application_fee_amount'] as dynamic,
-      automaticPaymentMethods: json['automatic_payment_methods'] == null
-          ? null
-          : AutomaticPaymentMethods.fromJson(
-              json['automatic_payment_methods'] as Map<String, dynamic>),
-      canceledAt: json['canceled_at'] as dynamic,
-      cancellationReason: json['cancellation_reason'] as dynamic,
-      captureMethod: json['capture_method'] as String?,
-      clientSecret: json['client_secret'] as String?,
-      confirmationMethod: json['confirmation_method'] as String?,
-      created: json['created'] as int?,
-      currency: json['currency'] as String?,
-      customer: json['customer'] as dynamic,
-      description: json['description'] as dynamic,
-      invoice: json['invoice'] as dynamic,
-      lastPaymentError: json['last_payment_error'] as dynamic,
-      latestCharge: json['latest_charge'] as dynamic,
-      livemode: json['livemode'] as bool?,
-      metadata: json['metadata'] == null
-          ? null
-          : Metadata.fromJson(json['metadata'] as Map<String, dynamic>),
-      nextAction: json['next_action'] as dynamic,
-      onBehalfOf: json['on_behalf_of'] as dynamic,
-      paymentMethod: json['payment_method'] as dynamic,
-      paymentMethodOptions: json['payment_method_options'] == null
-          ? null
-          : PaymentMethodOptions.fromJson(
-              json['payment_method_options'] as Map<String, dynamic>),
-      paymentMethodTypes: json['payment_method_types'] as List<String>?,
-      processing: json['processing'] as dynamic,
-      receiptEmail: json['receipt_email'] as dynamic,
-      review: json['review'] as dynamic,
-      setupFutureUsage: json['setup_future_usage'] as dynamic,
-      shipping: json['shipping'] as dynamic,
-      source: json['source'] as dynamic,
-      statementDescriptor: json['statement_descriptor'] as dynamic,
-      statementDescriptorSuffix: json['statement_descriptor_suffix'] as dynamic,
-      status: json['status'] as String?,
-      transferData: json['transfer_data'] as dynamic,
-      transferGroup: json['transfer_group'] as dynamic,
-    );
+  PaymentIntentModel.fromJson(dynamic json) {
+    _id = json['id'];
+    _object = json['object'];
+    _amount = json['amount'];
+    _amountCapturable = json['amount_capturable'];
+    _amountDetails = json['amount_details'] != null ? AmountDetails.fromJson(json['amount_details']) : null;
+    _amountReceived = json['amount_received'];
+    _application = json['application'];
+    _applicationFeeAmount = json['application_fee_amount'];
+    _automaticPaymentMethods = json['automatic_payment_methods'] != null ? AutomaticPaymentMethods.fromJson(json['automatic_payment_methods']) : null;
+    _canceledAt = json['canceled_at'];
+    _cancellationReason = json['cancellation_reason'];
+    _captureMethod = json['capture_method'];
+    _clientSecret = json['client_secret'];
+    _confirmationMethod = json['confirmation_method'];
+    _created = json['created'];
+    _currency = json['currency'];
+    _customer = json['customer'];
+    _description = json['description'];
+    _invoice = json['invoice'];
+    _lastPaymentError = json['last_payment_error'];
+    _latestCharge = json['latest_charge'];
+    _livemode = json['livemode'];
+    _metadata = json['metadata'];
+    _nextAction = json['next_action'];
+    _onBehalfOf = json['on_behalf_of'];
+    _paymentMethod = json['payment_method'];
+    _paymentMethodOptions = json['payment_method_options'] != null ? PaymentMethodOptions.fromJson(json['payment_method_options']) : null;
+    _paymentMethodTypes = json['payment_method_types'] != null ? json['payment_method_types'].cast<String>() : [];
+    _processing = json['processing'];
+    _receiptEmail = json['receipt_email'];
+    _review = json['review'];
+    _setupFutureUsage = json['setup_future_usage'];
+    _shipping = json['shipping'];
+    _source = json['source'];
+    _statementDescriptor = json['statement_descriptor'];
+    _statementDescriptorSuffix = json['statement_descriptor_suffix'];
+    _status = json['status'];
+    _transferData = json['transfer_data'];
+    _transferGroup = json['transfer_group'];
+  }
+  String? _id;
+  String? _object;
+  int? _amount;
+  int? _amountCapturable;
+  AmountDetails? _amountDetails;
+  int? _amountReceived;
+  dynamic _application;
+  dynamic _applicationFeeAmount;
+  AutomaticPaymentMethods? _automaticPaymentMethods;
+  dynamic _canceledAt;
+  dynamic _cancellationReason;
+  String? _captureMethod;
+  String? _clientSecret;
+  String? _confirmationMethod;
+  int? _created;
+  String? _currency;
+  dynamic _customer;
+  dynamic _description;
+  dynamic _invoice;
+  dynamic _lastPaymentError;
+  dynamic _latestCharge;
+  bool? _livemode;
+  dynamic _metadata;
+  dynamic _nextAction;
+  dynamic _onBehalfOf;
+  dynamic _paymentMethod;
+  PaymentMethodOptions? _paymentMethodOptions;
+  List<String>? _paymentMethodTypes;
+  dynamic _processing;
+  dynamic _receiptEmail;
+  dynamic _review;
+  dynamic _setupFutureUsage;
+  dynamic _shipping;
+  dynamic _source;
+  dynamic _statementDescriptor;
+  dynamic _statementDescriptorSuffix;
+  String? _status;
+  dynamic _transferData;
+  dynamic _transferGroup;
+
+  String? get id => _id;
+  String? get object => _object;
+  int? get amount => _amount;
+  int? get amountCapturable => _amountCapturable;
+  AmountDetails? get amountDetails => _amountDetails;
+  int? get amountReceived => _amountReceived;
+  dynamic get application => _application;
+  dynamic get applicationFeeAmount => _applicationFeeAmount;
+  AutomaticPaymentMethods? get automaticPaymentMethods => _automaticPaymentMethods;
+  dynamic get canceledAt => _canceledAt;
+  dynamic get cancellationReason => _cancellationReason;
+  String? get captureMethod => _captureMethod;
+  String? get clientSecret => _clientSecret;
+  String? get confirmationMethod => _confirmationMethod;
+  int? get created => _created;
+  String? get currency => _currency;
+  dynamic get customer => _customer;
+  dynamic get description => _description;
+  dynamic get invoice => _invoice;
+  dynamic get lastPaymentError => _lastPaymentError;
+  dynamic get latestCharge => _latestCharge;
+  bool? get livemode => _livemode;
+  dynamic get metadata => _metadata;
+  dynamic get nextAction => _nextAction;
+  dynamic get onBehalfOf => _onBehalfOf;
+  dynamic get paymentMethod => _paymentMethod;
+  PaymentMethodOptions? get paymentMethodOptions => _paymentMethodOptions;
+  List<String>? get paymentMethodTypes => _paymentMethodTypes;
+  dynamic get processing => _processing;
+  dynamic get receiptEmail => _receiptEmail;
+  dynamic get review => _review;
+  dynamic get setupFutureUsage => _setupFutureUsage;
+  dynamic get shipping => _shipping;
+  dynamic get source => _source;
+  dynamic get statementDescriptor => _statementDescriptor;
+  dynamic get statementDescriptorSuffix => _statementDescriptorSuffix;
+  String? get status => _status;
+  dynamic get transferData => _transferData;
+  dynamic get transferGroup => _transferGroup;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['object'] = _object;
+    map['amount'] = _amount;
+    map['amount_capturable'] = _amountCapturable;
+    if (_amountDetails != null) {
+      map['amount_details'] = _amountDetails?.toJson();
+    }
+    map['amount_received'] = _amountReceived;
+    map['application'] = _application;
+    map['application_fee_amount'] = _applicationFeeAmount;
+    if (_automaticPaymentMethods != null) {
+      map['automatic_payment_methods'] = _automaticPaymentMethods?.toJson();
+    }
+    map['canceled_at'] = _canceledAt;
+    map['cancellation_reason'] = _cancellationReason;
+    map['capture_method'] = _captureMethod;
+    map['client_secret'] = _clientSecret;
+    map['confirmation_method'] = _confirmationMethod;
+    map['created'] = _created;
+    map['currency'] = _currency;
+    map['customer'] = _customer;
+    map['description'] = _description;
+    map['invoice'] = _invoice;
+    map['last_payment_error'] = _lastPaymentError;
+    map['latest_charge'] = _latestCharge;
+    map['livemode'] = _livemode;
+    map['metadata'] = _metadata;
+    map['next_action'] = _nextAction;
+    map['on_behalf_of'] = _onBehalfOf;
+    map['payment_method'] = _paymentMethod;
+    if (_paymentMethodOptions != null) {
+      map['payment_method_options'] = _paymentMethodOptions?.toJson();
+    }
+    map['payment_method_types'] = _paymentMethodTypes;
+    map['processing'] = _processing;
+    map['receipt_email'] = _receiptEmail;
+    map['review'] = _review;
+    map['setup_future_usage'] = _setupFutureUsage;
+    map['shipping'] = _shipping;
+    map['source'] = _source;
+    map['statement_descriptor'] = _statementDescriptor;
+    map['statement_descriptor_suffix'] = _statementDescriptorSuffix;
+    map['status'] = _status;
+    map['transfer_data'] = _transferData;
+    map['transfer_group'] = _transferGroup;
+    return map;
   }
 
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'object': object,
-        'amount': amount,
-        'amount_capturable': amountCapturable,
-        'amount_details': amountDetails?.toJson(),
-        'amount_received': amountReceived,
-        'application': application,
-        'application_fee_amount': applicationFeeAmount,
-        'automatic_payment_methods': automaticPaymentMethods?.toJson(),
-        'canceled_at': canceledAt,
-        'cancellation_reason': cancellationReason,
-        'capture_method': captureMethod,
-        'client_secret': clientSecret,
-        'confirmation_method': confirmationMethod,
-        'created': created,
-        'currency': currency,
-        'customer': customer,
-        'description': description,
-        'invoice': invoice,
-        'last_payment_error': lastPaymentError,
-        'latest_charge': latestCharge,
-        'livemode': livemode,
-        'metadata': metadata?.toJson(),
-        'next_action': nextAction,
-        'on_behalf_of': onBehalfOf,
-        'payment_method': paymentMethod,
-        'payment_method_options': paymentMethodOptions?.toJson(),
-        'payment_method_types': paymentMethodTypes,
-        'processing': processing,
-        'receipt_email': receiptEmail,
-        'review': review,
-        'setup_future_usage': setupFutureUsage,
-        'shipping': shipping,
-        'source': source,
-        'statement_descriptor': statementDescriptor,
-        'statement_descriptor_suffix': statementDescriptorSuffix,
-        'status': status,
-        'transfer_data': transferData,
-        'transfer_group': transferGroup,
-      };
 }

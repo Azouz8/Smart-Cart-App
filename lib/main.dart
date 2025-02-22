@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:smart_cart_app/core/networking/api/api_consts.dart';
 import 'package:smart_cart_app/core/networking/api/api_service.dart';
 import 'package:smart_cart_app/core/networking/api/dio_consumer.dart';
@@ -18,6 +19,7 @@ import 'package:socket_io_client/socket_io_client.dart' as IO;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  Stripe.publishableKey = ApiConsts.stripePK;
   setupServiceLocator();
   Bloc.observer = MyBlocObserver();
   await CacheHelper.init();
