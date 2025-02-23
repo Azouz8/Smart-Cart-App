@@ -39,18 +39,18 @@ class SmartCart extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => LayoutCubit()),
-        // BlocProvider(create: (context) => HomeCubit(getIt.get<HomeRepoImpl>())),
-        BlocProvider(
-            create: (context) => HomeCubit(HomeRepoImpl(
-                  ApiService(DioConsumer(dio: Dio())),
-                  IO.io(
-                    ApiConsts.sockecIOUrl, // Replace with your server URL
-                    <String, dynamic>{
-                      'autoConnect': false,
-                      'transports': ['websocket'],
-                    },
-                  ),
-                ))),
+        BlocProvider(create: (context) => HomeCubit(getIt.get<HomeRepoImpl>())),
+        // BlocProvider(
+        //     create: (context) => HomeCubit(HomeRepoImpl(
+        //           ApiService(DioConsumer(dio: Dio())),
+        //           IO.io(
+        //             ApiConsts.sockecIOUrl, // Replace with your server URL
+        //             <String, dynamic>{
+        //               'autoConnect': false,
+        //               'transports': ['websocket'],
+        //             },
+        //           ),
+        //         ))),
       ],
       child: ScreenUtilInit(
         designSize: const Size(380, 700),
