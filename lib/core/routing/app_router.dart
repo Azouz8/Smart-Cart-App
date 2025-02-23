@@ -32,7 +32,7 @@ abstract class AppRouter {
   static final router = GoRouter(routes: [
     GoRoute(
       path: "/",
-      builder: (context, state) => const CheckoutCartView(),
+      builder: (context, state) => CheckoutCartView(),
     ),
     GoRoute(
       path: loginView,
