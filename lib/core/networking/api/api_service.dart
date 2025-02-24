@@ -107,11 +107,25 @@ class ApiService {
     required PaymentIntentInputModel paymentIntentInputModel,
   }) async {
     var response = await api.post(
-      ApiConsts.stripeUrl,
-      data: paymentIntentInputModel.toJson(),
-      token: ApiConsts.stripeToken,
-      contentType: Headers.formUrlEncodedContentType
-    );
+        "${ApiConsts.stripeBaseUrl}${ApiConsts.stripePaymentIntent}",
+        data: paymentIntentInputModel.toJson(),
+        token: ApiConsts.stripeToken,
+        contentType: Headers.formUrlEncodedContentType);
+    return response;
+  }
+
+  createEphemeralKey({
+    required String customerId,
+  }) async {
+    var response = await api.post(
+        "${ApiConsts.stripeBaseUrl}${ApiConsts.stripeEphemeralKey}",
+        data: {"customer": customerId},
+        token: ApiConsts.stripeToken,
+        contentType: Headers.formUrlEncodedContentType,
+        headers: {
+          "authorization": "Bearer ${ApiConsts.stripeToken}",
+          "Stripe-Version": "2025-01-27.acacia"
+        });
     return response;
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:smart_cart_app/core/networking/api/api_consts.dart';
 import 'package:smart_cart_app/core/routing/app_router.dart';
 import 'package:smart_cart_app/core/services/helper_functions.dart';
 import 'package:smart_cart_app/features/checkout/data/models/payment_intent_input_model/payment_intent_input_model.dart';
@@ -28,7 +29,10 @@ class CustomConsumerButton extends StatelessWidget {
       builder: (context, state) => ElevatedButton(
         onPressed: () {
           PaymentIntentInputModel paymentIntentInputModel =
-              PaymentIntentInputModel(amount: "100", currency: "USD");
+              PaymentIntentInputModel(
+                  amount: "100",
+                  currency: "USD",
+                  customerId: ApiConsts.stripeCustID);
           BlocProvider.of<CheckoutCubit>(context)
               .makePayment(paymentIntentInputModel: paymentIntentInputModel);
         },

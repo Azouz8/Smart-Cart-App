@@ -44,19 +44,23 @@ class DioConsumer extends ApiConsumer {
   }
 
   @override
-  Future post(String path,
-      {Object? data,
-      Map<String, dynamic>? queryParameters,
-      String? token,
-      String? contentType}) async {
+  Future post(
+    String path, {
+    Object? data,
+    Map<String, dynamic>? queryParameters,
+    String? token,
+    String? contentType,
+    Map<String, String>? headers,
+  }) async {
     try {
       // final token = CacheHelper.getString(key: CacheHelperKeys.token);
       // Remember to add the token for each method use this
-      dio.options.headers["authorization"] = "Bearer $token";
       final response = await dio.post(
         path,
         data: data,
-        options: Options(contentType: contentType),
+        options: Options(
+            contentType: contentType,
+            headers: headers ?? {"authorization": "Bearer $token"}),
         queryParameters: queryParameters,
       );
       return response.data;

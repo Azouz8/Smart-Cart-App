@@ -4,45 +4,46 @@ import 'payment_method_options.dart';
 
 class PaymentIntentModel {
   PaymentIntentModel({
-      String? id, 
-      String? object, 
-      int? amount, 
-      int? amountCapturable, 
-      AmountDetails? amountDetails, 
-      int? amountReceived, 
-      dynamic application, 
-      dynamic applicationFeeAmount, 
-      AutomaticPaymentMethods? automaticPaymentMethods, 
-      dynamic canceledAt, 
-      dynamic cancellationReason, 
-      String? captureMethod, 
-      String? clientSecret, 
-      String? confirmationMethod, 
-      int? created, 
-      String? currency, 
-      dynamic customer, 
-      dynamic description, 
-      dynamic invoice, 
-      dynamic lastPaymentError, 
-      dynamic latestCharge, 
-      bool? livemode, 
-      dynamic metadata, 
-      dynamic nextAction, 
-      dynamic onBehalfOf, 
-      dynamic paymentMethod, 
-      PaymentMethodOptions? paymentMethodOptions, 
-      List<String>? paymentMethodTypes, 
-      dynamic processing, 
-      dynamic receiptEmail, 
-      dynamic review, 
-      dynamic setupFutureUsage, 
-      dynamic shipping, 
-      dynamic source, 
-      dynamic statementDescriptor, 
-      dynamic statementDescriptorSuffix, 
-      String? status, 
-      dynamic transferData, 
-      dynamic transferGroup,}){
+    String? id,
+    String? object,
+    int? amount,
+    int? amountCapturable,
+    AmountDetails? amountDetails,
+    int? amountReceived,
+    dynamic application,
+    dynamic applicationFeeAmount,
+    AutomaticPaymentMethods? automaticPaymentMethods,
+    dynamic canceledAt,
+    dynamic cancellationReason,
+    String? captureMethod,
+    String? clientSecret,
+    String? confirmationMethod,
+    int? created,
+    String? currency,
+    dynamic customer,
+    dynamic description,
+    dynamic invoice,
+    dynamic lastPaymentError,
+    dynamic latestCharge,
+    bool? livemode,
+    dynamic metadata,
+    dynamic nextAction,
+    dynamic onBehalfOf,
+    dynamic paymentMethod,
+    PaymentMethodOptions? paymentMethodOptions,
+    List<String>? paymentMethodTypes,
+    dynamic processing,
+    dynamic receiptEmail,
+    dynamic review,
+    dynamic setupFutureUsage,
+    dynamic shipping,
+    dynamic source,
+    dynamic statementDescriptor,
+    dynamic statementDescriptorSuffix,
+    String? status,
+    dynamic transferData,
+    dynamic transferGroup,
+  }) {
     _id = id;
     _object = object;
     _amount = amount;
@@ -82,18 +83,22 @@ class PaymentIntentModel {
     _status = status;
     _transferData = transferData;
     _transferGroup = transferGroup;
-}
+  }
 
   PaymentIntentModel.fromJson(dynamic json) {
     _id = json['id'];
     _object = json['object'];
     _amount = json['amount'];
     _amountCapturable = json['amount_capturable'];
-    _amountDetails = json['amount_details'] != null ? AmountDetails.fromJson(json['amount_details']) : null;
+    _amountDetails = json['amount_details'] != null
+        ? AmountDetails.fromJson(json['amount_details'])
+        : null;
     _amountReceived = json['amount_received'];
     _application = json['application'];
     _applicationFeeAmount = json['application_fee_amount'];
-    _automaticPaymentMethods = json['automatic_payment_methods'] != null ? AutomaticPaymentMethods.fromJson(json['automatic_payment_methods']) : null;
+    _automaticPaymentMethods = json['automatic_payment_methods'] != null
+        ? AutomaticPaymentMethods.fromJson(json['automatic_payment_methods'])
+        : null;
     _canceledAt = json['canceled_at'];
     _cancellationReason = json['cancellation_reason'];
     _captureMethod = json['capture_method'];
@@ -111,8 +116,12 @@ class PaymentIntentModel {
     _nextAction = json['next_action'];
     _onBehalfOf = json['on_behalf_of'];
     _paymentMethod = json['payment_method'];
-    _paymentMethodOptions = json['payment_method_options'] != null ? PaymentMethodOptions.fromJson(json['payment_method_options']) : null;
-    _paymentMethodTypes = json['payment_method_types'] != null ? json['payment_method_types'].cast<String>() : [];
+    _paymentMethodOptions = json['payment_method_options'] != null
+        ? PaymentMethodOptions.fromJson(json['payment_method_options'])
+        : null;
+    _paymentMethodTypes = json['payment_method_types'] != null
+        ? json['payment_method_types'].cast<String>()
+        : [];
     _processing = json['processing'];
     _receiptEmail = json['receipt_email'];
     _review = json['review'];
@@ -173,7 +182,8 @@ class PaymentIntentModel {
   int? get amountReceived => _amountReceived;
   dynamic get application => _application;
   dynamic get applicationFeeAmount => _applicationFeeAmount;
-  AutomaticPaymentMethods? get automaticPaymentMethods => _automaticPaymentMethods;
+  AutomaticPaymentMethods? get automaticPaymentMethods =>
+      _automaticPaymentMethods;
   dynamic get canceledAt => _canceledAt;
   dynamic get cancellationReason => _cancellationReason;
   String? get captureMethod => _captureMethod;
@@ -254,5 +264,4 @@ class PaymentIntentModel {
     map['transfer_group'] = _transferGroup;
     return map;
   }
-
 }

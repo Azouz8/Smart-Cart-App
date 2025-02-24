@@ -3,11 +3,12 @@ import 'Link.dart';
 
 class PaymentMethodOptions {
   PaymentMethodOptions({
-      Card? card, 
-      Link? link,}){
+    Card? card,
+    Link? link,
+  }) {
     _card = card;
     _link = link;
-}
+  }
 
   PaymentMethodOptions.fromJson(dynamic json) {
     _card = json['card'] != null ? Card.fromJson(json['card']) : null;
@@ -29,5 +30,4 @@ class PaymentMethodOptions {
     }
     return map;
   }
-
 }

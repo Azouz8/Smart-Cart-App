@@ -1,3 +1,4 @@
+
 abstract class CheckoutStates {}
 
 class CheckoutInitial extends CheckoutStates {}
@@ -9,4 +10,7 @@ class CheckoutFailure extends CheckoutStates {
   CheckoutFailure(this.errMessage);
 }
 
-class CheckoutSuccess extends CheckoutStates {}
+class CheckoutSuccess extends CheckoutStates {
+  // SuccessPaymentModel successPaymentModel;
+  // CheckoutSuccess(this.successPaymentModel);
+}

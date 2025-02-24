@@ -1,8 +1,9 @@
 class AmountDetails {
   AmountDetails({
-      dynamic tip,}){
+    dynamic tip,
+  }) {
     _tip = tip;
-}
+  }
 
   AmountDetails.fromJson(dynamic json) {
     _tip = json['tip'];
@@ -16,5 +17,4 @@ class AmountDetails {
     map['tip'] = _tip;
     return map;
   }
-
 }
