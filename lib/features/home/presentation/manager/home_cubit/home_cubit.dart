@@ -70,21 +70,21 @@ class HomeCubit extends Cubit<HomeStates> {
   }
 
   void getTotalPrice() {
-    double total = 0;
+    int total = 0;
     for (var product in cartProducts) {
-      total += product.productID!.price! * product.quantity!;
+      total += product.productID!.price!.ceil() * product.quantity!;
     }
-    orderSubtotal = total.toStringAsFixed(2);
-    double discount = getTotalDiscount();
-    totalPrice = (total - discount).toStringAsFixed(2);
+    orderSubtotal = total.ceil().toString();
+    int discount = getTotalDiscount();
+    totalPrice = (total - discount).toString();
   }
 
-  double getTotalDiscount() {
-    double discount = 0;
+  int getTotalDiscount() {
+    int discount = 0;
     for (var product in cartProducts) {
       discount += product.productID!.discount!; // Assuming `price` is a double
     }
-    totalDiscount = discount.toStringAsFixed(2);
+    totalDiscount = discount.ceil().toString();
     return discount;
   }
 

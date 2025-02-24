@@ -40,17 +40,6 @@ class SmartCart extends StatelessWidget {
         BlocProvider(create: (context) => HomeCubit(getIt.get<HomeRepoImpl>())),
         BlocProvider(
             create: (context) => CheckoutCubit(getIt.get<CheckoutRepoImpl>())),
-        // BlocProvider(
-        //     create: (context) => HomeCubit(HomeRepoImpl(
-        //           ApiService(DioConsumer(dio: Dio())),
-        //           IO.io(
-        //             ApiConsts.sockecIOUrl, // Replace with your server URL
-        //             <String, dynamic>{
-        //               'autoConnect': false,
-        //               'transports': ['websocket'],
-        //             },
-        //           ),
-        //         ))),
       ],
       child: ScreenUtilInit(
         designSize: const Size(380, 700),

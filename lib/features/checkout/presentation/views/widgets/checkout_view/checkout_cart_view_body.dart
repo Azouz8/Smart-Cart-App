@@ -34,10 +34,10 @@ class CheckoutCartViewBody extends StatelessWidget {
                 ),
               ),
               OrderInfoItem(
-                  title: "Order Subtotal", value: "\$ $orderSubtotal"),
-              OrderInfoItem(title: "Discount", value: "\$ $totalDiscount"),
+                  title: "Order Subtotal", value: "\$ $orderSubtotal.00"),
+              OrderInfoItem(title: "Discount", value: "\$ $totalDiscount.00"),
               const Divider(thickness: 0.5, color: Colors.grey),
-              TotalPriceWidget(price: "\$ $totalPrice"),
+              TotalPriceWidget(price: "\$ $totalPrice.00"),
               const CustomCheckoutButton(),
               const SizedBox(
                 height: 5,

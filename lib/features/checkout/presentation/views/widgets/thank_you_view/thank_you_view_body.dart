@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smart_cart_app/core/routing/app_router.dart';
-import 'package:smart_cart_app/core/services/service_locator.dart';
-import 'package:smart_cart_app/features/checkout/data/repos/checkout_repo_impl.dart';
-import 'package:smart_cart_app/features/checkout/presentation/manager/checkout_cubit.dart';
 import 'thank_you_check_mark.dart';
 import 'thank_you_container.dart';
 import 'thank_you_dashed_line.dart';
