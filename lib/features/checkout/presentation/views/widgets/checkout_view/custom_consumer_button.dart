@@ -33,7 +33,7 @@ class CustomConsumerButton extends StatelessWidget {
                   amount: "100",
                   currency: "USD",
                   customerId: ApiConsts.stripeCustID);
-          BlocProvider.of<CheckoutCubit>(context)
+          CheckoutCubit.get(context)
               .makePayment(paymentIntentInputModel: paymentIntentInputModel);
         },
         style: ButtonStyle(

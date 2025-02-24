@@ -4,6 +4,7 @@ import 'package:smart_cart_app/features/checkout/data/models/ephemeral_key_model
 import 'package:smart_cart_app/features/checkout/data/models/init_payment_sheet_input_model/init_payment_sheet_input_model.dart';
 import 'package:smart_cart_app/features/checkout/data/models/payment_intent_input_model/payment_intent_input_model.dart';
 import 'package:smart_cart_app/features/checkout/data/models/payment_intent_model/payment_intent_model.dart';
+import 'package:smart_cart_app/features/checkout/data/models/payment_method_info/payment_method_info.dart';
 
 class StripeService {
   ApiService apiService;
@@ -40,15 +41,17 @@ class StripeService {
     await Stripe.instance.presentPaymentSheet();
   }
 
-  Future retrievePaymentInfo(String clientSecret) async {
-    var response = await Stripe.instance.retrievePaymentIntent(clientSecret);
-    print("HEEEEEEEEERRRRRREEEEEEEEEEE");
-    // print(response);
-    var paymentMethodId = response.paymentMethodId;
-    
+  Future<PaymentMethodInfo> retrievePaymentInfo(String clientSecret) async {
+    var paymentIntent =
+        await Stripe.instance.retrievePaymentIntent(clientSecret);
+    var response = await apiService.retrievePaymentMethod(
+        paymentId: paymentIntent.paymentMethodId!);
+    var paymentInfoModel = PaymentMethodInfo.fromJson(response);
+
+    return paymentInfoModel;
   }
 
-  Future makePayment(
+  Future<PaymentMethodInfo> makePayment(
       {required PaymentIntentInputModel paymentIntentInputModel}) async {
     var paymentIntentModel = await createPaymentIntent(paymentIntentInputModel);
     var ephemeralKeyModel =
@@ -61,6 +64,6 @@ class StripeService {
     await initPaymentSheet(
         initPaymentSheetInputModel: initPaymentSheetInputModel);
     await displayPaymentSheet();
-    await retrievePaymentInfo(paymentIntentModel.clientSecret!);
+    return await retrievePaymentInfo(paymentIntentModel.clientSecret!);
   }
 }

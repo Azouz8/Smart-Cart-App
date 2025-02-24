@@ -7,6 +7,8 @@ import 'package:smart_cart_app/core/networking/api/api_consts.dart';
 import 'package:smart_cart_app/core/services/cache_helper.dart';
 import 'package:smart_cart_app/core/services/service_locator.dart';
 import 'package:smart_cart_app/core/themes/light_theme/light_theme.dart';
+import 'package:smart_cart_app/features/checkout/data/repos/checkout_repo_impl.dart';
+import 'package:smart_cart_app/features/checkout/presentation/manager/checkout_cubit.dart';
 import 'package:smart_cart_app/features/home/data/repos/home_repo_impl.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/layout_cubit/layout_cubit.dart';
@@ -36,6 +38,8 @@ class SmartCart extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => LayoutCubit()),
         BlocProvider(create: (context) => HomeCubit(getIt.get<HomeRepoImpl>())),
+        BlocProvider(
+            create: (context) => CheckoutCubit(getIt.get<CheckoutRepoImpl>())),
         // BlocProvider(
         //     create: (context) => HomeCubit(HomeRepoImpl(
         //           ApiService(DioConsumer(dio: Dio())),

@@ -1,8 +1,11 @@
 abstract class ApiConsumer {
   Future<dynamic> get(
     String path, {
+    String? token,
     Object? data,
+    String? contentType,
     Map<String, dynamic>? queryParameters,
+    Map<String, String>? headers,
   });
   Future<dynamic> post(
     String path, {

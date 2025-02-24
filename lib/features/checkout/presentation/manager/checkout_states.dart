@@ -1,3 +1,4 @@
+import 'package:smart_cart_app/features/checkout/data/models/payment_method_info/payment_method_info.dart';
 
 abstract class CheckoutStates {}
 
@@ -11,6 +12,18 @@ class CheckoutFailure extends CheckoutStates {
 }
 
 class CheckoutSuccess extends CheckoutStates {
-  // SuccessPaymentModel successPaymentModel;
-  // CheckoutSuccess(this.successPaymentModel);
+  PaymentMethodInfo paymentMethodInfo;
+  CheckoutSuccess(this.paymentMethodInfo);
+}
+
+class CheckoutRetrievePaymentMethodLoading extends CheckoutStates {}
+
+class CheckoutRetrievePaymentMethodFailure extends CheckoutStates {
+  String errMessage;
+  CheckoutRetrievePaymentMethodFailure(this.errMessage);
+}
+
+class CheckoutRetrievePaymentMethodSuccess extends CheckoutStates {
+  PaymentMethodInfo paymentMethodInfo;
+  CheckoutRetrievePaymentMethodSuccess(this.paymentMethodInfo);
 }

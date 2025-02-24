@@ -128,4 +128,14 @@ class ApiService {
         });
     return response;
   }
+
+  retrievePaymentMethod({
+    required String paymentId,
+  }) async {
+    var response = await api.get(
+      "${ApiConsts.stripeBaseUrl}${ApiConsts.paymentMethods}/$paymentId",
+      token: ApiConsts.stripeToken,
+    );
+    return response;
+  }
 }

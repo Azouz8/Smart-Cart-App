@@ -1,6 +1,7 @@
 import 'package:either_dart/either.dart';
 import 'package:smart_cart_app/core/services/stripe_service.dart';
 import 'package:smart_cart_app/features/checkout/data/models/payment_intent_input_model/payment_intent_input_model.dart';
+import 'package:smart_cart_app/features/checkout/data/models/payment_method_info/payment_method_info.dart';
 
 import 'checkout_repo.dart';
 
@@ -10,12 +11,24 @@ class CheckoutRepoImpl extends CheckoutRepo {
   CheckoutRepoImpl(this.stripeService);
 
   @override
-  Future<Either<String, void>> makePayment(
+  Future<Either<String, PaymentMethodInfo>> makePayment(
       {required PaymentIntentInputModel paymentIntentInputModel}) async {
     try {
-      await stripeService.makePayment(
+      var paymentMethodInfo = await stripeService.makePayment(
           paymentIntentInputModel: paymentIntentInputModel);
-      return const Right(null);
+      return Right(paymentMethodInfo);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
+  @override
+  Future<Either<String, PaymentMethodInfo>> retrievePaymentInfo(
+      {required String clientSecret}) async {
+    try {
+      var paymentMethodInfo =
+          await stripeService.retrievePaymentInfo(clientSecret);
+      return Right(paymentMethodInfo);
     } catch (e) {
       return Left(e.toString());
     }

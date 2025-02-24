@@ -10,14 +10,23 @@ class DioConsumer extends ApiConsumer {
         .add(LogInterceptor(responseBody: true, requestHeader: true));
   }
   @override
-  Future get(String path,
-      {Object? data, Map<String, dynamic>? queryParameters}) async {
+  Future get(
+    String path, {
+    Object? data,
+    Map<String, dynamic>? queryParameters,
+    String? token,
+    String? contentType,
+    Map<String, String>? headers,
+  }) async {
     try {
-      final token = CacheHelper.getString(key: CacheHelperKeys.token);
-      dio.options.headers["authorization"] = "Bearer $token";
+      // final token = CacheHelper.getString(key: CacheHelperKeys.token);
+      // dio.options.headers["authorization"] = "Bearer $token";
       final response = await dio.get(
         path,
         data: data,
+        options: Options(
+            contentType: contentType,
+            headers: headers ?? {"authorization": "Bearer $token"}),
         queryParameters: queryParameters,
       );
       return response.data;
