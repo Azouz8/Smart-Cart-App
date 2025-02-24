@@ -16,6 +16,7 @@ class HomeCubit extends Cubit<HomeStates> {
   String totalDiscount = "";
   late IO.Socket socket;
   List<CartProductModel> cartProducts = [];
+  List<Map<String, dynamic>> ratingList = [];
 
   initSocket() {
     socket = IO.io(ApiConsts.sockecIOUrl, <String, dynamic>{
@@ -65,7 +66,7 @@ class HomeCubit extends Cubit<HomeStates> {
       CacheHelper.remove(key: CacheHelperKeys.cartID);
       emit(HomeRemoveUserFromCartSuccess());
       cartId = "";
-      cartProducts.clear();
+      // cartProducts.clear();
     });
   }
 
@@ -129,5 +130,23 @@ class HomeCubit extends Cubit<HomeStates> {
     }, (responseCode) {
       emit(HomeDeleteProductSuccess());
     });
+  }
+
+  void updateRatingList(String productID, String rating) {
+    // Check if the product already exists in the ratingList
+    int index = ratingList.indexWhere((map) => map['productID'] == productID);
+
+    if (index != -1) {
+      // If the product exists, update its rating
+      ratingList[index]['rating'] = rating;
+    } else {
+      // If the product doesn't exist, add a new entry
+      ratingList.add({
+        'productID': productID,
+        'rating': rating,
+      });
+    }
+    print("ratingList");
+    print(ratingList);
   }
 }

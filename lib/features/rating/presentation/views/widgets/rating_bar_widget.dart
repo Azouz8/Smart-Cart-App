@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 
 class RatingBarWidget extends StatelessWidget {
   const RatingBarWidget({
     super.key,
+    required this.prodID,
   });
-
+  final String prodID;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -23,7 +25,10 @@ class RatingBarWidget extends StatelessWidget {
             color: Colors.amber,
           ),
           onRatingUpdate: (rating) {
-            print(rating);
+            HomeCubit.get(context).updateRatingList(prodID, rating.toString());
+            // print(ratingList);
+            // print(prodID);
+            // print(rating);
           },
         ),
       ],

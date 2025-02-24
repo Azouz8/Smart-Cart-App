@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smart_cart_app/core/routing/app_router.dart';
 import 'package:smart_cart_app/core/services/cache_helper.dart';
+import 'package:smart_cart_app/features/home/data/models/cart_product_model/cart_product_model.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_states.dart';
 import 'package:smart_cart_app/features/rating/presentation/views/widgets/rate_product_list_view_item.dart';
@@ -10,16 +11,16 @@ import '../../../../home/presentation/views/widgets/custom_home_app_bar.dart';
 
 class RateProductsViewBody extends StatelessWidget {
   const RateProductsViewBody({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<HomeCubit, HomeStates>(
-      listener: (context, state) {
-        if (state is HomeRemoveUserFromCartSuccess) {
-          GoRouter.of(context).go(AppRouter.homeView);
-        }
-      },
-      builder: (context, state) => SafeArea(
+    return BlocConsumer<HomeCubit, HomeStates>(listener: (context, state) {
+      if (state is HomeRemoveUserFromCartSuccess) {
+        GoRouter.of(context).go(AppRouter.homeView);
+      }
+    }, builder: (context, state) {
+      final List<CartProductModel> products =
+          HomeCubit.get(context).cartProducts;
+      return SafeArea(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -29,12 +30,29 @@ class RateProductsViewBody extends StatelessWidget {
                 const CustomHomeAppBar(
                   title: "Rate Products",
                 ),
-                ListView.builder(
-                  itemBuilder: (context, index) =>
-                      const RateProductListViewItem(),
+                ListView.separated(
+                  reverse: true,
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 8),
+                  itemBuilder: (context, index) => ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: RateProductListViewItem(
+                      cartProductModel: products[index],
+                    ),
+                  ),
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 10,
+                  itemCount: products.length,
+                ),
+                // ListView.builder(
+                //   itemBuilder: (context, index) =>
+                //       const RateProductListViewItem(),
+                //   shrinkWrap: true,
+                //   physics: const NeverScrollableScrollPhysics(),
+                //   itemCount: 10,
+                // ),
+                const SizedBox(
+                  height: 8,
                 ),
                 SizedBox(
                   width: double.infinity,
@@ -81,7 +99,7 @@ class RateProductsViewBody extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
