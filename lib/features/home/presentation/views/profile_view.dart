@@ -75,7 +75,7 @@ class MyDivider extends StatelessWidget {
           thickness: 0.5,
           endIndent: 20,
           indent: 20,
-          color: Colors.grey.withOpacity(0.5),
+          color: Colors.grey.withAlpha(50),
         ),
         const SizedBox(
           height: 12,
@@ -92,6 +92,7 @@ class ProfileInfoWidget extends StatelessWidget {
     required this.label,
     required this.value,
   });
+
   final IconData preIcon;
   final String label;
   final String value;

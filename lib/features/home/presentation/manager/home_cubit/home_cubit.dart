@@ -90,7 +90,6 @@ class HomeCubit extends Cubit<HomeStates> {
   }
 
   Future<void> getScannedProducts() async {
-    print("Listening for scanned products..==========.");
     homeRepo.getScannedProducts().listen(
       (result) {
         result.fold(
@@ -146,7 +145,5 @@ class HomeCubit extends Cubit<HomeStates> {
         'rating': rating,
       });
     }
-    print("ratingList");
-    print(ratingList);
   }
 }

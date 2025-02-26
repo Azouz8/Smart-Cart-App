@@ -24,7 +24,7 @@ ThemeData getDarkTheme() => ThemeData(
         ),
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: AppColorsDark.scaffoldBackgroundColor.withOpacity(0.8),
+        backgroundColor: AppColorsDark.scaffoldBackgroundColor.withAlpha(80),
         selectedIconTheme: const IconThemeData(
           color: Color(0xffff5d65),
         ),

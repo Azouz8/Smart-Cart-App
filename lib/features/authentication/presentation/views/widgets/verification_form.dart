@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
+import 'package:smart_cart_app/features/authentication/presentation/manager/auth_cubit/auth_cubit.dart';
 
 class OtpForm extends StatelessWidget {
   OtpForm({super.key});
+
   final pin1 = TextEditingController();
   final pin2 = TextEditingController();
   final pin3 = TextEditingController();
   final pin4 = TextEditingController();
-  String code = "";
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -112,7 +114,8 @@ class OtpForm extends StatelessWidget {
                   onChanged: (pin) {
                     if (pin.isNotEmpty) {
                       FocusScope.of(context).nextFocus();
-                      code = pin1.text + pin2.text + pin3.text + pin4.text;
+                      AuthCubit.get(context).verificationCode =
+                          pin1.text + pin2.text + pin3.text + pin4.text;
                     }
                   },
                   textInputAction: TextInputAction.next,

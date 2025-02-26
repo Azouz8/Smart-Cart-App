@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smart_cart_app/core/routing/app_router.dart';
-import 'package:smart_cart_app/core/services/cache_helper.dart';
 import 'package:smart_cart_app/features/home/data/models/cart_product_model/cart_product_model.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_states.dart';
@@ -57,14 +56,7 @@ class RateProductsViewBody extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {
-                      var cartID =
-                          CacheHelper.getString(key: CacheHelperKeys.cartID);
-                      var userID =
-                          CacheHelper.getString(key: CacheHelperKeys.userID);
-                      HomeCubit.get(context)
-                          .removeUserFromCart(cartID!, userID!);
-                    },
+                    onPressed: () {},
                     style: ButtonStyle(
                       shape: WidgetStatePropertyAll(
                         RoundedRectangleBorder(

@@ -19,8 +19,8 @@ class StripeService {
 
   Future<EphemeralKeyModel> createEphemeralKey(String customerID) async {
     var response = await apiService.createEphemeralKey(customerId: customerID);
-    var ephmeralKeyModel = EphemeralKeyModel.fromJson(response);
-    return ephmeralKeyModel;
+    var ephemeralKeyModel = EphemeralKeyModel.fromJson(response);
+    return ephemeralKeyModel;
   }
 
   Future initPaymentSheet({

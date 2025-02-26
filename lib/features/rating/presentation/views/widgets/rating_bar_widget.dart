@@ -26,9 +26,6 @@ class RatingBarWidget extends StatelessWidget {
           ),
           onRatingUpdate: (rating) {
             HomeCubit.get(context).updateRatingList(prodID, rating.toString());
-            // print(ratingList);
-            // print(prodID);
-            // print(rating);
           },
         ),
       ],

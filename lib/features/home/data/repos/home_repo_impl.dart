@@ -49,7 +49,6 @@ class HomeRepoImpl extends HomeRepo {
     socket.on(ApiKeys.cartUpdated, (data) {
       try {
         print("🔄 Received cart update from socket");
-        print(data);
         List<CartProductModel> updatedProducts = data
             .map<CartProductModel>((item) => CartProductModel.fromJson(item))
             .toList();
