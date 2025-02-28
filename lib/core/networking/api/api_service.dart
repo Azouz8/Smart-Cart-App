@@ -145,4 +145,11 @@ class ApiService {
     );
     return response;
   }
+
+  getUserOrders() async {
+    var response = await api.get(
+      "${ApiConsts.apiBaseUrl}${ApiConsts.user}${ApiConsts.orders}",
+    );
+    return response;
+  }
 }

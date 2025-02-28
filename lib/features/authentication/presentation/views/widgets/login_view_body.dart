@@ -23,9 +23,9 @@ class LoginViewBody extends StatelessWidget {
   final TextEditingController passwordController;
   final AuthCubit cubit;
   final GlobalKey<FormFieldState> emailFieldKey =
-      GlobalKey<FormFieldState>(); // Key for email field
+  GlobalKey<FormFieldState>(); // Key for email field
   final GlobalKey<FormFieldState> passwordFieldKey =
-      GlobalKey<FormFieldState>();
+  GlobalKey<FormFieldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -34,14 +34,20 @@ class LoginViewBody extends StatelessWidget {
         if (state is AuthLoginSuccess) {
           showCustomSnackBar(
               context: context, message: "Welcome Back!", vPadding: 16);
-          // SecureStorage().writeData(
-          //     key: SecureStorageKeys.token, value: state.loginModel.token!);
-
-          GoRouter.of(context)
-              .push(AppRouter.categoriesView, extra: state.loginModel.id);
-        } else if (state is AuthLoginFailure) {
-          showCustomSnackBar(
-              context: context, message: state.errMessage, vPadding: 64);
+        // SecureStorage().writeData(
+        //     key: SecureStorageKeys.token, value: state.loginModel.token!);
+        // if(state.loginModel.firstTime){
+        //   GoRouter.of(context).push(AppRouter.categoriesView);
+        // }
+        // else {
+        //   GoRouter.of(context)
+        //       .push(AppRouter.homeView, extra: state.loginModel.id);
+        // }
+        GoRouter.of(context)
+            .push(AppRouter.homeView, extra: state.loginModel.id);
+      } else if (state is AuthLoginFailure) {
+        showCustomSnackBar(
+        context: context, message: state.errMessage, vPadding: 64);
         }
       },
       builder: (context, state) {
@@ -58,7 +64,9 @@ class LoginViewBody extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
-                        height: MediaQuery.sizeOf(context).height * 0.15,
+                        height: MediaQuery
+                            .sizeOf(context)
+                            .height * 0.15,
                       ),
                       SvgPicture.asset(
                         "assets/images/loginIcon.svg",
@@ -69,23 +77,28 @@ class LoginViewBody extends StatelessWidget {
                       ),
                       Text(
                         "Hello Again!",
-                        style: Theme.of(context)
+                        style: Theme
+                            .of(context)
                             .textTheme
                             .headlineMedium!
                             .copyWith(
-                              fontWeight: FontWeight.w600,
-                              color: const Color(0xff1A2530),
-                            ),
+                          fontWeight: FontWeight.w600,
+                          color: const Color(0xff1A2530),
+                        ),
                       ),
                       const SizedBox(
                         height: 5,
                       ),
                       Text(
                         "Welcome Back You've Been Missed!",
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              fontWeight: FontWeight.w400,
-                              color: Colors.grey,
-                            ),
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .bodyLarge!
+                            .copyWith(
+                          fontWeight: FontWeight.w400,
+                          color: Colors.grey,
+                        ),
                       ),
                       const SizedBox(
                         height: 35,
@@ -149,13 +162,14 @@ class LoginViewBody extends StatelessWidget {
                             ),
                             child: Text(
                               "Forgot Password?",
-                              style: Theme.of(context)
+                              style: Theme
+                                  .of(context)
                                   .textTheme
                                   .titleSmall!
                                   .copyWith(
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.grey,
-                                  ),
+                                fontWeight: FontWeight.w400,
+                                color: Colors.grey,
+                              ),
                             ),
                           ),
                         ],
@@ -185,23 +199,24 @@ class LoginViewBody extends StatelessWidget {
                           ),
                           child: state is AuthLoginLoading
                               ? const SizedBox(
-                                  height: 15,
-                                  width: 15,
-                                  child: CircularProgressIndicator(
-                                    color: Colors.white,
-                                    strokeWidth: 2,
-                                  ),
-                                )
+                            height: 15,
+                            width: 15,
+                            child: CircularProgressIndicator(
+                              color: Colors.white,
+                              strokeWidth: 2,
+                            ),
+                          )
                               : Text(
-                                  "Login",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall!
-                                      .copyWith(
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.white,
-                                      ),
-                                ),
+                            "Login",
+                            style: Theme
+                                .of(context)
+                                .textTheme
+                                .titleSmall!
+                                .copyWith(
+                              fontWeight: FontWeight.w400,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
                     ],
@@ -217,10 +232,14 @@ class LoginViewBody extends StatelessWidget {
                     children: [
                       Text(
                         'Don\'t have an account?',
-                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                              fontWeight: FontWeight.w400,
-                              color: Colors.grey,
-                            ),
+                        style: Theme
+                            .of(context)
+                            .textTheme
+                            .titleSmall!
+                            .copyWith(
+                          fontWeight: FontWeight.w400,
+                          color: Colors.grey,
+                        ),
                       ),
                       InkWell(
                         onTap: () {
@@ -237,12 +256,13 @@ class LoginViewBody extends StatelessWidget {
                           ),
                           child: Text(
                             ' Sign Up For Free!',
-                            style: Theme.of(context)
+                            style: Theme
+                                .of(context)
                                 .textTheme
                                 .titleSmall!
                                 .copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       )
