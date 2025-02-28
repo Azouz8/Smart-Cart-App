@@ -55,9 +55,7 @@ class OffersListViewItem extends StatelessWidget {
                         .bodyMedium!
                         .copyWith(fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(
-                    height: 5,
-                  ),
+                  SizedBox(height: 8.h),
                   Row(
                     children: [
                       Text(
@@ -84,9 +82,7 @@ class OffersListViewItem extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 5,
-                  ),
+                  const SizedBox(height: 5),
                   const Spacer(),
                   Row(
                     children: [

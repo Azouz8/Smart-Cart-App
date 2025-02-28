@@ -2,7 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_cart_app/core/networking/api/api_consts.dart';
 import 'package:smart_cart_app/core/services/cache_helper.dart';
 import 'package:smart_cart_app/features/home/data/models/cart_product_model/cart_product_model.dart';
-import 'package:smart_cart_app/features/home/data/models/recommendations_model/RecommendedItems.dart';
 import 'package:smart_cart_app/features/home/data/repos/home_repo.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_states.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
@@ -18,7 +17,6 @@ class HomeCubit extends Cubit<HomeStates> {
   String totalDiscount = "";
   late IO.Socket socket;
   List<CartProductModel> cartProducts = [];
-  List<RecommendedItems> recommendedProducts = [];
   List<Map<String, dynamic>> ratingList = [];
 
   initSocket() {
@@ -121,16 +119,6 @@ class HomeCubit extends Cubit<HomeStates> {
     });
   }
 
-  Future<void> getRecommendations(String userID) async {
-    emit(HomeGetRecommendedProductsLoading());
-    var result = await homeRepo.getRecommendations(userID: userID);
-    result.fold((failure) {
-      emit(HomeGetRecommendedProductsFailure(failure));
-    }, (products) {
-      recommendedProducts = products;
-      emit(HomeGetRecommendedProductsSuccess(products));
-    });
-  }
 
   Future<void> deleteProductFromCart(
       {required String cartID, required String productID}) async {
