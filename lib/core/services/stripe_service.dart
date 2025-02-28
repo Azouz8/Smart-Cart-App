@@ -6,9 +6,13 @@ import 'package:smart_cart_app/features/checkout/data/models/payment_intent_inpu
 import 'package:smart_cart_app/features/checkout/data/models/payment_intent_model/payment_intent_model.dart';
 import 'package:smart_cart_app/features/checkout/data/models/payment_method_info/payment_method_info.dart';
 
+import '../../features/checkout/data/models/transaction_model/transaction_model.dart';
+
 class StripeService {
   ApiService apiService;
+
   StripeService(this.apiService);
+
   Future<PaymentIntentModel> createPaymentIntent(
       PaymentIntentInputModel paymentIntentInputModel) async {
     var response = await apiService.createPaymentIntent(
@@ -65,5 +69,10 @@ class StripeService {
         initPaymentSheetInputModel: initPaymentSheetInputModel);
     await displayPaymentSheet();
     return await retrievePaymentInfo(paymentIntentModel.clientSecret!);
+  }
+
+  Future postUserTransaction({required TransactionModel transaction}) async {
+    var response = await apiService.postTransaction(transaction: transaction);
+    return response;
   }
 }
