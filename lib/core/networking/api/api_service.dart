@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:smart_cart_app/core/networking/api/api_consumer.dart';
 import 'package:smart_cart_app/core/networking/api/api_consts.dart';
+import 'package:smart_cart_app/core/networking/api/api_consumer.dart';
 import 'package:smart_cart_app/features/checkout/data/models/payment_intent_input_model/payment_intent_input_model.dart';
 
 class ApiService {
@@ -69,6 +69,13 @@ class ApiService {
   getCategories() async {
     var response = await api
         .get('${ApiConsts.apiBaseUrl}${ApiConsts.user}${ApiConsts.categories}');
+    return response;
+  }
+
+  postCategories(List<String> categories) async {
+    var response = await api.post(
+        '${ApiConsts.apiBaseUrl}${ApiConsts.user}${ApiConsts.likedCategories}',
+        data: {ApiKeys.likedCategories: categories});
     return response;
   }
 

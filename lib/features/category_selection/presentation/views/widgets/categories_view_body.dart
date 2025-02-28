@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_multi_select_items/flutter_multi_select_items.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:smart_cart_app/core/routing/app_router.dart';
 import 'package:smart_cart_app/core/services/helper_functions.dart';
 import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
 import 'package:smart_cart_app/features/category_selection/presentation/manager/category_cubit.dart';
 import 'package:smart_cart_app/features/category_selection/presentation/manager/category_states.dart';
 import 'package:smart_cart_app/features/home/presentation/views/widgets/custom_home_app_bar.dart';
+
 import 'custom_submit_button.dart';
 
 class CategoriesViewBody extends StatelessWidget {
   CategoriesViewBody({super.key});
+
   final controller = MultiSelectController();
-  final List selectedCategories = [];
+  final List<String> selectedCategories = [];
 
   @override
   Widget build(BuildContext context) {
@@ -24,18 +27,24 @@ class CategoriesViewBody extends StatelessWidget {
         if (state is CategoryGetFailure) {
           showCustomSnackBar(
               context: context, message: state.errMessage, vPadding: 64);
+        } else if (state is CategoryPostFailure) {
+          showCustomSnackBar(
+              context: context, message: state.errMessage, vPadding: 32);
+        } else if (state is CategoryPostSuccess) {
+          showCustomSnackBar(
+              context: context,
+              message: "Categories Added Successfully",
+              vPadding: 8);
+          GoRouter.of(context).push(AppRouter.homeView);
         }
       },
-      builder: (context, state) => state is CategoryGetLoading
-          ? const Center(
-              child: CircularProgressIndicator(
-              color: AppColorsLight.primaryColor,
-            ))
-          : SafeArea(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                child: CustomScrollView(
+      builder: (context, state) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          child: state is CategoryGetSuccess ||
+                  state is CategoryPostLoading ||
+                  state is CategoryPostSuccess
+              ? CustomScrollView(
                   physics: const BouncingScrollPhysics(),
                   slivers: [
                     const SliverToBoxAdapter(
@@ -73,7 +82,7 @@ class CategoriesViewBody extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SliverFillRemaining(
+                    SliverFillRemaining(
                       hasScrollBody: false,
                       child: Align(
                         alignment: AlignmentDirectional.bottomCenter,
@@ -81,15 +90,19 @@ class CategoriesViewBody extends StatelessWidget {
                           width: double.infinity,
                           child: CustomSubmitButton(
                             title: "Submit",
-                            route: AppRouter.homeView,
+                            onPressed: () {
+                              cubit.postCategories(selectedCategories);
+                            },
+                            isLoading: state is CategoryPostLoading,
                           ),
                         ),
                       ),
                     ),
                   ],
-                ),
-              ),
-            ),
+                )
+              : const Center(child: CircularProgressIndicator()),
+        ),
+      ),
     );
   }
 

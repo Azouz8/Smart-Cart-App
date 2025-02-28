@@ -38,7 +38,7 @@ class CustomConsumerButton extends StatelessWidget {
               PaymentIntentInputModel(
                   amount: totalPrice,
                   currency: "USD",
-                  customerId: ApiConsts.stripeCustID);
+                  customerId: ApiConsts.stripeCustomerID);
           CheckoutCubit.get(context)
               .makePayment(paymentIntentInputModel: paymentIntentInputModel);
         },

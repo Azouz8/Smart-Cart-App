@@ -38,7 +38,7 @@ class LoginViewBody extends StatelessWidget {
           //     key: SecureStorageKeys.token, value: state.loginModel.token!);
 
           GoRouter.of(context)
-              .push(AppRouter.homeView, extra: state.loginModel.id);
+              .push(AppRouter.categoriesView, extra: state.loginModel.id);
         } else if (state is AuthLoginFailure) {
           showCustomSnackBar(
               context: context, message: state.errMessage, vPadding: 64);

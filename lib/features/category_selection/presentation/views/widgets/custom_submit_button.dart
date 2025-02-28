@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class CustomSubmitButton extends StatelessWidget {
-  const CustomSubmitButton({
+   const CustomSubmitButton({
     super.key,
     required this.title,
-    required this.route,
+    this.onPressed, this.isLoading = false,
   });
-  final String title, route;
+
+  final String title;
+  final bool isLoading;
+  final void Function()? onPressed;
+
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        GoRouter.of(context).push(route);
-      },
+      onPressed: onPressed,
       style: ButtonStyle(
         shape: WidgetStatePropertyAll(
           RoundedRectangleBorder(
@@ -22,23 +23,24 @@ class CustomSubmitButton extends StatelessWidget {
         ),
         backgroundColor: WidgetStateProperty.all(const Color(0xff5b9ee1)),
       ),
-      child: Text(
-        title,
-        textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.titleSmall!.copyWith(
-              fontWeight: FontWeight.w400,
-              color: Colors.white,
-              fontFamily: "Carmen",
+      child: isLoading
+          ? const SizedBox(
+              height: 15,
+              width: 15,
+              child: CircularProgressIndicator(
+                color: Colors.white,
+                strokeWidth: 2,
+              ),
+            )
+          : Text(
+              title,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                    fontWeight: FontWeight.w400,
+                    color: Colors.white,
+                    fontFamily: "Carmen",
+                  ),
             ),
-      ),
-      // child: const SizedBox(
-      //   height: 15,
-      //   width: 15,
-      //   child: CircularProgressIndicator(
-      //     color: Colors.white,
-      //     strokeWidth: 2,
-      //   ),
-      // ),
     );
   }
 }

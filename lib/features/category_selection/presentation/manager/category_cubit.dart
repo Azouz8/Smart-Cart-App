@@ -25,4 +25,13 @@ class CategoryCubit extends Cubit<CategoryStates> {
       emit(CategoryGetSuccess(result));
     });
   }
+  Future<void> postCategories(List<String> categories) async {
+    emit(CategoryPostLoading());
+    var result = await categoryRepo.postCategories(categories: categories);
+    result.fold((failure) {
+      emit(CategoryPostFailure(failure));
+    }, (result) {
+      emit(CategoryPostSuccess());
+    });
+  }
 }
