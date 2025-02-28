@@ -1,4 +1,5 @@
 import 'package:smart_cart_app/features/home/data/models/cart_product_model/cart_product_model.dart';
+import 'package:smart_cart_app/features/home/data/models/recommendations_model/RecommendedItems.dart';
 
 abstract class HomeStates {}
 
@@ -48,6 +49,20 @@ class HomeGetCartProductsFailure extends HomeStates {
 class HomeGetCartProductsSuccess extends HomeStates {
   List<CartProductModel> products;
   HomeGetCartProductsSuccess(this.products);
+}
+
+class HomeGetRecommendedProductsLoading extends HomeStates {}
+
+class HomeGetRecommendedProductsFailure extends HomeStates {
+  String errMessage;
+
+  HomeGetRecommendedProductsFailure(this.errMessage);
+}
+
+class HomeGetRecommendedProductsSuccess extends HomeStates {
+  List<RecommendedItems> recommendations;
+
+  HomeGetRecommendedProductsSuccess(this.recommendations);
 }
 
 class HomeDeleteProductLoading extends HomeStates {}

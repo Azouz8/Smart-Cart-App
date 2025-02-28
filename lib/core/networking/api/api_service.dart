@@ -82,6 +82,13 @@ class ApiService {
     return response;
   }
 
+  getRecommendations({required String userID}) async {
+    var response = await api.post(
+        '${ApiConsts.apiBaseUrl}${ApiConsts.recommendations}${ApiConsts.getRecommendations}',
+        data: {ApiKeys.userId: userID});
+    return response;
+  }
+
   addUserToCart({required String cartID, required String userID}) async {
     var response = await api.patch(
       '${ApiConsts.apiBaseUrl}${ApiConsts.cart}$cartID/${ApiConsts.addUserToCart}',
@@ -165,6 +172,7 @@ class ApiService {
     );
     return response;
   }
+
   postTransaction({
     required TransactionModel transaction,
   }) async {

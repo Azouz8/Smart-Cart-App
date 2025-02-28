@@ -7,14 +7,14 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
+    return SafeArea(
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomHomeAppBar(title: "Profile"),
-            Row(
+            const CustomHomeAppBar(title: "Profile"),
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CircleAvatar(
@@ -26,31 +26,34 @@ class ProfileView extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
-            ProfileInfoWidget(
+            const ProfileInfoWidget(
               preIcon: Icons.person,
               label: "Name",
               value: "Ali Azouz",
             ),
-            MyDivider(),
-            ProfileInfoWidget(
+            const MyDivider(),
+            const ProfileInfoWidget(
               preIcon: Icons.email,
               label: "Email",
               value: "AliAzouz@gmail.com",
             ),
-            MyDivider(),
-            ProfileInfoWidget(
-              preIcon: Icons.phone,
-              label: "Phone Number",
-              value: "01020033818",
-            ),
-            MyDivider(),
-            ProfileInfoWidget(
+            const MyDivider(),
+            const ProfileInfoWidget(
               preIcon: Icons.password,
               label: "Change Password",
               value: "*********",
+            ),
+            const MyDivider(),
+            GestureDetector(
+              onTap: () {},
+              child: const ProfileInfoWidget(
+                preIcon: Icons.card_travel,
+                label: "Your Orders",
+                value: "",
+              ),
             ),
           ],
         ),

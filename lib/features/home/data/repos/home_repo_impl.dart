@@ -1,9 +1,11 @@
 import 'dart:async';
+
 import 'package:either_dart/either.dart';
 import 'package:smart_cart_app/core/networking/api/api_consts.dart';
 import 'package:smart_cart_app/core/networking/api/api_service.dart';
 import 'package:smart_cart_app/core/networking/errors/exceptions.dart';
 import 'package:smart_cart_app/features/home/data/models/cart_product_model/cart_product_model.dart';
+import 'package:smart_cart_app/features/home/data/models/recommendations_model/RecommendedItems.dart';
 import 'package:smart_cart_app/features/home/data/repos/home_repo.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
@@ -104,6 +106,21 @@ class HomeRepoImpl extends HomeRepo {
       var response =
           await apiService.deleteProduct(productID: productID, cartID: cartID);
       return Right(response);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, List<RecommendedItems>>> getRecommendations(
+      {required String userID}) async {
+    try {
+      var data = await apiService.getRecommendations(userID: userID);
+      List<RecommendedItems> recommendations = [];
+      for (var i in data[ApiKeys.recommendedItems]) {
+        recommendations.add(RecommendedItems.fromJson(i));
+      }
+      return Right(recommendations);
     } on ServerException catch (e) {
       return Left(e.errorModel.errMessage);
     }

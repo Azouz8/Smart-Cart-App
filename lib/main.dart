@@ -12,6 +12,7 @@ import 'package:smart_cart_app/features/checkout/presentation/manager/checkout_c
 import 'package:smart_cart_app/features/home/data/repos/home_repo_impl.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/layout_cubit/layout_cubit.dart';
+
 import 'core/routing/app_router.dart';
 import 'core/services/bloc_observer.dart';
 
