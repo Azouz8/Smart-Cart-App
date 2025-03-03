@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:either_dart/either.dart';
 import 'package:smart_cart_app/features/category_selection/data/models/category_model/category.dart';
 

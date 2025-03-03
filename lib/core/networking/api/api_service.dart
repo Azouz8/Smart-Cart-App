@@ -158,16 +158,17 @@ class ApiService {
 
   getUserOrders() async {
     var response = await api.get(
-      "${ApiConsts.apiBaseUrl}${ApiConsts.user}${ApiConsts.orders}",
+      "${ApiConsts.apiBaseUrl}${ApiConsts.transaction}${ApiConsts.orders}",
     );
     return response;
   }
 
   postRatings({
     required List<RatingModel> ratings,
+    required String orderID,
   }) async {
     var response = await api.post(
-      "${ApiConsts.apiBaseUrl}${ApiConsts.user}${ApiConsts.rating}",
+      "${ApiConsts.apiBaseUrl}${ApiConsts.ratings}${ApiConsts.addRating}/$orderID",
       data: ratings,
     );
     return response;
@@ -177,7 +178,7 @@ class ApiService {
     required TransactionModel transaction,
   }) async {
     var response = await api.post(
-      "${ApiConsts.apiBaseUrl}${ApiConsts.user}${ApiConsts.transactions}",
+      "${ApiConsts.apiBaseUrl}${ApiConsts.transaction}${ApiConsts.saveTransactions}",
       data: transaction,
     );
     return response;

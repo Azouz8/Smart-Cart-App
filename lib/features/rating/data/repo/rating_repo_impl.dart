@@ -1,4 +1,5 @@
 import 'package:either_dart/either.dart';
+import 'package:smart_cart_app/core/networking/api/api_consts.dart';
 import 'package:smart_cart_app/features/rating/data/repo/rating_repo.dart';
 import '../../../../core/networking/api/api_service.dart';
 import '../../../../core/networking/errors/exceptions.dart';
@@ -15,7 +16,7 @@ class RatingRepoImpl extends RatingRepo {
     try {
       var response = await apiService.getUserOrders();
       List<OrderModel> orders = [];
-      for (var i in response) {
+      for (var i in response[ApiKeys.data][ApiKeys.userOrders]) {
         orders.add(OrderModel.fromJson(i));
       }
       return Right(orders);
@@ -26,9 +27,9 @@ class RatingRepoImpl extends RatingRepo {
 
   @override
   Future<Either<String, Map<String, dynamic>>> postUserRatings(
-      {required List<RatingModel> ratings}) async {
+      {required List<RatingModel> ratings , required String orderID}) async {
     try {
-      var response = await apiService.postRatings(ratings: ratings);
+      var response = await apiService.postRatings(ratings: ratings,orderID: orderID);
       return Right(response);
     } on ServerException catch (e) {
       return Left(e.errorModel.errMessage);
