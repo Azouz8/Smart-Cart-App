@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
+import 'package:go_router/go_router.dart';
+import 'package:smart_cart_app/core/routing/app_router.dart';
 import 'package:smart_cart_app/features/home/presentation/views/widgets/custom_home_app_bar.dart';
+import 'widgets/profile_info_widget.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -27,7 +29,7 @@ class ProfileView extends StatelessWidget {
               ],
             ),
             const SizedBox(
-              height: 30,
+              height: 20,
             ),
             const ProfileInfoWidget(
               preIcon: Icons.person,
@@ -47,8 +49,12 @@ class ProfileView extends StatelessWidget {
               value: "*********",
             ),
             const MyDivider(),
-            GestureDetector(
-              onTap: () {},
+            InkWell(
+              onTap: () {
+                GoRouter.of(context).push(AppRouter.userOrdersView);
+              },
+              overlayColor: WidgetStateColor.transparent,
+              borderRadius: BorderRadius.circular(16),
               child: const ProfileInfoWidget(
                 preIcon: Icons.card_travel,
                 label: "Your Orders",
@@ -69,72 +75,11 @@ class MyDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(
-          height: 12,
-        ),
-        Divider(
-          thickness: 0.5,
-          endIndent: 20,
-          indent: 20,
-          color: Colors.grey.withAlpha(50),
-        ),
-        const SizedBox(
-          height: 12,
-        ),
-      ],
-    );
-  }
-}
-
-class ProfileInfoWidget extends StatelessWidget {
-  const ProfileInfoWidget({
-    super.key,
-    required this.preIcon,
-    required this.label,
-    required this.value,
-  });
-
-  final IconData preIcon;
-  final String label;
-  final String value;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Icon(
-          preIcon,
-          color: AppColorsLight.primaryColor,
-          size: 26,
-        ),
-        const SizedBox(width: 12),
-        Text(
-          label,
-          style: Theme.of(context)
-              .textTheme
-              .bodyLarge!
-              .copyWith(fontFamily: "Carmen", fontWeight: FontWeight.bold),
-        ),
-        const Spacer(),
-        Text(
-          value,
-          style: Theme.of(context)
-              .textTheme
-              .bodyMedium!
-              .copyWith(fontFamily: "Carmen", color: Colors.grey),
-        ),
-        const SizedBox(
-          width: 12,
-        ),
-        const Icon(
-          Icons.arrow_forward_ios,
-          color: Colors.grey,
-          size: 20,
-        ),
-      ],
+    return Divider(
+      thickness: 0.5,
+      endIndent: 20,
+      indent: 20,
+      color: Colors.grey.withAlpha(50),
     );
   }
 }
