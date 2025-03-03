@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smart_cart_app/core/routing/app_router.dart';
-import 'package:smart_cart_app/features/home/data/models/cart_product_model/cart_product_model.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_states.dart';
 import 'package:smart_cart_app/features/rating/presentation/views/widgets/rate_product_list_view_item.dart';
@@ -17,8 +16,6 @@ class RateProductsViewBody extends StatelessWidget {
         GoRouter.of(context).go(AppRouter.homeView);
       }
     }, builder: (context, state) {
-      final List<CartProductModel> products =
-          HomeCubit.get(context).cartProducts;
       return SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -35,13 +32,11 @@ class RateProductsViewBody extends StatelessWidget {
                       const SizedBox(height: 8),
                   itemBuilder: (context, index) => ClipRRect(
                     borderRadius: BorderRadius.circular(15),
-                    child: RateProductListViewItem(
-                      cartProductModel: products[index],
-                    ),
+                    child: const RateProductListViewItem(),
                   ),
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: products.length,
+                  itemCount: 5,
                 ),
                 // ListView.builder(
                 //   itemBuilder: (context, index) =>
