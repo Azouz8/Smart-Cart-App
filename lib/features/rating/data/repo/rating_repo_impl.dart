@@ -4,7 +4,6 @@ import 'package:smart_cart_app/features/rating/data/models/order_model/order_mod
 import 'package:smart_cart_app/features/rating/data/repo/rating_repo.dart';
 import '../../../../core/networking/api/api_service.dart';
 import '../../../../core/networking/errors/exceptions.dart';
-import '../models/rating_model/rating_model.dart';
 
 class RatingRepoImpl extends RatingRepo {
   final ApiService apiService;
@@ -27,7 +26,8 @@ class RatingRepoImpl extends RatingRepo {
 
   @override
   Future<Either<String, Map<String, dynamic>>> postUserRatings(
-      {required List<RatingModel> ratings, required String orderID}) async {
+      {required List<Map<String, dynamic>> ratings,
+      required String orderID}) async {
     try {
       var response =
           await apiService.postRatings(ratings: ratings, orderID: orderID);

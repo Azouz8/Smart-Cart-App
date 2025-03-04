@@ -26,9 +26,11 @@ class UserOrdersViewBody extends StatelessWidget {
               const CustomHomeAppBar(title: "Your Orders"),
               if (state is RatingGetUserOrdersLoading)
                 const Center(child: CircularProgressIndicator()),
-              if (state is RatingGetUserOrdersSuccess)
+              if (state is RatingGetUserOrdersSuccess ||
+                  state is RatingPostUserRatingsSuccess)
                 Expanded(
                   child: ListView.separated(
+                    physics: const BouncingScrollPhysics(),
                     itemCount: cubit.orders.length,
                     itemBuilder: (context, index) => UserOrdersListViewItem(
                       orderModel: cubit.orders[index],

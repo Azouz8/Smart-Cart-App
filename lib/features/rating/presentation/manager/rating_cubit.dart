@@ -12,7 +12,7 @@ class RatingCubit extends Cubit<RatingState> {
   final RatingRepo ratingRepo;
   List<OrderModel> orders = [];
   List<Product> ordersProducts = [];
-  List<Map<String, dynamic>> ratingList = [];
+  List<RatingModel> ratingList = [];
 
   Future<void> gerUserOrders() async {
     emit(RatingGetUserOrdersLoading());
@@ -32,8 +32,9 @@ class RatingCubit extends Cubit<RatingState> {
   Future<void> postUserRatings(
       {required List<RatingModel> ratings, required String orderID}) async {
     emit(RatingPostUserRatingsLoading());
+     List<Map<String, dynamic>> ratingsJson = ratingList.map((rating) => rating.toJson()).toList();
     var result =
-        await ratingRepo.postUserRatings(ratings: ratings, orderID: orderID);
+        await ratingRepo.postUserRatings(ratings: ratingsJson, orderID: orderID);
     result.fold((failure) {
       emit(RatingPostUserRatingsFailure(failure));
     }, (result) {
@@ -41,16 +42,15 @@ class RatingCubit extends Cubit<RatingState> {
     });
   }
 
-  void updateRatingList(String productID, String rating) {
-    int index = ratingList.indexWhere((map) => map['productID'] == productID);
+  void updateRatingList(String productID, int userRating) {
+    int index =
+        ratingList.indexWhere((rating) => rating.productID == productID);
 
     if (index != -1) {
-      ratingList[index]['userRating'] = rating;
+      ratingList[index] =
+          RatingModel(productID: productID, userRating: userRating);
     } else {
-      ratingList.add({
-        'productID': productID,
-        'userRating': rating,
-      });
+      ratingList.add(RatingModel(productID: productID, userRating: userRating));
     }
   }
 }

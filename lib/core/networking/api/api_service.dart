@@ -2,8 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:smart_cart_app/core/networking/api/api_consts.dart';
 import 'package:smart_cart_app/core/networking/api/api_consumer.dart';
 import 'package:smart_cart_app/features/checkout/data/models/payment_intent_input_model/payment_intent_input_model.dart';
-import 'package:smart_cart_app/features/rating/data/models/rating_model/rating_model.dart';
-
 import '../../../features/checkout/data/models/transaction_model/transaction_model.dart';
 
 class ApiService {
@@ -164,7 +162,7 @@ class ApiService {
   }
 
   postRatings({
-    required List<RatingModel> ratings,
+    required List<Map<String, dynamic>> ratings,
     required String orderID,
   }) async {
     var response = await api.post(
