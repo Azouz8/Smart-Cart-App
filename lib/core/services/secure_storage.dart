@@ -8,7 +8,6 @@ class SecureStorage {
 
   readData({required String key}) async {
     String value = await storage.read(key: key) ?? "";
-    print(value);
     return value;
   }
 
@@ -18,5 +17,5 @@ class SecureStorage {
 }
 
 class SecureStorageKeys {
-  static const token = "token";
+  static const refreshToken = "refreshToken";
 }

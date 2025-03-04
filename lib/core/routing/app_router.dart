@@ -15,8 +15,13 @@ import 'package:smart_cart_app/features/checkout/presentation/views/thank_you_vi
 import 'package:smart_cart_app/features/home/presentation/views/home_view.dart';
 import 'package:smart_cart_app/features/home/presentation/views/scan_qr_view.dart';
 import 'package:smart_cart_app/features/rating/data/models/order_model/order_model.dart';
-import 'package:smart_cart_app/features/rating/presentation/views/user_orders_view.dart';
 import 'package:smart_cart_app/features/rating/presentation/views/rate_products_view.dart';
+import 'package:smart_cart_app/features/rating/presentation/views/user_orders_view.dart';
+
+class NavigationService {
+  static final GlobalKey<NavigatorState> navigatorKey =
+      GlobalKey<NavigatorState>();
+}
 
 abstract class AppRouter {
   static const homeView = "/homeView";
@@ -32,158 +37,163 @@ abstract class AppRouter {
   static const categoriesView = "/categoriesView";
   static const userOrdersView = "/userOrdersView";
 
-  static final router = GoRouter(routes: [
-    GoRoute(
-      path: "/",
-      builder: (context, state) => LoginView(),
-    ),
-    GoRoute(
-      path: loginView,
-      builder: (context, state) => LoginView(),
-    ),
-    GoRoute(
-      path: registerView,
-      pageBuilder: (context, state) => CustomTransitionPage(
-        child: const RegisterView(),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          const begin = Offset(1.0, 0.0);
-          const end = Offset.zero;
-          const curve = Curves.ease;
-          var tween =
-              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-          return SlideTransition(
-            position: animation.drive(tween),
-            child: child,
-          );
-        },
+  static final router = GoRouter(
+    navigatorKey: NavigationService.navigatorKey,
+    routes: [
+      GoRoute(
+        path: "/",
+        builder: (context, state) => LoginView(),
       ),
-    ),
-    GoRoute(
-      path: userOrdersView,
-      pageBuilder: (context, state) => CustomTransitionPage(
-        child: const UserOrdersView(),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          const begin = Offset(1.0, 0.0);
-          const end = Offset.zero;
-          const curve = Curves.ease;
-          var tween =
-              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-          return SlideTransition(
-            position: animation.drive(tween),
-            child: child,
-          );
-        },
+      GoRoute(
+        path: loginView,
+        builder: (context, state) => LoginView(),
       ),
-    ),
-    GoRoute(
-      path: homeView,
-      pageBuilder: (context, state) => CustomTransitionPage(
-        child: const HomeView(),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          const begin = Offset(1.0, 0);
-          const end = Offset.zero;
-          const curve = Curves.ease;
-          var tween =
-              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-          return SlideTransition(
-            position: animation.drive(tween),
-            child: child,
-          );
-        },
-      ),
-    ),
-    GoRoute(
-      path: verificationView,
-      builder: (context, state) => const VerificationView(),
-    ),
-    GoRoute(
-      path: passwordRecoveryView,
-      builder: (context, state) => PasswordRecoveryView(),
-      pageBuilder: (context, state) => CustomTransitionPage(
-        child: PasswordRecoveryView(),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          const begin = Offset(1.0, 0.0);
-          const end = Offset.zero;
-          const curve = Curves.ease;
-          var tween =
-              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-          return SlideTransition(
-            position: animation.drive(tween),
-            child: child,
-          );
-        },
-      ),
-    ),
-    GoRoute(
-      path: scanQRCodeView,
-      pageBuilder: (context, state) => CustomTransitionPage(
-        child: BlocProvider(
-          create: (context) => CategoryCubit(getIt.get<CategoryRepoImpl>()),
-          child: ScanQrView(),
+      GoRoute(
+        path: registerView,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          child: const RegisterView(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(1.0, 0.0);
+            const end = Offset.zero;
+            const curve = Curves.ease;
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            return SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            );
+          },
         ),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          final scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-            CurvedAnimation(parent: animation, curve: Curves.easeInOut),
-          );
-          final fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-            CurvedAnimation(parent: animation, curve: Curves.easeInOut),
-          );
-          return ScaleTransition(
-            scale: scaleAnimation,
-            child: FadeTransition(opacity: fadeAnimation, child: child),
-          );
-        },
       ),
-    ),
-    GoRoute(
-      path: checkoutCartView,
-      builder: (context, state) => const CheckoutCartView(),
-    ),
-    GoRoute(
-      path: paymentDetailsView,
-      builder: (context, state) => const PaymentDetailsView(),
-    ),
-    GoRoute(
-      path: thankYouView,
-      builder: (context, state) => const ThankYouView(),
-    ),
-    GoRoute(
-      path: rateProductsView,
-      pageBuilder: (context, state) => CustomTransitionPage(
-        child:  RateProductsView(orderModel: state.extra as OrderModel,),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          const begin = Offset(1.0, 0.0);
-          const end = Offset.zero;
-          const curve = Curves.ease;
-          var tween =
-              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-          return SlideTransition(
-            position: animation.drive(tween),
-            child: child,
-          );
-        },
-      ),
-    ),
-    GoRoute(
-      path: categoriesView,
-      pageBuilder: (context, state) => CustomTransitionPage(
-        child: BlocProvider(
-          create: (context) => CategoryCubit(getIt.get<CategoryRepoImpl>()),
-          child: const CategoriesView(),
+      GoRoute(
+        path: userOrdersView,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          child: const UserOrdersView(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(1.0, 0.0);
+            const end = Offset.zero;
+            const curve = Curves.ease;
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            return SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            );
+          },
         ),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          final scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-            CurvedAnimation(parent: animation, curve: Curves.easeInOut),
-          );
-          final fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-            CurvedAnimation(parent: animation, curve: Curves.easeInOut),
-          );
-          return ScaleTransition(
-            scale: scaleAnimation,
-            child: FadeTransition(opacity: fadeAnimation, child: child),
-          );
-        },
       ),
-    ),
-  ]);
+      GoRoute(
+        path: homeView,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          child: const HomeView(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(1.0, 0);
+            const end = Offset.zero;
+            const curve = Curves.ease;
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            return SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            );
+          },
+        ),
+      ),
+      GoRoute(
+        path: verificationView,
+        builder: (context, state) => const VerificationView(),
+      ),
+      GoRoute(
+        path: passwordRecoveryView,
+        builder: (context, state) => PasswordRecoveryView(),
+        pageBuilder: (context, state) => CustomTransitionPage(
+          child: PasswordRecoveryView(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(1.0, 0.0);
+            const end = Offset.zero;
+            const curve = Curves.ease;
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            return SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            );
+          },
+        ),
+      ),
+      GoRoute(
+        path: scanQRCodeView,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          child: BlocProvider(
+            create: (context) => CategoryCubit(getIt.get<CategoryRepoImpl>()),
+            child: ScanQrView(),
+          ),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            final scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+              CurvedAnimation(parent: animation, curve: Curves.easeInOut),
+            );
+            final fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+              CurvedAnimation(parent: animation, curve: Curves.easeInOut),
+            );
+            return ScaleTransition(
+              scale: scaleAnimation,
+              child: FadeTransition(opacity: fadeAnimation, child: child),
+            );
+          },
+        ),
+      ),
+      GoRoute(
+        path: checkoutCartView,
+        builder: (context, state) => const CheckoutCartView(),
+      ),
+      GoRoute(
+        path: paymentDetailsView,
+        builder: (context, state) => const PaymentDetailsView(),
+      ),
+      GoRoute(
+        path: thankYouView,
+        builder: (context, state) => const ThankYouView(),
+      ),
+      GoRoute(
+        path: rateProductsView,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          child: RateProductsView(
+            orderModel: state.extra as OrderModel,
+          ),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(1.0, 0.0);
+            const end = Offset.zero;
+            const curve = Curves.ease;
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            return SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            );
+          },
+        ),
+      ),
+      GoRoute(
+        path: categoriesView,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          child: BlocProvider(
+            create: (context) => CategoryCubit(getIt.get<CategoryRepoImpl>()),
+            child: const CategoriesView(),
+          ),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            final scaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+              CurvedAnimation(parent: animation, curve: Curves.easeInOut),
+            );
+            final fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+              CurvedAnimation(parent: animation, curve: Curves.easeInOut),
+            );
+            return ScaleTransition(
+              scale: scaleAnimation,
+              child: FadeTransition(opacity: fadeAnimation, child: child),
+            );
+          },
+        ),
+      ),
+    ],
+  );
 }

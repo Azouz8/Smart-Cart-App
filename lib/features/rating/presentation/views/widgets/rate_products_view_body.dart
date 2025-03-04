@@ -5,6 +5,7 @@ import 'package:smart_cart_app/core/services/helper_functions.dart';
 import 'package:smart_cart_app/features/rating/data/models/order_model/order_model.dart';
 import 'package:smart_cart_app/features/rating/presentation/manager/rating_cubit.dart';
 import 'package:smart_cart_app/features/rating/presentation/views/widgets/rate_product_list_view_item.dart';
+
 import '../../../../home/presentation/views/widgets/custom_home_app_bar.dart';
 
 class RateProductsViewBody extends StatelessWidget {
@@ -23,6 +24,7 @@ class RateProductsViewBody extends StatelessWidget {
       }
     }, builder: (context, state) {
       var cubit = RatingCubit.get(context);
+      cubit.initRatingList(orderModel.products!);
       return SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),

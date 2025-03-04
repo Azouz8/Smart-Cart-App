@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_cart_app/core/services/helper_functions.dart';
 import 'package:smart_cart_app/features/rating/presentation/manager/rating_cubit.dart';
+
 import '../../../../home/presentation/views/widgets/custom_home_app_bar.dart';
 import 'user_orders_list_view_item.dart';
 
@@ -25,7 +26,15 @@ class UserOrdersViewBody extends StatelessWidget {
             children: [
               const CustomHomeAppBar(title: "Your Orders"),
               if (state is RatingGetUserOrdersLoading)
-                const Center(child: CircularProgressIndicator()),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Align(
+                        alignment: Alignment.center,
+                        heightFactor: MediaQuery.sizeOf(context).height * 0.02,
+                        child: const CircularProgressIndicator()),
+                  ],
+                ),
               if (state is RatingGetUserOrdersSuccess ||
                   state is RatingPostUserRatingsSuccess)
                 Expanded(

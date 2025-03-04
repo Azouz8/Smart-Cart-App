@@ -25,6 +25,12 @@ class RatingCubit extends Cubit<RatingState> {
     });
   }
 
+  void initRatingList(List<Product> products) {
+    ratingList = products.map((product) {
+      return RatingModel(productID: product.productId, userRating: 3);
+    }).toList();
+  }
+
   getUserOrderProducts({required int index}) {
     ordersProducts = orders[index].products!;
   }
@@ -32,9 +38,10 @@ class RatingCubit extends Cubit<RatingState> {
   Future<void> postUserRatings(
       {required List<RatingModel> ratings, required String orderID}) async {
     emit(RatingPostUserRatingsLoading());
-     List<Map<String, dynamic>> ratingsJson = ratingList.map((rating) => rating.toJson()).toList();
-    var result =
-        await ratingRepo.postUserRatings(ratings: ratingsJson, orderID: orderID);
+    List<Map<String, dynamic>> ratingsJson =
+        ratingList.map((rating) => rating.toJson()).toList();
+    var result = await ratingRepo.postUserRatings(
+        ratings: ratingsJson, orderID: orderID);
     result.fold((failure) {
       emit(RatingPostUserRatingsFailure(failure));
     }, (result) {

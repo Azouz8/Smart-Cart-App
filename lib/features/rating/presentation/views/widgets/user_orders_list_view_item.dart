@@ -38,7 +38,7 @@ class UserOrdersListViewItem extends StatelessWidget {
                       itemBuilder: (context, index) => UserOrderImageItem(
                         imageUrl: orderModel.products?[index].image,
                       ),
-                      itemCount: 2,
+                      itemCount: orderModel.products!.length > 1 ? 2 : 1,
                       separatorBuilder: (BuildContext context, int index) =>
                           const SizedBox(width: 12),
                     ),
@@ -58,7 +58,9 @@ class UserOrdersListViewItem extends StatelessWidget {
                           .copyWith(color: Colors.green),
                     ),
                     const Spacer(),
-                    Text("+${orderModel.products!.length - 2} more"),
+                    orderModel.products!.length > 1
+                        ? Text("+${orderModel.products!.length - 2} more")
+                        : Text("+${orderModel.products!.length - 1} more"),
                   ],
                 ),
               ),

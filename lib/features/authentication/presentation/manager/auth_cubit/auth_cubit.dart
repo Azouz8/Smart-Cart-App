@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_cart_app/core/services/cache_helper.dart';
+import 'package:smart_cart_app/core/services/secure_storage.dart';
 import 'package:smart_cart_app/features/authentication/data/repos/auth_repo.dart';
 
 import 'auth_states.dart';
@@ -74,7 +75,9 @@ class AuthCubit extends Cubit<AuthStates> {
       emit(AuthLoginFailure(failure));
     }, (loginModel) {
       CacheHelper.putString(
-          key: CacheHelperKeys.token, value: loginModel.token!);
+          key: CacheHelperKeys.token, value: loginModel.accessToken!);
+      SecureStorage().writeData(
+          key: SecureStorageKeys.refreshToken, value: loginModel.refreshToken!);
       CacheHelper.putString(key: CacheHelperKeys.userID, value: loginModel.id!);
       emit(AuthLoginSuccess(loginModel));
     });

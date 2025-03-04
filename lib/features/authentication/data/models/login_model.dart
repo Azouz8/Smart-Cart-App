@@ -1,13 +1,15 @@
 class LoginModel {
   LoginModel({
-    String? token,
+    String? accessToken,
+    String? refreshToken,
     String? id,
     String? name,
     String? email,
     bool? isAdmin,
     String? lastLogin,
   }) {
-    _token = token;
+    _accessToken = accessToken;
+    _accessToken = accessToken;
     _id = id;
     _name = name;
     _email = email;
@@ -16,21 +18,26 @@ class LoginModel {
   }
 
   LoginModel.fromJson(dynamic json) {
-    _token = json['token'];
+    _accessToken = json['accessToken'];
+    _refreshToken = json['refreshToken'];
     _id = json['_id'];
     _name = json['name'];
     _email = json['email'];
     _isAdmin = json['isAdmin'];
     _lastLogin = json['lastLogin'];
   }
-  String? _token;
+
+  String? _accessToken;
+  String? _refreshToken;
   String? _id;
   String? _name;
   String? _email;
   bool? _isAdmin;
   String? _lastLogin;
 
-  String? get token => _token;
+  String? get accessToken => _accessToken;
+
+  String? get refreshToken => _refreshToken;
   String? get id => _id;
   String? get name => _name;
   String? get email => _email;
@@ -39,7 +46,8 @@ class LoginModel {
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['token'] = _token;
+    map['accessToken'] = _accessToken;
+    map['refreshToken'] = _refreshToken;
     map['_id'] = _id;
     map['name'] = _name;
     map['email'] = _email;

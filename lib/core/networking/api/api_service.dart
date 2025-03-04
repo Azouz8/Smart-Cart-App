@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:smart_cart_app/core/networking/api/api_consts.dart';
 import 'package:smart_cart_app/core/networking/api/api_consumer.dart';
 import 'package:smart_cart_app/features/checkout/data/models/payment_intent_input_model/payment_intent_input_model.dart';
+
 import '../../../features/checkout/data/models/transaction_model/transaction_model.dart';
 
 class ApiService {
@@ -58,12 +59,6 @@ class ApiService {
   logOut() async {
     var response = await api
         .post('${ApiConsts.apiBaseUrl}${ApiConsts.auth}${ApiConsts.logout}');
-    return response;
-  }
-
-  refreshToken({required String token}) async {
-    var response = await api.post(
-        '${ApiConsts.apiBaseUrl}${ApiConsts.auth}${ApiConsts.refreshToken}');
     return response;
   }
 
