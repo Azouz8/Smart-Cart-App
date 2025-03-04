@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smart_cart_app/core/routing/app_router.dart';
+import 'package:smart_cart_app/features/rating/data/models/order_model/order_model.dart';
 import 'user_order_image_item.dart';
 
 class UserOrdersListViewItem extends StatelessWidget {
-  const UserOrdersListViewItem({
-    super.key,
-  });
+  const UserOrdersListViewItem({super.key, required this.orderModel});
+  final OrderModel orderModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push(AppRouter.rateProductsView);
+        GoRouter.of(context)
+            .push(AppRouter.rateProductsView, extra: orderModel);
       },
       child: SizedBox(
-        height: MediaQuery.sizeOf(context).height * 0.2,
+        height: MediaQuery.sizeOf(context).height * 0.22,
         child: Container(
           margin: const EdgeInsets.only(bottom: 0),
           padding: const EdgeInsets.all(16),
@@ -24,6 +25,7 @@ class UserOrdersListViewItem extends StatelessWidget {
           ),
           child: Column(
             children: [
+              Text(orderModel.orderId!),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -33,8 +35,9 @@ class UserOrdersListViewItem extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) =>
-                          const UserOrderImageItem(),
+                      itemBuilder: (context, index) => UserOrderImageItem(
+                        imageUrl: orderModel.products?[index].image,
+                      ),
                       itemCount: 2,
                       separatorBuilder: (BuildContext context, int index) =>
                           const SizedBox(width: 12),
@@ -48,14 +51,14 @@ class UserOrdersListViewItem extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      "\$1832",
+                      "\$${orderModel.totalPrice}",
                       style: Theme.of(context)
                           .textTheme
                           .labelMedium!
                           .copyWith(color: Colors.green),
                     ),
                     const Spacer(),
-                    const Text("+3 more"),
+                    Text("+${orderModel.products!.length - 2} more"),
                   ],
                 ),
               ),

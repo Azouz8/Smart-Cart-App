@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class CustomSubmitButton extends StatelessWidget {
-   const CustomSubmitButton({
+  const CustomSubmitButton({
     super.key,
     required this.title,
-    this.onPressed, this.isLoading = false,
+    this.onPressed,
+    this.isLoading = false,
   });
 
   final String title;

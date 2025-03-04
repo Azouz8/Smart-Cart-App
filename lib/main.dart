@@ -12,7 +12,8 @@ import 'package:smart_cart_app/features/checkout/presentation/manager/checkout_c
 import 'package:smart_cart_app/features/home/data/repos/home_repo_impl.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/layout_cubit/layout_cubit.dart';
-
+import 'package:smart_cart_app/features/rating/data/repo/rating_repo_impl.dart';
+import 'package:smart_cart_app/features/rating/presentation/manager/rating_cubit.dart';
 import 'core/routing/app_router.dart';
 import 'core/services/bloc_observer.dart';
 
@@ -41,6 +42,8 @@ class SmartCart extends StatelessWidget {
         BlocProvider(create: (context) => HomeCubit(getIt.get<HomeRepoImpl>())),
         BlocProvider(
             create: (context) => CheckoutCubit(getIt.get<CheckoutRepoImpl>())),
+        BlocProvider(
+            create: (context) => RatingCubit(getIt.get<RatingRepoImpl>())),
       ],
       child: ScreenUtilInit(
         designSize: const Size(380, 700),

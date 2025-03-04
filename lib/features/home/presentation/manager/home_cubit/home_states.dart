@@ -50,7 +50,6 @@ class HomeGetCartProductsSuccess extends HomeStates {
   HomeGetCartProductsSuccess(this.products);
 }
 
-
 class HomeDeleteProductLoading extends HomeStates {}
 
 class HomeDeleteProductFailure extends HomeStates {

@@ -5,8 +5,9 @@ import 'package:flutter_svg/svg.dart';
 class UserOrderImageItem extends StatelessWidget {
   const UserOrderImageItem({
     super.key,
+    required this.imageUrl,
   });
-
+  final String? imageUrl;
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
@@ -14,7 +15,7 @@ class UserOrderImageItem extends StatelessWidget {
       child: AspectRatio(
         aspectRatio: 0.95,
         child: CachedNetworkImage(
-          imageUrl: "",
+          imageUrl: imageUrl ?? "",
           errorWidget: (context, url, error) => SvgPicture.asset(
             "assets/images/ImagePlaceholder.svg",
             width: MediaQuery.sizeOf(context).width * 0.22,

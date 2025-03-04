@@ -14,7 +14,8 @@ import 'package:smart_cart_app/features/checkout/presentation/views/payment_deta
 import 'package:smart_cart_app/features/checkout/presentation/views/thank_you_view.dart';
 import 'package:smart_cart_app/features/home/presentation/views/home_view.dart';
 import 'package:smart_cart_app/features/home/presentation/views/scan_qr_view.dart';
-import 'package:smart_cart_app/features/home/presentation/views/user_orders_view.dart';
+import 'package:smart_cart_app/features/rating/data/models/order_model/order_model.dart';
+import 'package:smart_cart_app/features/rating/presentation/views/user_orders_view.dart';
 import 'package:smart_cart_app/features/rating/presentation/views/rate_products_view.dart';
 
 abstract class AppRouter {
@@ -34,7 +35,7 @@ abstract class AppRouter {
   static final router = GoRouter(routes: [
     GoRoute(
       path: "/",
-      builder: (context, state) => const HomeView(),
+      builder: (context, state) => LoginView(),
     ),
     GoRoute(
       path: loginView,
@@ -148,7 +149,20 @@ abstract class AppRouter {
     ),
     GoRoute(
       path: rateProductsView,
-      builder: (context, state) => const RateProductsView(),
+      pageBuilder: (context, state) => CustomTransitionPage(
+        child:  RateProductsView(orderModel: state.extra as OrderModel,),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(1.0, 0.0);
+          const end = Offset.zero;
+          const curve = Curves.ease;
+          var tween =
+              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          return SlideTransition(
+            position: animation.drive(tween),
+            child: child,
+          );
+        },
+      ),
     ),
     GoRoute(
       path: categoriesView,

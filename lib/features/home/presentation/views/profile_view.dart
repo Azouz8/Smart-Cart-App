@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smart_cart_app/core/routing/app_router.dart';
 import 'package:smart_cart_app/features/home/presentation/views/widgets/custom_home_app_bar.dart';
+import 'package:smart_cart_app/features/rating/presentation/manager/rating_cubit.dart';
 import 'widgets/profile_info_widget.dart';
 
 class ProfileView extends StatelessWidget {
@@ -51,6 +52,7 @@ class ProfileView extends StatelessWidget {
             const MyDivider(),
             InkWell(
               onTap: () {
+                RatingCubit.get(context).gerUserOrders();
                 GoRouter.of(context).push(AppRouter.userOrdersView);
               },
               overlayColor: WidgetStateColor.transparent,

@@ -2,14 +2,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:smart_cart_app/features/rating/data/models/order_model/product.dart';
 import 'rating_bar_widget.dart';
 
 class RateProductListViewItem extends StatelessWidget {
   const RateProductListViewItem({
     super.key,
-    // required this.cartProductModel,
+    required this.products,
   });
-  // final CartProductModel cartProductModel;
+  final Product products;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -25,7 +27,7 @@ class RateProductListViewItem extends StatelessWidget {
                 child: AspectRatio(
                   aspectRatio: 0.95,
                   child: CachedNetworkImage(
-                    imageUrl:  "",
+                    imageUrl: products.image ?? "",
                     errorWidget: (context, url, error) => SvgPicture.asset(
                       "assets/images/ImagePlaceholder.svg",
                       width: MediaQuery.sizeOf(context).width * 0.22,
@@ -45,14 +47,14 @@ class RateProductListViewItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "cartProductModel.productID!.title!",
+                      products.title!,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           fontFamily: "Carmen", fontWeight: FontWeight.bold),
                     ),
                     RatingBarWidget(
-                      prodID: "cartProductModel.productID!.id!",
+                      prodID: products.productId!,
                     )
                   ],
                 ),

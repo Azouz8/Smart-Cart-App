@@ -17,7 +17,6 @@ class RatingModel {
 
   String? get productID => _productID;
 
-
   int? get userRating => _userRating;
 
   Map<String, dynamic> toJson() {

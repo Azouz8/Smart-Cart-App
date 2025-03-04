@@ -1,11 +1,14 @@
 class PostCategoriesModel {
   PostCategoriesModel({
-      List<String>? likedCategories,}){
+    List<String>? likedCategories,
+  }) {
     _likedCategories = likedCategories;
-}
+  }
 
   PostCategoriesModel.fromJson(dynamic json) {
-    _likedCategories = json['likedCategories'] != null ? json['likedCategories'].cast<String>() : [];
+    _likedCategories = json['likedCategories'] != null
+        ? json['likedCategories'].cast<String>()
+        : [];
   }
   List<String>? _likedCategories;
 
@@ -16,5 +19,4 @@ class PostCategoriesModel {
     map['likedCategories'] = _likedCategories;
     return map;
   }
-
 }
