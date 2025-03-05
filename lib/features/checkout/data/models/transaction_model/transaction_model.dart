@@ -4,7 +4,7 @@ class TransactionModel {
   TransactionModel({
     List<Products>? products,
     String? stripeSessionId,
-    String? totalAmount,
+    int? totalAmount,
     String? paymentMethod,
     String? visa,
   }) {
@@ -30,7 +30,7 @@ class TransactionModel {
 
   List<Products>? _products;
   String? _stripeSessionId;
-  String? _totalAmount;
+  int? _totalAmount;
   String? _paymentMethod;
   String? _visa;
 
@@ -38,7 +38,7 @@ class TransactionModel {
 
   String? get stripeSessionId => _stripeSessionId;
 
-  String? get totalAmount => _totalAmount;
+  int? get totalAmount => _totalAmount;
 
   String? get paymentMethod => _paymentMethod;
 

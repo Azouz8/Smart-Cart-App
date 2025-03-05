@@ -15,7 +15,7 @@ class ThankYouPaymentMethodInfo extends StatelessWidget {
     return BlocBuilder<CheckoutCubit, CheckoutStates>(
         builder: (context, state) {
       var cubit = CheckoutCubit.get(context);
-      if (state is CheckoutSuccess) {
+      if (state is CheckoutSuccess || state is CheckoutPostTransactionSuccess) {
         return Container(
           height: 80.h,
           padding: const EdgeInsets.all(20),
@@ -48,8 +48,8 @@ class ThankYouPaymentMethodInfo extends StatelessWidget {
           ),
         );
       }
-      return const Center(
-        child: CircularProgressIndicator(),
+      return Center(
+        child: SizedBox(height: 80.h, child: const CircularProgressIndicator()),
       );
     });
   }

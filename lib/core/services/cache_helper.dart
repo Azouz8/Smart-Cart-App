@@ -34,4 +34,6 @@ class CacheHelperKeys {
   static const String cartID = "cartID";
   static const String userID = "userID";
   static const String token = "token";
+  static const String stripeCustomerId = "stripeCustomerId";
+  static const String stripeSessionId = "stripeSessionId";
 }

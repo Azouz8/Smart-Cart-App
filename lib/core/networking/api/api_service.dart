@@ -3,8 +3,6 @@ import 'package:smart_cart_app/core/networking/api/api_consts.dart';
 import 'package:smart_cart_app/core/networking/api/api_consumer.dart';
 import 'package:smart_cart_app/features/checkout/data/models/payment_intent_input_model/payment_intent_input_model.dart';
 
-import '../../../features/checkout/data/models/transaction_model/transaction_model.dart';
-
 class ApiService {
   final ApiConsumer api;
 
@@ -120,6 +118,9 @@ class ApiService {
         "${ApiConsts.stripeBaseUrl}${ApiConsts.stripePaymentIntent}",
         data: paymentIntentInputModel.toJson(),
         token: ApiConsts.stripeToken,
+        headers: {
+          "authorization": "Bearer ${ApiConsts.stripeToken}",
+        },
         contentType: Headers.formUrlEncodedContentType);
     return response;
   }
@@ -145,6 +146,9 @@ class ApiService {
     var response = await api.get(
       "${ApiConsts.stripeBaseUrl}${ApiConsts.paymentMethods}/$paymentId",
       token: ApiConsts.stripeToken,
+      headers: {
+        "authorization": "Bearer ${ApiConsts.stripeToken}",
+      },
     );
     return response;
   }
@@ -168,7 +172,7 @@ class ApiService {
   }
 
   postTransaction({
-    required TransactionModel transaction,
+    required Map<String,dynamic> transaction,
   }) async {
     var response = await api.post(
       "${ApiConsts.apiBaseUrl}${ApiConsts.transaction}${ApiConsts.saveTransactions}",

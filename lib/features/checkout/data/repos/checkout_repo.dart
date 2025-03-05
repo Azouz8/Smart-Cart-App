@@ -1,6 +1,5 @@
 import 'package:either_dart/either.dart';
 import 'package:smart_cart_app/features/checkout/data/models/payment_method_info/payment_method_info.dart';
-import 'package:smart_cart_app/features/checkout/data/models/transaction_model/transaction_model.dart';
 import '../models/payment_intent_input_model/payment_intent_input_model.dart';
 
 abstract class CheckoutRepo {
@@ -11,5 +10,5 @@ abstract class CheckoutRepo {
       {required String clientSecret});
 
   Future<Either<String, Map<String, dynamic>>> postTransaction(
-      {required TransactionModel transaction});
+      {required Map<String,dynamic> transaction});
 }

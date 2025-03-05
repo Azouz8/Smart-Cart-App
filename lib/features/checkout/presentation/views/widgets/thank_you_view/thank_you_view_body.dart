@@ -36,12 +36,6 @@ class ThankYouViewBody extends StatelessWidget {
                     route: AppRouter.homeView,
                   ),
                 ),
-                Expanded(
-                  child: CustomButton(
-                    title: "Rate Products",
-                    route: AppRouter.rateProductsView,
-                  ),
-                ),
               ],
             ),
           ),

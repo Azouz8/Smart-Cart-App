@@ -1,12 +1,11 @@
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:smart_cart_app/core/networking/api/api_service.dart';
+import 'package:smart_cart_app/core/services/cache_helper.dart';
 import 'package:smart_cart_app/features/checkout/data/models/ephemeral_key_model/ephemeral_key_model.dart';
 import 'package:smart_cart_app/features/checkout/data/models/init_payment_sheet_input_model/init_payment_sheet_input_model.dart';
 import 'package:smart_cart_app/features/checkout/data/models/payment_intent_input_model/payment_intent_input_model.dart';
 import 'package:smart_cart_app/features/checkout/data/models/payment_intent_model/payment_intent_model.dart';
 import 'package:smart_cart_app/features/checkout/data/models/payment_method_info/payment_method_info.dart';
-
-import '../../features/checkout/data/models/transaction_model/transaction_model.dart';
 
 class StripeService {
   ApiService apiService;
@@ -68,10 +67,12 @@ class StripeService {
     await initPaymentSheet(
         initPaymentSheetInputModel: initPaymentSheetInputModel);
     await displayPaymentSheet();
+    CacheHelper.putString(
+        key: CacheHelperKeys.stripeSessionId, value: paymentIntentModel.id!);
     return await retrievePaymentInfo(paymentIntentModel.clientSecret!);
   }
 
-  Future postUserTransaction({required TransactionModel transaction}) async {
+  Future postUserTransaction({required Map<String,dynamic> transaction}) async {
     var response = await apiService.postTransaction(transaction: transaction);
     return response;
   }

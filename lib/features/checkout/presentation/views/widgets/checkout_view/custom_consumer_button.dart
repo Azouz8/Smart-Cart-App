@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:smart_cart_app/core/networking/api/api_consts.dart';
 import 'package:smart_cart_app/core/routing/app_router.dart';
 import 'package:smart_cart_app/core/services/cache_helper.dart';
 import 'package:smart_cart_app/core/services/helper_functions.dart';
 import 'package:smart_cart_app/features/checkout/data/models/payment_intent_input_model/payment_intent_input_model.dart';
+import 'package:smart_cart_app/features/checkout/data/models/transaction_model/transaction_model.dart';
 import 'package:smart_cart_app/features/checkout/presentation/manager/checkout_cubit.dart';
 import 'package:smart_cart_app/features/checkout/presentation/manager/checkout_states.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
@@ -20,11 +20,26 @@ class CustomConsumerButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<CheckoutCubit, CheckoutStates>(
         listener: (context, state) {
+      var cubit = CheckoutCubit.get(context);
       if (state is CheckoutSuccess) {
         var userID = CacheHelper.getString(key: CacheHelperKeys.userID);
         var cartID = CacheHelper.getString(key: CacheHelperKeys.cartID);
+        cubit
+            .getCartProductsForTransaction(HomeCubit.get(context).cartProducts);
+        cubit.postUserTransaction(
+          transaction: TransactionModel(
+            products: cubit.cartProducts,
+            paymentMethod:
+                cubit.paymentMethodInfo.card!.brand![0].toUpperCase() +
+                    cubit.paymentMethodInfo.card!.brand!.substring(1),
+            stripeSessionId:
+                CacheHelper.getString(key: CacheHelperKeys.stripeSessionId),
+            visa: cubit.paymentMethodInfo.card!.last4,
+            totalAmount: int.parse(HomeCubit.get(context).totalPrice),
+          ),
+        );
         HomeCubit.get(context).removeUserFromCart(cartID!, userID!);
-        GoRouter.of(context).push(AppRouter.thankYouView);
+        GoRouter.of(context).go(AppRouter.thankYouView);
       } else if (state is CheckoutFailure) {
         Navigator.of(context).pop();
         showCustomSnackBar(
@@ -36,9 +51,12 @@ class CustomConsumerButton extends StatelessWidget {
         onPressed: () {
           PaymentIntentInputModel paymentIntentInputModel =
               PaymentIntentInputModel(
-                  amount: totalPrice,
-                  currency: "USD",
-                  customerId: ApiConsts.stripeCustomerID);
+            amount: totalPrice,
+            currency: "USD",
+            customerId:
+                CacheHelper.getString(key: CacheHelperKeys.stripeCustomerId) ??
+                    "",
+          );
           CheckoutCubit.get(context)
               .makePayment(paymentIntentInputModel: paymentIntentInputModel);
         },
