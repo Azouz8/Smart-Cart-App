@@ -72,7 +72,7 @@ void showCustomSnackBar({
 }
 
 void showSessionExpiredQuickAlert() {
-  BuildContext? context = NavigationService.navigatorKey.currentContext;
+  BuildContext? context = AppRouter.navigatorKey.currentContext;
 
   if (context == null) return;
 

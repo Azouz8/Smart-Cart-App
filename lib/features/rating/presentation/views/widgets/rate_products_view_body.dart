@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smart_cart_app/core/services/helper_functions.dart';
-import 'package:smart_cart_app/features/rating/data/models/order_model/order_model.dart';
 import 'package:smart_cart_app/features/rating/presentation/manager/rating_cubit.dart';
 import 'package:smart_cart_app/features/rating/presentation/views/widgets/rate_product_list_view_item.dart';
 
 import '../../../../home/presentation/views/widgets/custom_home_app_bar.dart';
 
 class RateProductsViewBody extends StatelessWidget {
-  const RateProductsViewBody({super.key, required this.orderModel});
-  final OrderModel orderModel;
+  const RateProductsViewBody({
+    super.key,
+  });
+
+  // final OrderModel orderModel;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RatingCubit, RatingState>(listener: (context, state) {
@@ -24,7 +26,7 @@ class RateProductsViewBody extends StatelessWidget {
       }
     }, builder: (context, state) {
       var cubit = RatingCubit.get(context);
-      cubit.initRatingList(orderModel.products!);
+      cubit.initRatingList(cubit.currentOrder.products!);
       return SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
@@ -40,11 +42,11 @@ class RateProductsViewBody extends StatelessWidget {
                 itemBuilder: (context, index) => ClipRRect(
                   borderRadius: BorderRadius.circular(15),
                   child: RateProductListViewItem(
-                    products: orderModel.products![index],
+                    products: cubit.currentOrder.products![index],
                   ),
                 ),
                 shrinkWrap: true,
-                itemCount: orderModel.products!.length,
+                itemCount: cubit.currentOrder.products!.length,
               ),
               const SizedBox(
                 height: 8,
@@ -55,7 +57,7 @@ class RateProductsViewBody extends StatelessWidget {
                   onPressed: () {
                     cubit.postUserRatings(
                         ratings: cubit.ratingList,
-                        orderID: orderModel.orderId!);
+                        orderID: cubit.currentOrder.orderId!);
                   },
                   style: ButtonStyle(
                     shape: WidgetStatePropertyAll(

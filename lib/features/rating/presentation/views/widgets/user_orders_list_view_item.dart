@@ -2,17 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smart_cart_app/core/routing/app_router.dart';
 import 'package:smart_cart_app/features/rating/data/models/order_model/order_model.dart';
+import 'package:smart_cart_app/features/rating/presentation/manager/rating_cubit.dart';
+
 import 'user_order_image_item.dart';
 
 class UserOrdersListViewItem extends StatelessWidget {
   const UserOrdersListViewItem({super.key, required this.orderModel});
+
   final OrderModel orderModel;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context)
-            .push(AppRouter.rateProductsView, extra: orderModel);
+        GoRouter.of(context).push(AppRouter.rateProductsView);
+        RatingCubit.get(context).setCurrentOrder(order: orderModel);
       },
       child: SizedBox(
         height: MediaQuery.sizeOf(context).height * 0.22,
@@ -25,7 +29,6 @@ class UserOrdersListViewItem extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Text(orderModel.orderId!),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

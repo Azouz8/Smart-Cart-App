@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smart_cart_app/core/services/service_locator.dart';
+import 'package:smart_cart_app/core/widgets/no_connection_view.dart';
 import 'package:smart_cart_app/features/authentication/presentation/views/login_view.dart';
 import 'package:smart_cart_app/features/authentication/presentation/views/password_recovery.dart';
 import 'package:smart_cart_app/features/authentication/presentation/views/register_view.dart';
@@ -12,18 +13,16 @@ import 'package:smart_cart_app/features/category_selection/presentation/views/ca
 import 'package:smart_cart_app/features/checkout/presentation/views/checkout_cart_view.dart';
 import 'package:smart_cart_app/features/checkout/presentation/views/payment_details_view.dart';
 import 'package:smart_cart_app/features/checkout/presentation/views/thank_you_view.dart';
+import 'package:smart_cart_app/features/home/presentation/manager/layout_cubit/layout_cubit.dart';
+import 'package:smart_cart_app/features/home/presentation/manager/layout_cubit/layout_states.dart';
 import 'package:smart_cart_app/features/home/presentation/views/home_view.dart';
 import 'package:smart_cart_app/features/home/presentation/views/scan_qr_view.dart';
-import 'package:smart_cart_app/features/rating/data/models/order_model/order_model.dart';
 import 'package:smart_cart_app/features/rating/presentation/views/rate_products_view.dart';
 import 'package:smart_cart_app/features/rating/presentation/views/user_orders_view.dart';
 
-class NavigationService {
+abstract class AppRouter {
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
-}
-
-abstract class AppRouter {
   static const homeView = "/homeView";
   static const loginView = "/loginView";
   static const registerView = "/registerView";
@@ -36,17 +35,26 @@ abstract class AppRouter {
   static const rateProductsView = "/rateProductsView";
   static const categoriesView = "/categoriesView";
   static const userOrdersView = "/userOrdersView";
+  static const noConnectionView = "/noConnectionView";
 
   static final router = GoRouter(
-    navigatorKey: NavigationService.navigatorKey,
+    navigatorKey: navigatorKey,
     routes: [
       GoRoute(
         path: "/",
-        builder: (context, state) => LoginView(),
+        builder: (context, state) => BlocBuilder<LayoutCubit, LayoutStates>(
+          builder: (context, state) {
+            return LoginView();
+          },
+        ),
       ),
       GoRoute(
         path: loginView,
         builder: (context, state) => LoginView(),
+      ),
+      GoRoute(
+        path: noConnectionView,
+        builder: (context, state) => const NoConnectionView(),
       ),
       GoRoute(
         path: registerView,
@@ -157,9 +165,7 @@ abstract class AppRouter {
       GoRoute(
         path: rateProductsView,
         pageBuilder: (context, state) => CustomTransitionPage(
-          child: RateProductsView(
-            orderModel: state.extra as OrderModel,
-          ),
+          child: const RateProductsView(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             const begin = Offset(1.0, 0.0);
             const end = Offset.zero;
