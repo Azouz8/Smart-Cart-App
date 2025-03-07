@@ -1,68 +1,113 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:quickalert/quickalert.dart';
 import 'package:smart_cart_app/core/routing/app_router.dart';
 import 'package:smart_cart_app/features/home/presentation/views/widgets/custom_home_app_bar.dart';
 import 'package:smart_cart_app/features/rating/presentation/manager/rating_cubit.dart';
+
+import '../../../../core/services/cache_helper.dart';
 import 'widgets/profile_info_widget.dart';
 
 class ProfileView extends StatelessWidget {
-  const ProfileView({super.key});
+  const ProfileView({super.key, required this.name, required this.email});
+
+  final String? name;
+  final String? email;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const CustomHomeAppBar(title: "Profile"),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 50,
-                  backgroundImage:
-                      AssetImage("assets/images/ProfilePicture.png"),
-                  // child: SvgPicture.asset(
-                  //   "assets/images/ProfilePicture.svg",
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const ProfileInfoWidget(
-              preIcon: Icons.person,
-              label: "Name",
-              value: "Ali Azouz",
-            ),
-            const MyDivider(),
-            const ProfileInfoWidget(
-              preIcon: Icons.email,
-              label: "Email",
-              value: "AliAzouz@gmail.com",
-            ),
-            const MyDivider(),
-            const ProfileInfoWidget(
-              preIcon: Icons.password,
-              label: "Change Password",
-              value: "*********",
-            ),
-            const MyDivider(),
-            InkWell(
-              onTap: () {
-                RatingCubit.get(context).gerUserOrders();
-                GoRouter.of(context).push(AppRouter.userOrdersView);
-              },
-              overlayColor: WidgetStateColor.transparent,
-              borderRadius: BorderRadius.circular(16),
-              child: const ProfileInfoWidget(
-                preIcon: Icons.card_travel,
-                label: "Your Orders",
-                value: "",
+        child: CustomScrollView(
+          slivers: [
+            const SliverToBoxAdapter(child: CustomHomeAppBar(title: "Profile")),
+            const SliverToBoxAdapter(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    radius: 50,
+                    backgroundImage: AssetImage("assets/images/profilePic.png"),
+                  ),
+                ],
               ),
             ),
+            const SliverToBoxAdapter(
+              child: SizedBox(
+                height: 20,
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: ProfileInfoWidget(
+                preIcon: Icons.person,
+                label: "Name",
+                value: name ?? "Unknown",
+              ),
+            ),
+            const SliverToBoxAdapter(child: MyDivider()),
+            SliverToBoxAdapter(
+              child: ProfileInfoWidget(
+                preIcon: Icons.email,
+                label: "Email",
+                value: email ?? "Unknown",
+              ),
+            ),
+            const SliverToBoxAdapter(child: MyDivider()),
+            const SliverToBoxAdapter(
+              child: ProfileInfoWidget(
+                preIcon: Icons.password,
+                label: "Change Password",
+                value: "*********",
+              ),
+            ),
+            const SliverToBoxAdapter(child: MyDivider()),
+            SliverToBoxAdapter(
+              child: InkWell(
+                onTap: () {
+                  RatingCubit.get(context).gerUserOrders();
+                  GoRouter.of(context).push(AppRouter.userOrdersView);
+                },
+                overlayColor: WidgetStateColor.transparent,
+                borderRadius: BorderRadius.circular(16),
+                child: const ProfileInfoWidget(
+                  preIcon: Icons.card_travel,
+                  label: "Your Orders",
+                  value: "",
+                ),
+              ),
+            ),
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: TextButton(
+                    onPressed: () {
+                      QuickAlert.show(
+                        context: context,
+                        type: QuickAlertType.confirm,
+                        title: "Are you sure?",
+                        text: "You will be logged out",
+                        confirmBtnColor: Colors.redAccent,
+                        showCancelBtn: true,
+                        onCancelBtnTap: () => Navigator.pop(context),
+                        onConfirmBtnTap: () {
+                          CacheHelper.remove(key: CacheHelperKeys.token);
+                          CacheHelper.remove(
+                              key: CacheHelperKeys.stripeCustomerId);
+                          GoRouter.of(context).go(AppRouter.loginView);
+                        },
+                      );
+                    },
+                    child: Text(
+                      "Logout",
+                      style: Theme.of(context)
+                          .textTheme
+                          .labelLarge!
+                          .copyWith(color: Colors.redAccent),
+                    )),
+              ),
+            )
           ],
         ),
       ),

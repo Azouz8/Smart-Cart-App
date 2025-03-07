@@ -6,9 +6,11 @@ import 'package:smart_cart_app/core/services/helper_functions.dart';
 import 'package:smart_cart_app/features/authentication/presentation/manager/auth_cubit/auth_states.dart';
 
 import '../../../../../core/routing/app_router.dart';
-import '../../../../../core/themes/light_theme/app_colors_light.dart';
 import '../../manager/auth_cubit/auth_cubit.dart';
+import 'ForgotPasswordWidget.dart';
+import 'custom_login_button.dart';
 import 'custom_text_form_field.dart';
+import 'dont_have_account_widget.dart';
 
 class LoginViewBody extends StatelessWidget {
   LoginViewBody({
@@ -23,8 +25,7 @@ class LoginViewBody extends StatelessWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final AuthCubit cubit;
-  final GlobalKey<FormFieldState> emailFieldKey =
-      GlobalKey<FormFieldState>(); // Key for email field
+  final GlobalKey<FormFieldState> emailFieldKey = GlobalKey<FormFieldState>();
   final GlobalKey<FormFieldState> passwordFieldKey =
       GlobalKey<FormFieldState>();
 
@@ -35,17 +36,12 @@ class LoginViewBody extends StatelessWidget {
         if (state is AuthLoginSuccess) {
           showCustomSnackBar(
               context: context, message: "Welcome Back!", vPadding: 16);
-          // SecureStorage().writeData(
-          //     key: SecureStorageKeys.token, value: state.loginModel.token!);
-          // if(state.loginModel.firstTime){
-          //   GoRouter.of(context).push(AppRouter.categoriesView);
-          // }
-          // else {
-          //   GoRouter.of(context)
-          //       .push(AppRouter.homeView, extra: state.loginModel.id);
-          // }
-          GoRouter.of(context)
-              .push(AppRouter.homeView, extra: state.loginModel.id);
+          if (state.loginModel.firstTime! == true) {
+            GoRouter.of(context).push(AppRouter.categoriesView);
+          } else {
+            GoRouter.of(context)
+                .push(AppRouter.homeView, extra: state.loginModel.id);
+          }
         } else if (state is AuthLoginFailure) {
           showCustomSnackBar(
               context: context, message: state.errMessage, vPadding: 64);
@@ -143,118 +139,26 @@ class LoginViewBody extends StatelessWidget {
                       const SizedBox(
                         height: 8,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              GoRouter.of(context)
-                                  .push(AppRouter.passwordRecoveryView);
-                            },
-                            overlayColor: const WidgetStatePropertyAll(
-                              AppColorsLight.scaffoldBackgroundColor,
-                            ),
-                            child: Text(
-                              "Forgot Password?",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleSmall!
-                                  .copyWith(
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.grey,
-                                  ),
-                            ),
-                          ),
-                        ],
-                      ),
+                      const ForgotPasswordWidget(),
                       const SizedBox(
                         height: 16,
                       ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            FocusManager.instance.primaryFocus?.unfocus();
-                            if (formKey.currentState!.validate()) {
-                              cubit.loginUser(
-                                  email: emailController.text,
-                                  password: passwordController.text);
-                            }
-                          },
-                          style: ButtonStyle(
-                            shape: WidgetStatePropertyAll(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                            ),
-                            backgroundColor: WidgetStateProperty.all(
-                                const Color(0xff5b9ee1)),
-                          ),
-                          child: state is AuthLoginLoading
-                              ? const SizedBox(
-                                  height: 15,
-                                  width: 15,
-                                  child: CircularProgressIndicator(
-                                    color: Colors.white,
-                                    strokeWidth: 2,
-                                  ),
-                                )
-                              : Text(
-                                  "Login",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleSmall!
-                                      .copyWith(
-                                        fontWeight: FontWeight.w400,
-                                        color: Colors.white,
-                                      ),
-                                ),
-                        ),
+                      CustomLoginButton(
+                        formKey: formKey,
+                        cubit: cubit,
+                        emailController: emailController,
+                        passwordController: passwordController,
+                        isLoading: state is AuthLoginLoading,
                       ),
                     ],
                   ),
                 ),
               ),
-              SliverFillRemaining(
+              const SliverFillRemaining(
                 hasScrollBody: false,
                 child: Align(
                   alignment: Alignment.bottomCenter,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Don\'t have an account?',
-                        style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                              fontWeight: FontWeight.w400,
-                              color: Colors.grey,
-                            ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          GoRouter.of(context).push(AppRouter.registerView);
-                        },
-                        overlayColor: const WidgetStatePropertyAll(
-                            AppColorsLight.scaffoldBackgroundColor),
-                        borderRadius: BorderRadius.circular(15),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            top: 8,
-                            bottom: 8,
-                            right: 8,
-                          ),
-                          child: Text(
-                            ' Sign Up For Free!',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleSmall!
-                                .copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
+                  child: DoNotHaveAccountWidget(),
                 ),
               ),
             ],

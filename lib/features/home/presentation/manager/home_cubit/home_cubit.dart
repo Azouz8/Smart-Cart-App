@@ -19,7 +19,7 @@ class HomeCubit extends Cubit<HomeStates> {
   List<CartProductModel> cartProducts = [];
 
   initSocket() {
-    socket = IO.io(ApiConsts.sockecIOUrl, <String, dynamic>{
+    socket = IO.io(ApiConsts.socketIOUrl, <String, dynamic>{
       'autoConnect': false,
       'transports': ['websocket'],
     });

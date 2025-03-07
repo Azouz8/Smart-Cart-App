@@ -18,7 +18,7 @@ void setupServiceLocator() {
 
   getIt.registerSingleton<IO.Socket>(
     IO.io(
-      ApiConsts.sockecIOUrl, // Replace with your server URL
+      ApiConsts.socketIOUrl,
       <String, dynamic>{
         'autoConnect': false,
         'transports': ['websocket'],
