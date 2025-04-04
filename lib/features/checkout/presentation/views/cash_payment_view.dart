@@ -6,8 +6,15 @@ class CashPaymentView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: CashPaymentViewBody(),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Pay With Cash",
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        centerTitle: true,
+      ),
+      body: const CashPaymentViewBody(),
     );
   }
 }

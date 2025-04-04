@@ -12,7 +12,6 @@ import 'package:smart_cart_app/features/category_selection/presentation/manager/
 import 'package:smart_cart_app/features/category_selection/presentation/views/categories_view.dart';
 import 'package:smart_cart_app/features/checkout/presentation/views/cash_payment_view.dart';
 import 'package:smart_cart_app/features/checkout/presentation/views/checkout_cart_view.dart';
-import 'package:smart_cart_app/features/checkout/presentation/views/payment_details_view.dart';
 import 'package:smart_cart_app/features/checkout/presentation/views/thank_you_view.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/layout_cubit/layout_cubit.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/layout_cubit/layout_states.dart';
@@ -173,10 +172,10 @@ abstract class AppRouter {
           },
         ),
       ),
-      GoRoute(
-        path: paymentDetailsView,
-        builder: (context, state) => const PaymentDetailsView(),
-      ),
+      // GoRoute(
+      //   path: paymentDetailsView,
+      //   builder: (context, state) => const PaymentDetailsView(),
+      // ),
       GoRoute(
         path: thankYouView,
         builder: (context, state) => const ThankYouView(),
