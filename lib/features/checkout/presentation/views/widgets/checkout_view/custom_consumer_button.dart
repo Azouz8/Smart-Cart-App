@@ -11,10 +11,7 @@ import 'package:smart_cart_app/features/checkout/presentation/manager/checkout_s
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 
 class CustomConsumerButton extends StatelessWidget {
-  const CustomConsumerButton({
-    super.key,
-    required this.title,
-  });
+  const CustomConsumerButton({super.key, required this.title});
   final String title;
   @override
   Widget build(BuildContext context) {
@@ -47,18 +44,23 @@ class CustomConsumerButton extends StatelessWidget {
       }
     }, builder: (context, state) {
       var totalPrice = HomeCubit.get(context).totalPrice;
+      var cubit = CheckoutCubit.get(context);
       return ElevatedButton(
         onPressed: () {
-          PaymentIntentInputModel paymentIntentInputModel =
-              PaymentIntentInputModel(
-            amount: totalPrice,
-            currency: "USD",
-            customerId:
-                CacheHelper.getString(key: CacheHelperKeys.stripeCustomerId) ??
-                    "",
-          );
-          CheckoutCubit.get(context)
-              .makePayment(paymentIntentInputModel: paymentIntentInputModel);
+          if (cubit.paymentMethodIndex == 0) {
+            PaymentIntentInputModel paymentIntentInputModel =
+                PaymentIntentInputModel(
+              amount: totalPrice,
+              currency: "USD",
+              customerId: CacheHelper.getString(
+                      key: CacheHelperKeys.stripeCustomerId) ??
+                  "",
+            );
+            CheckoutCubit.get(context)
+                .makePayment(paymentIntentInputModel: paymentIntentInputModel);
+          } else {
+            GoRouter.of(context).push(AppRouter.cashPaymentView);
+          }
         },
         style: ButtonStyle(
           shape: WidgetStatePropertyAll(

@@ -17,6 +17,12 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
   String paymentId = "";
   late String currentDate, currentTime;
   List<Products> cartProducts = [];
+  int paymentMethodIndex = 0;
+
+  void changePaymentMethodIndex(int index) {
+    paymentMethodIndex = index;
+    emit(CheckoutChangePaymentMethodIndexState());
+  }
 
   Future makePayment(
       {required PaymentIntentInputModel paymentIntentInputModel}) async {

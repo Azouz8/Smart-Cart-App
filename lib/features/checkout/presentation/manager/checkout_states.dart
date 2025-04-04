@@ -4,6 +4,8 @@ abstract class CheckoutStates {}
 
 class CheckoutInitial extends CheckoutStates {}
 
+class CheckoutChangePaymentMethodIndexState extends CheckoutStates {}
+
 class CheckoutLoading extends CheckoutStates {}
 
 class CheckoutFailure extends CheckoutStates {

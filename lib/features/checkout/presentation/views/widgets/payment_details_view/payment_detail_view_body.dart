@@ -21,12 +21,13 @@ class _PaymentDetailViewBodyState extends State<PaymentDetailViewBody> {
       child: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [
-          const SliverToBoxAdapter(child: PaymentMethodListView()),
+          SliverToBoxAdapter(child: PaymentMethodListView()),
           SliverToBoxAdapter(
-              child: CustomCreditCard(
-            formKey: formKey,
-            autovalidateMode: autovalidateMode,
-          )),
+            child: CustomCreditCard(
+              formKey: formKey,
+              autovalidateMode: autovalidateMode,
+            ),
+          ),
           SliverFillRemaining(
             hasScrollBody: false,
             child: Align(

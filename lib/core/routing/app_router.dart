@@ -10,6 +10,7 @@ import 'package:smart_cart_app/features/authentication/presentation/views/verifi
 import 'package:smart_cart_app/features/category_selection/data/repos/category_repo_impl.dart';
 import 'package:smart_cart_app/features/category_selection/presentation/manager/category_cubit.dart';
 import 'package:smart_cart_app/features/category_selection/presentation/views/categories_view.dart';
+import 'package:smart_cart_app/features/checkout/presentation/views/cash_payment_view.dart';
 import 'package:smart_cart_app/features/checkout/presentation/views/checkout_cart_view.dart';
 import 'package:smart_cart_app/features/checkout/presentation/views/payment_details_view.dart';
 import 'package:smart_cart_app/features/checkout/presentation/views/thank_you_view.dart';
@@ -30,6 +31,7 @@ abstract class AppRouter {
   static const passwordRecoveryView = "/passwordRecoveryView";
   static const scanQRCodeView = "/scanQRCodeView";
   static const checkoutCartView = "/checkoutCartView";
+  static const cashPaymentView = "/cashPaymentView";
   static const paymentDetailsView = "/paymentDetailsView";
   static const thankYouView = "/thankYouView";
   static const rateProductsView = "/rateProductsView";
@@ -153,6 +155,23 @@ abstract class AppRouter {
       GoRoute(
         path: checkoutCartView,
         builder: (context, state) => const CheckoutCartView(),
+      ),
+      GoRoute(
+        path: cashPaymentView,
+        pageBuilder: (context, state) => CustomTransitionPage(
+          child: const CashPaymentView(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(0.0, 1.0);
+            const end = Offset.zero;
+            const curve = Curves.ease;
+            var tween =
+                Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+            return SlideTransition(
+              position: animation.drive(tween),
+              child: child,
+            );
+          },
+        ),
       ),
       GoRoute(
         path: paymentDetailsView,
