@@ -17,7 +17,6 @@ class ThankYouContainer extends StatelessWidget {
     var currentDate = CheckoutCubit.get(context).currentDate;
     var currentTime = CheckoutCubit.get(context).currentTime;
     var paymentID = CacheHelper.getString(key: CacheHelperKeys.stripeSessionId);
-    print("paymentID: $paymentID");
     return Container(
       height: 550.h,
       padding: const EdgeInsets.only(right: 28, left: 28, top: 44, bottom: 8),
@@ -28,7 +27,7 @@ class ThankYouContainer extends StatelessWidget {
         ),
       ),
       child: Column(
-        spacing: 12,
+        spacing: 16,
         children: [
           Text(
             "Thank You!",
@@ -41,9 +40,6 @@ class ThankYouContainer extends StatelessWidget {
                 .textTheme
                 .titleMedium!
                 .copyWith(fontWeight: FontWeight.w500),
-          ),
-          const SizedBox(
-            height: 16,
           ),
           Row(
             children: [
@@ -77,12 +73,9 @@ class ThankYouContainer extends StatelessWidget {
             height: 30,
           ),
           TotalPriceWidget(price: "$totalPrice.00"),
-          SizedBox(
-            height: 10.h,
-          ),
           const ThankYouPaymentMethodInfo(),
           SizedBox(
-            height: 80.h,
+            height: 20.h,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
