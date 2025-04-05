@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:pretty_qr_code/pretty_qr_code.dart';
+import 'package:smart_cart_app/core/services/cache_helper.dart';
 import 'package:smart_cart_app/features/checkout/presentation/manager/checkout_cubit.dart';
 import 'package:smart_cart_app/features/checkout/presentation/views/widgets/checkout_view/total_price_widget.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
@@ -15,6 +16,8 @@ class ThankYouContainer extends StatelessWidget {
     var totalPrice = HomeCubit.get(context).totalPrice;
     var currentDate = CheckoutCubit.get(context).currentDate;
     var currentTime = CheckoutCubit.get(context).currentTime;
+    var paymentID = CacheHelper.getString(key: CacheHelperKeys.stripeSessionId);
+    print("paymentID: $paymentID");
     return Container(
       height: 550.h,
       padding: const EdgeInsets.only(right: 28, left: 28, top: 44, bottom: 8),
@@ -82,9 +85,22 @@ class ThankYouContainer extends StatelessWidget {
             height: 80.h,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SvgPicture.asset("assets/images/barcode.svg"),
+              Column(
+                spacing: 5,
+                children: [
+                  SizedBox(
+                    height: 70,
+                    child: PrettyQrView.data(data: paymentID ?? "QR Code"),
+                  ),
+                  Text(
+                    "Exit QR Code",
+                    style: Theme.of(context).textTheme.labelSmall,
+                  ),
+                ],
+              ),
               Container(
                 height: 60.h,
                 decoration: ShapeDecoration(

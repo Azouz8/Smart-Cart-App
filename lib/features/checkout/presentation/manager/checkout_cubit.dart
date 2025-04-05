@@ -47,8 +47,6 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
   Future postUserTransaction({required TransactionModel transaction}) async {
     emit(CheckoutPostTransactionLoading());
     Map<String, dynamic> transactionJson = transaction.toJson();
-    print("transactionJsonnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn");
-    print(transactionJson);
     var data = await checkoutRepo.postTransaction(transaction: transactionJson);
     data.fold((failure) {
       emit(CheckoutPostTransactionFailure(failure));
