@@ -126,6 +126,14 @@ class LoginViewBody extends StatelessWidget {
                         onChanged: (value) {
                           passwordFieldKey.currentState!.validate();
                         },
+                        onSubmit: (p0) {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          if (formKey.currentState!.validate()) {
+                            cubit.loginUser(
+                                email: emailController.text,
+                                password: passwordController.text);
+                          }
+                        },
                         prefixIcon: const Icon(Icons.password),
                         type: TextInputType.text,
                         obsecureText: cubit.isPassword,

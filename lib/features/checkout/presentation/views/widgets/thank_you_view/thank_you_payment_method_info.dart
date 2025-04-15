@@ -48,8 +48,8 @@ class ThankYouPaymentMethodInfo extends StatelessWidget {
           ),
         );
       }
-      return Center(
-        child: SizedBox(height: 80.h, child: const CircularProgressIndicator()),
+      return const Center(
+        child: SizedBox(child: CircularProgressIndicator()),
       );
     });
   }

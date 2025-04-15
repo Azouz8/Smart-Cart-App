@@ -1,5 +1,6 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -12,8 +13,10 @@ import 'package:smart_cart_app/features/checkout/presentation/manager/checkout_c
 import 'package:smart_cart_app/features/home/data/repos/home_repo_impl.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/layout_cubit/layout_cubit.dart';
+import 'package:smart_cart_app/features/home/presentation/manager/map_cubit/map_cubit.dart';
 import 'package:smart_cart_app/features/rating/data/repo/rating_repo_impl.dart';
 import 'package:smart_cart_app/features/rating/presentation/manager/rating_cubit.dart';
+
 import 'core/routing/app_router.dart';
 import 'core/services/bloc_observer.dart';
 
@@ -23,6 +26,10 @@ void main() async {
   setupServiceLocator();
   Bloc.observer = MyBlocObserver();
   await CacheHelper.init();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(
     DevicePreview(
       enabled: false,
@@ -40,6 +47,7 @@ class SmartCart extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => LayoutCubit()..monitorConnectivity()),
         BlocProvider(create: (context) => HomeCubit(getIt.get<HomeRepoImpl>())),
+        BlocProvider(create: (context) => MapCubit()),
         BlocProvider(
             create: (context) => CheckoutCubit(getIt.get<CheckoutRepoImpl>())),
         BlocProvider(

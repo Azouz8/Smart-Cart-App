@@ -20,9 +20,6 @@ class DioConsumer extends ApiConsumer {
         onError: (error, handler) async {
           if (error.response?.statusCode == 401 &&
               error.response!.data["message"] == "invalid refresh token") {
-            // add message check
-            print("error: ${error.response!.data["message"]}");
-            print("Token expired, refreshing...");
             final newToken = await refreshToken();
             if (newToken != null) {
               dio.options.headers["authorization"] = "Bearer $newToken";

@@ -5,6 +5,7 @@ import 'package:smart_cart_app/core/services/cache_helper.dart';
 import 'package:smart_cart_app/features/checkout/presentation/manager/checkout_cubit.dart';
 import 'package:smart_cart_app/features/checkout/presentation/views/widgets/checkout_view/total_price_widget.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
+
 import 'thank_you_payment_method_info.dart';
 
 class ThankYouContainer extends StatelessWidget {
@@ -18,7 +19,7 @@ class ThankYouContainer extends StatelessWidget {
     var currentTime = CheckoutCubit.get(context).currentTime;
     var paymentID = CacheHelper.getString(key: CacheHelperKeys.stripeSessionId);
     return Container(
-      height: 550.h,
+      height: MediaQuery.sizeOf(context).height * 0.8,
       padding: const EdgeInsets.only(right: 28, left: 28, top: 44, bottom: 8),
       decoration: ShapeDecoration(
         color: const Color(0xffededed),
@@ -27,7 +28,7 @@ class ThankYouContainer extends StatelessWidget {
         ),
       ),
       child: Column(
-        spacing: 16,
+        spacing: MediaQuery.sizeOf(context).height * 0.01,
         children: [
           Text(
             "Thank You!",
@@ -40,6 +41,9 @@ class ThankYouContainer extends StatelessWidget {
                 .textTheme
                 .titleMedium!
                 .copyWith(fontWeight: FontWeight.w500),
+          ),
+          SizedBox(
+            height: 5.h,
           ),
           Row(
             children: [
@@ -73,51 +77,58 @@ class ThankYouContainer extends StatelessWidget {
             height: 30,
           ),
           TotalPriceWidget(price: "$totalPrice.00"),
+          SizedBox(
+            height: 2.h,
+          ),
           const ThankYouPaymentMethodInfo(),
           SizedBox(
             height: 20.h,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                spacing: 5,
-                children: [
-                  SizedBox(
-                    height: 70,
-                    child: PrettyQrView.data(data: paymentID ?? "QR Code"),
-                  ),
-                  Text(
-                    "Exit QR Code",
-                    style: Theme.of(context).textTheme.labelSmall,
-                  ),
-                ],
-              ),
-              Container(
-                height: 60.h,
-                decoration: ShapeDecoration(
-                  shape: RoundedRectangleBorder(
-                    side: const BorderSide(width: 1.5, color: Colors.green),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  color: const Color(0xffededed),
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  spacing: 5,
+                  children: [
+                    SizedBox(
+                      height: 70,
+                      child: PrettyQrView.data(data: paymentID ?? "QR Code"),
+                    ),
+                    Text(
+                      "Exit QR Code",
+                      style: Theme.of(context).textTheme.labelSmall,
+                    ),
+                  ],
                 ),
-                child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 25.w, vertical: 12.h),
-                  child: Center(
-                    child: Text(
-                      "PAID",
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleMedium!
-                          .copyWith(color: Colors.green),
+                Container(
+                  height: 60.h,
+                  margin: EdgeInsets.only(bottom: 20.h),
+                  decoration: ShapeDecoration(
+                    shape: RoundedRectangleBorder(
+                      side: const BorderSide(width: 1.5, color: Colors.green),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    color: const Color(0xffededed),
+                  ),
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 25.w, vertical: 12.h),
+                    child: Center(
+                      child: Text(
+                        "PAID",
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(color: Colors.green),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ],
       ),

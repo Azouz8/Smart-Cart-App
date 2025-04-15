@@ -99,7 +99,6 @@ class LayoutCubit extends Cubit<LayoutStates> {
               .lastOrNull!
               .matchedLocation;
         }
-        print(lastRoute);
         GoRouter.of(context).push(AppRouter.noConnectionView);
         emit(LayoutNotConnectedState());
       }
