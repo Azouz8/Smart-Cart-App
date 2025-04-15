@@ -15,6 +15,7 @@ class HomeCubit extends Cubit<HomeStates> {
   String orderSubtotal = "";
   String totalPrice = "";
   String totalDiscount = "";
+  // We Could Create Cart Model Instead of the above Code
   late IO.Socket socket;
   List<CartProductModel> cartProducts = [];
 
@@ -29,7 +30,7 @@ class HomeCubit extends Cubit<HomeStates> {
       // emit(HomeSocketConnectedState());
       getScannedProducts();
     });
-    socket.onDisconnect((_) => print("connection Disconnection"));
+    socket.onDisconnect((_) => print("Socket Disconnection"));
     socket.onConnectError((err) => print("Socket could not connect :$err"));
     socket.onError((err) => print("Socket could not connect :$err"));
   }
@@ -66,7 +67,6 @@ class HomeCubit extends Cubit<HomeStates> {
       CacheHelper.remove(key: CacheHelperKeys.cartID);
       emit(HomeRemoveUserFromCartSuccess());
       cartId = "";
-      // cartProducts.clear();
     });
   }
 
@@ -83,7 +83,7 @@ class HomeCubit extends Cubit<HomeStates> {
   int getTotalDiscount() {
     int discount = 0;
     for (var product in cartProducts) {
-      discount += product.productID!.discount!; // Assuming `price` is a double
+      discount += product.productID!.discount!;
     }
     totalDiscount = discount.ceil().toString();
     return discount;

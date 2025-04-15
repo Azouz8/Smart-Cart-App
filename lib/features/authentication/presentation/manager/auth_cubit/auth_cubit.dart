@@ -81,10 +81,14 @@ class AuthCubit extends Cubit<AuthStates> {
       CacheHelper.putString(
           key: CacheHelperKeys.userEmail, value: loginModel.email!);
       CacheHelper.putString(
-          key: CacheHelperKeys.stripeCustomerId, value: loginModel.stripeCustomerId!);
+          key: CacheHelperKeys.stripeCustomerId,
+          value: loginModel.stripeCustomerId!);
       SecureStorage().writeData(
           key: SecureStorageKeys.refreshToken, value: loginModel.refreshToken!);
       CacheHelper.putString(key: CacheHelperKeys.userID, value: loginModel.id!);
+      CacheHelper.putString(
+          key: CacheHelperKeys.userRecommendationID,
+          value: loginModel.userReommID.toString());
       emit(AuthLoginSuccess(loginModel));
     });
   }

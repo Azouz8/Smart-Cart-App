@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_cart_app/features/home/presentation/views/widgets/offers_list_view_item.dart';
-
+import '../../../../core/services/cache_helper.dart';
 import '../../../../core/services/helper_functions.dart';
 import '../manager/recommendation_cubit/recommendation_cubit.dart';
 import 'widgets/custom_home_app_bar.dart';
 
 class OffersView extends StatelessWidget {
-  const OffersView({super.key});
-
+  OffersView({super.key});
+  final String userRecommendationId = CacheHelper.getString(key: CacheHelperKeys.userRecommendationID)!;
   @override
   Widget build(BuildContext context) {
     var cubit = RecommendationCubit.get(context);
-    cubit.getRecommendations("4");
+    cubit.getRecommendations(userRecommendationId);
     return BlocConsumer<RecommendationCubit, RecommendationState>(
       listener: (context, state) {
         if (state is RecommendedProductsFailure) {

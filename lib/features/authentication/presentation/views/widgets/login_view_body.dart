@@ -133,6 +133,7 @@ class LoginViewBody extends StatelessWidget {
                                 email: emailController.text,
                                 password: passwordController.text);
                           }
+                          return null;
                         },
                         prefixIcon: const Icon(Icons.password),
                         type: TextInputType.text,

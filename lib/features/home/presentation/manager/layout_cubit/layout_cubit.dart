@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +10,6 @@ import 'package:smart_cart_app/features/home/presentation/views/cart_view.dart';
 import 'package:smart_cart_app/features/home/presentation/views/map_view.dart';
 import 'package:smart_cart_app/features/home/presentation/views/offers_view.dart';
 import 'package:smart_cart_app/features/home/presentation/views/profile_view.dart';
-
 import '../../../../../core/routing/app_router.dart';
 import '../../../data/repos/home_repo_impl.dart';
 import 'layout_states.dart';
@@ -49,7 +47,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
     BlocProvider(
       create: (BuildContext context) =>
           RecommendationCubit(getIt.get<HomeRepoImpl>()),
-      child: const OffersView(),
+      child: OffersView(),
     ),
     const MapView(),
     ProfileView(
@@ -65,13 +63,12 @@ class LayoutCubit extends Cubit<LayoutStates> {
 
   @override
   Future<void> close() {
-    // TODO: implement close
     _subscription!.cancel();
     return super.close();
   }
 
   void monitorConnectivity() {
-    _subscription = Connectivity().onConnectivityChanged.listen((result) async {
+    _subscription = Connectivity().onConnectivityChanged.listen((result) {
       final context = AppRouter.navigatorKey.currentContext;
       if (context == null) return;
       if (result.contains(ConnectivityResult.wifi) ||

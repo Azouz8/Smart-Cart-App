@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_states.dart';
 import 'custom_checkout_button.dart';
-import 'ordre_info_item.dart';
+import 'order_info_item.dart';
 import 'total_price_widget.dart';
 
 class CheckoutCartViewBody extends StatelessWidget {

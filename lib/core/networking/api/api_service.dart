@@ -172,7 +172,7 @@ class ApiService {
   }
 
   postTransaction({
-    required Map<String,dynamic> transaction,
+    required Map<String, dynamic> transaction,
   }) async {
     var response = await api.post(
       "${ApiConsts.apiBaseUrl}${ApiConsts.transaction}${ApiConsts.saveTransactions}",

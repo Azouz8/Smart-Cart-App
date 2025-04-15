@@ -33,6 +33,7 @@ class CacheHelper {
 class CacheHelperKeys {
   static const String cartID = "cartID";
   static const String userID = "userID";
+  static const String userRecommendationID = "userID";
   static const String token = "token";
   static const String userName = "userName";
   static const String userEmail = "userEmail";
