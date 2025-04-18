@@ -8,8 +8,6 @@ import 'package:smart_cart_app/features/authentication/presentation/manager/auth
 import 'package:smart_cart_app/features/home/presentation/manager/layout_cubit/layout_cubit.dart';
 import 'package:smart_cart_app/features/home/presentation/views/widgets/custom_home_app_bar.dart';
 import 'package:smart_cart_app/features/rating/presentation/manager/rating_cubit.dart';
-
-import '../../../../core/services/cache_helper.dart';
 import 'widgets/profile_info_widget.dart';
 
 class ProfileView extends StatelessWidget {
