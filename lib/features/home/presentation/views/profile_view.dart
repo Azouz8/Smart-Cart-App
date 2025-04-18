@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:smart_cart_app/core/routing/app_router.dart';
+import 'package:smart_cart_app/features/authentication/presentation/manager/auth_cubit/auth_cubit.dart';
+import 'package:smart_cart_app/features/authentication/presentation/manager/auth_cubit/auth_states.dart';
+import 'package:smart_cart_app/features/home/presentation/manager/layout_cubit/layout_cubit.dart';
 import 'package:smart_cart_app/features/home/presentation/views/widgets/custom_home_app_bar.dart';
 import 'package:smart_cart_app/features/rating/presentation/manager/rating_cubit.dart';
 
@@ -81,31 +85,32 @@ class ProfileView extends StatelessWidget {
               hasScrollBody: false,
               child: Align(
                 alignment: Alignment.bottomCenter,
-                child: TextButton(
-                    onPressed: () {
-                      QuickAlert.show(
-                        context: context,
-                        type: QuickAlertType.confirm,
-                        title: "Are you sure?",
-                        text: "You will be logged out",
-                        confirmBtnColor: Colors.redAccent,
-                        showCancelBtn: true,
-                        onCancelBtnTap: () => Navigator.pop(context),
-                        onConfirmBtnTap: () {
-                          CacheHelper.remove(key: CacheHelperKeys.token);
-                          CacheHelper.remove(
-                              key: CacheHelperKeys.stripeCustomerId);
-                          GoRouter.of(context).go(AppRouter.loginView);
-                        },
-                      );
-                    },
-                    child: Text(
-                      "Logout",
-                      style: Theme.of(context)
-                          .textTheme
-                          .labelLarge!
-                          .copyWith(color: Colors.redAccent),
-                    )),
+                child: BlocBuilder<AuthCubit, AuthStates>(
+                  builder: (context, state) => TextButton(
+                      onPressed: () {
+                        QuickAlert.show(
+                          context: context,
+                          type: QuickAlertType.confirm,
+                          title: "Are you sure?",
+                          text: "You will be logged out",
+                          confirmBtnColor: Colors.redAccent,
+                          showCancelBtn: true,
+                          onCancelBtnTap: () => Navigator.pop(context),
+                          onConfirmBtnTap: () {
+                            AuthCubit.get(context).logoutUser();
+                            LayoutCubit.get(context).changeBottomNav(0);
+                            GoRouter.of(context).go(AppRouter.loginView);
+                          },
+                        );
+                      },
+                      child: Text(
+                        "Logout",
+                        style: Theme.of(context)
+                            .textTheme
+                            .labelLarge!
+                            .copyWith(color: Colors.redAccent),
+                      )),
+                ),
               ),
             )
           ],

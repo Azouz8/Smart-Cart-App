@@ -8,11 +8,11 @@ import 'widgets/custom_home_app_bar.dart';
 
 class OffersView extends StatelessWidget {
   OffersView({super.key});
-  final String userRecommendationId = CacheHelper.getString(key: CacheHelperKeys.userRecommendationID)!;
+  final String? userRecommendationId = CacheHelper.getString(key: CacheHelperKeys.userRecommendationID);
   @override
   Widget build(BuildContext context) {
     var cubit = RecommendationCubit.get(context);
-    cubit.getRecommendations(userRecommendationId);
+    cubit.getRecommendations(userRecommendationId ?? "4");
     return BlocConsumer<RecommendationCubit, RecommendationState>(
       listener: (context, state) {
         if (state is RecommendedProductsFailure) {

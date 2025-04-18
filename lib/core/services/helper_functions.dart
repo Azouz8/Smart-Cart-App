@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 import 'package:smart_cart_app/core/routing/app_router.dart';
-
 import '../themes/light_theme/app_colors_light.dart';
 
 void showCustomSnackBar({

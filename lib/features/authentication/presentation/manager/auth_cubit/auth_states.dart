@@ -28,3 +28,5 @@ class AuthLoginSuccess extends AuthStates {
   LoginModel loginModel;
   AuthLoginSuccess(this.loginModel);
 }
+
+class AuthLogoutSuccess extends AuthStates {}

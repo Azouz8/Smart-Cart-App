@@ -8,6 +8,8 @@ import 'package:smart_cart_app/core/networking/api/api_consts.dart';
 import 'package:smart_cart_app/core/services/cache_helper.dart';
 import 'package:smart_cart_app/core/services/service_locator.dart';
 import 'package:smart_cart_app/core/themes/light_theme/light_theme.dart';
+import 'package:smart_cart_app/features/authentication/data/repos/auth_repo_impl.dart';
+import 'package:smart_cart_app/features/authentication/presentation/manager/auth_cubit/auth_cubit.dart';
 import 'package:smart_cart_app/features/checkout/data/repos/checkout_repo_impl.dart';
 import 'package:smart_cart_app/features/checkout/presentation/manager/checkout_cubit.dart';
 import 'package:smart_cart_app/features/home/data/repos/home_repo_impl.dart';
@@ -16,7 +18,6 @@ import 'package:smart_cart_app/features/home/presentation/manager/layout_cubit/l
 import 'package:smart_cart_app/features/home/presentation/manager/map_cubit/map_cubit.dart';
 import 'package:smart_cart_app/features/rating/data/repo/rating_repo_impl.dart';
 import 'package:smart_cart_app/features/rating/presentation/manager/rating_cubit.dart';
-
 import 'core/routing/app_router.dart';
 import 'core/services/bloc_observer.dart';
 
@@ -45,6 +46,7 @@ class SmartCart extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => AuthCubit(getIt.get<AuthRepoImpl>())),
         BlocProvider(create: (context) => LayoutCubit()..monitorConnectivity()),
         BlocProvider(create: (context) => HomeCubit(getIt.get<HomeRepoImpl>())),
         BlocProvider(create: (context) => MapCubit()),

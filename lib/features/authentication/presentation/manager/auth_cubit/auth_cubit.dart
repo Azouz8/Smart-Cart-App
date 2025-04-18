@@ -92,4 +92,15 @@ class AuthCubit extends Cubit<AuthStates> {
       emit(AuthLoginSuccess(loginModel));
     });
   }
+
+  void logoutUser() {
+    CacheHelper.remove(key: CacheHelperKeys.token);
+    CacheHelper.remove(key: CacheHelperKeys.stripeCustomerId);
+    CacheHelper.remove(key: CacheHelperKeys.userName);
+    CacheHelper.remove(key: CacheHelperKeys.userEmail);
+    CacheHelper.remove(key: CacheHelperKeys.userID);
+    CacheHelper.remove(key: CacheHelperKeys.userRecommendationID);
+    SecureStorage().deleteData(key: SecureStorageKeys.refreshToken);
+    emit(AuthLogoutSuccess());
+  }
 }

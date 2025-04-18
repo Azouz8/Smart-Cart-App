@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smart_cart_app/core/services/helper_functions.dart';
 import 'package:smart_cart_app/features/authentication/presentation/manager/auth_cubit/auth_states.dart';
-
 import '../../../../../core/routing/app_router.dart';
 import '../../manager/auth_cubit/auth_cubit.dart';
 import 'ForgotPasswordWidget.dart';
@@ -13,18 +12,11 @@ import 'custom_text_form_field.dart';
 import 'dont_have_account_widget.dart';
 
 class LoginViewBody extends StatelessWidget {
-  LoginViewBody({
-    super.key,
-    required this.formKey,
-    required this.emailController,
-    required this.passwordController,
-    required this.cubit,
-  });
+  LoginViewBody({super.key});
 
-  final GlobalKey<FormState> formKey;
-  final TextEditingController emailController;
-  final TextEditingController passwordController;
-  final AuthCubit cubit;
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormFieldState> emailFieldKey = GlobalKey<FormFieldState>();
   final GlobalKey<FormFieldState> passwordFieldKey =
       GlobalKey<FormFieldState>();
