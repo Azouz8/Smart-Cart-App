@@ -12,11 +12,11 @@ class MapCubit extends Cubit<MapState> {
   final List<Offset> _recentPositions = [];
   static const int _maxRecentPositions = 5;
 
-  // Map dimensions
-  static const double mapImageWidth = 300.0;
-  static const double mapImageHeight = 500.0;
+  // Map dimensions - match with WalkableGrid (30x50 cells, 10 pixels per cell)
+  static const double mapImageWidth = 300.0; // 30 cells * 10 pixels
+  static const double mapImageHeight = 500.0; // 50 cells * 10 pixels
 
-  // GPS boundaries
+  // GPS boundaries - keep the same as they are correct
   static const double mapMinLat = 29.944984; // South edge
   static const double mapMaxLat = 29.945096; // North edge
   static const double mapMinLon = 31.279337; // West edge
@@ -113,16 +113,27 @@ class MapCubit extends Cubit<MapState> {
   }
 
   Offset _convertGpsToMapCoordinates(Position position) {
-    double latDistance = position.latitude - mapMinLat;
-    double lonDistance = position.longitude - mapMinLon;
+    // Convert GPS to map coordinates
+    final normalizedLat =
+        (position.latitude - mapMinLat) / (mapMaxLat - mapMinLat);
+    final normalizedLon =
+        (position.longitude - mapMinLon) / (mapMaxLon - mapMinLon);
 
-    double latPercent = latDistance / _latDistance;
-    double lonPercent = lonDistance / _lonDistance;
+    // Apply offset correction and scaling
+    // Note: We invert the latitude (1 - normalizedLat) because GPS coordinates increase northward
+    // but our Y coordinates increase southward
+    final mapX = normalizedLon * mapImageWidth;
+    final mapY = (1 - normalizedLat) * mapImageHeight;
 
-    double x = lonPercent * mapImageWidth;
-    double y = (1 - latPercent) * mapImageHeight;
+    print('GPS: (${position.latitude}, ${position.longitude})');
+    print('Normalized: ($normalizedLat, $normalizedLon)');
+    print('Map position: ($mapX, $mapY)');
 
-    return Offset(x, y);
+    // Ensure the position stays within map bounds
+    return Offset(
+      mapX.clamp(0.0, mapImageWidth).toDouble(),
+      mapY.clamp(0.0, mapImageHeight).toDouble(),
+    );
   }
 
   Offset _calculateSmoothedPosition() {
@@ -132,6 +143,7 @@ class MapCubit extends Cubit<MapState> {
     double y = 0;
     double totalWeight = 0;
 
+    // Use more recent positions with higher weight for smoother movement
     for (int i = 0; i < _recentPositions.length; i++) {
       double weight = pow(2, i).toDouble();
       x += _recentPositions[i].dx * weight;
@@ -139,7 +151,10 @@ class MapCubit extends Cubit<MapState> {
       totalWeight += weight;
     }
 
-    return Offset(x / totalWeight, y / totalWeight);
+    final smoothedX = (x / totalWeight).clamp(0.0, mapImageWidth).toDouble();
+    final smoothedY = (y / totalWeight).clamp(0.0, mapImageHeight).toDouble();
+
+    return Offset(smoothedX, smoothedY);
   }
 
   void startNavigation(Offset destination) {

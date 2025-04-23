@@ -45,7 +45,7 @@ abstract class AppRouter {
         path: "/",
         builder: (context, state) => BlocBuilder<LayoutCubit, LayoutStates>(
           builder: (context, state) {
-            return LoginView();
+            return HomeView();
           },
         ),
       ),
