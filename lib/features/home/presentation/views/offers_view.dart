@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_cart_app/features/home/presentation/views/widgets/offers_list_view_item.dart';
-import '../../../../core/services/cache_helper.dart';
 import '../../../../core/services/helper_functions.dart';
 import '../manager/recommendation_cubit/recommendation_cubit.dart';
 import 'widgets/custom_home_app_bar.dart';
 
 class OffersView extends StatelessWidget {
-  OffersView({super.key});
-  final String? userRecommendationId = CacheHelper.getString(key: CacheHelperKeys.userRecommendationID);
+  const OffersView({super.key});
   @override
   Widget build(BuildContext context) {
     var cubit = RecommendationCubit.get(context);
-    cubit.getRecommendations(userRecommendationId ?? "4");
+    if (cubit.recommendedProducts.isEmpty) {
+      cubit.getRecommendations();
+    }
     return BlocConsumer<RecommendationCubit, RecommendationState>(
       listener: (context, state) {
         if (state is RecommendedProductsFailure) {
@@ -33,10 +33,8 @@ class OffersView extends StatelessWidget {
                         const CustomHomeAppBar(
                           title: "Offers for You",
                         ),
-                        ListView.separated(
+                        GridView.builder(
                           reverse: true,
-                          separatorBuilder: (context, index) =>
-                              const SizedBox(height: 8),
                           itemBuilder: (context, index) => ClipRRect(
                             borderRadius: BorderRadius.circular(15),
                             child: OffersListViewItem(
@@ -46,6 +44,12 @@ class OffersView extends StatelessWidget {
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: state.recommendations.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 10,
+                          ),
                         )
                       ],
                     ),

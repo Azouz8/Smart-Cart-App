@@ -80,13 +80,9 @@ import 'widgets/empty_cart_widget.dart';
 import 'widgets/not_connected_widget.dart';
 import 'widgets/not_empty_cart_widget.dart';
 
-/// A view that displays the user's shopping cart.
-/// It handles different states of the cart including empty cart, not connected,
-/// and displaying cart products.
 class CartView extends StatelessWidget {
   const CartView({super.key});
 
-  /// Shows a snackbar with the error message
   void _showErrorSnackBar(BuildContext context, String message) {
     showCustomSnackBar(
       context: context,
@@ -111,15 +107,16 @@ class CartView extends StatelessWidget {
   }
 
   /// Determines the appropriate widget to display based on the current state
-  Widget _buildCartContent(BuildContext context, HomeStates state, HomeCubit cubit) {
+  Widget _buildCartContent(
+      BuildContext context, HomeStates state, HomeCubit cubit) {
     if (state is HomeInitial || state is HomeRemoveUserFromCartSuccess) {
       return const NotConnectedWidget(showSnackbar: false);
     }
-    
+
     if (state is HomeAddUserToCartFailure) {
       return const NotConnectedWidget(showSnackbar: false);
     }
-    
+
     if (state is HomeGetCartProductsSuccess ||
         state is HomeDeleteProductSuccess ||
         state is HomeGetScannedProductsSuccess) {
@@ -127,7 +124,7 @@ class CartView extends StatelessWidget {
           ? const EmptyCartWidget()
           : NotEmptyCartWidget(products: cubit.cartProducts);
     }
-    
+
     return const Center(
       child: CircularProgressIndicator(color: AppColorsLight.primaryColor),
     );

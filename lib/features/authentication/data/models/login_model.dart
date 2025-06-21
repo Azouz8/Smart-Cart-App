@@ -8,7 +8,7 @@ class LoginModel {
     bool? isAdmin,
     bool? firstTime,
     String? lastLogin,
-    int? userReommID,
+    String? userReommID,
     String? stripeCustomerId,
   }) {
     _accessToken = accessToken;
@@ -45,7 +45,7 @@ class LoginModel {
   bool? _firstTime;
   String? _lastLogin;
   String? _stripeCustomerId;
-  int? _userReommID;
+  String? _userReommID;
 
   String? get accessToken => _accessToken;
   String? get refreshToken => _refreshToken;
@@ -56,7 +56,7 @@ class LoginModel {
   bool? get firstTime => _firstTime;
   String? get lastLogin => _lastLogin;
   String? get stripeCustomerId => _stripeCustomerId;
-  int? get userReommID => _userReommID;
+  String? get userReommID => _userReommID;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

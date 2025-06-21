@@ -1,10 +1,11 @@
 import 'dart:async';
-
 import 'package:either_dart/either.dart';
 import 'package:smart_cart_app/core/networking/api/api_consts.dart';
 import 'package:smart_cart_app/core/networking/api/api_service.dart';
 import 'package:smart_cart_app/core/networking/errors/exceptions.dart';
+import 'package:smart_cart_app/core/services/notification_service.dart';
 import 'package:smart_cart_app/features/home/data/models/cart_product_model/cart_product_model.dart';
+import 'package:smart_cart_app/features/home/data/models/map_search_product_model/map_search_product_model.dart';
 import 'package:smart_cart_app/features/home/data/models/recommendations_model/RecommendedItems.dart';
 import 'package:smart_cart_app/features/home/data/repos/home_repo.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
@@ -14,8 +15,8 @@ class HomeRepoImpl extends HomeRepo {
   final IO.Socket socket;
   HomeRepoImpl(this.apiService, this.socket) {
     _setupSocketListeners();
+    print("Socket initialized and listeners set up");
   }
-
   @override
   Future<Either<String, Map<String, dynamic>>> addUserToCart({
     required String cartID,
@@ -46,6 +47,8 @@ class HomeRepoImpl extends HomeRepo {
 
   final StreamController<Either<String, List<CartProductModel>>>
       _streamController = StreamController.broadcast();
+  final StreamController<Either<String, String>> _notificationStreamController =
+      StreamController.broadcast();
 
   void _setupSocketListeners() {
     socket.on(ApiKeys.cartUpdated, (data) {
@@ -72,6 +75,30 @@ class HomeRepoImpl extends HomeRepo {
     return _streamController.stream;
   }
 
+  @override
+  void setupSocketNotificationListeners({required String cartID}) {
+    print(
+        "Setting up socket notification listeners for cartID: ${ApiKeys.cartalerts + cartID}");
+    socket.on(ApiKeys.cartalerts + cartID, (data) {
+      try {
+        print("🔄 Received Notification");
+        print("Data: $data");
+        NotificationService().showNotification(
+          title: data[0]["header"],
+          body: data[0]["message"],
+        );
+        // _notificationStreamController.add(Right(updatedProducts));
+      } on ServerException catch (e) {
+        return Left(e.errorModel.errMessage);
+      }
+    });
+
+    socket.onError((error) {
+      print("Socket error: $error");
+      _notificationStreamController.add(Left(error.toString()));
+    });
+  }
+
   // @override
   // void disconnectSocket() {
   //   if (socket.connected) {
@@ -92,6 +119,21 @@ class HomeRepoImpl extends HomeRepo {
       List<CartProductModel> products = [];
       for (var i in data[ApiKeys.results]) {
         products.add(CartProductModel.fromJson(i));
+      }
+      return Right(products);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, List<MapSearchProductModel>>> getSearchedProducts(
+      {required String query}) async {
+    try {
+      var data = await apiService.getSearchedProducts(query: query);
+      List<MapSearchProductModel> products = [];
+      for (var i in data[ApiKeys.data][ApiKeys.products]) {
+        products.add(MapSearchProductModel.fromJson(i));
       }
       return Right(products);
     } on ServerException catch (e) {

@@ -72,7 +72,8 @@ class StripeService {
     return await retrievePaymentInfo(paymentIntentModel.clientSecret!);
   }
 
-  Future postUserTransaction({required Map<String,dynamic> transaction}) async {
+  Future postUserTransaction(
+      {required Map<String, dynamic> transaction}) async {
     var response = await apiService.postTransaction(transaction: transaction);
     return response;
   }

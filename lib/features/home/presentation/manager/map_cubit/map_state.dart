@@ -1,37 +1,79 @@
-import 'package:flutter/material.dart';
+import 'package:equatable/equatable.dart';
+import 'package:smart_cart_app/features/home/data/models/map_model_types.dart';
+import 'package:smart_cart_app/features/home/data/models/map_search_product_model/map_search_product_model.dart';
 
-abstract class MapState {}
+class MapState extends Equatable {
+  final Coordinates userPosition;
+  final MapSearchProductModel? selectedProduct;
+  final List<MapSearchProductModel> searchResults;
+  final List<List<int>> path;
+  final bool isOnline;
+  final String error;
+  final String currentGeofence;
+  final bool isWifiEnabled;
+  final bool hasPermissions;
+  final bool isWifiManagerNull;
+  final bool manualMode;
+  final bool isLoading;
 
-class MapInitial extends MapState {}
-
-class MapLoading extends MapState {}
-
-class MapLoaded extends MapState {
-  final Offset currentPosition;
-  final List<Offset> pathPoints;
-  final bool isNavigating;
-
-  MapLoaded({
-    this.currentPosition = const Offset(0, 0),
-    this.pathPoints = const [],
-    this.isNavigating = false,
+  const MapState({
+    this.userPosition = const Coordinates(x: 1, y: 0),
+    this.selectedProduct,
+    this.path = const [],
+    this.isOnline = true,
+    this.error = '',
+    this.currentGeofence = '',
+    this.isWifiEnabled = false,
+    this.hasPermissions = false,
+    this.isWifiManagerNull = false,
+    this.manualMode = false,
+    this.isLoading = false,
+    this.searchResults = const [],
   });
 
-  MapLoaded copyWith({
-    Offset? currentPosition,
-    List<Offset>? pathPoints,
-    bool? isNavigating,
+  MapState copyWith({
+    Coordinates? userPosition,
+    MapSearchProductModel? selectedProduct,
+    List<List<int>>? path,
+    bool? isOnline,
+    String? error,
+    String? currentGeofence,
+    bool? isWifiEnabled,
+    bool? hasPermissions,
+    bool? isWifiManagerNull,
+    bool? manualMode,
+    bool? isLoading,
+    List<MapSearchProductModel>? searchResults,
   }) {
-    return MapLoaded(
-      currentPosition: currentPosition ?? this.currentPosition,
-      pathPoints: pathPoints ?? this.pathPoints,
-      isNavigating: isNavigating ?? this.isNavigating,
+    return MapState(
+      userPosition: userPosition ?? this.userPosition,
+      selectedProduct: selectedProduct ?? this.selectedProduct,
+      path: path ?? this.path,
+      isOnline: isOnline ?? this.isOnline,
+      error: error ?? this.error,
+      currentGeofence: currentGeofence ?? this.currentGeofence,
+      isWifiEnabled: isWifiEnabled ?? this.isWifiEnabled,
+      hasPermissions: hasPermissions ?? this.hasPermissions,
+      isWifiManagerNull: isWifiManagerNull ?? this.isWifiManagerNull,
+      manualMode: manualMode ?? this.manualMode,
+      isLoading: isLoading ?? this.isLoading,
+      searchResults: searchResults ?? this.searchResults,
     );
   }
-}
 
-class MapError extends MapState {
-  final String message;
-
-  MapError(this.message);
+  @override
+  List<Object?> get props => [
+        userPosition,
+        selectedProduct,
+        path,
+        isOnline,
+        error,
+        currentGeofence,
+        isWifiEnabled,
+        hasPermissions,
+        isWifiManagerNull,
+        manualMode,
+        isLoading,
+        searchResults,
+      ];
 }

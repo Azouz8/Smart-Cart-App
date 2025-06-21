@@ -52,6 +52,7 @@ class HomeCubit extends Cubit<HomeStates> {
       emit(HomeAddUserToCartFailure(failure));
     }, (responseCode) {
       cartId = cartID;
+      homeRepo.setupSocketNotificationListeners(cartID: cartID);
       CacheHelper.putString(key: CacheHelperKeys.cartID, value: cartID);
       emit(HomeAddUserToCartSuccess());
     });

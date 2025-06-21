@@ -45,13 +45,13 @@ abstract class AppRouter {
         path: "/",
         builder: (context, state) => BlocBuilder<LayoutCubit, LayoutStates>(
           builder: (context, state) {
-            return HomeView();
+            return const LoginView();
           },
         ),
       ),
       GoRoute(
         path: loginView,
-        builder: (context, state) => LoginView(),
+        builder: (context, state) => const LoginView(),
       ),
       GoRoute(
         path: noConnectionView,

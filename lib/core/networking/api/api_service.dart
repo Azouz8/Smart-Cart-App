@@ -74,9 +74,18 @@ class ApiService {
   }
 
   getRecommendations({required String userID}) async {
-    var response = await api.post(
-        '${ApiConsts.apiBaseUrl}${ApiConsts.recommendations}${ApiConsts.getRecommendations}',
-        data: {ApiKeys.userId: userID});
+    var response = await api.get(
+      '${ApiConsts.apiBaseUrl}${ApiConsts.recommendations}${ApiConsts.huggingFace}',
+      queryParameters: {ApiKeys.customerId: userID},
+    );
+    return response;
+  }
+
+  getSearchedProducts({required String query}) async {
+    var response = await api.get(
+      '${ApiConsts.apiBaseUrl}${ApiConsts.products}',
+      queryParameters: {ApiKeys.search: query},
+    );
     return response;
   }
 

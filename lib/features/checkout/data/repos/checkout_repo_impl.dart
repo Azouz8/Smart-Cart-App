@@ -36,7 +36,7 @@ class CheckoutRepoImpl extends CheckoutRepo {
 
   @override
   Future<Either<String, Map<String, dynamic>>> postTransaction(
-      {required Map<String,dynamic> transaction}) async {
+      {required Map<String, dynamic> transaction}) async {
     try {
       var response =
           await stripeService.postUserTransaction(transaction: transaction);

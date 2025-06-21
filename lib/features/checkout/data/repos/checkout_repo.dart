@@ -10,5 +10,5 @@ abstract class CheckoutRepo {
       {required String clientSecret});
 
   Future<Either<String, Map<String, dynamic>>> postTransaction(
-      {required Map<String,dynamic> transaction});
+      {required Map<String, dynamic> transaction});
 }

@@ -16,9 +16,7 @@ class PaymentMethodsBottomSheet extends StatelessWidget {
           PaymentMethodListView(),
           const SizedBox(
             width: double.infinity,
-            child: CustomConsumerButton(
-              title: "Continue"
-            ),
+            child: CustomConsumerButton(title: "Continue"),
           ),
         ],
       ),
