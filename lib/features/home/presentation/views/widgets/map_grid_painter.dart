@@ -100,24 +100,24 @@ class GridPainter extends CustomPainter {
     );
     canvas.drawImageRect(userIcon, src, dst, paint);
 
-    // if (selectedProduct != null) {
-    //   final productOffset = Offset(
-    //     selectedProduct!.coordinates.x * cellSize + cellSize / 2,
-    //     selectedProduct!.coordinates.y * cellSize + cellSize / 2,
-    //   );
-    //   final src = Rect.fromLTWH(
-    //     0,
-    //     0,
-    //     productIcon.width.toDouble(),
-    //     productIcon.height.toDouble(),
-    //   );
-    //   final dst = Rect.fromCenter(
-    //     center: productOffset,
-    //     width: cellSize * 3,
-    //     height: cellSize * 3,
-    //   );
-    //   canvas.drawImageRect(productIcon, src, dst, paint);
-    // }
+    if (selectedProduct != null) {
+      final productOffset = Offset(
+        selectedProduct!.x! * cellSize + cellSize / 2,
+        selectedProduct!.y! * cellSize + cellSize / 2,
+      );
+      final src = Rect.fromLTWH(
+        0,
+        0,
+        productIcon.width.toDouble(),
+        productIcon.height.toDouble(),
+      );
+      final dst = Rect.fromCenter(
+        center: productOffset,
+        width: cellSize * 3,
+        height: cellSize * 3,
+      );
+      canvas.drawImageRect(productIcon, src, dst, paint);
+    }
 
     paint
       ..color = Colors.red

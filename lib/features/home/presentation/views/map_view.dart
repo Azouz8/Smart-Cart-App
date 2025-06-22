@@ -90,7 +90,7 @@ class _MapViewState extends State<MapView> {
               return const Center(child: CircularProgressIndicator());
             }
             return Container(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -115,8 +115,6 @@ class _MapViewState extends State<MapView> {
         TextField(
           onTapOutside: (event) {
             _searchFocusNode.unfocus();
-            context.read<MapCubit>().clearSearchResults();
-            _searchController.clear();
           },
           controller: _searchController,
           focusNode: _searchFocusNode,
@@ -204,8 +202,8 @@ class _MapViewState extends State<MapView> {
             // subtitle: Text(product.aisle ?? "Aisle Name"),
             onTap: () {
               context.read<MapCubit>().selectProduct(product);
-              context.read<MapCubit>().clearSearchResults();
               context.read<MapCubit>().findPath();
+              context.read<MapCubit>().clearSearchResults();
             },
           );
         },
@@ -214,63 +212,81 @@ class _MapViewState extends State<MapView> {
   }
 
   Widget _buildMap(BuildContext context, MapState state) {
-    return SizedBox(
-      width: double.infinity,
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Center(
-            child: Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black26,
-                    offset: Offset(0, 2),
-                    blurRadius: 3.84,
+    return GestureDetector(
+      onTap: () {
+        _searchFocusNode.unfocus();
+        context.read<MapCubit>().clearSearchResults();
+      },
+      child: SizedBox(
+        width: double.infinity,
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Center(
+              child: Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black26,
+                      offset: Offset(0, 2),
+                      blurRadius: 3.84,
+                    ),
+                  ],
+                ),
+                padding: const EdgeInsets.all(10),
+                child: CustomPaint(
+                  size: const Size(280, 440),
+                  painter: GridPainter(
+                    grid: grid,
+                    geofences: geofences,
+                    path: state.path,
+                    userPosition: state.userPosition,
+                    selectedProduct: state.selectedProduct,
+                    userIcon: _userIcon!,
+                    productIcon: _productIcon!,
                   ),
-                ],
-              ),
-              padding: const EdgeInsets.all(10),
-              child: CustomPaint(
-                size: const Size(280, 440),
-                painter: GridPainter(
-                  grid: grid,
-                  geofences: geofences,
-                  path: state.path,
-                  userPosition: state.userPosition,
-                  selectedProduct: state.selectedProduct,
-                  userIcon: _userIcon!,
-                  productIcon: _productIcon!,
                 ),
               ),
             ),
-          ),
 
-          // Rotated Labels (same as before)
-          Positioned(
-            bottom: 220,
-            left: 0,
-            child: Transform.rotate(
-              angle: 90 * 3.1415926535 / 180,
-              child: Text(
-                "Central Area",
-                style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                      color: Colors.grey.shade400,
-                      fontWeight: FontWeight.w900,
-                    ),
+            // Rotated Labels (same as before)
+            Positioned(
+              bottom: 220,
+              left: 0,
+              child: Transform.rotate(
+                angle: 90 * 3.1415926535 / 180,
+                child: Text(
+                  "Central Area",
+                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                        color: Colors.grey.shade400,
+                        fontWeight: FontWeight.w900,
+                      ),
+                ),
               ),
             ),
-          ),
-          Positioned(
-            top: 80,
-            right: 30,
-            child: Transform.rotate(
-              angle: 90 * 3.1415926535 / 180,
+            Positioned(
+              top: 80,
+              right: 30,
+              child: Transform.rotate(
+                angle: 90 * 3.1415926535 / 180,
+                child: Text(
+                  "Section A",
+                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                        color: Colors.grey.shade400,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
+                      ),
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 220,
+              right: 70,
               child: Text(
-                "Section A",
+                "Section B",
                 style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                       color: Colors.grey.shade400,
                       fontSize: 18,
@@ -278,42 +294,33 @@ class _MapViewState extends State<MapView> {
                     ),
               ),
             ),
-          ),
-          Positioned(
-            bottom: 220,
-            right: 70,
-            child: Text(
-              "Section B",
-              style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                    color: Colors.grey.shade400,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w900,
-                  ),
-            ),
-          ),
-          Positioned(
-            bottom: 60,
-            right: 70,
-            child: Text(
-              "Section C",
-              style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                    color: Colors.grey.shade400,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w900,
-                  ),
-            ),
-          ),
-
-          // Search Results Overlay (moved here)
-          if (state.searchResults.isNotEmpty)
             Positioned(
+              bottom: 60,
+              right: 70,
+              child: Text(
+                "Section C",
+                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                      color: Colors.grey.shade400,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w900,
+                    ),
+              ),
+            ),
+
+            // Search Results Overlay (moved here)
+            if (state.searchResults.isNotEmpty)
+              Positioned(
                 top: 0,
                 left: 20,
                 right: 20,
-                child: _buildSearchResults(
-                  state,
-                ))
-        ],
+                child: Material(
+                  elevation: 8,
+                  color: Colors.transparent,
+                  child: _buildSearchResults(state),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

@@ -1343,19 +1343,29 @@ final List<AccessPoint> accessPoints = [
 
 final List<Product> products = [
   Product(
-      name: 'Milk', aisle: 'Aisle 1', coordinates: Coordinates(x: 20, y: 20)),
+      name: 'Milk',
+      aisle: 'Aisle 1',
+      coordinates: const Coordinates(x: 20, y: 20)),
   Product(
-      name: 'Milk2', aisle: 'Aisle 1', coordinates: Coordinates(x: 2, y: 3)),
+      name: 'Milk2',
+      aisle: 'Aisle 1',
+      coordinates: const Coordinates(x: 2, y: 3)),
   Product(
-      name: 'Bread', aisle: 'Aisle 1', coordinates: Coordinates(x: 2, y: 7)),
+      name: 'Bread',
+      aisle: 'Aisle 1',
+      coordinates: const Coordinates(x: 2, y: 7)),
   Product(
-      name: 'Apples', aisle: 'Aisle 2', coordinates: Coordinates(x: 6, y: 3)),
+      name: 'Apples',
+      aisle: 'Aisle 2',
+      coordinates: const Coordinates(x: 6, y: 3)),
   Product(
-      name: 'Pasta', aisle: 'Aisle 2', coordinates: Coordinates(x: 6, y: 7)),
+      name: 'Pasta',
+      aisle: 'Aisle 2',
+      coordinates: const Coordinates(x: 6, y: 7)),
   Product(
       name: 'Cheese',
       aisle: 'Central Area',
-      coordinates: Coordinates(x: 4, y: 5)),
+      coordinates: const Coordinates(x: 4, y: 5)),
 ];
 final List<Geofence> geofences = [
   Geofence(

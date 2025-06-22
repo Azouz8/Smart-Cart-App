@@ -19,6 +19,8 @@ class MapSearchProductModel {
   String? section;
   DateTime? createdAt;
   DateTime? updatedAt;
+  int? x;
+  int? y;
 
   MapSearchProductModel({
     this.id,
@@ -41,6 +43,8 @@ class MapSearchProductModel {
     this.section,
     this.createdAt,
     this.updatedAt,
+    this.x,
+    this.y,
   });
 
   factory MapSearchProductModel.fromJson(Map<String, dynamic> json) {
@@ -69,6 +73,8 @@ class MapSearchProductModel {
       updatedAt: json['updatedAt'] == null
           ? null
           : DateTime.parse(json['updatedAt'] as String),
+      x: json['x'] as int?,
+      y: json['y'] as int?,
     );
   }
 
@@ -93,5 +99,7 @@ class MapSearchProductModel {
         'section': section,
         'createdAt': createdAt?.toIso8601String(),
         'updatedAt': updatedAt?.toIso8601String(),
+        'x': x,
+        'y': y,
       };
 }

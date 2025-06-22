@@ -1,5 +1,6 @@
 import 'package:either_dart/either.dart';
 import 'package:smart_cart_app/features/home/data/models/cart_product_model/cart_product_model.dart';
+import 'package:smart_cart_app/features/home/data/models/map_model_types.dart';
 import 'package:smart_cart_app/features/home/data/models/map_search_product_model/map_search_product_model.dart';
 import 'package:smart_cart_app/features/home/data/models/recommendations_model/RecommendedItems.dart';
 
@@ -12,6 +13,8 @@ abstract class HomeRepo {
 
   Future<Either<String, List<RecommendedItems>>> getRecommendations(
       {required String userID});
+
+  Future<Either<String, List<List<int>>>> findPath({required Coordinates start, required Coordinates end});
 
   Stream<Either<String, List<CartProductModel>>> getScannedProducts();
   void setupSocketNotificationListeners({required String cartID});

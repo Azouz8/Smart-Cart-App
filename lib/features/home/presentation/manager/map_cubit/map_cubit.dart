@@ -271,25 +271,40 @@ class MapCubit extends Cubit<MapState> {
 
   Future<void> findPath() async {
     if (state.selectedProduct == null) return;
-    // try {
-    //   // final response = await http.post(
-    //   //   Uri.parse('${ApiConsts.apiBaseUrl}/navigation/find-path'),
-    //   //   headers: {'Content-Type': 'application/json'},
-    //   //   body: jsonEncode({
-    //   //     'start': state.userPosition.toJson(),
-    //   //     'end': state.selectedProduct!.coordinates.toJson(),
-    //   //   }),
-    //   // );
-    //   // final path = (jsonDecode(response.body)['path'] as List)
-    //   //     .map((p) => [p[0] as int, p[1] as int])
-    //   //     .toList();
-    //   emit(state.copyWith(path: path, error: ''));
-    // } catch (e) {
-    //   emit(state.copyWith(error: 'Failed to find path: $e'));
-    // }
+    try {
+      // final response = await http.post(
+      //   Uri.parse('${ApiConsts.apiBaseUrl}/navigation/find-path'),
+      //   headers: {'Content-Type': 'application/json'},
+      //   body: jsonEncode({
+      //     'start': state.userPosition.toJson(),
+      //     'end': state.selectedProduct!.coordinates.toJson(),
+      //   }),
+      // );
+      // final path = (jsonDecode(response.body)['path'] as List)
+      //     .map((p) => [p[0] as int, p[1] as int])
+      //     .toList();
+      var result = await homeRepo.findPath(
+        start: state.userPosition,
+        end: Coordinates(
+          x: state.selectedProduct!.x!,
+          y: state.selectedProduct!.y!,
+        ),
+      );
+      result.fold(
+        (failure) {
+          emit(state.copyWith(error: failure.toString()));
+        },
+        (path) {
+          emit(state.copyWith(path: path, error: ''));
+        },
+      );
+    } catch (e) {
+      emit(state.copyWith(error: 'Failed to find path: $e'));
+    }
   }
 
   void selectProduct(MapSearchProductModel? product) {
+    print("in Select Product");
     emit(state.copyWith(selectedProduct: product));
   }
 

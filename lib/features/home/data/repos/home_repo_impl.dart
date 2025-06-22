@@ -5,6 +5,7 @@ import 'package:smart_cart_app/core/networking/api/api_service.dart';
 import 'package:smart_cart_app/core/networking/errors/exceptions.dart';
 import 'package:smart_cart_app/core/services/notification_service.dart';
 import 'package:smart_cart_app/features/home/data/models/cart_product_model/cart_product_model.dart';
+import 'package:smart_cart_app/features/home/data/models/map_model_types.dart';
 import 'package:smart_cart_app/features/home/data/models/map_search_product_model/map_search_product_model.dart';
 import 'package:smart_cart_app/features/home/data/models/recommendations_model/RecommendedItems.dart';
 import 'package:smart_cart_app/features/home/data/repos/home_repo.dart';
@@ -127,21 +128,6 @@ class HomeRepoImpl extends HomeRepo {
   }
 
   @override
-  Future<Either<String, List<MapSearchProductModel>>> getSearchedProducts(
-      {required String query}) async {
-    try {
-      var data = await apiService.getSearchedProducts(query: query);
-      List<MapSearchProductModel> products = [];
-      for (var i in data[ApiKeys.data][ApiKeys.products]) {
-        products.add(MapSearchProductModel.fromJson(i));
-      }
-      return Right(products);
-    } on ServerException catch (e) {
-      return Left(e.errorModel.errMessage);
-    }
-  }
-
-  @override
   Future<Either<String, int>> deleteProductFromCart(
       {required String productID, required String cartID}) async {
     try {
@@ -163,6 +149,37 @@ class HomeRepoImpl extends HomeRepo {
         recommendations.add(RecommendedItems.fromJson(i));
       }
       return Right(recommendations);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, List<MapSearchProductModel>>> getSearchedProducts(
+      {required String query}) async {
+    try {
+      var data = await apiService.getSearchedProducts(query: query);
+      List<MapSearchProductModel> products = [];
+      for (var i in data[ApiKeys.data][ApiKeys.products]) {
+        products.add(MapSearchProductModel.fromJson(i));
+      }
+      return Right(products);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errMessage);
+    }
+  }
+
+  @override
+  Future<Either<String, List<List<int>>>> findPath(
+      {required Coordinates start, required Coordinates end}) async {
+    try {
+      var data = await apiService.findPath(start: start, end: end);
+      final rawPath = data[ApiKeys.data][ApiKeys.path] as List;
+      final path = rawPath
+          .map<List<int>>(
+              (point) => (point as List).map<int>((e) => e as int).toList())
+          .toList();
+      return Right(path);
     } on ServerException catch (e) {
       return Left(e.errorModel.errMessage);
     }

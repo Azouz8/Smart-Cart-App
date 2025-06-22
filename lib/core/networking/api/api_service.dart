@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:smart_cart_app/core/networking/api/api_consts.dart';
 import 'package:smart_cart_app/core/networking/api/api_consumer.dart';
 import 'package:smart_cart_app/features/checkout/data/models/payment_intent_input_model/payment_intent_input_model.dart';
+import 'package:smart_cart_app/features/home/data/models/map_model_types.dart';
 
 class ApiService {
   final ApiConsumer api;
@@ -93,6 +94,17 @@ class ApiService {
     var response = await api.patch(
       '${ApiConsts.apiBaseUrl}${ApiConsts.cart}$cartID/${ApiConsts.addUserToCart}',
       data: {ApiKeys.userID: userID},
+    );
+    return response;
+  }
+
+  findPath({
+    required Coordinates start,
+    required Coordinates end,
+  }) async {
+    var response = await api.get(
+      '${ApiConsts.apiBaseUrl}${ApiConsts.navigation}${ApiConsts.findPath}',
+      queryParameters: {"start[x]": start.x, "start[y]": start.y, "end[x]": end.x, "end[y]": end.y},
     );
     return response;
   }
