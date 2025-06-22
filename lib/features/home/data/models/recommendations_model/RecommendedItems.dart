@@ -21,6 +21,8 @@ class RecommendedItems {
     String? createdAt,
     String? updatedAt,
     int? v,
+    int? x,
+    int? y,
   }) {
     _id = id;
     _itemId = itemId;
@@ -43,6 +45,8 @@ class RecommendedItems {
     _createdAt = createdAt;
     _updatedAt = updatedAt;
     _v = v;
+    _x = x;
+    _y = y;
   }
 
   RecommendedItems.fromJson(dynamic json) {
@@ -83,6 +87,8 @@ class RecommendedItems {
     _createdAt = json['createdAt'];
     _updatedAt = json['updatedAt'];
     _v = json['__v'];
+    _x = json['x'];
+    _y = json['y'];
   }
 
   String? _id;
@@ -106,6 +112,13 @@ class RecommendedItems {
   String? _createdAt;
   String? _updatedAt;
   int? _v;
+  int? _x;
+  int? _y;
+
+  int? get x => _x;
+
+  int? get y => _y;
+
 
   String? get id => _id;
 
@@ -176,6 +189,8 @@ class RecommendedItems {
     map['createdAt'] = _createdAt;
     map['updatedAt'] = _updatedAt;
     map['__v'] = _v;
+    map['x'] = _x;
+    map['y'] = _y;
     return map;
   }
 }
