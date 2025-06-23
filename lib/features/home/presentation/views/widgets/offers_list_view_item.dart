@@ -22,14 +22,10 @@ class OffersListViewItem extends StatelessWidget {
     return InkWell(
       onTap: () {
         LayoutCubit.get(context).changeBottomNav(2);
-        print("RRRRRRRRRRRRRRRRRRRRRRRRRRRRR");
-        print("x: ${recommendedItem.x}, y: ${recommendedItem.y}");
         context.read<MapCubit>().selectProduct(MapSearchProductModel(
               x: recommendedItem.x ?? 2,
               y: recommendedItem.y ?? 2,
             ));
-
-        // Trigger path finding
         context.read<MapCubit>().findPath();
       },
       child: Container(

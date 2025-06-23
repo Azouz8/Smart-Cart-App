@@ -30,6 +30,7 @@ class CheckoutCubit extends Cubit<CheckoutStates> {
     var data = await checkoutRepo.makePayment(
         paymentIntentInputModel: paymentIntentInputModel);
     data.fold((failure) {
+      print("Checkout Failure: $failure");
       emit(CheckoutFailure(failure));
     }, (response) {
       paymentMethodInfo = response;

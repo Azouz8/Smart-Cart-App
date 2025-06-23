@@ -11,7 +11,6 @@ class PaymentMethodListView extends StatelessWidget {
 
   final List<String> paymentMethods = [
     "assets/images/credit_card.svg",
-    // "assets/images/paypal.svg",
     "assets/images/cash.svg",
   ];
 

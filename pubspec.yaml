@@ -57,7 +57,7 @@ dependencies:
   geolocator: ^14.0.0
   wifi_scan: ^0.4.1+2
   flutter_local_notifications: ^19.2.1
-  flutter_native_splash: ^2.4.6
+  # flutter_native_splash: ^2.4.6
   equatable: ^2.0.5
   url_launcher: ^6.3.0
 dev_dependencies:
@@ -113,16 +113,16 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
 
-flutter_native_splash:
-  color: "#5b9ee1"
-  image: assets/images/splash_icon.png
-  android_12:
-    color: "#5b9ee1"
-    image: assets/images/splash_icon.png
-    android_gravity: center
-  android: true
-  ios: true
-  web: false
-  fullscreen: true
-  android_gravity: center
-  ios_content_mode: center
+# flutter_native_splash:
+#   color: "#5b9ee1"
+#   image: assets/images/splash_icon.png
+#   android_12:
+#     color: "#5b9ee1"
+#     image: assets/images/splash_icon.png
+#     android_gravity: center
+#   android: true
+#   ios: true
+#   web: false
+#   fullscreen: true
+#   android_gravity: center
+#   ios_content_mode: center
