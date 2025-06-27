@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:smart_cart_app/core/services/cache_helper.dart';
 import 'package:smart_cart_app/core/services/service_locator.dart';
 import 'package:smart_cart_app/core/widgets/no_connection_view.dart';
 import 'package:smart_cart_app/features/authentication/presentation/views/login_view.dart';
@@ -17,6 +18,7 @@ import 'package:smart_cart_app/features/home/presentation/manager/layout_cubit/l
 import 'package:smart_cart_app/features/home/presentation/manager/layout_cubit/layout_states.dart';
 import 'package:smart_cart_app/features/home/presentation/views/home_view.dart';
 import 'package:smart_cart_app/features/home/presentation/views/scan_qr_view.dart';
+import 'package:smart_cart_app/features/on_boarding/presentation/views/onboarding_view.dart';
 import 'package:smart_cart_app/features/rating/presentation/views/rate_products_view.dart';
 import 'package:smart_cart_app/features/rating/presentation/views/user_orders_view.dart';
 
@@ -24,6 +26,7 @@ abstract class AppRouter {
   static final GlobalKey<NavigatorState> navigatorKey =
       GlobalKey<NavigatorState>();
   static const homeView = "/homeView";
+  static const onBoardingView = "/onBoardingView";
   static const loginView = "/loginView";
   static const registerView = "/registerView";
   static const verificationView = "/verificationView";
@@ -45,6 +48,10 @@ abstract class AppRouter {
         path: "/",
         builder: (context, state) => BlocBuilder<LayoutCubit, LayoutStates>(
           builder: (context, state) {
+            if(CacheHelper.getBoolean(key: CacheHelperKeys.onBoarding) == null ||
+                CacheHelper.getBoolean(key: CacheHelperKeys.onBoarding) == false) {
+              return const OnBoardingView();
+            }
             return const LoginView();
           },
         ),

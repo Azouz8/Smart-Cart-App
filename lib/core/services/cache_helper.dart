@@ -39,4 +39,5 @@ class CacheHelperKeys {
   static const String userEmail = "userEmail";
   static const String stripeCustomerId = "stripeCustomerId";
   static const String stripeSessionId = "stripeSessionId";
+  static const String onBoarding = "onBoarding";
 }
