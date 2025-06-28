@@ -11,10 +11,7 @@ import 'package:smart_cart_app/features/rating/presentation/manager/rating_cubit
 import 'widgets/profile_info_widget.dart';
 
 class ProfileView extends StatelessWidget {
-  const ProfileView({super.key, required this.name, required this.email});
-
-  final String? name;
-  final String? email;
+  const ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +41,7 @@ class ProfileView extends StatelessWidget {
               child: ProfileInfoWidget(
                 preIcon: Icons.person,
                 label: "Name",
-                value: name ?? "Unknown",
+                value: context.read<AuthCubit>().loginModel?.name ?? "Unknown",
               ),
             ),
             const SliverToBoxAdapter(child: MyDivider()),
@@ -52,7 +49,7 @@ class ProfileView extends StatelessWidget {
               child: ProfileInfoWidget(
                 preIcon: Icons.email,
                 label: "Email",
-                value: email ?? "Unknown",
+                value: context.read<AuthCubit>().loginModel?.email ?? "Unknown",
               ),
             ),
             const SliverToBoxAdapter(child: MyDivider()),

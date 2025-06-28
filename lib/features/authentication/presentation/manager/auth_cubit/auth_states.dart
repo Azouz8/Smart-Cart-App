@@ -6,6 +6,8 @@ class AuthInitial extends AuthStates {}
 
 class ChangePasswordVisibility extends AuthStates {}
 
+class ResetVisibility extends AuthStates {}
+
 class ChangeGender extends AuthStates {}
 
 class AuthSignUpLoading extends AuthStates {}

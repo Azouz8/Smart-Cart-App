@@ -37,17 +37,27 @@ class UserOrdersViewBody extends StatelessWidget {
                 ),
               if (state is RatingGetUserOrdersSuccess ||
                   state is RatingPostUserRatingsSuccess)
-                Expanded(
-                  child: ListView.separated(
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: cubit.orders.length,
-                    itemBuilder: (context, index) => UserOrdersListViewItem(
-                      orderModel: cubit.orders[index],
+                if (cubit.orders.isEmpty)
+                  const Expanded(
+                    child: Center(
+                      child: Text(
+                        "You have no orders yet.",
+                        style: TextStyle(fontSize: 18, color: Colors.grey),
+                      ),
                     ),
-                    separatorBuilder: (BuildContext context, int index) =>
-                        const SizedBox(height: 8),
+                  )
+                else
+                  Expanded(
+                    child: ListView.separated(
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: cubit.orders.length,
+                      itemBuilder: (context, index) => UserOrdersListViewItem(
+                        orderModel: cubit.orders[index],
+                      ),
+                      separatorBuilder: (BuildContext context, int index) =>
+                          const SizedBox(height: 8),
+                    ),
                   ),
-                ),
             ],
           ),
         ),

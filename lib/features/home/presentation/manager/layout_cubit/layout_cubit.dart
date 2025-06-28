@@ -3,7 +3,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:smart_cart_app/core/services/cache_helper.dart';
 import 'package:smart_cart_app/features/home/presentation/views/cart_view.dart';
 import 'package:smart_cart_app/features/home/presentation/views/map_view.dart';
 import 'package:smart_cart_app/features/home/presentation/views/offers_view.dart';
@@ -43,10 +42,7 @@ class LayoutCubit extends Cubit<LayoutStates> {
     const CartView(),
     const OffersView(),
     const MapView(),
-    ProfileView(
-      name: CacheHelper.getString(key: CacheHelperKeys.userName),
-      email: CacheHelper.getString(key: CacheHelperKeys.userEmail),
-    )
+    const ProfileView()
   ];
 
   void changeBottomNav(int index) {

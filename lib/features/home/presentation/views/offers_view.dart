@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smart_cart_app/features/authentication/presentation/manager/auth_cubit/auth_cubit.dart';
 import 'package:smart_cart_app/features/home/presentation/views/widgets/offers_list_view_item.dart';
 import '../../../../core/services/helper_functions.dart';
 import '../manager/recommendation_cubit/recommendation_cubit.dart';
@@ -11,7 +12,8 @@ class OffersView extends StatelessWidget {
   Widget build(BuildContext context) {
     var cubit = RecommendationCubit.get(context);
     if (cubit.recommendedProducts.isEmpty) {
-      cubit.getRecommendations();
+      var userID = context.read<AuthCubit>().loginModel!.userReommID;
+      cubit.getRecommendations(userID: userID!);
     }
     return BlocConsumer<RecommendationCubit, RecommendationState>(
       listener: (context, state) {

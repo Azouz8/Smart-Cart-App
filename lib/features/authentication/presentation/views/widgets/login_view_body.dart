@@ -32,8 +32,11 @@ class LoginViewBody extends StatelessWidget {
             GoRouter.of(context).push(AppRouter.categoriesView);
           } else {
             GoRouter.of(context)
-                .push(AppRouter.homeView, extra: state.loginModel.id);
+                .go(AppRouter.homeView, extra: state.loginModel.id);
           }
+          emailController.clear();
+          passwordController.clear();
+          AuthCubit.get(context).resetVisibility();
         } else if (state is AuthLoginFailure) {
           showCustomSnackBar(
               context: context, message: state.errMessage, vPadding: 64);

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_cart_app/core/services/cache_helper.dart';
 import 'package:smart_cart_app/core/services/secure_storage.dart';
+import 'package:smart_cart_app/features/authentication/data/models/login_model.dart';
 import 'package:smart_cart_app/features/authentication/data/repos/auth_repo.dart';
 
 import 'auth_states.dart';
@@ -18,6 +19,13 @@ class AuthCubit extends Cubit<AuthStates> {
   bool isMaleSelected = true;
   String gender = "Male";
   String verificationCode = "";
+  LoginModel? loginModel;
+
+  void resetVisibility() {
+    isPassword = true;
+    passwordIcon = const Icon(Icons.visibility_outlined);
+    emit(ResetVisibility());
+  }
 
   void changePasswordVisibility() {
     isPassword = !isPassword;
@@ -77,18 +85,12 @@ class AuthCubit extends Cubit<AuthStates> {
       CacheHelper.putString(
           key: CacheHelperKeys.token, value: loginModel.accessToken!);
       CacheHelper.putString(
-          key: CacheHelperKeys.userName, value: loginModel.name!);
-      CacheHelper.putString(
-          key: CacheHelperKeys.userEmail, value: loginModel.email!);
-      CacheHelper.putString(
           key: CacheHelperKeys.stripeCustomerId,
           value: loginModel.stripeCustomerId!);
       SecureStorage().writeData(
           key: SecureStorageKeys.refreshToken, value: loginModel.refreshToken!);
       CacheHelper.putString(key: CacheHelperKeys.userID, value: loginModel.id!);
-      CacheHelper.putString(
-          key: CacheHelperKeys.userRecommendationID,
-          value: loginModel.userReommID.toString());
+      this.loginModel = loginModel;
       emit(AuthLoginSuccess(loginModel));
     });
   }
@@ -96,10 +98,7 @@ class AuthCubit extends Cubit<AuthStates> {
   void logoutUser() {
     CacheHelper.remove(key: CacheHelperKeys.token);
     CacheHelper.remove(key: CacheHelperKeys.stripeCustomerId);
-    CacheHelper.remove(key: CacheHelperKeys.userName);
-    CacheHelper.remove(key: CacheHelperKeys.userEmail);
     CacheHelper.remove(key: CacheHelperKeys.userID);
-    CacheHelper.remove(key: CacheHelperKeys.userRecommendationID);
     SecureStorage().deleteData(key: SecureStorageKeys.refreshToken);
     emit(AuthLogoutSuccess());
   }

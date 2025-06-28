@@ -41,6 +41,12 @@ class RegisterViewBody extends StatelessWidget {
               message: "Account Created Successfully, please check your Email",
               vPadding: 64);
           GoRouter.of(context).push(AppRouter.loginView);
+          emailController.clear();
+          nameController.clear();
+          passwordController.clear();
+          confirmPasswordController.clear();
+          birthDateController.clear();
+          AuthCubit.get(context).resetVisibility();
         }
       },
       builder: (BuildContext context, state) {

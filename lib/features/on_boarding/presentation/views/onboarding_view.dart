@@ -18,7 +18,7 @@ class OnBoardingView extends StatefulWidget {
 class _OnBoardingViewState extends State<OnBoardingView> {
   List<OnBoardingModel> list = [
     OnBoardingModel(
-        image: "assets/images/on_boarding_.png",
+        image: "assets/images/on_boarding_1.png",
         title: "Scan Products Easily",
         subtitle:
             "Use the barcode scanner to scan barcodes and get product details instantly."),

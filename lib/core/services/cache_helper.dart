@@ -33,10 +33,7 @@ class CacheHelper {
 class CacheHelperKeys {
   static const String cartID = "cartID";
   static const String userID = "userID";
-  static const String userRecommendationID = "userRecommendationID";
   static const String token = "token";
-  static const String userName = "userName";
-  static const String userEmail = "userEmail";
   static const String stripeCustomerId = "stripeCustomerId";
   static const String stripeSessionId = "stripeSessionId";
   static const String onBoarding = "onBoarding";
