@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smart_cart_app/core/routing/app_router.dart';
+import 'package:smart_cart_app/core/services/cache_helper.dart';
 import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
 
 class SplashView extends StatefulWidget {
@@ -18,13 +19,14 @@ class _SplashViewState extends State<SplashView>
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     Future.delayed(
-      const Duration(seconds: 2),
+      const Duration(seconds: 3),
       () {
-        // if(CacheHelper.getBoolean(key: "OnBoarding") == null || CacheHelper.getBoolean(key: "OnBoarding") == false){
-        //   GoRouter.of(context).pushReplacement(AppRouter.onboardingView);
-        // }
-        // else
-        GoRouter.of(context).pushReplacement(AppRouter.loginView);
+        if (CacheHelper.getBoolean(key: CacheHelperKeys.onBoarding) == null ||
+            CacheHelper.getBoolean(key: CacheHelperKeys.onBoarding) == false) {
+          GoRouter.of(context).go(AppRouter.onBoardingView);
+        } else {
+          GoRouter.of(context).go(AppRouter.loginView);
+        }
       },
     );
   }
@@ -52,13 +54,15 @@ class _SplashViewState extends State<SplashView>
             const Spacer(),
             Text(
               "SSC",
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+              style: Theme.of(context).textTheme.displayLarge?.copyWith(
                   fontWeight: FontWeight.w900,
                   color: Colors.white,
-                  fontStyle: FontStyle.italic,
+                  fontSize: 30,
+                  // fontStyle: FontStyle.italic,
+                  fontFamily: "Boldonse",
                   letterSpacing: 2),
             ),
-             SizedBox(height: MediaQuery.sizeOf(context).height * 0.04),
+            SizedBox(height: MediaQuery.sizeOf(context).height * 0.04),
           ],
         ),
       ),

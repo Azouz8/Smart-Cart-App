@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_cart_app/core/services/helper_functions.dart';
 import 'package:smart_cart_app/features/rating/presentation/manager/rating_cubit.dart';
 
@@ -38,12 +39,23 @@ class UserOrdersViewBody extends StatelessWidget {
               if (state is RatingGetUserOrdersSuccess ||
                   state is RatingPostUserRatingsSuccess)
                 if (cubit.orders.isEmpty)
-                  const Expanded(
-                    child: Center(
-                      child: Text(
-                        "You have no orders yet.",
-                        style: TextStyle(fontSize: 18, color: Colors.grey),
-                      ),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Image.asset(
+                          "assets/images/no_orders.png",
+                        ),
+                        Text(
+                          "You have no orders yet.",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineMedium
+                              ?.copyWith(color: Colors.grey),
+                        ),
+                        SizedBox(height: 80.h),
+                      ],
                     ),
                   )
                 else

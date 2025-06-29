@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:smart_cart_app/core/services/cache_helper.dart';
 import 'package:smart_cart_app/core/services/service_locator.dart';
 import 'package:smart_cart_app/core/widgets/no_connection_view.dart';
 import 'package:smart_cart_app/features/authentication/presentation/views/login_view.dart';
@@ -21,6 +20,7 @@ import 'package:smart_cart_app/features/home/presentation/views/scan_qr_view.dar
 import 'package:smart_cart_app/features/on_boarding/presentation/views/onboarding_view.dart';
 import 'package:smart_cart_app/features/rating/presentation/views/rate_products_view.dart';
 import 'package:smart_cart_app/features/rating/presentation/views/user_orders_view.dart';
+import 'package:smart_cart_app/features/splash/presentation/views/splash_view.dart';
 
 abstract class AppRouter {
   static final GlobalKey<NavigatorState> navigatorKey =
@@ -48,17 +48,21 @@ abstract class AppRouter {
         path: "/",
         builder: (context, state) => BlocBuilder<LayoutCubit, LayoutStates>(
           builder: (context, state) {
-            if(CacheHelper.getBoolean(key: CacheHelperKeys.onBoarding) == null ||
-                CacheHelper.getBoolean(key: CacheHelperKeys.onBoarding) == false) {
-              return const OnBoardingView();
-            }
-            return const LoginView();
+            // if(CacheHelper.getBoolean(key: CacheHelperKeys.onBoarding) == null ||
+            //     CacheHelper.getBoolean(key: CacheHelperKeys.onBoarding) == false) {
+            //   return const OnBoardingView();
+            // }
+            return const SplashView();
           },
         ),
       ),
       GoRoute(
         path: loginView,
         builder: (context, state) => const LoginView(),
+      ),
+      GoRoute(
+        path: onBoardingView,
+        builder: (context, state) => const OnBoardingView(),
       ),
       GoRoute(
         path: noConnectionView,

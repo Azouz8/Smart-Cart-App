@@ -24,6 +24,15 @@ import 'core/routing/app_router.dart';
 import 'core/services/bloc_observer.dart';
 
 void main() async {
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      systemNavigationBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      statusBarBrightness: Brightness.light,
+      systemNavigationBarIconBrightness: Brightness.light,
+    ),
+  );
   WidgetsFlutterBinding.ensureInitialized();
   Stripe.publishableKey = ApiConsts.stripePK;
   setupServiceLocator();
@@ -53,7 +62,9 @@ class SmartCart extends StatelessWidget {
         BlocProvider(create: (context) => LayoutCubit()..monitorConnectivity()),
         BlocProvider(create: (context) => HomeCubit(getIt.get<HomeRepoImpl>())),
         BlocProvider(create: (context) => MapCubit(getIt.get<HomeRepoImpl>())),
-        BlocProvider(create: (context) => RecommendationCubit(getIt.get<HomeRepoImpl>())),
+        BlocProvider(
+            create: (context) =>
+                RecommendationCubit(getIt.get<HomeRepoImpl>())),
         BlocProvider(
             create: (context) => CheckoutCubit(getIt.get<CheckoutRepoImpl>())),
         BlocProvider(
