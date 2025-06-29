@@ -47,6 +47,12 @@ class CustomConsumerButton extends StatelessWidget {
       var cubit = CheckoutCubit.get(context);
       return ElevatedButton(
         onPressed: () {
+          if (state is CheckoutLoading ||
+              state is CheckoutSuccess ||
+              state is CheckoutPostTransactionLoading ||
+              state is CheckoutPostTransactionSuccess) {
+            return;
+          }
           if (cubit.paymentMethodIndex == 0) {
             PaymentIntentInputModel paymentIntentInputModel =
                 PaymentIntentInputModel(

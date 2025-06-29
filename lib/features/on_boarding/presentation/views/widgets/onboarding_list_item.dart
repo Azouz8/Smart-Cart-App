@@ -31,13 +31,16 @@ class OnBoardingItem extends StatelessWidget {
         SizedBox(
           height: 8.h,
         ),
-        Text(
-          model.subtitle,
-          textAlign: TextAlign.center,
-          style: Theme.of(context)
-              .textTheme
-              .bodyLarge!
-              .copyWith(color: Colors.grey),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10.w),
+          child: Text(
+            model.subtitle,
+            textAlign: TextAlign.center,
+            style: Theme.of(context)
+                .textTheme
+                .bodyLarge!
+                .copyWith(color: Colors.grey),
+          ),
         ),
         Expanded(
           child: SizedBox(
