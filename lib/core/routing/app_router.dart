@@ -48,15 +48,17 @@ abstract class AppRouter {
         path: "/",
         builder: (context, state) => BlocBuilder<LayoutCubit, LayoutStates>(
           builder: (context, state) {
-            if(CacheHelper.getBoolean(key: CacheHelperKeys.onBoarding) == null ||
-                CacheHelper.getBoolean(key: CacheHelperKeys.onBoarding) == false) {
+            if (CacheHelper.getBoolean(key: CacheHelperKeys.onBoarding) ==
+                    null ||
+                CacheHelper.getBoolean(key: CacheHelperKeys.onBoarding) ==
+                    false) {
               return const OnBoardingView();
             }
-            return const OnBoardingView();
+            return const LoginView();
           },
         ),
       ),
-       GoRoute(
+      GoRoute(
         path: loginView,
         pageBuilder: (context, state) => CustomTransitionPage(
           child: const LoginView(),
