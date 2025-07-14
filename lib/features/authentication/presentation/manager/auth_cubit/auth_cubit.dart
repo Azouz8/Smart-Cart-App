@@ -97,6 +97,7 @@ class AuthCubit extends Cubit<AuthStates> {
 
   void logoutUser() {
     CacheHelper.remove(key: CacheHelperKeys.token);
+    CacheHelper.remove(key: CacheHelperKeys.cartID);
     CacheHelper.remove(key: CacheHelperKeys.stripeCustomerId);
     CacheHelper.remove(key: CacheHelperKeys.userID);
     SecureStorage().deleteData(key: SecureStorageKeys.refreshToken);

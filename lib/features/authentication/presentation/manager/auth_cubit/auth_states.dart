@@ -31,4 +31,12 @@ class AuthLoginSuccess extends AuthStates {
   AuthLoginSuccess(this.loginModel);
 }
 
+class AuthLogoutLoading extends AuthStates {}
+
+class AuthLogoutFailure extends AuthStates {
+  String errMessage;
+
+  AuthLogoutFailure(this.errMessage);
+}
+
 class AuthLogoutSuccess extends AuthStates {}
