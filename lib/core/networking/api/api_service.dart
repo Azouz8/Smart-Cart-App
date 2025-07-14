@@ -102,9 +102,12 @@ class ApiService {
     required Coordinates start,
     required Coordinates end,
   }) async {
-    var response = await api.get(
+    var response = await api.post(
       '${ApiConsts.apiBaseUrl}${ApiConsts.navigation}${ApiConsts.findPath}',
-      queryParameters: {"start[x]": start.x, "start[y]": start.y, "end[x]": end.x, "end[y]": end.y},
+      data: {
+        ApiKeys.start: {"x": start.x, "y": start.y},
+        ApiKeys.end: {"x": end.x, "y": end.y},
+      },
     );
     return response;
   }
