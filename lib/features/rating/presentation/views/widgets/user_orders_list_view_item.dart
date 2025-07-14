@@ -54,7 +54,7 @@ class UserOrdersListViewItem extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      "\$${orderModel.totalPrice}",
+                      "${orderModel.totalPrice} L.E",
                       style: Theme.of(context)
                           .textTheme
                           .labelMedium!

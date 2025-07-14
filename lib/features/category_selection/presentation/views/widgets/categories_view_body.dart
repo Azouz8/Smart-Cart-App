@@ -35,7 +35,7 @@ class CategoriesViewBody extends StatelessWidget {
               context: context,
               message: "Categories Added Successfully",
               vPadding: 8);
-          GoRouter.of(context).push(AppRouter.homeView);
+          GoRouter.of(context).go(AppRouter.homeView);
         }
       },
       builder: (context, state) => SafeArea(

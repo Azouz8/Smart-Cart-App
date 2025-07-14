@@ -59,7 +59,7 @@ class CartListViewItem extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    "\$ ${cartProductModel.productID!.price}",
+                    "${cartProductModel.productID!.price} L.E",
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                         fontFamily: "Carmen",
                         color: Colors.grey,
@@ -100,7 +100,7 @@ class CartListViewItem extends StatelessWidget {
                       ),
                       const Spacer(),
                       Text(
-                        "\$ $total",
+                        "$total L.E",
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             fontFamily: "Carmen",
                             color: Colors.green,

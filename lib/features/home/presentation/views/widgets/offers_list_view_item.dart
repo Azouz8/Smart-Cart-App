@@ -50,7 +50,7 @@ class OffersListViewItem extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 16.w,
+              height: 8.w,
             ),
             Text(
               recommendedItem.title!,
@@ -63,7 +63,7 @@ class OffersListViewItem extends StatelessWidget {
             ),
             SizedBox(height: 8.h),
             Text(
-              "\$ ${recommendedItem.price}",
+              "${recommendedItem.price} L.E",
               style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   fontFamily: "Carmen",
                   color: Colors.grey,

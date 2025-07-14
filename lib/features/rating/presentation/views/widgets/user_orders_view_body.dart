@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:smart_cart_app/core/services/helper_functions.dart';
+import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
 import 'package:smart_cart_app/features/rating/presentation/manager/rating_cubit.dart';
 
 import '../../../../home/presentation/views/widgets/custom_home_app_bar.dart';
@@ -33,7 +34,9 @@ class UserOrdersViewBody extends StatelessWidget {
                     Align(
                         alignment: Alignment.center,
                         heightFactor: MediaQuery.sizeOf(context).height * 0.02,
-                        child: const CircularProgressIndicator()),
+                        child: const CircularProgressIndicator(
+                          color: AppColorsLight.primaryColor,
+                        )),
                   ],
                 ),
               if (state is RatingGetUserOrdersSuccess ||

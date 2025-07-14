@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_states.dart';
+
 import 'custom_checkout_button.dart';
 import 'order_info_item.dart';
 import 'total_price_widget.dart';
@@ -34,10 +35,10 @@ class CheckoutCartViewBody extends StatelessWidget {
                 ),
               ),
               OrderInfoItem(
-                  title: "Order Subtotal", value: "\$ $orderSubtotal.00"),
-              OrderInfoItem(title: "Discount", value: "\$ $totalDiscount.00"),
+                  title: "Order Subtotal", value: "$orderSubtotal.00 L.E"),
+              OrderInfoItem(title: "Discount", value: "$totalDiscount.00 L.E"),
               const Divider(thickness: 0.5, color: Colors.grey),
-              TotalPriceWidget(price: "\$ $totalPrice.00"),
+              TotalPriceWidget(price: "$totalPrice.00 L.E"),
               const CustomCheckoutButton(),
               const SizedBox(
                 height: 5,

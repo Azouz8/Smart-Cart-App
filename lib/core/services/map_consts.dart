@@ -4,7 +4,7 @@ class MapConstants {
   static const double gridWidth = 18;
   static const int gridHeight = 23;
   static const int gridSize = gridHeight;
-  static const int scanInterval = 500500; // milliseconds
+  static const int scanInterval = 1000; // milliseconds
   static const double cellSize = 10;
   static const double boardSize = gridHeight * gridWidth;
 }
