@@ -17,9 +17,9 @@ import 'package:smart_cart_app/features/home/data/repos/home_repo_impl.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/layout_cubit/layout_cubit.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/map_cubit/map_cubit.dart';
-import 'package:smart_cart_app/features/home/presentation/manager/recommendation_cubit/recommendation_cubit.dart';
 import 'package:smart_cart_app/features/rating/data/repo/rating_repo_impl.dart';
 import 'package:smart_cart_app/features/rating/presentation/manager/rating_cubit.dart';
+
 import 'core/routing/app_router.dart';
 import 'core/services/bloc_observer.dart';
 
@@ -58,13 +58,14 @@ class SmartCart extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => AuthCubit(getIt.get<AuthRepoImpl>())),
         BlocProvider(create: (context) => LayoutCubit()..monitorConnectivity()),
-        BlocProvider(create: (context) => HomeCubit(getIt.get<HomeRepoImpl>())),
-        BlocProvider(create: (context) => MapCubit(getIt.get<HomeRepoImpl>())),
+        BlocProvider(create: (context) => AuthCubit(getIt.get<AuthRepoImpl>())),
         BlocProvider(
             create: (context) =>
-                RecommendationCubit(getIt.get<HomeRepoImpl>())),
+                HomeCubit(getIt.get<HomeRepoImpl>())..initialize()),
+        BlocProvider(
+            create: (context) =>
+                MapCubit(getIt.get<HomeRepoImpl>())..initialize()),
         BlocProvider(
             create: (context) => CheckoutCubit(getIt.get<CheckoutRepoImpl>())),
         BlocProvider(

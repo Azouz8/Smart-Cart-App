@@ -15,7 +15,6 @@ class HomeCubit extends Cubit<HomeStates> {
   String orderSubtotal = "";
   String totalPrice = "";
   String totalDiscount = "";
-  // We Could Create Cart Model Instead of the above Code
   late IO.Socket socket;
   List<CartProductModel> cartProducts = [];
 
@@ -33,6 +32,11 @@ class HomeCubit extends Cubit<HomeStates> {
     socket.onDisconnect((_) => print("Socket Disconnection"));
     socket.onConnectError((err) => print("Socket could not connect :$err"));
     socket.onError((err) => print("Socket could not connect :$err"));
+  }
+
+  void initialize() {
+    cartId = CacheHelper.getString(key: CacheHelperKeys.cartID) ?? "";
+    emit(HomeInitial());
   }
 
   @override

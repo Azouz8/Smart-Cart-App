@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -14,6 +15,8 @@ import 'package:wifi_scan/wifi_scan.dart';
 
 class MapCubit extends Cubit<MapState> {
   MapCubit(this.homeRepo) : super(const MapState());
+
+  static MapCubit get(context) => BlocProvider.of(context);
   HomeRepo homeRepo;
   Timer? _scanTimer;
   Timer? _debounce;
@@ -46,9 +49,7 @@ class MapCubit extends Cubit<MapState> {
   }
 
   Future<void> _checkWifiManagerAvailability() async {
-    // Simulate checking if Wi-Fi scanning is available
-    // In a real app, check if the wifi_scan package is properly linked
-    const isAvailable = true; // Assume available for now
+    const isAvailable = true;
     emit(
       state.copyWith(
         isWifiManagerNull: !isAvailable,
@@ -125,10 +126,11 @@ class MapCubit extends Cubit<MapState> {
   }
 
   Future<void> _monitorWifiState() async {
-    if (state.isWifiManagerNull) return;
+    if (state.isWifiManagerNull || isClosed) return;
     try {
       final canScan = await WiFiScan.instance.canStartScan();
       final isEnabled = canScan == CanStartScan.yes;
+      if (isClosed) return;
       emit(
         state.copyWith(
           isWifiEnabled: isEnabled,
@@ -136,10 +138,13 @@ class MapCubit extends Cubit<MapState> {
         ),
       );
     } catch (e) {
+      if (isClosed) return;
       emit(state.copyWith(error: 'Error checking Wi-Fi status: $e'));
     }
-    // Schedule next check
-    Timer(const Duration(seconds: 5), _monitorWifiState);
+
+    if (!isClosed) {
+      Timer(const Duration(seconds: 5), _monitorWifiState);
+    }
   }
 
   void _startWifiScanning() {
@@ -230,20 +235,17 @@ class MapCubit extends Cubit<MapState> {
     var y = (positions.fold(0.0, (sum, pos) => sum + pos['y'] * pos['weight']) /
         totalWeight);
 
-    // Initialize filters once
     _xFilter ??= KalmanFilter(initialValue: x);
     _yFilter ??= KalmanFilter(initialValue: y);
 
-    // Filter the results
-    final filteredX = _xFilter!.filter(x).round();
-    final filteredY = _yFilter!.filter(y).round();
+    final filteredX = _xFilter!.filter(x).floor();
+    final filteredY = _yFilter!.filter(y).floor();
 
     if (filteredX >= 0 &&
-        filteredX < 23 &&
+        filteredX < 25 &&
         filteredY >= 0 &&
-        filteredY < 43 &&
+        filteredY < 44 &&
         grid[filteredY][filteredX] == 0) {
-      print("Filtered Position: ($filteredX, $filteredY)");
       return Coordinates(x: filteredX, y: filteredY);
     }
     return null;
@@ -272,17 +274,6 @@ class MapCubit extends Cubit<MapState> {
   Future<void> findPath() async {
     if (state.selectedProduct == null) return;
     try {
-      // final response = await http.post(
-      //   Uri.parse('${ApiConsts.apiBaseUrl}/navigation/find-path'),
-      //   headers: {'Content-Type': 'application/json'},
-      //   body: jsonEncode({
-      //     'start': state.userPosition.toJson(),
-      //     'end': state.selectedProduct!.coordinates.toJson(),
-      //   }),
-      // );
-      // final path = (jsonDecode(response.body)['path'] as List)
-      //     .map((p) => [p[0] as int, p[1] as int])
-      //     .toList();
       var result = await homeRepo.findPath(
         start: state.userPosition,
         end: Coordinates(
@@ -307,29 +298,6 @@ class MapCubit extends Cubit<MapState> {
     print("in Select Product");
     emit(state.copyWith(selectedProduct: product));
   }
-
-  // void setManualPosition(int x, int y) {
-  //   if (x >= 0 &&
-  //       x < MapConstants.gridSize &&
-  //       y >= 0 &&
-  //       y < MapConstants.gridSize &&
-  //       grid[y][x] == 0) {
-  //     _xFilter = KalmanFilter(initialValue: x.toDouble());
-  //     _yFilter = KalmanFilter(initialValue: y.toDouble());
-  //     final position = Coordinates(x: x, y: y);
-  //     emit(state.copyWith(userPosition: position));
-  //     _checkGeofence(position);
-  //   } else {
-  //     emit(state.copyWith(error: 'Invalid position selected.'));
-  //   }
-  // }
-  // void toggleManualMode() {
-  //   emit(state.copyWith(manualMode: !state.manualMode));
-  // }
-  // Future<void> refreshLocation() async {
-  //   if (state.isWifiManagerNull || state.manualMode) return;
-  //   await _scanWifi();
-  // }
 
   void searchProducts(String query) {
     _debounce?.cancel();

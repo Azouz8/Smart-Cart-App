@@ -1,16 +1,18 @@
 import 'dart:async';
 import 'dart:ui' as ui;
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:smart_cart_app/core/services/map_consts.dart';
 import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/map_cubit/map_cubit.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/map_cubit/map_state.dart';
 import 'package:smart_cart_app/features/home/presentation/views/widgets/custom_home_app_bar.dart';
 import 'package:smart_cart_app/features/home/presentation/views/widgets/map_grid_painter.dart';
-import 'package:smart_cart_app/core/services/map_consts.dart';
 
 class MapView extends StatefulWidget {
   const MapView({super.key});
@@ -269,39 +271,39 @@ class _MapViewState extends State<MapView> {
             ),
             Positioned(
               top: 80,
-              right: 30,
+              right: 20,
               child: Transform.rotate(
                 angle: 90 * 3.1415926535 / 180,
                 child: Text(
                   "Section A",
                   style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                         color: Colors.grey.shade400,
-                        fontSize: 18,
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.w900,
                       ),
                 ),
               ),
             ),
             Positioned(
-              bottom: 220,
-              right: 70,
+              bottom: 200,
+              right: 55,
               child: Text(
                 "Section B",
                 style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                       color: Colors.grey.shade400,
-                      fontSize: 18,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.w900,
                     ),
               ),
             ),
             Positioned(
               bottom: 60,
-              right: 70,
+              right: 55,
               child: Text(
                 "Section C",
                 style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                       color: Colors.grey.shade400,
-                      fontSize: 18,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.w900,
                     ),
               ),

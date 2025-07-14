@@ -32,7 +32,7 @@ class VerificationViewBody extends StatelessWidget {
               style: TextStyle(color: Color(0xFF757575)),
             ),
             SizedBox(height: 16.h),
-            OtpForm(),
+            const OtpForm(),
             const Spacer(),
             TextButton(
               onPressed: () {},

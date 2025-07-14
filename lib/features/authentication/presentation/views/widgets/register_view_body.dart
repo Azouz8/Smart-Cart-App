@@ -10,6 +10,7 @@ import 'package:smart_cart_app/core/services/helper_functions.dart';
 import 'package:smart_cart_app/core/themes/light_theme/app_colors_light.dart';
 import 'package:smart_cart_app/features/authentication/presentation/manager/auth_cubit/auth_states.dart';
 import 'package:smart_cart_app/features/authentication/presentation/views/widgets/custom_text_form_field.dart';
+
 import '../../manager/auth_cubit/auth_cubit.dart';
 
 class RegisterViewBody extends StatelessWidget {
@@ -40,13 +41,17 @@ class RegisterViewBody extends StatelessWidget {
               context: context,
               message: "Account Created Successfully, please check your Email",
               vPadding: 64);
-          GoRouter.of(context).push(AppRouter.loginView);
+          GoRouter.of(context).push(AppRouter.verificationView);
           emailController.clear();
           nameController.clear();
           passwordController.clear();
           confirmPasswordController.clear();
           birthDateController.clear();
           AuthCubit.get(context).resetVisibility();
+        }
+        if (state is AuthSignUpFailure) {
+          showCustomSnackBar(
+              context: context, message: state.errMessage, vPadding: 64);
         }
       },
       builder: (BuildContext context, state) {

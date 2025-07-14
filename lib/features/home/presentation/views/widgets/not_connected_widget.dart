@@ -16,7 +16,7 @@ class NotConnectedWidget extends StatelessWidget {
   final bool showSnackbar;
   @override
   Widget build(BuildContext context) {
-    var userName = context.read<AuthCubit>().loginModel!.name!;
+    String? userName = context.read<AuthCubit>().loginModel?.name ?? "Customer";
     if (showSnackbar) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         showCustomSnackBar(

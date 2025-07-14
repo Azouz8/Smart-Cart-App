@@ -5,6 +5,7 @@ import 'package:smart_cart_app/core/services/cache_helper.dart';
 import 'package:smart_cart_app/features/checkout/presentation/manager/checkout_cubit.dart';
 import 'package:smart_cart_app/features/checkout/presentation/views/widgets/checkout_view/total_price_widget.dart';
 import 'package:smart_cart_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
+
 import 'thank_you_payment_method_info.dart';
 
 class ThankYouContainer extends StatelessWidget {
@@ -75,7 +76,7 @@ class ThankYouContainer extends StatelessWidget {
             color: Colors.grey,
             height: 30,
           ),
-          TotalPriceWidget(price: "$totalPrice.00"),
+          TotalPriceWidget(price: "$totalPrice.00 L.E"),
           SizedBox(
             height: 2.h,
           ),

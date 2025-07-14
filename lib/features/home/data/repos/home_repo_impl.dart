@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:either_dart/either.dart';
 import 'package:smart_cart_app/core/networking/api/api_consts.dart';
 import 'package:smart_cart_app/core/networking/api/api_service.dart';
@@ -67,7 +68,7 @@ class HomeRepoImpl extends HomeRepo {
 
     socket.onError((error) {
       print("Socket error: $error");
-      _streamController.add(Left(error.toString()));
+      _streamController.add(const Left("Error to Connect to server"));
     });
   }
 
@@ -78,15 +79,12 @@ class HomeRepoImpl extends HomeRepo {
 
   @override
   void setupSocketNotificationListeners({required String cartID}) {
-    print(
-        "Setting up socket notification listeners for cartID: ${ApiKeys.cartalerts + cartID}");
     socket.on(ApiKeys.cartalerts + cartID, (data) {
       try {
         print("🔄 Received Notification");
-        print("Data: $data");
         NotificationService().showNotification(
-          title: data[0]["header"],
-          body: data[0]["message"],
+          title: data["header"],
+          body: data["message"],
         );
         // _notificationStreamController.add(Right(updatedProducts));
       } on ServerException catch (e) {
