@@ -43,3 +43,5 @@ app.*.map.json
 /android/app/release
 
 lib/core/networking/api/api_consts.dart
+*.ini
+*.ico

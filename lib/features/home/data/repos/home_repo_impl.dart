@@ -16,7 +16,7 @@ class HomeRepoImpl extends HomeRepo {
   final ApiService apiService;
   final IO.Socket socket;
   HomeRepoImpl(this.apiService, this.socket) {
-    _setupSocketListeners();
+    setupSocketListeners();
     print("Socket initialized and listeners set up");
   }
   @override
@@ -51,8 +51,8 @@ class HomeRepoImpl extends HomeRepo {
       _streamController = StreamController.broadcast();
   final StreamController<Either<String, String>> _notificationStreamController =
       StreamController.broadcast();
-
-  void _setupSocketListeners() {
+  @override
+  void setupSocketListeners() {
     socket.on(ApiKeys.cartUpdated, (data) {
       try {
         print("🔄 Received cart update from socket");

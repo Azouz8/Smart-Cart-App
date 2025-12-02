@@ -38,6 +38,6 @@ ThemeData getDarkTheme() => ThemeData(
         ),
       ),
       appBarTheme: const AppBarTheme(
-        color: AppColorsDark.scaffoldBackgroundColor,
+        backgroundColor: AppColorsDark.scaffoldBackgroundColor,
       ),
     );

@@ -38,7 +38,7 @@ ThemeData getLightTheme() => ThemeData(
         type: BottomNavigationBarType.fixed,
       ),
       appBarTheme: const AppBarTheme(
-        color: AppColorsLight.scaffoldBackgroundColor,
+        backgroundColor: AppColorsLight.scaffoldBackgroundColor,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarBrightness: Brightness.light,
           statusBarColor: AppColorsLight.scaffoldBackgroundColor,

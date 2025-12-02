@@ -17,6 +17,7 @@ abstract class HomeRepo {
   Future<Either<String, List<List<int>>>> findPath({required Coordinates start, required Coordinates end});
 
   Stream<Either<String, List<CartProductModel>>> getScannedProducts();
+  void setupSocketListeners();
   void setupSocketNotificationListeners({required String cartID});
 
   // void disconnectSocket();

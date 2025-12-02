@@ -19,10 +19,9 @@ import 'package:smart_cart_app/features/home/presentation/manager/layout_cubit/l
 import 'package:smart_cart_app/features/home/presentation/manager/map_cubit/map_cubit.dart';
 import 'package:smart_cart_app/features/rating/data/repo/rating_repo_impl.dart';
 import 'package:smart_cart_app/features/rating/presentation/manager/rating_cubit.dart';
-
 import 'core/routing/app_router.dart';
 import 'core/services/bloc_observer.dart';
-
+  
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(

@@ -39,6 +39,14 @@ class HomeCubit extends Cubit<HomeStates> {
     emit(HomeInitial());
   }
 
+  void closeSocket() {
+    if (socket.connected) {
+      socket.disconnect();
+      socket.dispose();
+      print("Socket disconnected and disposed.");
+    }
+  }
+
   @override
   Future<void> close() {
     if (socket.connected) {
@@ -57,6 +65,7 @@ class HomeCubit extends Cubit<HomeStates> {
     }, (responseCode) {
       cartId = cartID;
       homeRepo.setupSocketNotificationListeners(cartID: cartID);
+      homeRepo.setupSocketListeners();
       CacheHelper.putString(key: CacheHelperKeys.cartID, value: cartID);
       emit(HomeAddUserToCartSuccess());
     });
@@ -95,6 +104,7 @@ class HomeCubit extends Cubit<HomeStates> {
   }
 
   Future<void> getScannedProducts() async {
+    print("Listening to scanned products...");
     homeRepo.getScannedProducts().listen(
       (result) {
         result.fold(
